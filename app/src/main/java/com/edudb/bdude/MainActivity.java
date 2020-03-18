@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(Arrays.asList(
                                 new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                new AuthUI.IdpConfig.FacebookBuilder().build(),
+//                                new AuthUI.IdpConfig.FacebookBuilder().build(), TODO add facebook_application_id, https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#facebook, https://console.firebase.google.com/project/bdude-d4c05/authentication/providers
 //                                new AuthUI.IdpConfig.TwitterBuilder().build(),
 //                                new AuthUI.IdpConfig.MicrosoftBuilder().build(),
 //                                new AuthUI.IdpConfig.YahooBuilder().build(),
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                                 new AuthUI.IdpConfig.PhoneBuilder().build()
                                 //                       ,new AuthUI.IdpConfig.AnonymousBuilder().build()
                         ))
+                        .setLogo(R.mipmap.ic_launcher)
                         .build(),
                 RC_SIGN_IN);
     }
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Successfully signed in!", Toast.LENGTH_SHORT).show();
+                showSnackbar("Successfully signed in!");
             } else {
                 // Sign in failed
                 if (response == null) {
