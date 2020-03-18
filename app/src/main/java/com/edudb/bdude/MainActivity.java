@@ -79,4 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private void showSnackbar(String message) {
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
+
+    public void signOut(View view) {
+        AuthUI.getInstance().signOut(this);
+    }
 }
