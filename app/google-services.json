@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "301644723160",
+    "firebase_url": "https://bdude-d4c05.firebaseio.com",
+    "project_id": "bdude-d4c05",
+    "storage_bucket": "bdude-d4c05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301644723160:android:d080b106fd0ba53699b8ad",
+        "android_client_info": {
+          "package_name": "com.edudb.bdude"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301644723160-8r15f75dndenmt9qu1k8947b5ngivlg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-18eoGiL3AeCHj8PeGtP0shY3bUwW_P8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301644723160-8r15f75dndenmt9qu1k8947b5ngivlg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
