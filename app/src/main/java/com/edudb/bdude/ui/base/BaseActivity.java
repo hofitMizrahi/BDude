@@ -12,10 +12,10 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements BaseView{
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        ButterKnife.bind(this);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView();
+        ButterKnife.bind(this);
         initDependencies();
     }
 
@@ -31,5 +31,5 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract int getLayoutResource();
 
-    public abstract int initDependencies();
+    public abstract void initDependencies();
 }

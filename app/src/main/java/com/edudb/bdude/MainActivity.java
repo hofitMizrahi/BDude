@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.edudb.bdude.ui.base.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -16,16 +17,13 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final int RC_SIGN_IN = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
     }
 
     public void signIn(View view) {
@@ -82,5 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void signOut(View view) {
         AuthUI.getInstance().signOut(this);
+    }
+
+    @Override
+    public int getLayoutResource() {
+        return 0;
+    }
+
+    @Override
+    public void initDependencies() {
+
     }
 }
