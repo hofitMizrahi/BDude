@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,9 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     @BindView(R.id.request_recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.empty_view)
+    TextView mEmptyViewTxt;
+
     @OnClick(R.id.helpContinueBtn)
     void startHelpRequest(){
         mPresenter.createHelpRequestClicked();
@@ -80,5 +84,11 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter.setData(helpRequests);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void displayEmptyView() {
+        mEmptyViewTxt.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 }

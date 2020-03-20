@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BDude</string>
     <string name="help_please_btn">עזרה בבקשה</string>
+    <string name="no_request_data">אין בקשות להציג בסביבתך</string>
 </resources>

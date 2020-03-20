@@ -10,6 +10,8 @@ public interface HelpRequestsListContract {
     interface View{
         void startLogin();
         void displayDataList(List<HelpRequest> helpRequests);
+        void navigateToCreateNewRequestActivity();
+        void displayEmptyView();
     }
 
     interface Presenter extends BasePresenter {

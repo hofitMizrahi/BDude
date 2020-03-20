@@ -3,34 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/color_main_background"
     android:layout_height="match_parent"
+    android:background="@color/color_main_background"
     tools:context=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/helpContinueBtn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_green_btn_continue"
+        android:text="@string/help_please_btn"
+        android:textColor="#ffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="dndkjncd" />
+        android:padding="16dp"
+        android:text="@string/no_request_data"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@id/helpContinueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="16dp"
         android:id="@+id/request_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/helpContinueBtn"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/helpContinueBtn"
-        android:text="@string/help_please_btn"
-        android:layout_width="match_parent"
-        android:textColor="#ffff"
-        android:layout_margin="8dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:background="@drawable/rounded_green_btn_continue"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

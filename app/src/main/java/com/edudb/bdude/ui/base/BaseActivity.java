@@ -10,13 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerLoginComponent;
 import com.edudb.bdude.di.modules.LoginModule;
+import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -60,15 +65,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract void initDependencies();
 
+    public void navigateToCreateNewRequestActivity(){
+        startActivity(new Intent(this, CreateHelpRequestActivity.class));
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
         if (requestCode == RC_SIGN_IN) {
+
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                showSnackbar("Successfully signed in!");
+
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    SessionManager.getInstance().setCurrentUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                }
+
             } else {
                 // Sign in failed
                 if (response == null) {

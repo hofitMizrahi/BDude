@@ -1,15 +1,17 @@
 package com.edudb.bdude.session;
 
+import com.edudb.bdude.db.modules.CurrentUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.GeoPoint;
+
 public class SessionManager {
 
-    //TODO save user Uid
+    private static SessionManager mInstance;
+    private CurrentUser mCurrentUser;
+    private GeoPoint mGeoPint;
 
-    public static SessionManager mInstance;
-
-    //TODO add this check
-    public static boolean isUserLogin(){
-        //TODO add Condition
-        return false;
+    public boolean isUserLogin(){
+        return FirebaseAuth.getInstance().getCurrentUser() != null && mCurrentUser != null && mCurrentUser.getUId() != null;
     }
 
     public static SessionManager getInstance() {
@@ -17,5 +19,13 @@ public class SessionManager {
             mInstance = new SessionManager();
         }
         return mInstance;
+    }
+
+    public void setUserLocation(GeoPoint geoPoint){
+        mGeoPint = geoPoint;
+    }
+
+    public void setCurrentUser(String uId){
+        mCurrentUser = new CurrentUser(uId);
     }
 }
