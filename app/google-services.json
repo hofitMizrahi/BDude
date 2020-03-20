@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "301644723160-59ca2nnn2u0jgs7e94ke26dj78b216s3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edudb.bdude",
+            "certificate_hash": "30fab28b4fcd1d164f69e5d89d44e7dc519e887d"
+          }
+        },
+        {
+          "client_id": "301644723160-64khpdbclti3f68sljit4s757jqd7snc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edudb.bdude",
+            "certificate_hash": "eb85720c5b726f270d11c747dc4ba9129f941d51"
+          }
+        },
+        {
           "client_id": "301644723160-8r15f75dndenmt9qu1k8947b5ngivlg7.apps.googleusercontent.com",
           "client_type": 3
         }

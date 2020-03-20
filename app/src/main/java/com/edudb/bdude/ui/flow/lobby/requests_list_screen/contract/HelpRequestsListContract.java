@@ -6,7 +6,6 @@ public interface HelpRequestsListContract {
 
     interface View{
         void navigateToLoginScreen();
-
         void startLogin();
     }
 

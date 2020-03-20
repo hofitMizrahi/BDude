@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edudb.bdude">
 
-
     <application
         android:name=".application.BDudeApplication"
         android:allowBackup="true"
@@ -11,18 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
+            android:screenOrientation="fullSensor"/>
         <activity android:name=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.flow.login.view.LoginActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".ui.flow.lobby.my_requests.view.MyRequestsActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".ui.flow.lobby.request_details.view.RequestDetailsActivity" />
 
-        <activity android:name=".ui.flow.login.view.LoginActivity" />
-
-        <uses-library android:name="com.google.android.maps"/>
-
+        <uses-library android:name="com.google.android.maps" />
     </application>
 
 </manifest>

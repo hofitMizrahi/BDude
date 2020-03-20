@@ -1,8 +1,6 @@
 package com.edudb.bdude.application;
 
 import android.app.Application;
-import android.util.Log;
-
 import com.edudb.bdude.di.components.ApplicationComponent;
 import com.edudb.bdude.di.components.DaggerApplicationComponent;
 import com.edudb.bdude.di.modules.ApplicationModule;

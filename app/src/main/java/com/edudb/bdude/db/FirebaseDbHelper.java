@@ -1,12 +1,15 @@
 package com.edudb.bdude.db;
 
-import com.google.firebase.database.FirebaseDatabase;
 import javax.inject.Inject;
 
 public class FirebaseDbHelper {
 
+//    // Write a message to the database
+//    FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    DatabaseReference myRef = database.getReference("message");
+
     public static FirebaseDbHelper mFirebaseDbInstance;
-    public FirebaseDatabase mFirebaseDataBase;
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Inject
     FirebaseDbHelper() {
