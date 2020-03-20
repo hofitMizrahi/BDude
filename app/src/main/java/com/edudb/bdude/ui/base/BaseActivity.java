@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -10,12 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerLoginComponent;
 import com.edudb.bdude.di.modules.LoginModule;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
+import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -34,6 +37,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements BaseView{
 
     private static final int RC_SIGN_IN = 5;
+    public static final String REQUEST_DETAILS = "request_details";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +62,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
     public BasePresenter getPresenter(){
         return null;
     }
@@ -69,6 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public void navigateToCreateNewRequestActivity(){
        // startActivity(new Intent(this, CreateHelpRequestActivity.class));
         startActivity(new Intent(this, MyRequestsActivity.class));
+    }
+
+    public void navigateToRequestDetailsScreen(HelpRequest request) {
+        startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

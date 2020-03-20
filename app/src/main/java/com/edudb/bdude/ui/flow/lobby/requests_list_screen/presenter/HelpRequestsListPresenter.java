@@ -44,4 +44,17 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
             mView.navigateToCreateNewRequestActivity();
         }
     }
+
+    @Override
+    public void onItemClicked(HelpRequest request) {
+        checkUserLogIn(request);
+    }
+
+    private void checkUserLogIn(HelpRequest request){
+        if(!SessionManager.getInstance().isUserLogin()){
+            mView.startLogin();
+        }else {
+            mView.navigateToRequestDetailsScreen(request);
+        }
+    }
 }

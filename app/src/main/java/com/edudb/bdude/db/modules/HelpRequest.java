@@ -1,11 +1,14 @@
 package com.edudb.bdude.db.modules;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.firestore.GeoPoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
-public class HelpRequest implements Serializable {
+public class HelpRequest implements Parcelable {
 
     @SerializedName("address_coords")
     @Expose
@@ -22,9 +25,6 @@ public class HelpRequest implements Serializable {
     @SerializedName("phone_number")
     @Expose
     String phone_number;
-    @SerializedName("timestamp")
-    @Expose
-    long timestamp;
     @SerializedName("title")
     @Expose
     String title;
@@ -40,6 +40,18 @@ public class HelpRequest implements Serializable {
 
     public HelpRequest() {
     }
+
+    public static final Creator<HelpRequest> CREATOR = new Creator<HelpRequest>() {
+        @Override
+        public HelpRequest createFromParcel(Parcel in) {
+            return new HelpRequest(in);
+        }
+
+        @Override
+        public HelpRequest[] newArray(int size) {
+            return new HelpRequest[size];
+        }
+    };
 
     public GeoPoint getAddress_coords() {
         return address_coords;
@@ -81,14 +93,6 @@ public class HelpRequest implements Serializable {
         this.phone_number = phone_number;
     }
 
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -119,5 +123,38 @@ public class HelpRequest implements Serializable {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeDouble(address_coords.getLatitude());
+        parcel.writeDouble(address_coords.getLongitude());
+        parcel.writeString(address_text);
+        parcel.writeString(body);
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(user_ID);
+        parcel.writeString(user_avatar);
+        parcel.writeString(user_name);
+        parcel.writeString(phone_number);
+    }
+
+    public HelpRequest(Parcel in) {
+        double lat = in.readDouble();
+        double lng = in.readDouble();
+        address_coords = new GeoPoint(lat, lng);
+        this.id = in.readString();
+        this.address_text = in.readString();
+        this.body =  in.readString();
+        this.title =  in.readString();
+        this.user_ID =  in.readString();
+        this.user_avatar =  in.readString();
+        this.user_name =  in.readString();
+        this.phone_number =  in.readString();
     }
 }

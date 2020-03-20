@@ -2,6 +2,7 @@ package com.edudb.bdude.ui.flow.lobby.request_details.view;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
@@ -15,6 +16,9 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Inject
     RequestDetailsPresenter mPresenter;
+
+    @Inject
+    HelpRequest mRequestDetailsObj;
 
     @Override
     public int getLayoutResource() {
