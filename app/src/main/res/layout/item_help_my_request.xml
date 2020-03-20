@@ -20,11 +20,12 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/avatar"
+                android:id="@+id/delete"
                 android:layout_marginTop="16dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:gravity="right"
+                android:src="@drawable/red_garbage_ic_"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,30 +37,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:gravity="right"
-                android:textSize="16sp"
                 android:layout_marginEnd="16dp"
-                android:maxLength="100"
-                android:textStyle="bold"
                 android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toStartOf="@+id/avatar"
+                android:gravity="right"
+                android:maxLength="100"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/delete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title"
                 tools:text="description" />
-
-            <TextView
-                android:id="@+id/destination"
-                android:layout_width="0dp"
-                tools:text="40 km"
-                android:layout_marginEnd="16dp"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/avatar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/body"
-                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/title"
@@ -69,7 +55,8 @@
                 android:layout_width="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_height="wrap_content"
-                android:text="tit jhfjkh jfhjff fhf jfhfj jfhjfh jkfhjfh jfhjfh fjhfjhhf fjhfjh le"
+                android:textColor="@color/colorDark"
+                android:text="tit jhfjjfh fjhfjhhf fjhfjh le"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="right"

@@ -3,6 +3,8 @@ package com.edudb.bdude.di.modules;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
+import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -19,6 +21,12 @@ public class MyRequestsModule {
     @Provides
     MyRequestsContract.View provideView(){
         return  mView;
+    }
+
+    @PerActivity
+    @Provides
+    MyRequestsRecyclerAdapter provideAdapter(){
+        return new MyRequestsRecyclerAdapter();
     }
 
     @Provides

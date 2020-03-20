@@ -21,6 +21,10 @@ public class SessionManager {
         return mInstance;
     }
 
+    public CurrentUser getUser(){
+        return mCurrentUser;
+    }
+
     public void setUserLocation(GeoPoint geoPoint){
         mGeoPint = geoPoint;
     }

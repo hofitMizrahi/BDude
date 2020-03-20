@@ -15,6 +15,7 @@ import com.edudb.bdude.di.components.DaggerLoginComponent;
 import com.edudb.bdude.di.modules.LoginModule;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
+import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -66,7 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public abstract void initDependencies();
 
     public void navigateToCreateNewRequestActivity(){
-        startActivity(new Intent(this, CreateHelpRequestActivity.class));
+       // startActivity(new Intent(this, CreateHelpRequestActivity.class));
+        startActivity(new Intent(this, MyRequestsActivity.class));
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
