@@ -1,38 +1,51 @@
 package com.edudb.bdude.db.modules;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class HelpRequest {
+public class HelpRequest implements Serializable {
 
-    String address_coords;
+    @SerializedName("address_coords")
+    @Expose
+    GeoPoint address_coords;
+    @SerializedName("address_text")
+    @Expose
     String address_text;
+    @SerializedName("body")
+    @Expose
     String body;
-    LatLng id;
+    @SerializedName("id")
+    @Expose
+    String id;
+    @SerializedName("phone_number")
+    @Expose
     String phone_number;
+    @SerializedName("timestamp")
+    @Expose
     long timestamp;
+    @SerializedName("title")
+    @Expose
     String title;
+    @SerializedName("user_ID")
+    @Expose
     String user_ID;
+    @SerializedName("user_avatar")
+    @Expose
     String user_avatar;
+    @SerializedName("user_name")
+    @Expose
     String user_name;
 
-    public HelpRequest(String address_coords, String address_text, String body, LatLng id, String phone_number, long timestamp, String title, String user_ID, String user_avatar, String user_name) {
-        this.address_coords = address_coords;
-        this.address_text = address_text;
-        this.body = body;
-        this.id = id;
-        this.phone_number = phone_number;
-        this.timestamp = timestamp;
-        this.title = title;
-        this.user_ID = user_ID;
-        this.user_avatar = user_avatar;
-        this.user_name = user_name;
+    public HelpRequest() {
     }
 
-    public String getAddress_coords() {
+    public GeoPoint getAddress_coords() {
         return address_coords;
     }
 
-    public void setAddress_coords(String address_coords) {
+    public void setAddress_coords(GeoPoint address_coords) {
         this.address_coords = address_coords;
     }
 
@@ -52,11 +65,11 @@ public class HelpRequest {
         this.body = body;
     }
 
-    public LatLng getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(LatLng id) {
+    public void setId(String id) {
         this.id = id;
     }
 

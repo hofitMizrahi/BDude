@@ -1,9 +1,13 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 
 import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 @PerActivity
@@ -21,7 +25,16 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void onStart() {
-        mDataBase.createRequest();
+        mDataBase.getAllRequestsList(this::displayList);
+    }
+
+    private void displayList(List<HelpRequest> helpRequests) {
+
+        if(helpRequests != null && helpRequests.size() > 0){
+            mView.displayDataList(helpRequests);
+        }else {
+            //TODO show no data view
+        }
     }
 
     @Override

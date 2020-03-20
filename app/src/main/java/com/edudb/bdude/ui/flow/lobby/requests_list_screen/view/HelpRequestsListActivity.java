@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
@@ -26,6 +27,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -72,4 +74,8 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
         return mPresenter;
     }
 
+    @Override
+    public void displayDataList(List<HelpRequest> helpRequests) {
+
+    }
 }
