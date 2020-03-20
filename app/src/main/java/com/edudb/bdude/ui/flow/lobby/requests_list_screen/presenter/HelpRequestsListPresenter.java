@@ -26,7 +26,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void createHelpRequestClicked() {
-        //TODO enum ASK_NEW_REQUEST
+
         if(!SessionManager.getInstance().isUserLogin()){
             mView.startLogin();
         }else {

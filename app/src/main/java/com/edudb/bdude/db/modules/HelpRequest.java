@@ -1,4 +1,4 @@
-package com.edudb.bdude.db.response;
+package com.edudb.bdude.db.modules;
 
 import com.google.android.gms.maps.model.LatLng;
 

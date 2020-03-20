@@ -5,7 +5,6 @@ import com.edudb.bdude.ui.base.BasePresenter;
 public interface HelpRequestsListContract {
 
     interface View{
-        void navigateToLoginScreen();
         void startLogin();
     }
 
