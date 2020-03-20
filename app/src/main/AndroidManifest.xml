@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.flow.login.view.LoginActivity" />
+
         <uses-library android:name="com.google.android.maps"/>
 
     </application>

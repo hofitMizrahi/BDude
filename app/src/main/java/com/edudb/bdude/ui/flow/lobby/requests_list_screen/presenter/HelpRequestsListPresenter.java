@@ -2,6 +2,7 @@ package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.di.scope.PerActivity;
+import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import javax.inject.Inject;
 
@@ -21,5 +22,15 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
     @Override
     public void onStart() {
         mDataBase.createRequest();
+    }
+
+    @Override
+    public void createHelpRequestClicked() {
+        //TODO enum ASK_NEW_REQUEST
+        if(!SessionManager.getInstance().isUserLogin()){
+            mView.startLogin();
+        }else {
+            //TODO navigate to createNewRequest activity
+        }
     }
 }

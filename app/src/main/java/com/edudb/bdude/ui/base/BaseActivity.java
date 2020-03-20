@@ -27,9 +27,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         View root = getLayoutInflater().inflate(R.layout.activity_base, null);
         setContentView(root);
 
-        View view = getLayoutInflater().inflate(getLayoutResource(), null);
-        ViewGroup mContentContainer = findViewById(R.id.content_container);
-        mContentContainer.addView(view);
+        if(getLayoutResource() != 0) {
+            View view = getLayoutInflater().inflate(getLayoutResource(), null);
+            ViewGroup mContentContainer = findViewById(R.id.content_container);
+            mContentContainer.addView(view);
+        }
     }
 
     public BasePresenter getPresenter(){

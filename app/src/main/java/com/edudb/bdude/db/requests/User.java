@@ -1,61 +1,73 @@
 package com.edudb.bdude.db.requests;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.iid.FirebaseInstanceIdReceiver;
 
 public class User {
 
-    String fullAddress;
-    String name;
-    String phone;
-    LatLng latLng;
-    String uId;
+//    address_coords
+//[32.081166° N, 34.785302° E]
 
-    public User(String fullAddress, String name, String phone, LatLng latLng, String uId) {
-        this.fullAddress = fullAddress;
+    String address_coords;
+    String address_text;
+    String avatar;
+    LatLng name;
+    String phone_number;
+    String uid;
+
+    public User(String address_coords, String address_text, String avatar, LatLng name, String phone_number, String uid) {
+        this.address_coords = address_coords;
+        this.address_text = address_text;
+        this.avatar = avatar;
         this.name = name;
-        this.phone = phone;
-        this.latLng = latLng;
-        this.uId = uId;
+        this.phone_number = phone_number;
+        this.uid = uid;
     }
 
-    public String getFullAddress() {
-        return fullAddress;
+    public String getAddress_coords() {
+        return address_coords;
     }
 
-    public void setFullAddress(String fullAddress) {
-        this.fullAddress = fullAddress;
+    public void setAddress_coords(String address_coords) {
+        this.address_coords = address_coords;
     }
 
-    public String getName() {
+    public String getAddress_text() {
+        return address_text;
+    }
+
+    public void setAddress_text(String address_text) {
+        this.address_text = address_text;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public LatLng getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(LatLng name) {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public String getUid() {
+        return uid;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
-    }
-
-    public String getuId() {
-        return uId;
-    }
-
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
