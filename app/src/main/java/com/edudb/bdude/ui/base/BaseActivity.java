@@ -17,6 +17,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
+        if(getPresenter() != null){
+            getPresenter().onStart();
+        }
     }
 
     public void setContentView() {
@@ -27,6 +30,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         View view = getLayoutInflater().inflate(getLayoutResource(), null);
         ViewGroup mContentContainer = findViewById(R.id.content_container);
         mContentContainer.addView(view);
+    }
+
+    public BasePresenter getPresenter(){
+        return null;
     }
 
     public abstract int getLayoutResource();

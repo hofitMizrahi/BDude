@@ -6,13 +6,20 @@ import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsL
 import javax.inject.Inject;
 
 @PerActivity
-class HelpRequestsListPresenter implements HelpRequestsListContract.Presenter {
+public class HelpRequestsListPresenter implements HelpRequestsListContract.Presenter {
+
+    @Inject
+    HelpRequestsListContract.View mView;
 
     @Inject
     FirebaseDbHelper mDataBase;
 
     @Inject
-    HelpRequestsListPresenter() {
+    public HelpRequestsListPresenter() {
+    }
+
+    @Override
+    public void onStart() {
         mDataBase.createRequest();
     }
 }
