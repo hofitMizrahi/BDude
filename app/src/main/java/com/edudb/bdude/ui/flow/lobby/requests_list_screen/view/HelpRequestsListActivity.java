@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
@@ -76,6 +77,8 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
 
     @Override
     public void displayDataList(List<HelpRequest> helpRequests) {
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter.setData(helpRequests);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

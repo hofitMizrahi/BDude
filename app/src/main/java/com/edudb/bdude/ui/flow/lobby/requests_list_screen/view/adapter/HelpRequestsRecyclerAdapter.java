@@ -6,8 +6,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
+import com.edudb.bdude.db.modules.HelpRequest;
+
+import java.util.List;
 
 public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpRequestViewHolder> {
+
+    private List<HelpRequest> mList;
 
     @NonNull
     @Override
@@ -18,11 +23,15 @@ public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpReques
 
     @Override
     public void onBindViewHolder(@NonNull HelpRequestViewHolder holder, int position) {
-
+        holder.onBind(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
+    }
+
+    public void setData(List<HelpRequest> helpRequests) {
+        mList = helpRequests;
     }
 }
