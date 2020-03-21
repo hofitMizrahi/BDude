@@ -11,7 +11,6 @@ public interface HelpRequestsListContract {
 
     interface View extends BaseView {
         void startLogin();
-        void showTermsOfUse();
         void displayDataList(List<HelpRequest> helpRequests);
         void navigateToCreateNewRequestActivity();
         void displayEmptyView();
