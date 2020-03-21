@@ -2,8 +2,10 @@ package com.edudb.bdude.ui.flow.lobby.my_requests.view;
 
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
@@ -15,8 +17,11 @@ import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
+
 import java.util.List;
+
 import javax.inject.Inject;
+
 import butterknife.BindView;
 
 public class MyRequestsActivity extends BaseActivity implements MyRequestsContract.View {
@@ -69,10 +74,10 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @Override
     public void initView() {
         String str = "";
-        if(mCurrentUser.getName() != null && !mCurrentUser.equals("")){
+        if (mCurrentUser.getName() != null && !mCurrentUser.equals("")) {
             str = mCurrentUser.getName();
         }
-        mTitleWithUserName.setText(String.format("%s %s", getString(R.string.hello), str));
+        mTitleWithUserName.setText(String.format("%s %s%s", getString(R.string.hello), str, "!"));
     }
 
     @Override
