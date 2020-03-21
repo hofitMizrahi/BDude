@@ -55,8 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/rounded_green_btn_continue"
-        android:text="@string/show_phone"
+        android:text="@string/call_to_number"
         android:textColor="#ffff"
+        android:gravity="center"
+        android:textDirection="rtl"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />

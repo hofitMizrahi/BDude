@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 public class RequestDetailsActivity extends BaseActivity implements RequestDetailsContract.View {
 
-    private boolean isDial = false;
+    //private boolean isDial = false;
 
     @Inject
     RequestDetailsPresenter mPresenter;
@@ -39,12 +39,13 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @OnClick(R.id.show_phone)
     void onBtnClicked() {
-        if (!isDial) {
-            mNumberBtn.setText(getString(R.string.call_to_number) + mRequestDetailsObj.getPhone_number());
-        } else {
+        //if (!isDial) {
+        // mNumberBtn.setText(getString(R.string.call_to_number) + mRequestDetailsObj.getPhone_number());
+        //mNumberBtn.setText(getString(R.string.call_to_number));
+        //} else {
             startDial(mRequestDetailsObj.getPhone_number());
-        }
-        isDial = true;
+        //}
+        //isDial = true;
     }
 
     @Override

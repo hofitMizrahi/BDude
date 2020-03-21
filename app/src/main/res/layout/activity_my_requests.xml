@@ -20,7 +20,7 @@
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             android:padding="16dp"
-            tools:text="שלום חופית"
+            android:text="שלום ישראל!"
             android:textColor="@color/colorDark"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -46,7 +46,7 @@
 
         android:padding="16dp"
         android:text="@string/no_my_request_data"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

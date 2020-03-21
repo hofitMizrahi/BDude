@@ -21,9 +21,6 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     private IExecutable<HelpRequest> mListener;
     private HelpRequest mHelpRequest;
 
-    @BindView(R.id.title)
-    TextView mTitle;
-
     @BindView(R.id.body)
     TextView mBody;
 
@@ -47,8 +44,7 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
         mHelpRequest = helpRequest;
 
-        mTitle.setText(helpRequest.getTitle());
-        mBody.setText(helpRequest.getBody());
+        mBody.setText(helpRequest.getTitle());
         mLocation.setText(helpRequest.getAddress_coords().toString());
 
         Picasso.get().load(helpRequest.getUser_avatar()).into(mAvatar);
