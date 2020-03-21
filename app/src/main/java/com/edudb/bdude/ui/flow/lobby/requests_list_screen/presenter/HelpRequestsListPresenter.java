@@ -3,7 +3,9 @@ package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.scope.PerActivity;
+import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.shared_preferences.SharedPrefsController;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import java.util.List;
 import javax.inject.Inject;
@@ -15,22 +17,26 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
     HelpRequestsListContract.View mView;
 
     @Inject
+    SharedPrefsController mSharedPrefsController;
+
+    @Inject
     FirebaseDbHelper mDataBase;
 
     @Inject
-    public HelpRequestsListPresenter() {
+    HelpRequestsListPresenter() {
     }
 
     @Override
     public void onStart() {
-        if(!SessionManager.getInstance().isUserAcceptedTerms())
-        {
-            mView.showTermsOfUse();
-        }
-        else{
-            mDataBase.createRequest();
-        }
+
         mView.displayProgressBar();
+
+        boolean showTermsOfUse = mSharedPrefsController.getBoolean(Constants.SHOW_TERMS_OF_USE);
+
+        if (!showTermsOfUse) {
+            mSharedPrefsController.putBoolean(Constants.SHOW_TERMS_OF_USE, true);
+            mView.navigateTermsOfUseScreen();
+        }
         mDataBase.getAllRequestsList(this::displayList);
     }
 

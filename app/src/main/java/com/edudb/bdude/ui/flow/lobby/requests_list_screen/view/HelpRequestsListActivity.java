@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
+import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
+
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -73,5 +76,10 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     public void displayEmptyView() {
         mEmptyViewTxt.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void navigateTermsOfUseScreen() {
+        startActivity(new Intent(this, TermsOfUseActivity.class));
     }
 }

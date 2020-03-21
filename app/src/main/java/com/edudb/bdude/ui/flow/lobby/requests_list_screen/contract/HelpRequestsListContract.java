@@ -16,6 +16,7 @@ public interface HelpRequestsListContract {
         void navigateToCreateNewRequestActivity();
         void displayEmptyView();
         void navigateToRequestDetailsScreen(HelpRequest request);
+        void navigateTermsOfUseScreen();
     }
 
     interface Presenter extends BasePresenter, HelpRequestsRecyclerAdapter.InteractionListener {
