@@ -1,6 +1,7 @@
 package com.edudb.bdude.ui.flow.lobby.request_details.view;
 
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
@@ -26,6 +27,12 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Inject
     HelpRequest mRequestDetailsObj;
+
+    @BindView(R.id.title)
+    TextView mTitleTxt;
+
+    @BindView(R.id.body)
+    TextView mBodyTxt;
 
     @BindView(R.id.show_phone)
     Button mNumberBtn;
@@ -60,6 +67,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public void initViews() {
-
+        mTitleTxt.setText(mRequestDetailsObj.getTitle());
+        mBodyTxt.setText(mRequestDetailsObj.getBody());
     }
 }

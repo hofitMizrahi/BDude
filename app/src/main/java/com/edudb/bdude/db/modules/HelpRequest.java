@@ -148,9 +148,9 @@ public class HelpRequest implements Parcelable {
         double lat = in.readDouble();
         double lng = in.readDouble();
         address_coords = new GeoPoint(lat, lng);
-        this.id = in.readString();
         this.address_text = in.readString();
         this.body =  in.readString();
+        this.id = in.readString();
         this.title =  in.readString();
         this.user_ID =  in.readString();
         this.user_avatar =  in.readString();
