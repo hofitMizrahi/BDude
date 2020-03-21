@@ -23,6 +23,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void onStart() {
+        mView.displayProgressBar();
         mDataBase.getAllRequestsList(this::displayList);
     }
 
@@ -33,6 +34,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         }else {
             mView.displayEmptyView();
         }
+        mView.hideProgressBar();
     }
 
     @Override

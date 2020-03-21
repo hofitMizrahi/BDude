@@ -1,14 +1,19 @@
 package com.edudb.bdude.ui.base;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
@@ -34,10 +39,13 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private static final int RC_SIGN_IN = 5;
     public static final String REQUEST_DETAILS = "request_details";
+
+    private ProgressBar mProgressBar;
+    private View mContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,8 +53,28 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
-        if(getPresenter() != null){
+        hideProgressBar();
+        if (getPresenter() != null) {
             getPresenter().onStart();
+        }
+    }
+
+    public void displayProgressBar() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mContainer.setVisibility(View.GONE);
+    }
+
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+        mContainer.setVisibility(View.VISIBLE);
+    }
+
+    public void startDial(String phoneNumber) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(phoneNumber)));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -55,8 +83,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         View root = getLayoutInflater().inflate(R.layout.activity_base, null);
         setContentView(root);
 
-        if(getLayoutResource() != 0) {
+        if (getLayoutResource() != 0) {
             View view = getLayoutInflater().inflate(getLayoutResource(), null);
+            mProgressBar = findViewById(R.id.progress_bar);
+            mContainer = findViewById(R.id.content_container);
             ViewGroup mContentContainer = findViewById(R.id.content_container);
             mContentContainer.addView(view);
         }
@@ -67,7 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return this;
     }
 
-    public BasePresenter getPresenter(){
+    public BasePresenter getPresenter() {
         return null;
     }
 
@@ -75,8 +105,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract void initDependencies();
 
-    public void navigateToCreateNewRequestActivity(){
-       // startActivity(new Intent(this, CreateHelpRequestActivity.class));
+    public void navigateToCreateNewRequestActivity() {
+        // startActivity(new Intent(this, CreateHelpRequestActivity.class));
         startActivity(new Intent(this, MyRequestsActivity.class));
     }
 
@@ -94,7 +124,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             // Successfully signed in
             if (resultCode == RESULT_OK) {
 
-                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     SessionManager.getInstance().setCurrentUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 }
 

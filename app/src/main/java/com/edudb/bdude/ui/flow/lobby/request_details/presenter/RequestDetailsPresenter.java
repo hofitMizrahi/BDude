@@ -20,5 +20,6 @@ public class RequestDetailsPresenter implements RequestDetailsContract.Presenter
 
     @Override
     public void onStart() {
+        mView.initViews();
     }
 }

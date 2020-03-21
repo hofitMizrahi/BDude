@@ -6,6 +6,7 @@ import com.edudb.bdude.ui.base.BaseView;
 public interface RequestDetailsContract {
 
     interface View extends BaseView {
+        void initViews();
     }
 
     interface Presenter extends BasePresenter {

@@ -18,6 +18,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
 
     @Override
     public void onStart() {
+        mView.displayProgressBar();
         mDataBase.getMyRequests(this::displayList);
     }
 
@@ -28,6 +29,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
         }else {
             mView.showEmptyView();
         }
+        mView.hideProgressBar();
     }
 
     @Inject
@@ -36,6 +38,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
 
     @Override
     public void onItemDeleteClicked(HelpRequest request) {
+        mView.displayProgressBar();
         mDataBase.deleteRequest(request.getId(), aVoid -> {
             mMyList.remove(request);
 
@@ -44,6 +47,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
             }else {
                 mView.showEmptyView();
             }
+            mView.hideProgressBar();
         });
     }
 }
