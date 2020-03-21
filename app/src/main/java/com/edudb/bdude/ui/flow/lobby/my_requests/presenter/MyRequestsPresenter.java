@@ -19,6 +19,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
     @Override
     public void onStart() {
         mView.displayProgressBar();
+        mView.initView();
         mDataBase.getMyRequests(this::displayList);
     }
 

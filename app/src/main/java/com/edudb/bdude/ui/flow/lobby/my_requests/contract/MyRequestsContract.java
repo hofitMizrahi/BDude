@@ -13,6 +13,7 @@ public interface MyRequestsContract {
         void displayList(List<HelpRequest> helpRequests);
         void showEmptyView();
         void refreshList(List<HelpRequest> list);
+        void initView();
     }
 
     interface Presenter extends BasePresenter , MyRequestsRecyclerAdapter.IEventListener {
