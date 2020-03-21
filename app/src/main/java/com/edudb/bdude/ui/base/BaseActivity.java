@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.base;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
@@ -110,5 +112,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                         .setLogo(R.mipmap.ic_launcher)
                         .build(),
                 RC_SIGN_IN);
+    }
+
+    public void showTermsOfUse() {
+        AlertDialog.Builder termsAlertDialog = new AlertDialog.Builder(this);
+        termsAlertDialog.setTitle("Terms Of Use")
+                .setMessage("Note that to use the app, you must accept terms of use")
+                .setOnCancelListener(dialog -> {
+                   showTermsOfUse();
+                })
+        .setPositiveButton("I except terms", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        termsAlertDialog.show();
     }
 }

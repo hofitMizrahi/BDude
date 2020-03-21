@@ -6,6 +6,7 @@ public interface HelpRequestsListContract {
 
     interface View{
         void startLogin();
+        void showTermsOfUse();
     }
 
     interface Presenter extends BasePresenter {

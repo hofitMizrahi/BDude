@@ -12,6 +12,11 @@ public class SessionManager {
         return false;
     }
 
+    public static boolean isUserAcceptedTerms(){
+        //TODO add condition
+        return false;
+    }
+
     public static SessionManager getInstance() {
         if(mInstance == null){
             mInstance = new SessionManager();

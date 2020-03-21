@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,5 +72,7 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     public BasePresenter getPresenter() {
         return mPresenter;
     }
+
+
 
 }

@@ -21,7 +21,13 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void onStart() {
-        mDataBase.createRequest();
+        if(!SessionManager.getInstance().isUserAcceptedTerms())
+        {
+            mView.showTermsOfUse();
+        }
+        else{
+            mDataBase.createRequest();
+        }
     }
 
     @Override
