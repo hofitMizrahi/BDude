@@ -113,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             // Successfully signed in
             if (resultCode == RESULT_OK) {
 
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     FirebaseDbHelper.getInstance().getCurrentUserDetails(uid, this::saveUserDetails);
