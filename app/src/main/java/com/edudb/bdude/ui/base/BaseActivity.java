@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,27 +14,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
-import com.edudb.bdude.di.components.DaggerLoginComponent;
-import com.edudb.bdude.di.modules.LoginModule;
+import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
-import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
-import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.Objects;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -124,8 +117,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             // Successfully signed in
             if (resultCode == RESULT_OK) {
 
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    SessionManager.getInstance().setCurrentUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseDbHelper.getInstance().getCurrentUserDetails(uid, this::saveUserDetails);
                 }
 
             } else {
@@ -145,6 +140,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 Log.e("BDUDE", "Sign-in error: ", response.getError());
             }
         }
+    }
+
+    private void saveUserDetails(User user){
+        SessionManager.getInstance().setCurrentUser(user.getUid());
     }
 
     private void showSnackbar(String message) {

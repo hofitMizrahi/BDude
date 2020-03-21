@@ -12,13 +12,7 @@ public class User {
     String phone_number;
     String uid;
 
-    public User(GeoPoint address_coords, String address_text, String avatar, LatLng name, String phone_number, String uid) {
-        this.address_coords = address_coords;
-        this.address_text = address_text;
-        this.avatar = avatar;
-        this.name = name;
-        this.phone_number = phone_number;
-        this.uid = uid;
+    public User() {
     }
 
     public GeoPoint getAddress_coords() {

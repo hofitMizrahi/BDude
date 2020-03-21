@@ -1,6 +1,7 @@
 package com.edudb.bdude.db;
 
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -72,5 +73,15 @@ public class FirebaseDbHelper {
     }
 
     public void updateRequest(){
+    }
+
+    public void getCurrentUserDetails(String uId ,IExecutable<User> listener) {
+        db.collection("users").whereEqualTo("uid", uId).get().addOnSuccessListener(snapshots -> {
+
+            for(DocumentSnapshot document : snapshots.getDocuments()){
+                User user = snapshots.getDocuments().get(0).toObject(User.class);
+                listener.execute(user);
+            }
+        });
     }
 }
