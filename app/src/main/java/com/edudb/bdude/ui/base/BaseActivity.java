@@ -101,6 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             startLogin();
         }else {
             // startActivity(new Intent(this, CreateHelpRequestActivity.class));
+            //TODO temp
             startActivity(new Intent(this, MyRequestsActivity.class));
         }
     }
@@ -163,9 +164,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                         .setAvailableProviders(Arrays.asList(
                                 new AuthUI.IdpConfig.GoogleBuilder().build(),
                                 //new AuthUI.IdpConfig.FacebookBuilder().build(), TODO add facebook_application_id, https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#facebook, https://console.firebase.google.com/project/bdude-d4c05/authentication/providers
-                                new AuthUI.IdpConfig.EmailBuilder().build(),
-                                new AuthUI.IdpConfig.PhoneBuilder().build()
-                                //,new AuthUI.IdpConfig.AnonymousBuilder().build()
+                                new AuthUI.IdpConfig.EmailBuilder().build()
+                                //new AuthUI.IdpConfig.PhoneBuilder().build()
                         ))
                         .setLogo(R.mipmap.ic_launcher)
                         .build(),
