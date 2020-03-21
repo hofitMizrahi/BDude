@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">BDude</string>
     <string name="help_please_btn">עזרה בבקשה</string>
+    <string name="no_request_data">אין בקשות להציג בסביבתך</string>
+    <string name="my_request_title">הבקשות שלי</string>
+    <string name="no_my_request_data">אין לך בקשות</string>
+    <string name="show_phone">הצג מספר טלפון</string>
+    <string name="call_to_number">חייג למספר</string>
+    <string name="i_need_help_with">אני צריך עזרה עם:</string>
 </resources>

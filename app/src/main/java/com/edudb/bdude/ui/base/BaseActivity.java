@@ -1,35 +1,46 @@
 package com.edudb.bdude.ui.base;
 
 import android.content.DialogInterface;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
-import com.edudb.bdude.di.components.DaggerLoginComponent;
-import com.edudb.bdude.di.modules.LoginModule;
-import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
+import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.User;
+import com.edudb.bdude.interfaces.IExecutable;
+import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
+import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private static final int RC_SIGN_IN = 5;
+    public static final String REQUEST_DETAILS = "request_details";
+
+    private ProgressBar mProgressBar;
+    private View mContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,8 +48,28 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
-        if(getPresenter() != null){
+        hideProgressBar();
+        if (getPresenter() != null) {
             getPresenter().onStart();
+        }
+    }
+
+    public void displayProgressBar() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mContainer.setVisibility(View.GONE);
+    }
+
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+        mContainer.setVisibility(View.VISIBLE);
+    }
+
+    public void startDial(String phoneNumber) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(phoneNumber)));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -47,14 +78,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         View root = getLayoutInflater().inflate(R.layout.activity_base, null);
         setContentView(root);
 
-        if(getLayoutResource() != 0) {
+        if (getLayoutResource() != 0) {
             View view = getLayoutInflater().inflate(getLayoutResource(), null);
+            mProgressBar = findViewById(R.id.progress_bar);
+            mContainer = findViewById(R.id.content_container);
             ViewGroup mContentContainer = findViewById(R.id.content_container);
             mContentContainer.addView(view);
         }
     }
 
-    public BasePresenter getPresenter(){
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    public BasePresenter getPresenter() {
         return null;
     }
 
@@ -62,15 +100,31 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract void initDependencies();
 
+    public void navigateToCreateNewRequestActivity() {
+        // startActivity(new Intent(this, CreateHelpRequestActivity.class));
+        startActivity(new Intent(this, MyRequestsActivity.class));
+    }
+
+    public void navigateToRequestDetailsScreen(HelpRequest request) {
+        startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
         if (requestCode == RC_SIGN_IN) {
+
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                showSnackbar("Successfully signed in!");
+
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseDbHelper.getInstance().getCurrentUserDetails(uid, this::saveUserDetails);
+                }
+
             } else {
                 // Sign in failed
                 if (response == null) {
@@ -88,6 +142,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 Log.e("BDUDE", "Sign-in error: ", response.getError());
             }
         }
+    }
+
+    private void saveUserDetails(User user){
+        SessionManager.getInstance().setCurrentUser(user.getUid());
     }
 
     private void showSnackbar(String message) {

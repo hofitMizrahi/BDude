@@ -1,38 +1,63 @@
 package com.edudb.bdude.db.modules;
 
-import com.google.android.gms.maps.model.LatLng;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class HelpRequest {
+import com.google.firebase.firestore.GeoPoint;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-    String address_coords;
+public class HelpRequest implements Parcelable {
+
+    @SerializedName("address_coords")
+    @Expose
+    GeoPoint address_coords;
+    @SerializedName("address_text")
+    @Expose
     String address_text;
+    @SerializedName("body")
+    @Expose
     String body;
-    LatLng id;
+    @SerializedName("id")
+    @Expose
+    String id;
+    @SerializedName("phone_number")
+    @Expose
     String phone_number;
-    long timestamp;
+    @SerializedName("title")
+    @Expose
     String title;
+    @SerializedName("user_ID")
+    @Expose
     String user_ID;
+    @SerializedName("user_avatar")
+    @Expose
     String user_avatar;
+    @SerializedName("user_name")
+    @Expose
     String user_name;
 
-    public HelpRequest(String address_coords, String address_text, String body, LatLng id, String phone_number, long timestamp, String title, String user_ID, String user_avatar, String user_name) {
-        this.address_coords = address_coords;
-        this.address_text = address_text;
-        this.body = body;
-        this.id = id;
-        this.phone_number = phone_number;
-        this.timestamp = timestamp;
-        this.title = title;
-        this.user_ID = user_ID;
-        this.user_avatar = user_avatar;
-        this.user_name = user_name;
+    public HelpRequest() {
     }
 
-    public String getAddress_coords() {
+    public static final Creator<HelpRequest> CREATOR = new Creator<HelpRequest>() {
+        @Override
+        public HelpRequest createFromParcel(Parcel in) {
+            return new HelpRequest(in);
+        }
+
+        @Override
+        public HelpRequest[] newArray(int size) {
+            return new HelpRequest[size];
+        }
+    };
+
+    public GeoPoint getAddress_coords() {
         return address_coords;
     }
 
-    public void setAddress_coords(String address_coords) {
+    public void setAddress_coords(GeoPoint address_coords) {
         this.address_coords = address_coords;
     }
 
@@ -52,11 +77,11 @@ public class HelpRequest {
         this.body = body;
     }
 
-    public LatLng getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(LatLng id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -66,14 +91,6 @@ public class HelpRequest {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getTitle() {
@@ -106,5 +123,38 @@ public class HelpRequest {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeDouble(address_coords.getLatitude());
+        parcel.writeDouble(address_coords.getLongitude());
+        parcel.writeString(address_text);
+        parcel.writeString(body);
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(user_ID);
+        parcel.writeString(user_avatar);
+        parcel.writeString(user_name);
+        parcel.writeString(phone_number);
+    }
+
+    public HelpRequest(Parcel in) {
+        double lat = in.readDouble();
+        double lng = in.readDouble();
+        address_coords = new GeoPoint(lat, lng);
+        this.address_text = in.readString();
+        this.body =  in.readString();
+        this.id = in.readString();
+        this.title =  in.readString();
+        this.user_ID =  in.readString();
+        this.user_avatar =  in.readString();
+        this.user_name =  in.readString();
+        this.phone_number =  in.readString();
     }
 }

@@ -1,23 +1,36 @@
 package com.edudb.bdude.di.modules;
 
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
+import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
+
 import dagger.Module;
 import dagger.Provides;
+
+import static com.edudb.bdude.ui.base.BaseActivity.REQUEST_DETAILS;
 
 @Module
 public class RequestDetailsModule {
 
     private RequestDetailsContract.View mView;
+    private RequestDetailsActivity mActivity;
 
     public RequestDetailsModule(RequestDetailsContract.View mView) {
         this.mView = mView;
+        mActivity = (RequestDetailsActivity) mView.getActivity();
     }
 
     @PerActivity
     @Provides
     RequestDetailsContract.View provideView(){
         return  mView;
+    }
+
+    @PerActivity
+    @Provides
+    HelpRequest provideRequestDetails(){
+        return  (HelpRequest) mActivity.getIntent().getExtras().getParcelable(REQUEST_DETAILS);
     }
 
 }

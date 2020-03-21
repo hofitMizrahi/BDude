@@ -1,33 +1,25 @@
 package com.edudb.bdude.db.modules;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.firestore.GeoPoint;
 
 public class User {
 
-//    address_coords
-//[32.081166° N, 34.785302° E]
-
-    String address_coords;
+    GeoPoint address_coords;
     String address_text;
     String avatar;
     LatLng name;
     String phone_number;
     String uid;
 
-    public User(String address_coords, String address_text, String avatar, LatLng name, String phone_number, String uid) {
-        this.address_coords = address_coords;
-        this.address_text = address_text;
-        this.avatar = avatar;
-        this.name = name;
-        this.phone_number = phone_number;
-        this.uid = uid;
+    public User() {
     }
 
-    public String getAddress_coords() {
+    public GeoPoint getAddress_coords() {
         return address_coords;
     }
 
-    public void setAddress_coords(String address_coords) {
+    public void setAddress_coords(GeoPoint address_coords) {
         this.address_coords = address_coords;
     }
 
