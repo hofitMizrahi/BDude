@@ -139,7 +139,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     private void saveUserDetails(User user){
-        SessionManager.getInstance().setCurrentUser(user.getUid());
+        SessionManager.getInstance().setCurrentUser(user);
     }
 
     private void showSnackbar(String message) {

@@ -60,7 +60,7 @@ public class FirebaseDbHelper {
     }
 
     public void getMyRequests(IExecutable<List<HelpRequest>> listener) {
-        db.collection("posts").whereEqualTo("user_ID", SessionManager.getInstance().getUser().getUId()).get().addOnSuccessListener(snapshots -> {
+        db.collection("posts").whereEqualTo("user_ID", SessionManager.getInstance().getUser().getUid()).get().addOnSuccessListener(snapshots -> {
             List<HelpRequest> list = new ArrayList<>();
 
             for (DocumentSnapshot document : snapshots.getDocuments()) {
@@ -80,9 +80,11 @@ public class FirebaseDbHelper {
         db.collection("users").whereEqualTo("uid", uId).get().addOnSuccessListener(snapshots -> {
 
             for (DocumentSnapshot document : snapshots.getDocuments()) {
-                User user = snapshots.getDocuments().get(0).toObject(User.class);
+                User user = document.toObject(User.class);
                 listener.execute(user);
             }
         });
+
+        //TODO FAIL OPTION
     }
 }
