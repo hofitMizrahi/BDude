@@ -17,6 +17,7 @@ import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.firebase.ui.auth.AuthUI;
@@ -100,9 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if(!SessionManager.getInstance().isUserLogin()){
             startLogin();
         }else {
-            // startActivity(new Intent(this, CreateHelpRequestActivity.class));
-            //TODO temp
-            startActivity(new Intent(this, MyRequestsActivity.class));
+            startActivity(new Intent(this, CreateHelpRequestActivity.class));
         }
     }
 
