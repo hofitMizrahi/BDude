@@ -23,6 +23,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MyRequestsActivity extends BaseActivity implements MyRequestsContract.View {
 
@@ -37,6 +38,11 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
 
     @BindView(R.id.my_requests_recycler_view)
     RecyclerView mRecycler;
+
+    @OnClick(R.id.helpContinueBtn)
+    void startHelpRequest(){
+        mPresenter.createHelpRequestClicked();
+    }
 
     @BindView(R.id.title_name)
     TextView mTitleWithUserName;

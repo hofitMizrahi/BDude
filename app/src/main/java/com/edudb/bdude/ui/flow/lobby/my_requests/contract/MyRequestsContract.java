@@ -14,8 +14,10 @@ public interface MyRequestsContract {
         void showEmptyView();
         void refreshList(List<HelpRequest> list);
         void initView();
+        void navigateToCreateNewRequestActivity();
     }
 
     interface Presenter extends BasePresenter , MyRequestsRecyclerAdapter.IEventListener {
+        void createHelpRequestClicked();
     }
 }

@@ -3,7 +3,7 @@
     <string name="help_please_btn">עזרה בבקשה</string>
     <string name="no_request_data">אין בקשות להציג בסביבתך</string>
     <string name="my_request_title">הבקשות שלי</string>
-    <string name="no_my_request_data">אין לך בקשות</string>
+    <string name="no_my_request_data">אין לך בקשות לעזרה, אם ברצונך לבקש עזרה לחץ על הוספת בקשה חדשה</string>
     <string name="show_phone">הצג מספר טלפון</string>
     <string name="call_to_number">חייג למספר</string>
     <string name="i_need_help_with">אני צריך עזרה עם:</string>
@@ -15,4 +15,5 @@
     <string name="enter_phone_number">טלפון ליצירת קשר:</string>
     <string name="enter_phone_number_disclaimer">המספר לא יוצג למשתמש לצורך שמירה על פרטיותך</string>
     <string name="hello">שלום</string>
+    <string name="help_please_btn_new">בקשה חדשה</string>
 </resources>

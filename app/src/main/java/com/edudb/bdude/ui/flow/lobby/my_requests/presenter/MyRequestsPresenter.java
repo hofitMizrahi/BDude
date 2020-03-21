@@ -51,4 +51,9 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
             mView.hideProgressBar();
         });
     }
+
+    @Override
+    public void createHelpRequestClicked() {
+        mView.navigateToCreateNewRequestActivity();
+    }
 }

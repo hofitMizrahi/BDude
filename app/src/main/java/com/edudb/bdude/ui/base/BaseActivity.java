@@ -95,8 +95,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public abstract void initDependencies();
 
     public void navigateToCreateNewRequestActivity() {
-        // startActivity(new Intent(this, CreateHelpRequestActivity.class));
-        startActivity(new Intent(this, MyRequestsActivity.class));
+
+        //TODO enum -> create new request activity
+        if(!SessionManager.getInstance().isUserLogin()){
+            startLogin();
+        }else {
+            // startActivity(new Intent(this, CreateHelpRequestActivity.class));
+            startActivity(new Intent(this, MyRequestsActivity.class));
+        }
     }
 
     public void navigateToRequestDetailsScreen(HelpRequest request) {

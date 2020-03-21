@@ -52,12 +52,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void createHelpRequestClicked() {
-
-        if(!SessionManager.getInstance().isUserLogin()){
-            mView.startLogin();
-        }else {
-            mView.navigateToCreateNewRequestActivity();
-        }
+        mView.navigateToCreateNewRequestActivity();
     }
 
     @Override
