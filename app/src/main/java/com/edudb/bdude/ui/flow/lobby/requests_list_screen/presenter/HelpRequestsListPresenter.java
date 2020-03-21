@@ -3,6 +3,7 @@ package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.di.scope.PerActivity;
+import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.shared_preferences.SharedPrefsController;
@@ -52,7 +53,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Override
     public void createHelpRequestClicked() {
-        mView.navigateToCreateNewRequestActivity();
+        mView.checkLoginAndNavigate(EnumNavigation.CREATE_POST);
     }
 
     @Override

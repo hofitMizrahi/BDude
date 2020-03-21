@@ -15,6 +15,7 @@ import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
+import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private ProgressBar mProgressBar;
     private View mContainer;
+    private ViewGroup mActionBarContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,28 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
+//    public void getUserPermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+//                    PERMISSION_ACCESS_COARSE_LOCATION);
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        switch (requestCode) {
+//            case PERMISSION_ACCESS_COARSE_LOCATION:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    // All good!
+//                } else {
+//                    Toast.makeText(this, "Need your location!", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                break;
+//        }
+//    }
+
     public void setContentView() {
 
         View root = getLayoutInflater().inflate(R.layout.activity_base, null);
@@ -77,6 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             View view = getLayoutInflater().inflate(getLayoutResource(), null);
             mProgressBar = findViewById(R.id.progress_bar);
             mContainer = findViewById(R.id.content_container);
+            mActionBarContainer = findViewById(R.id.action_bar_container);
             ViewGroup mContentContainer = findViewById(R.id.content_container);
             mContentContainer.addView(view);
         }
@@ -95,13 +120,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract void initDependencies();
 
-    public void navigateToCreateNewRequestActivity() {
+    @Override
+    public void checkLoginAndNavigate(EnumNavigation navigation) {
 
-        //TODO enum -> create new request activity
         if(!SessionManager.getInstance().isUserLogin()){
             startLogin();
         }else {
-            startActivity(new Intent(this, CreateHelpRequestActivity.class));
+            switch (navigation){
+                case CREATE_POST:
+                    startActivity(new Intent(this, CreateHelpRequestActivity.class));
+                    break;
+                case MY_REQUESTS:
+                    startActivity(new Intent(this, MyRequestsActivity.class));
+                    break;
+            }
         }
     }
 
