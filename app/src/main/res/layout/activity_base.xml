@@ -9,13 +9,15 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<!--        <FrameLayout-->
-<!--            android:id="@+id/action_bar_container"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
+        <FrameLayout
+            android:id="@+id/action_bar_container"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     <FrameLayout
         android:id="@+id/content_container"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

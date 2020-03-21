@@ -1,27 +1,21 @@
 package com.edudb.bdude.ui.base;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
+import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
@@ -43,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private ProgressBar mProgressBar;
     private View mContainer;
+    private ViewGroup mActionBarContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +70,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-//
 //    public void getUserPermission() {
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
 //                != PackageManager.PERMISSION_GRANTED) {
@@ -107,6 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             View view = getLayoutInflater().inflate(getLayoutResource(), null);
             mProgressBar = findViewById(R.id.progress_bar);
             mContainer = findViewById(R.id.content_container);
+            mActionBarContainer = findViewById(R.id.action_bar_container);
             ViewGroup mContentContainer = findViewById(R.id.content_container);
             mContentContainer.addView(view);
         }
@@ -125,15 +120,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract void initDependencies();
 
-    public void navigateToCreateNewRequestActivity() {
+    @Override
+    public void checkLoginAndNavigate(EnumNavigation navigation) {
 
-        //TODO enum -> create new request activity
         if(!SessionManager.getInstance().isUserLogin()){
             startLogin();
         }else {
-             startActivity(new Intent(this, CreateHelpRequestActivity.class));
-            //TODO temp
-            //startActivity(new Intent(this, MyRequestsActivity.class));
+
+            switch (navigation){
+                case CREATE_POST:
+                    startActivity(new Intent(this, CreateHelpRequestActivity.class));
+                    break;
+                case MY_REQUESTS:
+                    startActivity(new Intent(this, MyRequestsActivity.class));
+                    break;
+            }
         }
     }
 
