@@ -1,41 +1,30 @@
 package com.edudb.bdude.ui.flow.lobby.create_new_help_request.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
-import com.edudb.bdude.di.components.DaggerMyRequestsComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
-import com.edudb.bdude.di.modules.MyRequestsModule;
+import com.edudb.bdude.general.Constants;
+import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.OnFocusChange;
+import butterknife.OnTextChanged;
 
 public class CreateHelpRequestActivity extends BaseActivity implements CreateHelpRequestContract.View {
 
-    final String regex = "^(0)[1-9]{1}[0-9]{7}$|^(05)[0-9]{8}$";
-    final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-
-    boolean needHelpWithFieldIsValid = false;
-    boolean mMoreDetailsFieldIsValid = false;
-    boolean mPhoneNumberIsValid = false;
+    //final Pattern pattern = Pattern.compile(Constants.PHONE_FULL_REGEX, Pattern.MULTILINE);
 
     @Inject
     CreateHelpRequestPresenter mPresenter;
@@ -47,43 +36,55 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     EditText mMoreDetails;
 
     @BindView(R.id.phone_ET)
-    EditText  mPhoneNumber;
+    EditText mPhoneNumber;
 
     @BindView(R.id.send_help_request)
     Button mHelpButton;
 
-    @BindView((R.id.main_layout))
-    LinearLayout mMainLayout;
+    @BindView(R.id.man_avatar)
+    RadioButton mManAvatar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @BindView(R.id.women_avatar)
+    RadioButton mWomenAvatar;
 
-        super.onCreate(savedInstanceState);
+    @OnClick({R.id.women_avatar, R.id.man_avatar})
+    void onIconClicked() {
+        validateBtn();
+    }
 
-        mMainLayout.setOnTouchListener((v, event) -> {
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            checkNeedHelpWithValidity();
-            checkMoreDetailsValidity();
-            checkPhoneNumberValidity();
-            checkEnableButton();
-            return true;
-        });
+    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT})
+    void onTextChange() {
+        validateBtn();
+    }
 
-        mNeedHelpWith.setOnFocusChangeListener((v, hasFocus) -> {
-           if(!hasFocus)
-               checkNeedHelpWithValidity();
-        });
+    @OnTextChanged({R.id.phone_ET})
+    void onPhoneChange() {
+        validateBtn();
+    }
 
-        mMoreDetails.setOnFocusChangeListener((v, hasFocus) -> {
-           if(!hasFocus)
-               checkMoreDetailsValidity();
-        });
-        mPhoneNumber.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                checkPhoneNumberValidity();
-            }
-        });
+    @OnFocusChange({R.id.phone_ET})
+    void onPhoneFocusChange() {
+        if(!mPhoneNumber.isFocused()){
+            checkMobileNumberError();
+        }
+    }
+
+    @OnClick(R.id.send_help_request)
+    void onCreatePostClicked(){
+        if(mHelpButton.isEnabled()){
+            mPresenter.sendRequest();
+        }
+    }
+
+    private void validateBtn() {
+
+        boolean retVal = !Utils.isNullOrWhiteSpace(mNeedHelpWith.getText().toString());
+        retVal &= !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString());
+        retVal &= !Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString());
+        retVal &= mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX);
+        retVal &= mManAvatar.isChecked() || mWomenAvatar.isChecked();
+
+        setBtnEnabled(retVal);
     }
 
     @Override
@@ -104,59 +105,35 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         return mPresenter;
     }
 
-    private void checkPhoneNumberValidity()
-    {
-        String phoneNumber = mPhoneNumber.getText().toString();
-        Matcher matcher = pattern.matcher(phoneNumber);
-
-        if(!matcher.matches())
-        {
+    private void checkMobileNumberError() {
+        if(Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString()) || !mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX)) {
             mPhoneNumber.setError("בדוק שנית את המספר שהוכנס");
-            mPhoneNumberIsValid = false;
-        }
-        else
-        {
+        }else {
             mPhoneNumber.setError(null);
-            mPhoneNumberIsValid = true;
         }
-        checkEnableButton();
-
     }
 
-    private void checkNeedHelpWithValidity()
-    {
-        if(mNeedHelpWith.getText().toString().length() < 1) {
+    private void setNeedHelpError() {
+        if(Utils.isNullOrWhiteSpace(mNeedHelpWith.getText().toString())) {
             mNeedHelpWith.setError("יש לציין עזרה נחוצה");
-            needHelpWithFieldIsValid = false;
-        }
-        else if(mNeedHelpWith.getText().toString().length() >= 1) {
+        }else {
             mNeedHelpWith.setError(null);
-            needHelpWithFieldIsValid = true;
         }
-
-        checkEnableButton();
     }
 
-    private void checkMoreDetailsValidity()
-    {
-        if(mMoreDetails.getText().toString().length() < 1){
-            mMoreDetailsFieldIsValid = false;
+    private void setMoreDetailsError() {
+        if(Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString())) {
             mMoreDetails.setError("יש להכניס פירוט נוסף");
-        }
-        else if(mMoreDetails.getText().toString().length() >= 1)
-        {
+        }else {
             mMoreDetails.setError(null);
-            mMoreDetailsFieldIsValid = true;
         }
-
-        checkEnableButton();
     }
 
-    private void checkEnableButton()
-    {
-        if(needHelpWithFieldIsValid && mMoreDetailsFieldIsValid && mPhoneNumberIsValid)
-            mHelpButton.setEnabled(true);
-        else
-            mHelpButton.setEnabled(false);
+    private void setBtnEnabled(boolean validate) {
+        mHelpButton.setEnabled(validate);
+    }
+
+    @Override
+    public void initViews() {
     }
 }

@@ -10,7 +10,7 @@ public class BaseActionBar extends ConstraintLayout {
 
     private String mTitle;
     private Context mContext;
-//
+
 //    @BindView(R.id.textViewLeft)
 //    @Nullable
 //    TextView mTextViewLeft;

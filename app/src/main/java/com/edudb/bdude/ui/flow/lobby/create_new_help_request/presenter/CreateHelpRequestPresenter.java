@@ -20,4 +20,9 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     @Inject
     public CreateHelpRequestPresenter() {
     }
+
+    @Override
+    public void sendRequest() {
+
+    }
 }

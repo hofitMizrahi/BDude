@@ -5,8 +5,10 @@ import com.edudb.bdude.ui.base.BasePresenter;
 public interface CreateHelpRequestContract {
 
     interface View{
+        void initViews();
     }
 
     interface Presenter extends BasePresenter {
+        void sendRequest();
     }
 }

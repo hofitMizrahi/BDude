@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.flow.terms_of_use.view.TermsOfUseActivity"></activity>
+        <activity android:name=".ui.flow.terms_of_use.view.TermsOfUseActivity"/>
         <activity
             android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
-            android:screenOrientation="fullSensor" />
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

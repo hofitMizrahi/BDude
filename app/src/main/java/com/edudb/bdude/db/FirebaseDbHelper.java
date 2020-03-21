@@ -50,9 +50,7 @@ public class FirebaseDbHelper {
     }
 
     public void deleteRequest(String documentId, IExecutable<Void> listener) {
-
-        //TODO fix - not delete from firebase db
-        db.collection("Posts")
+        db.collection("posts")
                 .document(documentId)
                 .delete().addOnSuccessListener(snapsShot -> {
             listener.execute(null);

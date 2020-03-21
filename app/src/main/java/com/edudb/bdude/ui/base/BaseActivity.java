@@ -199,6 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                                 //new AuthUI.IdpConfig.PhoneBuilder().build()
                         ))
                         .setLogo(R.mipmap.ic_launcher)
+                        .setTheme(R.style.AppThemeFirebaseAuth)
                         .build(),
                 RC_SIGN_IN);
     }
