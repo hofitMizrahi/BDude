@@ -13,6 +13,9 @@ public class HelpRequest implements Parcelable {
     @SerializedName("address_coords")
     @Expose
     GeoPoint address_coords;
+    @SerializedName("user_gender")
+    @Expose
+    String user_gender;
     @SerializedName("address_text")
     @Expose
     String address_text;
@@ -134,6 +137,7 @@ public class HelpRequest implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeDouble(address_coords.getLatitude());
         parcel.writeDouble(address_coords.getLongitude());
+        parcel.writeString(user_gender);
         parcel.writeString(address_text);
         parcel.writeString(body);
         parcel.writeString(id);
@@ -148,6 +152,7 @@ public class HelpRequest implements Parcelable {
         double lat = in.readDouble();
         double lng = in.readDouble();
         address_coords = new GeoPoint(lat, lng);
+        user_gender = in.readString();
         this.address_text = in.readString();
         this.body =  in.readString();
         this.id = in.readString();

@@ -8,7 +8,7 @@ public class User {
     GeoPoint address_coords;
     String address_text;
     String avatar;
-    LatLng name;
+    String name;
     String phone_number;
     String uid;
 
@@ -39,11 +39,11 @@ public class User {
         this.avatar = avatar;
     }
 
-    public LatLng getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(LatLng name) {
+    public void setName(String name) {
         this.name = name;
     }
 
