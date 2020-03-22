@@ -1,8 +1,10 @@
 package com.edudb.bdude.ui.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,9 +52,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private ViewGroup mActionBarContainer;
     private BaseActionBar mActionBar;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
