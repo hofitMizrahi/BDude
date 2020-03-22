@@ -96,7 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
-        showSnackbar("UserRegistrationMessageEvent");
+        checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 
     public void displayProgressBar() {
