@@ -2,9 +2,15 @@ package com.edudb.bdude.general;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.edudb.bdude.R;
+
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BaseActionBar extends ConstraintLayout {
 
@@ -14,6 +20,21 @@ public class BaseActionBar extends ConstraintLayout {
 //    @BindView(R.id.textViewLeft)
 //    @Nullable
 //    TextView mTextViewLeft;
+
+    @OnClick(R.id.btnLocation)
+    void onLocationBtnClicked() {
+        EventBus.getDefault().post(new LocationMessageEvent());
+    }
+
+    @OnClick(R.id.btnShare)
+    void onShareBtnClicked() {
+        EventBus.getDefault().post(new ShareMessageEvent());
+    }
+
+    @OnClick(R.id.btnUserRegistration)
+    void onUserRegistrationBtnClicked() {
+        EventBus.getDefault().post(new UserRegistrationMessageEvent());
+    }
 
     public BaseActionBar(Context context) {
         super(context);
@@ -37,13 +58,15 @@ public class BaseActionBar extends ConstraintLayout {
         this.mContext = context;
         init();
     }
-//
-//    @OnClick(R.id.btnClose)
-//    public void navigateBack() {
-//        if (getContext() instanceof Activity) {
-//            ((Activity) getContext()).onBackPressed();
-//        }
-//    }
 
+
+    public static class LocationMessageEvent {
+    }
+
+    public static class ShareMessageEvent {
+    }
+
+    public static class UserRegistrationMessageEvent {
+    }
 }
 

@@ -9,14 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
-import com.edudb.bdude.interfaces.IExecutable;
+import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
@@ -26,8 +28,14 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.Arrays;
 import java.util.Objects;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -49,6 +57,33 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (getPresenter() != null) {
             getPresenter().onStart();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocationMessageEvent(BaseActionBar.LocationMessageEvent event) {
+
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onShareMessageEvent(BaseActionBar.ShareMessageEvent event) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_info));
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
+
     }
 
     public void displayProgressBar() {
@@ -121,12 +156,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public abstract void initDependencies();
 
     @Override
+    public void checkLocation() {
+
+    }
+
+    @Override
     public void checkLoginAndNavigate(EnumNavigation navigation) {
 
-        if(!SessionManager.getInstance().isUserLogin()){
+        if (!SessionManager.getInstance().isUserLogin()) {
             startLogin();
-        }else {
-            switch (navigation){
+        } else {
+
+            switch (navigation) {
                 case CREATE_POST:
                     startActivity(new Intent(this, CreateHelpRequestActivity.class));
                     break;
@@ -176,7 +217,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-    private void saveUserDetails(User user){
+    private void saveUserDetails(User user) {
         SessionManager.getInstance().setCurrentUser(user);
     }
 
@@ -199,8 +240,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                                 //new AuthUI.IdpConfig.PhoneBuilder().build()
                         ))
                         .setLogo(R.mipmap.ic_launcher)
-                        .setTheme(R.style.AppThemeFirebaseAuth)
                         .build(),
                 RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

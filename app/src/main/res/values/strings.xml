@@ -6,6 +6,7 @@
     <string name="no_my_request_data">אין לך בקשות לעזרה, אם ברצונך לבקש עזרה לחץ על הוספת בקשה חדשה</string>
     <string name="show_phone">הצג מספר טלפון</string>
     <string name="call_to_number">חייג למספר</string>
+    <string name="share_info">TODO טקסט לשיתוף + קישור לגוגל פליי</string>
     <string name="i_need_help_with">אני צריך עזרה עם:</string>
     <string name="approve">אישור</string>
     <string name="terms_of_use">תנאי שימוש</string>

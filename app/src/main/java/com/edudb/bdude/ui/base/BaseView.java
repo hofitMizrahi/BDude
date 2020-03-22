@@ -9,5 +9,7 @@ public interface BaseView {
     Activity getActivity();
     void displayProgressBar();
     void hideProgressBar();
+
+    void checkLocation();
     void checkLoginAndNavigate(EnumNavigation tag);
 }
