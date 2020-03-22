@@ -5,10 +5,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
+    private BaseActionBar mActionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +63,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(this::setActionBar, 100);
+    }
+
+
+    @Override
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
@@ -69,7 +79,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public void onLocationMessageEvent(BaseActionBar.LocationMessageEvent event) {
 
     }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShareMessageEvent(BaseActionBar.ShareMessageEvent event) {
@@ -83,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
-
+        showSnackbar("UserRegistrationMessageEvent");
     }
 
     public void displayProgressBar() {
@@ -94,6 +103,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
         mContainer.setVisibility(View.VISIBLE);
+    }
+
+    public BaseActionBar getCustomActionBar(){
+        return new BaseActionBar(this);
+    }
+
+
+    protected void setActionBar() {
+        Log.d("setActionBar", getClass().getSimpleName());
+        BaseActionBar actionBar = getCustomActionBar();
+        mActionBarContainer.removeAllViews();
+        mActionBarContainer.addView(actionBar);
+//            actionBar.draw();
+        actionBar.postInvalidate();
     }
 
     public void startDial(String phoneNumber) {
@@ -239,6 +262,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                                 new AuthUI.IdpConfig.EmailBuilder().build()
                                 //new AuthUI.IdpConfig.PhoneBuilder().build()
                         ))
+                        .setTheme(R.style.AppThemeFirebaseAuth)
                         .setLogo(R.mipmap.ic_launcher)
                         .build(),
                 RC_SIGN_IN);

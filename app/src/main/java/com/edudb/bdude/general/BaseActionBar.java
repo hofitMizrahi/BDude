@@ -2,24 +2,15 @@ package com.edudb.bdude.general;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.edudb.bdude.R;
-
 import org.greenrobot.eventbus.EventBus;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BaseActionBar extends ConstraintLayout {
 
-    private String mTitle;
     private Context mContext;
-
-//    @BindView(R.id.textViewLeft)
-//    @Nullable
-//    TextView mTextViewLeft;
 
     @OnClick(R.id.btnLocation)
     void onLocationBtnClicked() {
