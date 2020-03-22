@@ -1,10 +1,5 @@
 package com.edudb.bdude.ui.flow.terms_of_use.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.widget.Button;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.di.components.DaggerTermsOfUseComponent;
@@ -16,7 +11,6 @@ import com.edudb.bdude.ui.flow.terms_of_use.presenter.TermsOfUsePresenter;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContract.View {

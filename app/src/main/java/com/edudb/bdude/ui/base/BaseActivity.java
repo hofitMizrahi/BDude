@@ -1,8 +1,11 @@
 package com.edudb.bdude.ui.base;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
@@ -21,6 +26,7 @@ import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
+import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
@@ -30,6 +36,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.GeoPoint;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private static final int RC_SIGN_IN = 5;
     public static final String REQUEST_DETAILS = "request_details";
+    private static final int LOCATION_PERMISSION_REQ_CODE = 10;
 
     private ProgressBar mProgressBar;
     private View mContainer;
@@ -105,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mContainer.setVisibility(View.VISIBLE);
     }
 
-    public BaseActionBar getCustomActionBar(){
+    public BaseActionBar getCustomActionBar() {
         return new BaseActionBar(this);
     }
 
@@ -127,28 +135,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             e.printStackTrace();
         }
     }
-
-//    public void getUserPermission() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-//                    PERMISSION_ACCESS_COARSE_LOCATION);
-//        }
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        switch (requestCode) {
-//            case PERMISSION_ACCESS_COARSE_LOCATION:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    // All good!
-//                } else {
-//                    Toast.makeText(this, "Need your location!", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                break;
-//        }
-//    }
 
     public void setContentView() {
 
@@ -180,7 +166,37 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void checkLocation() {
+        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle(getString(R.string.ask_for_location_permission_title));
+            alertDialog.setMessage(getString(R.string.ask_for_location_permission_message));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.approve),
+                    (dialog, which) -> {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION},
+                                LOCATION_PERMISSION_REQ_CODE);
+                        dialog.dismiss();
+                    });
+            alertDialog.show();
+        } else {
+            setUserLocation();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQ_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setUserLocation();
+            }
+        }
+    }
+
+    private void setUserLocation() {
+        Location location = Utils.getLastBestLocation(this);
+        SessionManager.getInstance().setUserLocation(new GeoPoint(location.getLatitude(), location.getLongitude()));
     }
 
     @Override
