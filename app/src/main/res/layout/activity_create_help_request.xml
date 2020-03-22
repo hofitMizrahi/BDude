@@ -120,7 +120,7 @@
             android:id="@+id/phone_ET"
             style="@style/text_control_style"
             android:inputType="number"
-            android:focusable="false"
+            android:focusable="true"
             android:maxLines="1"
             android:maxLength="10"
             android:lines="1"
