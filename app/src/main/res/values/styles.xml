@@ -33,16 +33,10 @@
         <item name="android:lines">1</item>
     </style>
 
-    <style name="AppThemeFirebaseAuth" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:actionBarStyle">@style/FirebaseAuthActionBarStyle</item>
+    <style name="AppThemeFirebaseAuth" parent="AppTheme">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="FirebaseAuthActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/colorWhite</item>
-    </style>
-
 
 </resources>
