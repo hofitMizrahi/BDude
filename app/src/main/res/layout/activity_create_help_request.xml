@@ -39,6 +39,7 @@
             android:id="@+id/need_help_with_editT"
             style="@style/text_control_style"
             android:focusable="true"
+            android:hint="נא לתת כותרת לבקשה"
             android:maxLength="20"
             android:maxLines="1"
             android:layout_width="match_parent"
