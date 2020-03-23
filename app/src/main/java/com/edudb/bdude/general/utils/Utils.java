@@ -37,6 +37,8 @@ public class Utils {
         } else {
             return locationNet;
         }
+
+        //TODO if gps is close -> user need to open Alert and navigate to open
     }
 
 }
