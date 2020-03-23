@@ -32,6 +32,9 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.need_help_with_editT)
     EditText mNeedHelpWith;
 
+    @BindView(R.id.my_location_editT)
+    EditText mMyLocation;
+
     @BindView(R.id.more_details_editT)
     EditText mMoreDetails;
 
@@ -52,7 +55,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         validateBtn();
     }
 
-    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT})
+    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT,R.id.my_location_editT})
     void onTextChange() {
         validateBtn();
     }
@@ -81,6 +84,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         boolean retVal = !Utils.isNullOrWhiteSpace(mNeedHelpWith.getText().toString());
         retVal &= !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString());
         retVal &= !Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString());
+        retVal &= !Utils.isNullOrWhiteSpace(mMyLocation.getText().toString());
         retVal &= mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX);
         retVal &= mManAvatar.isChecked() || mWomenAvatar.isChecked();
 
@@ -110,22 +114,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
             mPhoneNumber.setError("בדוק שנית את המספר שהוכנס");
         }else {
             mPhoneNumber.setError(null);
-        }
-    }
-
-    private void setNeedHelpError() {
-        if(Utils.isNullOrWhiteSpace(mNeedHelpWith.getText().toString())) {
-            mNeedHelpWith.setError("יש לציין עזרה נחוצה");
-        }else {
-            mNeedHelpWith.setError(null);
-        }
-    }
-
-    private void setMoreDetailsError() {
-        if(Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString())) {
-            mMoreDetails.setError("יש להכניס פירוט נוסף");
-        }else {
-            mMoreDetails.setError(null);
         }
     }
 

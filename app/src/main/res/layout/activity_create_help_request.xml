@@ -39,13 +39,41 @@
             android:id="@+id/need_help_with_editT"
             style="@style/text_control_style"
             android:focusable="true"
-            android:hint="נא לתת כותרת לבקשה"
+            android:hint="@string/hint_help_with"
             android:maxLength="20"
             android:maxLines="1"
             android:layout_width="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_name" />
+
+
+        <TextView
+            android:id="@+id/title_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="16dp"
+            android:text="@string/my_location_is"
+            android:textColor="@color/colorDark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/my_location_editT"
+            style="@style/text_control_style"
+            android:focusable="true"
+            android:hint="@string/hint_enter_location"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_location" />
+
+
+
 
         <TextView
             android:layout_width="match_parent"
@@ -67,7 +95,7 @@
             android:focusable="true"
             android:lines="3"
             android:gravity="top|right"
-            android:hint="במה אתה צריך עזרה?"
+            android:hint="@string/details_edit_text"
             android:layout_width="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
