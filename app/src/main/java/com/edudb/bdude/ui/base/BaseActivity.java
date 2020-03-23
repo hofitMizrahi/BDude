@@ -75,7 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onResume() {
         super.onResume();
-        //checkLocation();
         new Handler().postDelayed(this::setActionBar, 100);
     }
 

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/header_gradient_horizontal"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:padding="16dp"
         android:paddingTop="16dp"
@@ -17,11 +17,11 @@
 
         <Button
             android:id="@+id/btnLocation"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/fui_ic_twitter_bird_white_24dp"
+            android:background="@drawable/green_location_ic"
             android:padding="15dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +30,9 @@
 
         <Button
             android:id="@+id/btnShare"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:backgroundTint="@color/colorDark"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_share"
@@ -44,6 +45,7 @@
             android:id="@+id/btnUserRegistration"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:backgroundTint="@color/colorDark"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:background="@drawable/login_ic_person"
@@ -55,10 +57,10 @@
 
         <TextView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="LOGO"
+            android:background="@drawable/ic_logo"
             android:gravity="center"
             android:padding="10sp"
             android:textStyle="normal"
