@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:paddingBottom="20dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:clickable="true"
@@ -47,34 +48,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
-
-        <TextView
-            android:id="@+id/title_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:text="@string/my_location_is"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/my_location_editT"
-            style="@style/text_control_style"
-            android:focusable="true"
-            android:hint="@string/hint_enter_location"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_location" />
-
-
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +73,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_name" />
+
+        <TextView
+            android:id="@+id/title_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="16dp"
+            android:text="@string/my_location_is"
+            android:textColor="@color/colorDark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/my_location_editT"
+            style="@style/text_control_style"
+            android:focusable="true"
+            android:hint="@string/hint_enter_location"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_location" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/enter_phone_number_disclaimer"
+            android:textColor="@color/colorDark"
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
