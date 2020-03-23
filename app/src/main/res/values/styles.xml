@@ -9,6 +9,10 @@
 
     <style name="CardView" parent="Base.CardView" />
 
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
     <style name="card_view_style" parent="CardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
