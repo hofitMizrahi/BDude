@@ -21,6 +21,9 @@
     <string name="help_please_btn_new">בקשה חדשה</string>
     <string name="ask_for_location_permission_title">בקשת מיקום</string>
     <string name="ask_for_location_permission_message">נשמח לקבל את המיקום TODO..</string>
+    <string name="ask_for_location_gps_open_btn">פתח מסך gps</string>
+    <string name="ask_for_location_gps_message">עלייך לפתוח pgs בכדי שנוכל לחפש אנשים לפי המיקום הקרו ב אלייך</string>
+    <string name="ask_for_location_gps_title">כותרת לפתוח gps</string>
     <string name="hint_enter_location">נא להכניס מיקום</string>
     <string name="hint_help_with">נא לתת כותרת לבקשה</string>
     <string name="details_edit_text">במה אתה צריך עזרה?</string>

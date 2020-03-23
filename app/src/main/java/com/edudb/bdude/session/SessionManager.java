@@ -24,9 +24,14 @@ public class SessionManager {
     }
 
     public void setUserLocation(GeoPoint geoPoint){
-        if(mCurrentUser != null){
-            mCurrentUser.setAddress_coords(geoPoint);
+        if(mCurrentUser == null){
+            mCurrentUser = new User();
         }
+        mCurrentUser.setAddress_coords(geoPoint);
+    }
+
+    public GeoPoint getUserLocation(){
+        return mCurrentUser.getAddress_coords();
     }
 
     public void setCurrentUser(User user){

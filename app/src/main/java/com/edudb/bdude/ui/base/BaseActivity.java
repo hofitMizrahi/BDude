@@ -27,6 +27,7 @@ import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.general.utils.Utils;
+import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
@@ -44,16 +45,18 @@ import java.util.Arrays;
 import java.util.Objects;
 import butterknife.ButterKnife;
 
+import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
+
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private static final int RC_SIGN_IN = 5;
     public static final String REQUEST_DETAILS = "request_details";
-    private static final int LOCATION_PERMISSION_REQ_CODE = 10;
+
+    private LocationHelper mLocationHelper = LocationHelper.getInstance();
 
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
-    private BaseActionBar mActionBar;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -72,6 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onResume() {
         super.onResume();
+        //checkLocation();
         new Handler().postDelayed(this::setActionBar, 100);
     }
 
@@ -84,7 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLocationMessageEvent(BaseActionBar.LocationMessageEvent event) {
-
+        checkLocation();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -122,7 +126,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         BaseActionBar actionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
         mActionBarContainer.addView(actionBar);
-//            actionBar.draw();
         actionBar.postInvalidate();
     }
 
@@ -165,22 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void checkLocation() {
-        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle(getString(R.string.ask_for_location_permission_title));
-            alertDialog.setMessage(getString(R.string.ask_for_location_permission_message));
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.approve),
-                    (dialog, which) -> {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION},
-                                LOCATION_PERMISSION_REQ_CODE);
-                        dialog.dismiss();
-                    });
-            alertDialog.show();
-        } else {
-            setUserLocation();
-        }
+        mLocationHelper.checkLocation(this);
     }
 
     @Override
@@ -188,14 +176,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQ_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setUserLocation();
+                checkLocation();
             }
         }
-    }
-
-    private void setUserLocation() {
-        Location location = Utils.getLastBestLocation(this);
-        SessionManager.getInstance().setUserLocation(new GeoPoint(location.getLatitude(), location.getLongitude()));
     }
 
     @Override
