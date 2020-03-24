@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +35,18 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sucho.placepicker.AddressData;
+import com.sucho.placepicker.Constants;
+import com.sucho.placepicker.MapType;
+import com.sucho.placepicker.PlacePicker;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.Arrays;
 import java.util.Objects;
+
 import butterknife.ButterKnife;
 
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
@@ -50,6 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private LocationHelper mLocationHelper = LocationHelper.getInstance();
 
+    private final int PLACE_PICKER_REQUEST = 1;
+
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
@@ -58,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
@@ -163,7 +173,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void checkLocation() {
-        mLocationHelper.checkLocation(this);
+        Intent intent = new PlacePicker.IntentBuilder()
+                .setLatLong(32.073580, 34.788050)
+                .showLatLong(true)
+                .setMapZoom(12.0f)
+                .setAddressRequired(true)
+                .hideMarkerShadow(true)
+                .setMarkerImageImageColor(R.color.colorPrimary)
+                .setMapType(MapType.NORMAL)
+                .onlyCoordinates(true)  //Get only Coordinates from Place Picker
+                .build(this);
+        startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
+        //mLocationHelper.checkLocation(this);
     }
 
     @Override
@@ -229,6 +250,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
                 showSnackbar("Unknown error");
                 Log.e("BDUDE", "Sign-in error: ", response.getError());
+            }
+        } else if (requestCode == Constants.PLACE_PICKER_REQUEST) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                AddressData addressData = data.getParcelableExtra(Constants.ADDRESS_INTENT);
+                Toast.makeText(this, addressData.getLatitude() + "   " + addressData.getLongitude(), Toast.LENGTH_SHORT).show();
             }
         }
     }

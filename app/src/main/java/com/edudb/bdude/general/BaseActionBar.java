@@ -2,9 +2,13 @@ package com.edudb.bdude.general;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.edudb.bdude.R;
+
 import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,6 +25,9 @@ public class BaseActionBar extends ConstraintLayout {
     void onShareBtnClicked() {
         EventBus.getDefault().post(new ShareMessageEvent());
     }
+
+    @OnClick(R.id.getLocationText)
+    void onGetLocationTextClicked() { EventBus.getDefault().post(new LocationMessageEvent()); }
 
     @OnClick(R.id.btnUserRegistration)
     void onUserRegistrationBtnClicked() {
