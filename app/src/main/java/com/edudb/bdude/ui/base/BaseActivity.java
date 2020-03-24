@@ -181,7 +181,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 .hideMarkerShadow(true)
                 .setMarkerImageImageColor(R.color.colorPrimary)
                 .setMapType(MapType.NORMAL)
-                .onlyCoordinates(true)  //Get only Coordinates from Place Picker
+                .onlyCoordinates(true)
                 .build(this);
         startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
         //mLocationHelper.checkLocation(this);
