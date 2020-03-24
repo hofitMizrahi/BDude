@@ -10,7 +10,7 @@ import java.util.List;
 public interface MyRequestsContract {
 
     interface View extends BaseView {
-        void displayList(List<HelpRequest> helpRequests);
+        void displayList(List<HelpRequest> posts);
         void showEmptyView();
         void refreshList(List<HelpRequest> list);
         void initView();

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.squareup.picasso.Picasso;
 
@@ -18,8 +19,8 @@ import butterknife.OnClick;
 
 public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
-    private IExecutable<HelpRequest> mListener;
-    private HelpRequest mHelpRequest;
+    private IExecutable<Post> mListener;
+    private Post mPost;
 
     @BindView(R.id.body)
     TextView mBody;
@@ -28,25 +29,23 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     TextView mLocation;
     @OnClick(R.id.root_item)
     void onItemClicked(){
-        mListener.execute(mHelpRequest);
+        mListener.execute(mPost);
     }
 
     @BindView(R.id.avatar)
     ImageView mAvatar;
 
-    public HelpRequestViewHolder(@NonNull View itemView, IExecutable<HelpRequest> requestIExecutable) {
+    public HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
         super(itemView);
         ButterKnife.bind(this,itemView);
         mListener = requestIExecutable;
     }
 
-    public void onBind(HelpRequest helpRequest) {
+    public void onBind(Post post) {
 
-        mHelpRequest = helpRequest;
-
-        mBody.setText(helpRequest.getTitle());
-        mLocation.setText(helpRequest.getAddress_coords().toString());
-
-        Picasso.get().load(helpRequest.getUser_avatar()).into(mAvatar);
+        mPost = post;
+        mBody.setText(post.getTitle());
+        mLocation.setText(post.getGeoloc().toString());
+        Picasso.get().load(post.getUserAvatar()).into(mAvatar);
     }
 }

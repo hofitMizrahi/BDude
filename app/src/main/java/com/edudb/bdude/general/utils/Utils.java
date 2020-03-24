@@ -4,6 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 public class Utils {
 
@@ -37,8 +42,30 @@ public class Utils {
         } else {
             return locationNet;
         }
+    }
 
-        //TODO if gps is close -> user need to open Alert and navigate to open
+    public static <T> T tryParseJson(String string, Class<T> clazz) {
+        try {
+            return new Gson().fromJson(string, clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("tryParseJson", string);
+        }
+        return null;
+    }
+
+    public static <T> T tryParseJsonType(String string, Type clazz) {
+        try {
+            return new Gson().fromJson(string, clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("tryParseJson", string);
+        }
+        return null;
+    }
+
+    public static String parseToJson(Object obj) {
+        return new Gson().toJson(obj);
     }
 
 }

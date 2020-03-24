@@ -69,11 +69,11 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     }
 
     @Override
-    public void displayList(List<HelpRequest> helpRequests) {
+    public void displayList(List<HelpRequest> posts) {
         mEmptyViewTxt.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter.setDate(helpRequests, mPresenter);
+        mAdapter.setDate(posts, mPresenter);
         mRecycler.setAdapter(mAdapter);
     }
 

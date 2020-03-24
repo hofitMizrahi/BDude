@@ -32,10 +32,10 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    void onBind(HelpRequest helpRequest, IExecutable<Integer> listener){
+    void onBind(HelpRequest post, IExecutable<Integer> listener){
         mListener = listener;
-        mTitle.setText(helpRequest.getTitle());
-        mBody.setText(helpRequest.getBody());
+        mTitle.setText(post.getTitle());
+        mBody.setText(post.getBody());
 
     }
 }

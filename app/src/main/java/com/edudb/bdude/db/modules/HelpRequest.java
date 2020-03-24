@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
 
 public class HelpRequest implements Parcelable {
 

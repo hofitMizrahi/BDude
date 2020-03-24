@@ -24,10 +24,10 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
         mDataBase.getMyRequests(this::displayList);
     }
 
-    private void displayList(List<HelpRequest> helpRequests) {
-        if(helpRequests != null && helpRequests.size() > 0){
-            mMyList = helpRequests;
-            mView.displayList(helpRequests);
+    private void displayList(List<HelpRequest> posts) {
+        if(posts != null && posts.size() > 0){
+            mMyList = posts;
+            mView.displayList(posts);
         }else {
             mView.showEmptyView();
         }

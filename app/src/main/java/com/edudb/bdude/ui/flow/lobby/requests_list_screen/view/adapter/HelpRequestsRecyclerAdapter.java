@@ -7,14 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.interfaces.IExecutable;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 
 import java.util.List;
 
-public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpRequestViewHolder> implements IExecutable<HelpRequest> {
+public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpRequestViewHolder> implements IExecutable<Post> {
 
-    private List<HelpRequest> mList;
+    private List<Post> mList;
     private InteractionListener mListener;
 
     @NonNull
@@ -34,17 +34,17 @@ public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpReques
         return mList.size();
     }
 
-    public void setData(List<HelpRequest> helpRequests, InteractionListener listener) {
-        mList = helpRequests;
+    public void setData(List<Post> posts, InteractionListener listener) {
+        mList = posts;
         mListener = listener;
     }
 
     @Override
-    public void execute(HelpRequest request) {
+    public void execute(Post request) {
         mListener.onItemClicked(request);
     }
 
     public interface InteractionListener{
-        void onItemClicked(HelpRequest request);
+        void onItemClicked(Post request);
     }
 }

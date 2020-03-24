@@ -5,12 +5,12 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class User {
 
-    GeoPoint address_coords;
-    String address_text;
-    String avatar;
-    String name;
-    String phone_number;
-    String uid;
+    private GeoPoint address_coords;
+    private String address_text;
+    private String avatar;
+    private String name;
+    private String phone_number;
+    private String uid;
 
     public User() {
     }

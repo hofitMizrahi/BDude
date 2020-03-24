@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
@@ -66,9 +67,9 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     }
 
     @Override
-    public void displayDataList(List<HelpRequest> helpRequests) {
+    public void displayDataList(List<Post> posts) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter.setData(helpRequests, mPresenter);
+        mAdapter.setData(posts, mPresenter);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -76,6 +77,11 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     public void displayEmptyView() {
         mEmptyViewTxt.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void navigateToRequestDetailsScreen(Post request) {
+
     }
 
     @Override
