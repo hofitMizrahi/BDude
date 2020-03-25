@@ -10,6 +10,8 @@ import com.edudb.bdude.di.qualifier.ApplicationContext;
 import com.edudb.bdude.di.scope.PerApplication;
 import com.edudb.bdude.shared_preferences.SharedPrefsController;
 import com.edudb.bdude.ui.base.BaseActivity;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+
 import dagger.Component;
 
 @PerApplication
@@ -20,6 +22,8 @@ public interface ApplicationComponent {
     Context provideAppContext();
 
     SharedPrefsController sharedPrefsController();
+
+    FirebaseRemoteConfig firebaseConfig();
 
     void inject(BaseActivity baseActivity);
 

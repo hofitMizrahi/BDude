@@ -8,6 +8,8 @@ import com.edudb.bdude.session.SessionManager;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.squareup.okhttp.internal.DiskLruCache;
 
 import java.util.ArrayList;
@@ -40,9 +42,6 @@ public class FirebaseDbHelper {
         dr.set(post).addOnSuccessListener(snapshot -> {
             listener.execute(null);
         });
-    }
-
-    public void getConfigByKey() {
     }
 
     public void getAllRequestsList(IExecutable<List<HelpRequest>> listener) {

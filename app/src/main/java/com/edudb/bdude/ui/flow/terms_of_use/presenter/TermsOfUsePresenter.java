@@ -1,7 +1,9 @@
 package com.edudb.bdude.ui.flow.terms_of_use.presenter;
 
 import com.edudb.bdude.di.scope.PerActivity;
+import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.ui.flow.terms_of_use.contract.TermsOfUseContract;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import javax.inject.Inject;
 
@@ -12,11 +14,14 @@ public class TermsOfUsePresenter implements TermsOfUseContract.Presenter {
     TermsOfUseContract.View mView;
 
     @Inject
-    public TermsOfUsePresenter() {
+    FirebaseRemoteConfig mConfiguration;
+
+    @Inject
+    TermsOfUsePresenter() {
     }
 
     @Override
     public void onStart() {
-        mView.checkLocation();
+        mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_KEY));
     }
 }

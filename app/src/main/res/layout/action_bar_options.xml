@@ -12,71 +12,71 @@
         android:background="@drawable/header_gradient_horizontal"
         android:orientation="horizontal"
         android:paddingTop="16dp"
-        android:paddingBottom="8dp"
+        android:paddingBottom="16dp"
         android:weightSum="4">
 
-        <Button
-            android:id="@+id/btnLocation"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/green_location_ic"
-            android:padding="15dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/btnShare"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/btnLocation"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@drawable/green_location_ic"-->
+<!--            android:padding="15dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnShare"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <Button
             android:id="@+id/btnShare"
             android:layout_width="35dp"
-            android:backgroundTint="@color/colorDark"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_share"
+            android:backgroundTint="@color/colorDark"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/searchContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnUserRegistration"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:backgroundTint="@color/colorDark"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:background="@drawable/login_ic_person"
+            android:background="@drawable/menu"
+            android:backgroundTint="@color/colorDark"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/searchContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_logo_40"
-            android:gravity="center"
-            android:padding="10sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/logo"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/ic_logo_40"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="10sp"-->
+<!--            android:textStyle="normal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <LinearLayout
             android:id="@+id/searchContainer"
             android:layout_width="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:background="@drawable/searching_style"
             android:orientation="horizontal"
             android:paddingEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/getLocationText"

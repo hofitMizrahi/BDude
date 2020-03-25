@@ -6,27 +6,42 @@
     android:layout_height="match_parent"
     android:background="#E8E8E8">
 
+    <Button
+        android:id="@+id/btnApprove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_selector_green"
+        android:clickable="false"
+        android:text="@string/approve"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/title_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
         android:padding="16dp"
         android:text="@string/terms_of_use"
         android:textColor="@color/colorDark"
         android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDisclaimer"
         style="@style/card_view_style"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/btnApprove"
-        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/title_name">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,16 +55,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="16dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
                     <TextView
+                        android:id="@+id/termsTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:gravity="start"
+                        android:text="@string/terms_of_use_default_text"
                         android:textColor="@color/colorDark"
                         android:textSize="16sp"
-                        android:text="@string/terms_of_use_default_text"
                         app:layout_constraintBottom_toBottomOf="@id/checkbox"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,20 +77,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/btnApprove"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_selector_green"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:clickable="false"
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"
-        android:text="@string/approve"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

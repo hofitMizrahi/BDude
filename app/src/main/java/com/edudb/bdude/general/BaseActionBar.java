@@ -28,11 +28,6 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.searchContainer)
     View mSearchContainer;
 
-    @OnClick(R.id.btnLocation)
-    void onLocationBtnClicked() {
-        EventBus.getDefault().post(new LocationMessageEvent());
-    }
-
     @OnClick(R.id.btnShare)
     void onShareBtnClicked() {
         EventBus.getDefault().post(new ShareMessageEvent());

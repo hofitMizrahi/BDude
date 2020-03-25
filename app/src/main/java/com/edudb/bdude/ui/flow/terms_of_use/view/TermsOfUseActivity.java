@@ -1,5 +1,7 @@
 package com.edudb.bdude.ui.flow.terms_of_use.view;
 
+import android.widget.TextView;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.di.components.DaggerTermsOfUseComponent;
@@ -11,6 +13,7 @@ import com.edudb.bdude.ui.flow.terms_of_use.presenter.TermsOfUsePresenter;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContract.View {
@@ -22,6 +25,9 @@ public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContra
     void onApproveBtnClicked(){
         finish();
     }
+
+    @BindView(R.id.termsTV)
+    TextView mHealthWarningTerms;
 
     @Override
     public int getLayoutResource() {
@@ -39,5 +45,10 @@ public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContra
     @Override
     public BasePresenter getPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public void initText(String str) {
+        mHealthWarningTerms.setText(str);
     }
 }
