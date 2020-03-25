@@ -7,18 +7,6 @@
     android:background="@color/color_main_background"
     tools:context=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
 
-    <Button
-        android:id="@+id/helpContinueBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_green_btn_continue"
-        android:text="@string/help_please_btn"
-        android:textColor="#ffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
     <TextView
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
@@ -28,7 +16,7 @@
         android:text="@string/no_request_data"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/helpContinueBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +27,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/helpContinueBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/helpContinueBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="30dp"
+        app:backgroundTint="@color/green_light"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/ic_add_black_24dp"
+        android:textSize="20sp"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
