@@ -139,7 +139,7 @@ public class LocationHelper {
                 .withGooglePlacesEnabled()
 //                .withSearchZone("es_ES") https://github.com/AdevintaSpain/Leku#search-zone TODO add Israel Search zone?
 //                .withSearchZone(new SearchZoneRect(new LatLng(26.525467, -18.910366), new LatLng(43.906271, 5.394197)))
-                .withDefaultLocaleSearchZone()
+//                .withDefaultLocaleSearchZone()
                 .shouldReturnOkOnBackPressed()
                 .withZipCodeHidden()
                 .withGoogleTimeZoneEnabled()
