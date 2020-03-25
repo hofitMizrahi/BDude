@@ -16,13 +16,13 @@ import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
-import com.sucho.placepicker.AddressData;
-import com.sucho.placepicker.Constants;
-import com.sucho.placepicker.MapType;
-import com.sucho.placepicker.PlacePicker;
+import com.schibstedspain.leku.LocationPickerActivity;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 
 public class LocationHelper {
 
@@ -40,8 +40,23 @@ public class LocationHelper {
     }
 
     public static void setLocation(Intent data) {
-        AddressData place = data.getParcelableExtra(Constants.ADDRESS_INTENT);
-        mLastLocation = new GeoPoint(place.getLatitude(), place.getLongitude());
+        double latitude = data.getDoubleExtra(LATITUDE, 0.0);
+        double longitude = data.getDoubleExtra(LONGITUDE, 0.0);
+/*        val address = data.getStringExtra(LOCATION_ADDRESS)
+        Log.d("ADDRESS****", address.toString())
+        val postalcode = data.getStringExtra(ZIPCODE)
+        Log.d("POSTALCODE****", postalcode.toString())
+        val bundle = data.getBundleExtra(TRANSITION_BUNDLE)
+        Log.d("BUNDLE TEXT****", bundle.getString("test"))
+        val fullAddress = data.getParcelableExtra<Address>(ADDRESS)
+        if (fullAddress != null) {
+            Log.d("FULL ADDRESS****", fullAddress.toString())
+        }
+        val timeZoneId = data.getStringExtra(TIME_ZONE_ID)
+        Log.d("TIME ZONE ID****", timeZoneId)
+        val timeZoneDisplayName = data.getStringExtra(TIME_ZONE_DISPLAY_NAME)*/
+
+        mLastLocation = new GeoPoint(latitude, longitude);
     }
 
     public void checkLocation(BaseActivity activity) {
@@ -100,7 +115,7 @@ public class LocationHelper {
         return "";
     }
 
-    public static double getDistance(LatLng endP){
+    public static double getDistance(LatLng endP) {
 
         double distance = 0;
         Location locationA = new Location(LocationManager.GPS_PROVIDER);
@@ -115,17 +130,24 @@ public class LocationHelper {
     }
 
     public static void setMap(BaseActivity activity) {
-        Intent intent = new PlacePicker.IntentBuilder()
-                .setLatLong(mLastLocation.getLatitude(), mLastLocation.getLongitude())
-                .showLatLong(true)
-                .setMapZoom(12.0f)
-                .setAddressRequired(true)
-                .hideMarkerShadow(true)
-                .setMarkerImageImageColor(R.color.colorPrimary)
-                .setMapType(MapType.NORMAL)
-                .onlyCoordinates(true)
-                .build( activity);
-        activity.startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
+        Intent locationPickerIntent = new LocationPickerActivity.Builder()
+                .withLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude())
+                .withGeolocApiKey(activity.getString(R.string.google_api_key)) // https://github.com/AdevintaSpain/Leku#geocoding-api-fallback
+//                .withSearchZone("es_ES") https://github.com/AdevintaSpain/Leku#search-zone TODO add Israel Search zone?
+//                .withSearchZone(new SearchZoneRect(new LatLng(26.525467, -18.910366), new LatLng(43.906271, 5.394197)))
+//                .withDefaultLocaleSearchZone()
+                .shouldReturnOkOnBackPressed()
+                .withStreetHidden()
+                .withCityHidden()
+                .withZipCodeHidden()
+                .withSatelliteViewHidden()
+                .withGooglePlacesEnabled()
+                .withGoogleTimeZoneEnabled()
+                .withVoiceSearchHidden()
+                .withUnnamedRoadHidden()
+                .build(activity);
+
+        activity.startActivityForResult(locationPickerIntent, BaseActivity.PLACE_PICKER_REQUEST);
     }
 }
 

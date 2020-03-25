@@ -31,4 +31,13 @@
     <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
     <string name="enter_name">שם המבקש:</string>
     <string name="enter_name_hint">נא להכניס שם</string>
+
+    <string name="leku_title_activity_location_picker">בחירת מיקום</string>
+    <string name="leku_load_location_error">משהו לא עבד, נא נסה שנית.</string>
+    <string name="leku_no_search_results">אין תוצאות לחיפוש</string>
+    <string name="leku_unknown_location">מיקום לא ידוע</string>
+    <string name="leku_voice_search_promp">חיפוש בקול…</string>
+    <string name="leku_voice_search_extra_language">he-HE</string>
+    <string name="leku_toolbar_action_voice_title">קול</string>
+    <string name="leku_search_hint">חיפוש</string>
 </resources>

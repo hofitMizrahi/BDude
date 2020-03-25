@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.Post;
@@ -34,15 +35,14 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.sucho.placepicker.Constants;
-import com.sucho.placepicker.MapType;
-import com.sucho.placepicker.PlacePicker;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Arrays;
 import java.util.Objects;
+
 import butterknife.ButterKnife;
 
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
@@ -50,6 +50,7 @@ import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CO
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private static final int RC_SIGN_IN = 5;
+    public static final int PLACE_PICKER_REQUEST = 6;
     public static final String REQUEST_DETAILS = "request_details";
 
     private ProgressBar mProgressBar;
@@ -249,7 +250,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 Log.e("BDUDE", "Sign-in error: ", response.getError());
             }
 
-        } else if (requestCode == Constants.PLACE_PICKER_REQUEST) {
+        } else if (requestCode == PLACE_PICKER_REQUEST) {
 
             if (resultCode == Activity.RESULT_OK && data != null) {
 
