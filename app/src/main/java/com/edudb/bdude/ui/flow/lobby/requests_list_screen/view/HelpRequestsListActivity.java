@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
-import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
@@ -18,6 +17,7 @@ import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsL
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
 import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -62,6 +62,11 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     }
 
     @Override
+    protected void refreshData() {
+        mPresenter.onStart();
+    }
+
+    @Override
     public BasePresenter getPresenter() {
         return mPresenter;
     }
@@ -77,11 +82,6 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     public void displayEmptyView() {
         mEmptyViewTxt.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void navigateToRequestDetailsScreen(Post request) {
-
     }
 
     @Override

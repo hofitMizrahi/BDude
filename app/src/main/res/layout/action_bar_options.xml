@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/header_gradient_horizontal"
         android:orientation="horizontal"
-        android:padding="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
         android:weightSum="4">
@@ -25,7 +24,6 @@
             android:background="@drawable/green_location_ic"
             android:padding="15dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnShare"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,20 +36,18 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_share"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnUserRegistration"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:backgroundTint="@color/colorDark"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:background="@drawable/login_ic_person"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,22 +65,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/getLocationText"
+        <LinearLayout
+            android:id="@+id/searchContainer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:drawableStart="@drawable/ic_gps_fixed_black"
-            android:gravity="center"
-            android:text="תל אביב ישראל"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/searching_style"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintTop_toBottomOf="@+id/logo">
 
+            <TextView
+                android:id="@+id/getLocationText"
+                android:layout_width="205dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:paddingStart="16dp"
+                android:textDirection="rtl"
+                android:gravity="center|start"
+                android:paddingBottom="6dp"
+                android:lines="1"
+                android:text="...תל אביב גחגחגחי גגיו"
+                android:paddingTop="5dp"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/search_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_gps_fixed_black"
+                android:layout_marginStart="10dp"
+                android:paddingStart="8dp" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

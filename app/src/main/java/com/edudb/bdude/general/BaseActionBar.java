@@ -2,6 +2,8 @@ package com.edudb.bdude.general;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -9,12 +11,19 @@ import com.edudb.bdude.R;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BaseActionBar extends ConstraintLayout {
 
     private Context mContext;
+
+    @BindView(R.id.getLocationText)
+    TextView mLocationTxt;
+
+    @BindView(R.id.searchContainer)
+    View mSearchContainer;
 
     @OnClick(R.id.btnLocation)
     void onLocationBtnClicked() {
@@ -26,8 +35,8 @@ public class BaseActionBar extends ConstraintLayout {
         EventBus.getDefault().post(new ShareMessageEvent());
     }
 
-    @OnClick(R.id.getLocationText)
-    void onGetLocationTextClicked() { EventBus.getDefault().post(new LocationMessageEvent()); }
+    @OnClick(R.id.searchContainer)
+    void onGetLocationTextClicked() { EventBus.getDefault().post(new ChangeLocationEvent()); }
 
     @OnClick(R.id.btnUserRegistration)
     void onUserRegistrationBtnClicked() {
@@ -57,8 +66,22 @@ public class BaseActionBar extends ConstraintLayout {
         init();
     }
 
+    public void setAddress(String address) {
+        mLocationTxt.setText(address);
+    }
+
+    public void showSearchLine() {
+        mSearchContainer.setVisibility(VISIBLE);
+    }
+
+    public void removeSearchLine() {
+        mSearchContainer.setVisibility(GONE);
+    }
 
     public static class LocationMessageEvent {
+    }
+
+    public static class ChangeLocationEvent {
     }
 
     public static class ShareMessageEvent {

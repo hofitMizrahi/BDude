@@ -4,7 +4,9 @@ package com.edudb.bdude.db.modules.algolia;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Geoloc {
+import java.io.Serializable;
+
+public class Geoloc implements Serializable {
 
     @SerializedName("lat")
     @Expose

@@ -7,9 +7,6 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class AlgoliaSearch {
 
-    //jerusalem TODO change
-    public final GeoPoint defaultLocation = new GeoPoint(31.7477639, 35.1859154);
-
     private static AlgoliaSearch mInstance;
     private Client mClient;
     private Index mIndex;

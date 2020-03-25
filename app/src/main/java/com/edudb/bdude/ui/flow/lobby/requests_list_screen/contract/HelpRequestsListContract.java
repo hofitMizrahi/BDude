@@ -14,7 +14,6 @@ public interface HelpRequestsListContract {
         void startLogin();
         void displayDataList(List<Post> posts);
         void displayEmptyView();
-        void navigateToRequestDetailsScreen(Post request);
         void navigateTermsOfUseScreen();
     }
 

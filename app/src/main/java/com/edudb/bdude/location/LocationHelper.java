@@ -5,20 +5,34 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
+import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.google.firebase.firestore.GeoPoint;
+import com.sucho.placepicker.AddressData;
+import com.sucho.placepicker.Constants;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class LocationHelper {
+
+    //jerusalem TODO change
+    public static GeoPoint mLastLocation = new GeoPoint(31.7477639, 35.1859154);
 
     public static final int LOCATION_PERMISSION_REQ_CODE = 10;
 
@@ -28,6 +42,11 @@ public class LocationHelper {
         if (mInstance == null)
             mInstance = new LocationHelper();
         return mInstance;
+    }
+
+    public static void setLocation(Intent data) {
+        AddressData place = data.getParcelableExtra(Constants.ADDRESS_INTENT);
+        mLastLocation = new GeoPoint(place.getLatitude(), place.getLongitude());
     }
 
     public void checkLocation(BaseActivity activity) {
@@ -55,7 +74,7 @@ public class LocationHelper {
                     , activity.getString(R.string.ask_for_location_gps_message)
                     , activity.getString(R.string.ask_for_location_gps_open_btn), true);
 
-        }else {
+        } else {
             setUserLocation(activity);
         }
 
@@ -63,7 +82,27 @@ public class LocationHelper {
 
     public void setUserLocation(Context context) {
         Location location = Utils.getLastBestLocation(context);
-        SessionManager.getInstance().setUserLocation(new GeoPoint(location.getLatitude(), location.getLongitude()));
+        mLastLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+        //TODO check if need to save this location to user data
+        //SessionManager.getInstance().setUserLocation();
+    }
+
+    public static String getLocationName(Context context) {
+        Geocoder gcd = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = gcd.getFromLocation(LocationHelper.mLastLocation.getLatitude(), LocationHelper.mLastLocation.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //TODO fix string if null
+        if (addresses != null && addresses.size() > 0) {
+            String locationString = addresses.get(0).getLocality() + ", " + addresses.get(0).getThoroughfare();
+            return locationString;
+        }
+        return "";
     }
 }
 

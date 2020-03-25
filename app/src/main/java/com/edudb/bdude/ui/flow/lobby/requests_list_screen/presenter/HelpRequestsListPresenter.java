@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 
+import com.algolia.search.saas.AbstractQuery;
 import com.algolia.search.saas.AlgoliaException;
 import com.algolia.search.saas.Index;
 import com.algolia.search.saas.Query;
@@ -11,9 +12,12 @@ import com.edudb.bdude.db.modules.algolia.AlgoliaModel;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.Constants;
+import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.shared_preferences.SharedPrefsController;
+import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONObject;
 
@@ -61,7 +65,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         }
 
         //TODO add location to query
-
+        mQuery.setAroundLatLng(new AbstractQuery.LatLng(LocationHelper.mLastLocation.getLatitude(), LocationHelper.mLastLocation.getLongitude()));
         mIndex.searchAsync(mQuery, this::onSearchComplete);
     }
 

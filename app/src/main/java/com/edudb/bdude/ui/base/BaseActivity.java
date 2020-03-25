@@ -13,15 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseDbHelper;
-import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
@@ -30,23 +28,21 @@ import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
+import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.sucho.placepicker.AddressData;
 import com.sucho.placepicker.Constants;
 import com.sucho.placepicker.MapType;
 import com.sucho.placepicker.PlacePicker;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Arrays;
 import java.util.Objects;
-
 import butterknife.ButterKnife;
 
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
@@ -58,11 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private LocationHelper mLocationHelper = LocationHelper.getInstance();
 
-    private final int PLACE_PICKER_REQUEST = 1;
-
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
+    private BaseActionBar mBaseActionBar;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -84,7 +79,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         new Handler().postDelayed(this::setActionBar, 100);
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -97,6 +91,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocationMessageEvent(BaseActionBar.ChangeLocationEvent event) {
+        openMap();
+    }
+
+    public void openMap(){
+        Intent intent = new PlacePicker.IntentBuilder()
+                .setLatLong(32.073580, 34.788050)
+                .showLatLong(true)
+                .setMapZoom(12.0f)
+                .setAddressRequired(true)
+                .hideMarkerShadow(true)
+                .setMarkerImageImageColor(R.color.colorPrimary)
+                .setMapType(MapType.NORMAL)
+                .onlyCoordinates(true)
+                .build(this);
+        startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShareMessageEvent(BaseActionBar.ShareMessageEvent event) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -104,7 +117,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
@@ -122,16 +134,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     public BaseActionBar getCustomActionBar() {
-        return new BaseActionBar(this);
+        return mBaseActionBar != null ? mBaseActionBar : new BaseActionBar(this);
     }
-
 
     protected void setActionBar() {
         Log.d("setActionBar", getClass().getSimpleName());
-        BaseActionBar actionBar = getCustomActionBar();
+        mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
-        mActionBarContainer.addView(actionBar);
-        actionBar.postInvalidate();
+
+        if(this instanceof HelpRequestsListActivity){
+            mBaseActionBar.showSearchLine();
+            mBaseActionBar.setAddress(LocationHelper.getLocationName(this));
+        }else {
+            mBaseActionBar.removeSearchLine();
+        }
+
+        mActionBarContainer.addView(mBaseActionBar);
+        mBaseActionBar.postInvalidate();
     }
 
     public void startDial(String phoneNumber) {
@@ -173,18 +192,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void checkLocation() {
-        Intent intent = new PlacePicker.IntentBuilder()
-                .setLatLong(32.073580, 34.788050)
-                .showLatLong(true)
-                .setMapZoom(12.0f)
-                .setAddressRequired(true)
-                .hideMarkerShadow(true)
-                .setMarkerImageImageColor(R.color.colorPrimary)
-                .setMapType(MapType.NORMAL)
-                .onlyCoordinates(true)
-                .build(this);
-        startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
-        //mLocationHelper.checkLocation(this);
+        mLocationHelper.checkLocation(this);
     }
 
     @Override
@@ -215,13 +223,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-    public void navigateToRequestDetailsScreen(HelpRequest request) {
+    public void navigateToRequestDetailsScreen(Post request) {
         startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
+
         if (requestCode == RC_SIGN_IN) {
 
             IdpResponse response = IdpResponse.fromResultIntent(data);
@@ -230,33 +238,43 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             if (resultCode == RESULT_OK) {
 
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    FirebaseDbHelper.getInstance().getCurrentUserDetails(uid, this::saveUserDetails);
+                    FirebaseDbHelper.getInstance().getCurrentUserDetails(FirebaseAuth.getInstance().getCurrentUser().getUid(), this::saveUserDetails);
                 }
 
             } else {
+
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
                     showSnackbar("Sign in cancelled");
                     return;
                 }
-
                 if (Objects.requireNonNull(response.getError()).getErrorCode() == ErrorCodes.NO_NETWORK) {
                     showSnackbar("No Internet connection");
                     return;
                 }
-
                 showSnackbar("Unknown error");
                 Log.e("BDUDE", "Sign-in error: ", response.getError());
             }
+
         } else if (requestCode == Constants.PLACE_PICKER_REQUEST) {
+
             if (resultCode == Activity.RESULT_OK && data != null) {
-                AddressData addressData = data.getParcelableExtra(Constants.ADDRESS_INTENT);
-                Toast.makeText(this, addressData.getLatitude() + "   " + addressData.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                LocationHelper.setLocation(data);
+                searchByNewLocation();
+            }else {
+                showSnackbar("מיקום לא נמצא");
             }
         }
+    }
+
+    private void searchByNewLocation() {
+        getCustomActionBar().setAddress(LocationHelper.getLocationName(this));
+        refreshData();
+    }
+
+    protected void refreshData() {
     }
 
     private void saveUserDetails(User user) {

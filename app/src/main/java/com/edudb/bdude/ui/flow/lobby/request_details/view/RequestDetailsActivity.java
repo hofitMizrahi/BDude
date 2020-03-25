@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
@@ -29,7 +30,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     RequestDetailsPresenter mPresenter;
 
     @Inject
-    HelpRequest mRequestDetailsObj;
+    Post mRequestDetailsObj;
 
     @BindView(R.id.title)
     TextView mTitleTxt;
@@ -45,7 +46,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @OnClick(R.id.show_phone)
     void onBtnClicked() {
-        startDial(mRequestDetailsObj.getPhone_number());
+        startDial(mRequestDetailsObj.getPhoneNumber());
     }
 
     @OnClick(R.id.whatapp_btn)
@@ -54,7 +55,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     }
 
     private void openWhatsApp() {
-        String contact = "+972" + mRequestDetailsObj.getPhone_number();
+        String contact = "+972" + mRequestDetailsObj.getPhoneNumber();
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
             PackageManager pm = getPackageManager();
@@ -89,7 +90,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @Override
     public void initViews() {
 
-        if(mRequestDetailsObj.getPhone_number().length() < 10){
+        if(mRequestDetailsObj.getPhoneNumber().length() < 10){
             mWhatsAppBtn.setVisibility(View.GONE);
         }
         mTitleTxt.setText(mRequestDetailsObj.getTitle());
