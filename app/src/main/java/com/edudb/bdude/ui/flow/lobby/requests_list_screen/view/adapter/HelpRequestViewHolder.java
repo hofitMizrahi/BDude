@@ -65,7 +65,7 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
         if(hours == 0){
             fullTimeStr += "פורסם לאחרונה";
         }else {
-            fullTimeStr += "פורסם לפני " + hours + "שעות";
+            fullTimeStr += "פורסם לפני " + hours + " שעות";
         }
         mHours.setText(fullTimeStr);
         Glide.with(mAvatar.getContext()).load("https://api.adorable.io/avatar/" + post.getId()).circleCrop().into(mAvatar);

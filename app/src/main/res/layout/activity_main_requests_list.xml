@@ -21,27 +21,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/request_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/helpContinueBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <TextView
         android:id="@+id/helpContinueBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="30dp"
-        app:backgroundTint="@color/green_light"
-        android:layout_marginStart="30dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_green_btn_continue"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:layout_marginStart="16dp"
+        android:paddingTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:paddingBottom="10dp"
+        android:text="בקשה חדשה"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
-        app:layout_anchorGravity="bottom|right|end"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/helpContinueBtn"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|right"-->
+    <!--        android:layout_marginBottom="30dp"-->
+    <!--        app:backgroundTint="@color/green_light"-->
+    <!--        android:layout_marginStart="30dp"-->
+    <!--        android:src="@drawable/ic_add_black_24dp"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_anchorGravity="bottom|right|end"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
