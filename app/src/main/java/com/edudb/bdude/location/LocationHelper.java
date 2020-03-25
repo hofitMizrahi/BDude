@@ -136,18 +136,14 @@ public class LocationHelper {
         Intent locationPickerIntent = new LocationPickerActivity.Builder()
                 .withLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude())
                 .withGeolocApiKey(activity.getString(R.string.google_api_key)) // https://github.com/AdevintaSpain/Leku#geocoding-api-fallback
+                .withGooglePlacesEnabled()
 //                .withSearchZone("es_ES") https://github.com/AdevintaSpain/Leku#search-zone TODO add Israel Search zone?
 //                .withSearchZone(new SearchZoneRect(new LatLng(26.525467, -18.910366), new LatLng(43.906271, 5.394197)))
 //                .withDefaultLocaleSearchZone()
                 .shouldReturnOkOnBackPressed()
-                .withStreetHidden()
-                .withCityHidden()
                 .withZipCodeHidden()
-                .withSatelliteViewHidden()
-                .withGooglePlacesEnabled()
                 .withGoogleTimeZoneEnabled()
-                .withVoiceSearchHidden()
-                .withUnnamedRoadHidden()
+//                .withUnnamedRoadHidden()
                 .build(activity);
 
         activity.startActivityForResult(locationPickerIntent, BaseActivity.PLACE_PICKER_REQUEST);
