@@ -52,8 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private static final int RC_SIGN_IN = 5;
     public static final String REQUEST_DETAILS = "request_details";
 
-    private LocationHelper mLocationHelper = LocationHelper.getInstance();
-
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
@@ -96,17 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     public void openMap(){
-        Intent intent = new PlacePicker.IntentBuilder()
-                .setLatLong(32.073580, 34.788050)
-                .showLatLong(true)
-                .setMapZoom(12.0f)
-                .setAddressRequired(true)
-                .hideMarkerShadow(true)
-                .setMarkerImageImageColor(R.color.colorPrimary)
-                .setMapType(MapType.NORMAL)
-                .onlyCoordinates(true)
-                .build(this);
-        startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
+      LocationHelper.setMap(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -192,7 +180,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void checkLocation() {
-        mLocationHelper.checkLocation(this);
+        LocationHelper.getInstance().checkLocation(this);
     }
 
     @Override

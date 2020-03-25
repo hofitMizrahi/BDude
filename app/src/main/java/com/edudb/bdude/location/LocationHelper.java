@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 import com.sucho.placepicker.AddressData;
 import com.sucho.placepicker.Constants;
+import com.sucho.placepicker.MapType;
+import com.sucho.placepicker.PlacePicker;
 
 import java.io.IOException;
 import java.util.List;
@@ -118,6 +120,20 @@ public class LocationHelper {
         distance = locationA.distanceTo(locationB);
 
         return distance / 1000;
+    }
+
+    public static void setMap(BaseActivity activity) {
+        Intent intent = new PlacePicker.IntentBuilder()
+                .setLatLong(mLastLocation.getLatitude(), mLastLocation.getLongitude())
+                .showLatLong(true)
+                .setMapZoom(12.0f)
+                .setAddressRequired(true)
+                .hideMarkerShadow(true)
+                .setMarkerImageImageColor(R.color.colorPrimary)
+                .setMapType(MapType.NORMAL)
+                .onlyCoordinates(true)
+                .build( activity);
+        activity.startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST);
     }
 }
 

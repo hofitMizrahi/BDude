@@ -61,7 +61,6 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         } else {
 
             //TODO check location from gps if have permission && gps open - if not use default locatiom
-            mView.checkLocation();
         }
 
         //TODO add location to query
