@@ -85,11 +85,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onLocationMessageEvent(BaseActionBar.LocationMessageEvent event) {
-        checkLocation();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLocationMessageEvent(BaseActionBar.ChangeLocationEvent event) {
         openMap();
     }

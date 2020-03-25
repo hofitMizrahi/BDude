@@ -39,8 +39,35 @@ public class HelpRequest implements Serializable {
     @SerializedName("user_name")
     @Expose
     String user_name;
+    @SerializedName("timestamp")
+    @Expose
+    long timestamp;
 
     public HelpRequest() {
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setAddress_coords(GeoPoint address_coords) {
+        this.address_coords = address_coords;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public void setUser_avatar(String user_avatar) {
+        this.user_avatar = user_avatar;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public GeoPoint getAddress_coords() {

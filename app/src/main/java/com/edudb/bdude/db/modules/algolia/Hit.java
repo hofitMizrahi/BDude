@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Hit {
 
+    @SerializedName("timestamp")
+    @Expose
+    private long timestamp;
     @SerializedName("user_name")
     @Expose
     private String userName;
@@ -81,6 +84,14 @@ public class Hit {
 
     public String getBody() {
         return body;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setBody(String body) {

@@ -42,20 +42,6 @@ public class LocationHelper {
     public static void setLocation(Intent data) {
         double latitude = data.getDoubleExtra(LATITUDE, 0.0);
         double longitude = data.getDoubleExtra(LONGITUDE, 0.0);
-/*        val address = data.getStringExtra(LOCATION_ADDRESS)
-        Log.d("ADDRESS****", address.toString())
-        val postalcode = data.getStringExtra(ZIPCODE)
-        Log.d("POSTALCODE****", postalcode.toString())
-        val bundle = data.getBundleExtra(TRANSITION_BUNDLE)
-        Log.d("BUNDLE TEXT****", bundle.getString("test"))
-        val fullAddress = data.getParcelableExtra<Address>(ADDRESS)
-        if (fullAddress != null) {
-            Log.d("FULL ADDRESS****", fullAddress.toString())
-        }
-        val timeZoneId = data.getStringExtra(TIME_ZONE_ID)
-        Log.d("TIME ZONE ID****", timeZoneId)
-        val timeZoneDisplayName = data.getStringExtra(TIME_ZONE_DISPLAY_NAME)*/
-
         mLastLocation = new GeoPoint(latitude, longitude);
     }
 
@@ -93,9 +79,6 @@ public class LocationHelper {
     public void setUserLocation(Context context) {
         Location location = Utils.getLastBestLocation(context);
         mLastLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
-
-        //TODO check if need to save this location to user data
-        //SessionManager.getInstance().setUserLocation();
     }
 
     public static String getLocationName(Context context) {
@@ -107,10 +90,16 @@ public class LocationHelper {
             e.printStackTrace();
         }
 
-        //TODO fix string if null
         if (addresses != null && addresses.size() > 0) {
-            String locationString = addresses.get(0).getLocality() + ", " + addresses.get(0).getThoroughfare();
-            return locationString;
+
+            String str = "";
+            if(!Utils.isNullOrWhiteSpace(addresses.get(0).getLocality())){
+                str += addresses.get(0).getLocality();
+            }
+            if(!Utils.isNullOrWhiteSpace(addresses.get(0).getThoroughfare())){
+                str += ", " + addresses.get(0).getThoroughfare();
+            }
+            return str;
         }
         return "";
     }
