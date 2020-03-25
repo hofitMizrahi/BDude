@@ -1,11 +1,14 @@
 package com.edudb.bdude.db;
 
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.okhttp.internal.DiskLruCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class FirebaseDbHelper {
+
+    //TODO add Success and Fail listener
 
     private static FirebaseDbHelper mFirebaseDbInstance;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -28,9 +33,13 @@ public class FirebaseDbHelper {
         return mFirebaseDbInstance;
     }
 
-    public void createRequest(HelpRequest post) {
+    public void createRequest(HelpRequest post, IExecutable<Void> listener) {
 
-        db.collection("posts").add(post);
+        DocumentReference dr = db.collection("posts").document();
+        post.setId(dr.getId());
+        dr.set(post).addOnSuccessListener(snapshot -> {
+            listener.execute(null);
+        });
     }
 
     public void getConfigByKey() {
@@ -70,8 +79,6 @@ public class FirebaseDbHelper {
     }
 
     public void updateRequest() {
-
-
     }
 
     public void getCurrentUserDetails(String uId, IExecutable<User> listener) {
@@ -82,7 +89,5 @@ public class FirebaseDbHelper {
                 listener.execute(user);
             }
         });
-
-        //TODO FAIL OPTION
     }
 }

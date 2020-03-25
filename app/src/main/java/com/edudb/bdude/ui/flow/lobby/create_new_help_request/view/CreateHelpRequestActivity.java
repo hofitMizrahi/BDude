@@ -5,11 +5,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
 import com.edudb.bdude.enums.EnumGender;
 import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.general.utils.Utils;
+import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
@@ -26,6 +28,9 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Inject
     CreateHelpRequestPresenter mPresenter;
 
+    @Inject
+    User mUser;
+
     @BindView(R.id.my_location_editT)
     EditText mMyLocation;
 
@@ -41,18 +46,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.send_help_request)
     Button mHelpButton;
 
-    @BindView(R.id.man_avatar)
-    RadioButton mManAvatar;
+    @BindView(R.id.name_ET)
+    EditText mNameEt;
 
-    @BindView(R.id.women_avatar)
-    RadioButton mWomenAvatar;
-
-    @OnClick({R.id.women_avatar, R.id.man_avatar})
-    void onIconClicked() {
-        validateBtn();
-    }
-
-    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT,R.id.my_location_editT})
+    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT,R.id.my_location_editT, R.id.name_ET})
     void onTextChange() {
         validateBtn();
     }
@@ -82,8 +79,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         retVal &= !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString());
         retVal &= !Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString());
         retVal &= !Utils.isNullOrWhiteSpace(mMyLocation.getText().toString());
+        retVal &= !Utils.isNullOrWhiteSpace(mNameEt.getText().toString());
         retVal &= mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX);
-        retVal &= mManAvatar.isChecked() || mWomenAvatar.isChecked();
 
         setBtnEnabled(retVal);
     }
@@ -120,6 +117,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public void initViews() {
+        mNameEt.setText(mUser.getName());
     }
 
     @Override
@@ -134,8 +132,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     }
 
     @Override
-    public String getGender() {
-        return mManAvatar.isChecked() ? EnumGender.MALE.getValue() : EnumGender.MALE.getValue();
+    public String getName() {
+        return mNameEt.getText().toString();
     }
 
     @Override

@@ -29,4 +29,6 @@
     <string name="details_edit_text">במה אתה צריך עזרה?</string>
     <string name="senw_whatsapp">שלח וואטסאפ</string>
     <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
+    <string name="enter_name">שם המבקש:</string>
+    <string name="enter_name_hint">נא להכניס שם</string>
 </resources>

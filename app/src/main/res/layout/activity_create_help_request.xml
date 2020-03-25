@@ -111,35 +111,32 @@
             android:textSize="16sp"
             android:textStyle="italic" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/enter_name"
+            android:textColor="@color/colorDark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/women_avatar"
-                    android:layout_width="60dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/custom_radio_selector"
-                    android:layout_height="60dp"/>
-
-                <RadioButton
-                    android:id="@+id/man_avatar"
-                    android:layout_width="60dp"
-                    android:background="@drawable/custom_radio_selector"
-                    android:layout_margin="8dp"
-                    android:layout_height="60dp"/>
-
-            </RadioGroup>
-
-        </LinearLayout>
+        <EditText
+            android:id="@+id/name_ET"
+            style="@style/text_control_style"
+            android:inputType="number"
+            android:focusable="true"
+            android:maxLines="1"
+            android:hint="@string/enter_name_hint"
+            android:maxLength="10"
+            android:lines="1"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
 
         <TextView

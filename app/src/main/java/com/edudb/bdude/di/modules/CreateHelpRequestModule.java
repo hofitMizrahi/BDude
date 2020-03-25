@@ -1,6 +1,8 @@
 package com.edudb.bdude.di.modules;
 
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.scope.PerActivity;
+import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
 import dagger.Module;
@@ -19,6 +21,12 @@ public class CreateHelpRequestModule {
     @Provides
     CreateHelpRequestContract.View provideView(){
         return  mView;
+    }
+
+    @PerActivity
+    @Provides
+    User provideUser(){
+        return SessionManager.getInstance().getUser();
     }
 
     @Provides
