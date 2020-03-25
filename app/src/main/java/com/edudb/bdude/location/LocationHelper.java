@@ -21,6 +21,7 @@ import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 import com.sucho.placepicker.AddressData;
 import com.sucho.placepicker.Constants;
@@ -103,6 +104,20 @@ public class LocationHelper {
             return locationString;
         }
         return "";
+    }
+
+    public static double getDistance(LatLng endP){
+
+        double distance = 0;
+        Location locationA = new Location(LocationManager.GPS_PROVIDER);
+        locationA.setLatitude(mLastLocation.getLatitude());
+        locationA.setLongitude(mLastLocation.getLongitude());
+        Location locationB = new Location(LocationManager.GPS_PROVIDER);
+        locationB.setLatitude(endP.latitude);
+        locationB.setLongitude(endP.longitude);
+        distance = locationA.distanceTo(locationB);
+
+        return distance / 1000;
     }
 }
 
