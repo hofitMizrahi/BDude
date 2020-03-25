@@ -28,7 +28,9 @@ public class FirebaseDbHelper {
         return mFirebaseDbInstance;
     }
 
-    public void createRequest() {
+    public void createRequest(HelpRequest post) {
+
+        db.collection("posts").add(post);
     }
 
     public void getConfigByKey() {

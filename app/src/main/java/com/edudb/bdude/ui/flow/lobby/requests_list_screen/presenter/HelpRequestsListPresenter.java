@@ -41,9 +41,6 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
     SharedPrefsController mSharedPrefsController;
 
     @Inject
-    FirebaseDbHelper mDataBase;
-
-    @Inject
     HelpRequestsListPresenter() {
     }
 
@@ -66,7 +63,6 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         //TODO add location to query
 
         mIndex.searchAsync(mQuery, this::onSearchComplete);
-        //mDataBase.getAllRequestsList(this::displayList);
     }
 
     private void onSearchComplete(JSONObject jsonObject, AlgoliaException e) {

@@ -3,6 +3,7 @@ package com.edudb.bdude.db.modules;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.edudb.bdude.enums.EnumGender;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -39,8 +40,19 @@ public class HelpRequest implements Parcelable {
     @SerializedName("user_name")
     @Expose
     String user_name;
+    @SerializedName("gender")
+    @Expose
+    String gender;
 
     public HelpRequest() {
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public static final Creator<HelpRequest> CREATOR = new Creator<HelpRequest>() {
@@ -59,7 +71,7 @@ public class HelpRequest implements Parcelable {
         return address_coords;
     }
 
-    public void setAddress_coords(GeoPoint address_coords) {
+    public void setGeoPoint(GeoPoint address_coords) {
         this.address_coords = address_coords;
     }
 
@@ -91,7 +103,7 @@ public class HelpRequest implements Parcelable {
         return phone_number;
     }
 
-    public void setPhone_number(String phone_number) {
+    public void setPhoneNumber(String phone_number) {
         this.phone_number = phone_number;
     }
 
@@ -115,7 +127,12 @@ public class HelpRequest implements Parcelable {
         return user_avatar;
     }
 
-    public void setUser_avatar(String user_avatar) {
+    public void setUserAvatar(String user_avatar) {
+
+//        if(EnumGender.MALE.getValue()){
+//            //TODO icon avatar
+//        }
+
         this.user_avatar = user_avatar;
     }
 
@@ -123,7 +140,7 @@ public class HelpRequest implements Parcelable {
         return user_name;
     }
 
-    public void setUser_name(String user_name) {
+    public void setUserName(String user_name) {
         this.user_name = user_name;
     }
 

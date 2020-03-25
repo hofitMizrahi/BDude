@@ -28,4 +28,5 @@
     <string name="hint_help_with">נא לתת כותרת לבקשה</string>
     <string name="details_edit_text">במה אתה צריך עזרה?</string>
     <string name="senw_whatsapp">שלח וואטסאפ</string>
+    <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
 </resources>
