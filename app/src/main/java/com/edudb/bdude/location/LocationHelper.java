@@ -2,7 +2,6 @@ package com.edudb.bdude.location;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -10,16 +9,10 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
-import com.edudb.bdude.interfaces.IExecutable;
-import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
@@ -27,15 +20,14 @@ import com.sucho.placepicker.AddressData;
 import com.sucho.placepicker.Constants;
 import com.sucho.placepicker.MapType;
 import com.sucho.placepicker.PlacePicker;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class LocationHelper {
 
-    //jerusalem TODO change
-    public static GeoPoint mLastLocation = new GeoPoint(31.7477639, 35.1859154);
+    //tel aviv TODO change
+    public static GeoPoint mLastLocation = new GeoPoint(32.069424, 34.783667);
 
     public static final int LOCATION_PERMISSION_REQ_CODE = 10;
 

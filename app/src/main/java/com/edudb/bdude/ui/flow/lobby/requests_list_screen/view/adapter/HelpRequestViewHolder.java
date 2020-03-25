@@ -16,6 +16,10 @@ import com.edudb.bdude.location.LocationHelper;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,6 +34,9 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.body)
     TextView mBody;
 
+    @BindView(R.id.hours)
+    TextView mHours;
+
     @BindView(R.id.destination)
     TextView mLocation;
     @OnClick(R.id.root_item)
@@ -40,19 +47,32 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.avatar)
     ImageView mAvatar;
 
-    public HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
+    HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
         super(itemView);
         ButterKnife.bind(this,itemView);
         mListener = requestIExecutable;
     }
 
-    public void onBind(Post post) {
+    void onBind(Post post) {
 
         mPost = post;
         mBody.setText(post.getTitle());
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " km";
         mLocation.setText(kmStr);
+
+        //TODO add string to xml && 1 hour
+
+        int hours   = (int) ((mPost.getTimestamp() / (1000*60*60)) % 24);
+        String fullTimeStr  = "";
+
+        if(hours == 0){
+            fullTimeStr += "פורסם לאחרונה";
+        }else {
+            fullTimeStr += "פורסם לפני " + hours + "שעות";
+        }
+
+        mHours.setText(fullTimeStr);
         Picasso.get().load(post.getUserAvatar()).into(mAvatar);
     }
 }

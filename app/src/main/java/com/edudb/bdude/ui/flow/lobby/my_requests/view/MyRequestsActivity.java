@@ -73,6 +73,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
         mEmptyViewTxt.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setNestedScrollingEnabled(false);
         mAdapter.setDate(posts, mPresenter);
         mRecycler.setAdapter(mAdapter);
     }

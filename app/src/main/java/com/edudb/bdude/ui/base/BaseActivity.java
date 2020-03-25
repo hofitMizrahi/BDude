@@ -137,6 +137,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mBaseActionBar.removeSearchLine();
         }
 
+        if(!(this instanceof MyRequestsActivity)){
+            mBaseActionBar.removeLoginIcon();
+        }
+
         mActionBarContainer.addView(mBaseActionBar);
         mBaseActionBar.postInvalidate();
     }

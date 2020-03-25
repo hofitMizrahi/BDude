@@ -22,6 +22,9 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.getLocationText)
     TextView mLocationTxt;
 
+    @BindView(R.id.btnUserRegistration)
+    TextView mBtnUserRegistration;
+
     @BindView(R.id.searchContainer)
     View mSearchContainer;
 
@@ -76,6 +79,10 @@ public class BaseActionBar extends ConstraintLayout {
 
     public void removeSearchLine() {
         mSearchContainer.setVisibility(GONE);
+    }
+
+    public void removeLoginIcon() {
+        mBtnUserRegistration.setVisibility(GONE);
     }
 
     public static class LocationMessageEvent {

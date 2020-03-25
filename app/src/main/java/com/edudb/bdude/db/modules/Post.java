@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 public class Post implements Serializable {
 
-    @SerializedName("user_gender")
+    @SerializedName("timestamp")
     @Expose
-    String userGender;
+    long timestamp;
     @SerializedName("_geoloc")
     @Expose
     Geoloc geoloc;
@@ -56,6 +56,14 @@ public class Post implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getBody() {
