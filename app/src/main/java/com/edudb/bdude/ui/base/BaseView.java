@@ -10,6 +10,7 @@ public interface BaseView {
     Activity getActivity();
     void displayProgressBar();
     void hideProgressBar();
+    void openMap();
     void checkLocation();
     void checkLoginAndNavigate(EnumNavigation tag);
     void navigateToRequestDetailsScreen(Post request);

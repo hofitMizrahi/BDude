@@ -8,14 +8,17 @@ public interface CreateHelpRequestContract {
 
     interface View extends BaseView {
         void initViews();
-        GeoPoint getLocation();
+        String getLocationName();
         String getNumber();
         String getName();
         String getBody();
         String getFullTitle();
+        void changeLocationText(String locationName);
     }
 
     interface Presenter extends BasePresenter {
         void sendRequest();
+        void selectLocationClicked();
+        void changeLocation(GeoPoint location);
     }
 }

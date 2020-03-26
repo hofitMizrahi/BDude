@@ -67,8 +67,9 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     }
 
     @Override
-    public BasePresenter getPresenter() {
-        return mPresenter;
+    protected void onResume() {
+        super.onResume();
+        refreshData();
     }
 
     @Override

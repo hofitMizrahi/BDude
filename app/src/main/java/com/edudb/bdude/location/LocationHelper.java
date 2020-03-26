@@ -45,6 +45,14 @@ public class LocationHelper {
         mLastLocation = new GeoPoint(latitude, longitude);
     }
 
+    public static GeoPoint getLocation(Intent data) {
+        double latitude = data.getDoubleExtra(LATITUDE, 0.0);
+        double longitude = data.getDoubleExtra(LONGITUDE, 0.0);
+        return new GeoPoint(latitude, longitude);
+    }
+
+
+
     public void checkLocation(BaseActivity activity) {
 
         if ((ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
@@ -81,11 +89,11 @@ public class LocationHelper {
         mLastLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
     }
 
-    public static String getLocationName(Context context) {
+    public static String getLocationName(Context context, GeoPoint geoPoint) {
         Geocoder gcd = new Geocoder(context, Locale.getDefault());
         List<Address> addresses = null;
         try {
-            addresses = gcd.getFromLocation(LocationHelper.mLastLocation.getLatitude(), LocationHelper.mLastLocation.getLongitude(), 1);
+            addresses = gcd.getFromLocation(geoPoint.getLatitude(), geoPoint.getLongitude(), 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -123,9 +131,6 @@ public class LocationHelper {
                 .withLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude())
                 .withGeolocApiKey(activity.getString(R.string.google_api_key)) // https://github.com/AdevintaSpain/Leku#geocoding-api-fallback
                 .withGooglePlacesEnabled()
-//                .withSearchZone("es_ES") https://github.com/AdevintaSpain/Leku#search-zone TODO add Israel Search zone?
-//                .withSearchZone(new SearchZoneRect(new LatLng(26.525467, -18.910366), new LatLng(43.906271, 5.394197)))
-//                .withDefaultLocaleSearchZone()
                 .shouldReturnOkOnBackPressed()
                 .withZipCodeHidden()
                 .withGoogleTimeZoneEnabled()

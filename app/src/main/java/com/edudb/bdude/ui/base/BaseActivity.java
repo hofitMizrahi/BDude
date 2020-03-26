@@ -26,6 +26,7 @@ import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
@@ -128,7 +129,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         if(this instanceof HelpRequestsListActivity){
             mBaseActionBar.showSearchLine();
-            mBaseActionBar.setAddress(LocationHelper.getLocationName(this));
+            mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
         }else {
             mBaseActionBar.removeSearchLine();
         }
@@ -249,8 +250,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             if (resultCode == Activity.RESULT_OK && data != null) {
 
-                LocationHelper.setLocation(data);
-                searchByNewLocation();
+                if(getActivity() instanceof CreateHelpRequestActivity){
+                    ((CreateHelpRequestPresenter) getPresenter()).changeLocation(LocationHelper.getLocation(data));
+                }else {
+                    LocationHelper.setLocation(data);
+                    searchByNewLocation();
+                }
             }else {
                 showSnackbar("מיקום לא נמצא");
             }
@@ -258,7 +263,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     private void searchByNewLocation() {
-        getCustomActionBar().setAddress(LocationHelper.getLocationName(this));
+        getCustomActionBar().setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
         refreshData();
     }
 

@@ -3,6 +3,8 @@ package com.edudb.bdude.ui.flow.lobby.create_new_help_request.view;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.User;
@@ -17,7 +19,9 @@ import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
 import com.google.firebase.firestore.GeoPoint;
+
 import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
@@ -32,7 +36,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     User mUser;
 
     @BindView(R.id.my_location_editT)
-    EditText mMyLocation;
+    TextView mMyLocation;
 
     @BindView(R.id.more_details_editT)
     EditText mMoreDetails;
@@ -49,7 +53,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.name_ET)
     EditText mNameEt;
 
-    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT,R.id.my_location_editT, R.id.name_ET})
+    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.need_help_with_editT, R.id.my_location_editT, R.id.name_ET})
     void onTextChange() {
         validateBtn();
     }
@@ -61,16 +65,21 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @OnFocusChange({R.id.phone_ET})
     void onPhoneFocusChange() {
-        if(!mPhoneNumber.isFocused()){
+        if (!mPhoneNumber.isFocused()) {
             checkMobileNumberError();
         }
     }
 
     @OnClick(R.id.send_help_request)
-    void onCreatePostClicked(){
-        if(mHelpButton.isEnabled()){
+    void onCreatePostClicked() {
+        if (mHelpButton.isEnabled()) {
             mPresenter.sendRequest();
         }
+    }
+
+    @OnClick(R.id.my_location_editT)
+    void onSelectLocationClicked() {
+        mPresenter.selectLocationClicked();
     }
 
     private void validateBtn() {
@@ -104,9 +113,9 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     }
 
     private void checkMobileNumberError() {
-        if(Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString()) || !mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX)) {
+        if (Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString()) || !mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX)) {
             mPhoneNumber.setError(getString(R.string.check_the_number));
-        }else {
+        } else {
             mPhoneNumber.setError(null);
         }
     }
@@ -121,9 +130,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     }
 
     @Override
-    public GeoPoint getLocation() {
-        //TODO take this location from the location field
-        return new GeoPoint(31.039394, 35.772637);
+    public String getLocationName() {
+        return mMyLocation.getText().toString();
     }
 
     @Override
@@ -144,6 +152,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Override
     public String getFullTitle() {
         return mTitle.getText().toString();
+    }
+
+    @Override
+    public void changeLocationText(String locationName) {
+        mMyLocation.setText(locationName);
     }
 
 }
