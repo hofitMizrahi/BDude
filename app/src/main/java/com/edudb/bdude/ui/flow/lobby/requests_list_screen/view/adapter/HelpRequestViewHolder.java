@@ -15,10 +15,6 @@ import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,6 +26,9 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.body)
     TextView mBody;
+
+    @BindView(R.id.title)
+    TextView mTitle;
 
     @BindView(R.id.hours)
     TextView mHours;
@@ -54,17 +53,18 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     void onBind(Post post) {
 
         mPost = post;
+        mTitle.setText(String.format("%s %s", post.getUserName(), mTitle.getText()));
         mBody.setText(post.getTitle());
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " km";
         mLocation.setText(kmStr);
 
-        int hours   = (int) ((mPost.getTimestamp() / (1000*60*60)) % 24);
-        String fullTimeStr  = "";
+        int hours = (int) ((mPost.getTimestamp() / (1000 * 60 * 60)) % 24);
+        String fullTimeStr = "";
 
-        if(hours == 0){
+        if (hours == 0) {
             fullTimeStr += "פורסם לאחרונה";
-        }else {
+        } else {
             fullTimeStr += "פורסם לפני " + hours + " שעות";
         }
         mHours.setText(fullTimeStr);

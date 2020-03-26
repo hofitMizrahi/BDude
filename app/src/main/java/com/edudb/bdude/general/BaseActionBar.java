@@ -2,7 +2,9 @@ package com.edudb.bdude.general;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -28,13 +30,18 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.searchContainer)
     View mSearchContainer;
 
+    @BindView(R.id.btnShare)
+    Button btnShare;
+
     @OnClick(R.id.btnShare)
     void onShareBtnClicked() {
         EventBus.getDefault().post(new ShareMessageEvent());
     }
 
     @OnClick(R.id.searchContainer)
-    void onGetLocationTextClicked() { EventBus.getDefault().post(new ChangeLocationEvent()); }
+    void onGetLocationTextClicked() {
+        EventBus.getDefault().post(new ChangeLocationEvent());
+    }
 
     @OnClick(R.id.btnUserRegistration)
     void onUserRegistrationBtnClicked() {
@@ -56,6 +63,8 @@ public class BaseActionBar extends ConstraintLayout {
     protected void init() {
         inflate(getContext(), R.layout.action_bar_options, this);
         ButterKnife.bind(this);
+        buttonEffect(btnShare);
+        buttonEffect(mBtnUserRegistration);
     }
 
     public BaseActionBar(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -91,5 +100,26 @@ public class BaseActionBar extends ConstraintLayout {
 
     public static class UserRegistrationMessageEvent {
     }
+
+    public void buttonEffect(View button) {
+        button.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setAlpha(100);//MainActivity.this.getColor(R.color.test), PorterDuff.Mode.SCREEN);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().setAlpha(255);
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
 }
 

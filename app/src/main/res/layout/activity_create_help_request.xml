@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E8E8E8">
@@ -9,176 +8,231 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/send_help_request">
+        app:layout_constraintBottom_toTopOf="@id/send_help_request"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/main_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <TextView
-            android:id="@+id/title_name"
+        <LinearLayout
+            android:id="@+id/main_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:text="@string/i_need_help_with"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/need_help_with_editT"
-            style="@style/text_control_style"
+            android:layout_height="0dp"
+            android:clickable="true"
             android:focusable="true"
-            android:hint="@string/hint_help_with"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_name" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:paddingEnd="16dp"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
             android:paddingStart="16dp"
-            android:text="@string/more_details"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-
-        <EditText
-            android:id="@+id/more_details_editT"
-            style="@style/text_control_style"
-            android:focusable="true"
-            android:lines="3"
-            android:gravity="top|right"
-            android:hint="@string/details_edit_text"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_name" />
-
-        <TextView
-            android:id="@+id/title_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:text="@string/my_location_is"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/my_location_editT"
-            style="@style/text_control_style"
-            android:focusable="true"
-            android:hint="@string/hint_enter_location"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_location" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            app:layout_constraintTop_toTopOf="parent"
             android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/enter_phone_number_disclaimer"
-            android:textColor="@color/colorDark"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+            android:paddingBottom="20dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/enter_name"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/i_need_help_with"
+                android:textColor="@color/colorDark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/name_ET"
-            style="@style/text_control_style"
-            android:inputType="number"
-            android:focusable="true"
-            android:maxLines="1"
-            android:hint="@string/enter_name_hint"
-            android:maxLength="10"
-            android:lines="1"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_name" />
+            <EditText
+                android:id="@+id/need_help_with_editT"
+                style="@style/text_control_style"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:hint="@string/hint_help_with"
+                android:maxLength="20"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_name" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/more_details"
+                android:textColor="@color/colorDark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="16dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/enter_phone_number"
-            android:textColor="@color/colorDark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/phone_ET"
-            style="@style/text_control_style"
-            android:inputType="number"
-            android:focusable="true"
-            android:maxLines="1"
-            android:maxLength="10"
-            android:lines="1"
-            android:layout_width="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_name" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_help" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/enter_phone_number_disclaimer"
-            android:textColor="@color/colorDark"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+                <EditText
+                    android:id="@+id/more_details_editT"
+                    style="@style/text_control_style"
+                    android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:gravity="top|right"
+                    android:hint="@string/details_edit_text"
+                    android:layoutDirection="rtl"
+                    android:lines="3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_name" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/title_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/my_location_is"
+                android:textColor="@color/colorDark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_location_on" />
+
+                <EditText
+                    android:id="@+id/my_location_editT"
+                    style="@style/text_control_style"
+                    android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:hint="@string/hint_enter_location"
+                    android:layoutDirection="rtl"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_location" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/enter_phone_number_disclaimer"
+                android:textColor="@color/colorDark"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/enter_name"
+                android:textColor="@color/colorDark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_person" />
+
+                <EditText
+                    android:id="@+id/name_ET"
+                    style="@style/text_control_style"
+                    android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:hint="@string/enter_name_hint"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_name" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/enter_phone_number"
+                android:textColor="@color/colorDark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_phone_grey" />
+
+                <EditText
+                    android:id="@+id/phone_ET"
+                    style="@style/text_control_style"
+                    android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_name" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/enter_phone_number_disclaimer"
+                android:textColor="@color/colorDark"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -186,17 +240,18 @@
         android:id="@+id/send_help_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_selector_green"
-        android:enabled="false"
         android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/btn_selector_green"
         android:clickable="true"
+        android:enabled="false"
         android:focusable="false"
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"
+        android:layoutDirection="rtl"
         android:text="@string/send_request"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

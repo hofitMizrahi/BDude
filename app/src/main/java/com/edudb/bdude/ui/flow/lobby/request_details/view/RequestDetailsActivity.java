@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
@@ -18,6 +20,10 @@ import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
 import com.edudb.bdude.ui.flow.lobby.request_details.presenter.RequestDetailsPresenter;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -38,18 +44,21 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.body)
     TextView mBodyTxt;
 
-    @BindView(R.id.show_phone)
-    Button mNumberBtn;
+    @BindView(R.id.time)
+    TextView mTimeTxt;
 
-    @BindView(R.id.whatapp_btn)
-    Button mWhatsAppBtn;
+    @BindView(R.id.show_phone)
+    CardView mNumberBtn;
+
+    @BindView(R.id.whatsappCV)
+    CardView mWhatsAppBtn;
 
     @OnClick(R.id.show_phone)
     void onBtnClicked() {
         startDial(mRequestDetailsObj.getPhoneNumber());
     }
 
-    @OnClick(R.id.whatapp_btn)
+    @OnClick(R.id.whatsappCV)
     void openWhatsAppClicked() {
         openWhatsApp();
     }
@@ -95,5 +104,12 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
         }
         mTitleTxt.setText(mRequestDetailsObj.getTitle());
         mBodyTxt.setText(mRequestDetailsObj.getBody());
+        mTimeTxt.setText(convertTime(mRequestDetailsObj.getTimestamp()));
+    }
+
+    public String convertTime(long time){
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("dd/MM HH:mm");
+        return format.format(date);
     }
 }
