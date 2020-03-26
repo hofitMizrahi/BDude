@@ -29,7 +29,6 @@ import javax.inject.Inject;
 @PerActivity
 public class HelpRequestsListPresenter implements HelpRequestsListContract.Presenter {
 
-    private AlgoliaModel mAlgoliaModel;
     private List<Post> mSearchResultItems;
 
     @Inject
@@ -58,18 +57,14 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         if (!showTermsOfUse) {
             mSharedPrefsController.putBoolean(Constants.SHOW_TERMS_OF_USE, true);
             mView.navigateTermsOfUseScreen();
-        } else {
-
-            //TODO check location from gps if have permission && gps open - if not use default locatiom
         }
 
-        //TODO add location to query
         mQuery.setAroundLatLng(new AbstractQuery.LatLng(LocationHelper.mLastLocation.getLatitude(), LocationHelper.mLastLocation.getLongitude()));
         mIndex.searchAsync(mQuery, this::onSearchComplete);
     }
 
     private void onSearchComplete(JSONObject jsonObject, AlgoliaException e) {
-        mAlgoliaModel = AlgoliaUtils.getAlgoliaResult(jsonObject, e, mSearchResultItems = new ArrayList<>());
+        AlgoliaUtils.getAlgoliaResult(jsonObject, e, mSearchResultItems = new ArrayList<>());
         displayList();
     }
 
@@ -94,10 +89,6 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
     }
 
     private void checkUserLogIn(Post request) {
-        if (!SessionManager.getInstance().isUserLogin()) {
-            mView.startLogin();
-        } else {
-            mView.navigateToRequestDetailsScreen(request);
-        }
+        mView.navigateToRequestDetailsScreen(request);
     }
 }

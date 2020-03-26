@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 
 import butterknife.BindView;
@@ -22,6 +23,9 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.body)
     TextView mBody;
 
+    @BindView(R.id.date)
+    TextView mDate;
+
     @OnClick(R.id.delete)
     void onItemDeleteClicked(){
         mListener.execute(getAdapterPosition());
@@ -36,7 +40,6 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
         mListener = listener;
         mTitle.setText(post.getTitle());
         mBody.setText(post.getBody());
-
-        //TODO add more details
+        mDate.setText(Utils.getTimeFormat(post.getTimestamp()));
     }
 }

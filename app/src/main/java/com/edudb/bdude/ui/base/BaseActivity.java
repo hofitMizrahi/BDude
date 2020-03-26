@@ -54,6 +54,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public static final int PLACE_PICKER_REQUEST = 6;
     public static final String REQUEST_DETAILS = "request_details";
 
+    private EnumNavigation mEnumNavigation;
+    private Post mTempPost;
+
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
@@ -90,8 +93,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         openMap();
     }
 
-    public void openMap(){
-      LocationHelper.setMap(this);
+    public void openMap() {
+        LocationHelper.setMap(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -127,14 +130,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
 
-        if(this instanceof HelpRequestsListActivity){
+        if (this instanceof HelpRequestsListActivity) {
             mBaseActionBar.showSearchLine();
             mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
-        }else {
+        } else {
             mBaseActionBar.removeSearchLine();
         }
 
-        if(this instanceof MyRequestsActivity){
+        if (this instanceof MyRequestsActivity) {
             mBaseActionBar.removeLoginIcon();
         }
 
@@ -197,6 +200,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void checkLoginAndNavigate(EnumNavigation navigation) {
 
+        mEnumNavigation = navigation;
+
         if (!SessionManager.getInstance().isUserLogin()) {
             startLogin();
         } else {
@@ -213,7 +218,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     public void navigateToRequestDetailsScreen(Post request) {
-        startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
+        mTempPost = request;
+        mEnumNavigation = EnumNavigation.POST_DETAILS;
+        if (!SessionManager.getInstance().isUserLogin()) {
+            startLogin();
+        } else {
+            startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -250,13 +261,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             if (resultCode == Activity.RESULT_OK && data != null) {
 
-                if(getActivity() instanceof CreateHelpRequestActivity){
+                if (getActivity() instanceof CreateHelpRequestActivity) {
                     ((CreateHelpRequestPresenter) getPresenter()).changeLocation(LocationHelper.getLocation(data));
-                }else {
+                } else {
                     LocationHelper.setLocation(data);
                     searchByNewLocation();
                 }
-            }else {
+            } else {
                 showSnackbar("מיקום לא נמצא");
             }
         }
@@ -272,6 +283,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private void saveUserDetails(User user) {
         SessionManager.getInstance().setCurrentUser(user);
+
+        if (mEnumNavigation == EnumNavigation.POST_DETAILS) {
+            navigateToRequestDetailsScreen(mTempPost);
+        } else {
+            checkLoginAndNavigate(mEnumNavigation);
+        }
     }
 
     private void showSnackbar(String message) {

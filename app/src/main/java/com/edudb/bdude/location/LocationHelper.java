@@ -20,7 +20,6 @@ import com.schibstedspain.leku.LocationPickerActivity;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
 import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
 import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 
@@ -51,8 +50,6 @@ public class LocationHelper {
         return new GeoPoint(latitude, longitude);
     }
 
-
-
     public void checkLocation(BaseActivity activity) {
 
         if ((ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
@@ -81,7 +78,6 @@ public class LocationHelper {
         } else {
             setUserLocation(activity);
         }
-
     }
 
     public void setUserLocation(Context context) {

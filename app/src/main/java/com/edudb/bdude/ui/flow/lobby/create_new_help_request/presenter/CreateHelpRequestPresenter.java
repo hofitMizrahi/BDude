@@ -3,6 +3,7 @@ package com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
+import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
@@ -46,7 +47,7 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
         post.setAddress_text(mView.getLocationName());
         post.setUserName(mView.getName());
         post.setUser_ID(user.getUid());
-
+        post.setTimestamp(System.currentTimeMillis());
         mDataBase.createRequest(post, this::onComplete);
     }
 
@@ -62,9 +63,8 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     }
 
     private void onComplete(Void var){
-
-        //TODO navigate to my request screen
         mView.hideProgressBar();
         mView.getActivity().finish();
+        mView.checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 }

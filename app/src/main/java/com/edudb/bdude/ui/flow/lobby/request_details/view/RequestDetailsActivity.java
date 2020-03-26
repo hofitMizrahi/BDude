@@ -16,6 +16,7 @@ import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
+import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
@@ -64,6 +65,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     }
 
     private void openWhatsApp() {
+        //TODO check country code with lang
         String contact = "+972" + mRequestDetailsObj.getPhoneNumber();
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
@@ -104,12 +106,6 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
         }
         mTitleTxt.setText(mRequestDetailsObj.getTitle());
         mBodyTxt.setText(mRequestDetailsObj.getBody());
-        mTimeTxt.setText(convertTime(mRequestDetailsObj.getTimestamp()));
-    }
-
-    public String convertTime(long time){
-        Date date = new Date(time);
-        Format format = new SimpleDateFormat("dd/MM HH:mm");
-        return format.format(date);
+        mTimeTxt.setText(Utils.getTimeFormat(mRequestDetailsObj.getTimestamp()));
     }
 }

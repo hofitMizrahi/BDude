@@ -22,6 +22,7 @@ public class TermsOfUsePresenter implements TermsOfUseContract.Presenter {
 
     @Override
     public void onStart() {
+        mView.checkLocation();
         mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_KEY));
     }
 }
