@@ -31,7 +31,7 @@
                 android:padding="16dp"
                 android:text="@string/i_need_help_with"
                 android:textColor="@color/colorDark"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +56,7 @@
                 android:paddingEnd="16dp"
                 android:text="@string/more_details"
                 android:textColor="@color/colorDark"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,18 +67,18 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_help" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@drawable/ic_help" />-->
 
                 <EditText
                     android:id="@+id/more_details_editT"
                     style="@style/text_control_style"
                     android:layout_width="match_parent"
                     android:focusable="true"
-                    android:gravity="top|right"
+                    android:gravity="top"
                     android:hint="@string/details_edit_text"
                     android:layoutDirection="rtl"
                     android:lines="3"
@@ -95,7 +95,7 @@
                 android:padding="16dp"
                 android:text="@string/my_location_is"
                 android:textColor="@color/colorDark"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,11 +106,11 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_location_on" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@drawable/ic_location_on" />-->
 
                 <TextView
                     android:id="@+id/my_location_editT"
@@ -129,25 +129,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="right"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColor="@color/colorDark"
-                android:textSize="16sp"
-                android:textStyle="italic"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:text="@string/enter_name"
                 android:textColor="@color/colorDark"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -157,11 +145,11 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_person" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@drawable/ic_person" />-->
 
                 <EditText
                     android:id="@+id/name_ET"
@@ -187,7 +175,7 @@
                 android:paddingEnd="16dp"
                 android:text="@string/enter_phone_number"
                 android:textColor="@color/colorDark"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -198,11 +186,11 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_phone_grey" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@drawable/ic_phone_grey" />-->
 
                 <EditText
                     android:id="@+id/phone_ET"
@@ -218,19 +206,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/title_name" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="right"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColor="@color/colorDark"
-                android:textSize="16sp"
-                android:textStyle="italic"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
+       </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -239,8 +215,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/btn_selector_green"
-        android:clickable="true"
+        android:background="@drawable/btn_selector"
         android:enabled="false"
         android:focusable="false"
         android:layoutDirection="rtl"

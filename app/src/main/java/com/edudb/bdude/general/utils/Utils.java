@@ -5,19 +5,16 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
-
 import com.google.gson.Gson;
-
 import java.lang.reflect.Type;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utils {
 
     public static boolean isNullOrWhiteSpace(String string) {
         return string == null || string.isEmpty() || string.equals("null");
-    }
-
-    public static String getNonNullText(String text) {
-        return isNullOrWhiteSpace(text) ? "" : text;
     }
 
     @SuppressLint("MissingPermission")
@@ -75,5 +72,11 @@ public class Utils {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public static String getTimeFormat(long time) {
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("dd/MM HH:mm");
+        return format.format(date);
     }
 }
