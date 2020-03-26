@@ -1,11 +1,13 @@
 package com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 
@@ -28,7 +30,12 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.delete)
     void onItemDeleteClicked(){
-        mListener.execute(getAdapterPosition());
+
+        DialogUtil.getSingleButtonInstance(itemView.getContext(), (dialog, whith) -> {
+            mListener.execute(getAdapterPosition());
+        }, itemView.getContext().getString(R.string.pay_attention_please),
+                itemView.getContext().getString(R.string.delete_item_text),
+                itemView.getContext().getString(R.string.delete), true );
     }
 
     MyRequestViewHolder(@NonNull View itemView) {

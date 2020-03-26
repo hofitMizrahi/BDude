@@ -76,8 +76,7 @@
             android:orientation="horizontal"
             android:paddingEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/getLocationText"

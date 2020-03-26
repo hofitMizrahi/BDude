@@ -11,29 +11,6 @@
     <string name="need_help_with">need help with:</string>
     <string name="my_location_is">My location:</string>
 
-<<<<<<< HEAD
-    <string name="approve">אישור</string>
-    <string name="pay_attention_please">לתשומת לבך</string>
-    <string name="terms_of_use_default_text">תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש תנאי שימוש</string>
-    <string name="send_request">שלח בקשה</string>
-    <string name="more_details">פרטים נוספים:</string>
-    <string name="enter_phone_number">טלפון ליצירת קשר:</string>
-    <string name="enter_phone_number_disclaimer">המספר לא יוצג למשתמש לצורך שמירה על פרטיותך</string>
-    <string name="hello">שלום</string>
-    <string name="help_please_btn_new">בקשה חדשה</string>
-    <string name="ask_for_location_permission_title">בקשת מיקום</string>
-    <string name="ask_for_location_permission_message">נשמח לקבל את המיקום TODO..</string>
-    <string name="ask_for_location_gps_open_btn">פתח מסך gps</string>
-    <string name="ask_for_location_gps_message">עלייך לפתוח pgs בכדי שנוכל לחפש אנשים לפי המיקום הקרו ב אלייך</string>
-    <string name="ask_for_location_gps_title">כותרת לפתוח gps</string>
-    <string name="hint_enter_location">נא להכניס מיקום</string>
-    <string name="hint_help_with">נא לתת כותרת לבקשה</string>
-    <string name="details_edit_text">במה אתה צריך עזרה?</string>
-    <string name="senw_whatsapp">שלח וואטסאפ</string>
-    <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
-    <string name="enter_name">שם המבקש:</string>
-    <string name="enter_name_hint">נא להכניס שם</string>
-=======
     <string name="approve">OK</string>
     <string name="terms_of_use">Terms of use</string>
     <string name="terms_of_use_default_text">במהלך מתן או קבלת עזרה אנא הקפידו על הוראות משרד הבריאות כפי שמופרסמות באתר *משרד הבריאות, למען שמירה על בריאותכם ובריאות הציבור.    *לינק לאתר https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx</string>
@@ -54,7 +31,6 @@
     <string name="check_the_number">Please, check the phone number again</string>
     <string name="enter_name">Name:</string>
     <string name="enter_name_hint">Please enter name</string>
->>>>>>> 2f022c7fa457f5227fbc332c6d51f750d09d6d2b
 
     <string name="leku_title_activity_location_picker">Location Picker</string>
     <string name="leku_no_geocoder_available">Service not available</string>
@@ -69,4 +45,8 @@
     <string name="leku_longitude">Longitude</string>
     <string name="leku_latitude">Latitude</string>
     <string name="leku_coordinates">Coordinates</string>
+    <string name="delete_item_text">Are you sure you want to delete this request?</string>
+    <string name="delete">delete</string>
+    <string name="pay_attention_please">Pay attention</string>
+
 </resources>

@@ -47,4 +47,9 @@
     <string name="leku_coordinates">קואורדינטות</string>
     <string name="leku_no_geocoder_available">השירות לא זמין</string>
     <string name="leku_network_resource">אינטרנט</string>
+
+    <string name="delete_item_text">האם ברצונך למחוק את הבקשה?</string>
+    <string name="delete">מחק</string>
+    <string name="pay_attention_please">לתשומת לבך</string>
+
 </resources>
