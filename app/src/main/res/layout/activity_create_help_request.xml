@@ -129,6 +129,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/colorDark"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+>>>>>>> 2f022c7fa457f5227fbc332c6d51f750d09d6d2b
                 android:gravity="center"
                 android:padding="16dp"
                 android:paddingStart="16dp"
@@ -206,6 +221,21 @@
                     app:layout_constraintTop_toBottomOf="@+id/title_name" />
             </LinearLayout>
 
+<<<<<<< HEAD
+=======
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/colorDark"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+>>>>>>> 2f022c7fa457f5227fbc332c6d51f750d09d6d2b
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

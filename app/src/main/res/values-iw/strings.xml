@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BDude</string>
+
+    <string name="help_please_btn">עזרה בבקשה</string>
+    <string name="no_request_data">אין בקשות להציג בסביבתך</string>
+    <string name="my_request_title">הבקשות שלי</string>
+    <string name="no_my_request_data">אין לך בקשות לעזרה, אם ברצונך לבקש עזרה לחץ על הוספת בקשה חדשה</string>
+    <string name="show_phone">הצג מספר טלפון</string>
+    <string name="call_to_number">חייג למספר</string>
+    <string name="share_info">TODO טקסט לשיתוף + קישור לגוגל פליי</string>
+    <string name="i_need_help_with">צריך עזרה עם:</string>
+    <string name="need_help_with">צריך עזרה עם:</string>
+    <string name="my_location_is">המיקום שלי:</string>
+
+    <string name="approve">אישור</string>
+    <string name="terms_of_use">תנאי שימוש</string>
+    <string name="terms_of_use_default_text">במהלך מתן או קבלת עזרה אנא הקפידו על הוראות משרד הבריאות כפי שמופרסמות באתר *משרד הבריאות, למען שמירה על בריאותכם ובריאות הציבור.    *לינק לאתר https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx</string>
+    <string name="send_request">שלח בקשה</string>
+    <string name="more_details">פרטים נוספים:</string>
+    <string name="enter_phone_number">טלפון ליצירת קשר:</string>
+    <string name="hello">שלום</string>
+    <string name="help_please_btn_new">בקשה חדשה</string>
+    <string name="ask_for_location_permission_title">בקשת מיקום</string>
+    <string name="ask_for_location_permission_message">נשמח לקבל את המיקום TODO..</string>
+    <string name="ask_for_location_gps_open_btn">פתח מסך gps</string>
+    <string name="ask_for_location_gps_message">עלייך לפתוח pgs בכדי שנוכל לחפש אנשים לפי המיקום הקרו ב אלייך</string>
+    <string name="ask_for_location_gps_title">כותרת לפתוח gps</string>
+    <string name="hint_enter_location">נא להכניס מיקום</string>
+    <string name="hint_help_with">נא לתת כותרת לבקשה</string>
+    <string name="details_edit_text">במה אתה צריך עזרה?</string>
+    <string name="send_whatsapp">שלח וואטסאפ</string>
+    <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
+    <string name="enter_name">שם המבקש:</string>
+    <string name="enter_name_hint">נא להכניס שם</string>
+
+    <string name="leku_title_activity_location_picker">בחירת מיקום</string>
+    <string name="leku_load_location_error">משהו לא עבד, נא נסה שנית.</string>
+    <string name="leku_no_search_results">אין תוצאות לחיפוש</string>
+    <string name="leku_unknown_location">מיקום לא ידוע</string>
+    <string name="leku_voice_search_promp">חיפוש בקול…</string>
+    <string name="leku_voice_search_extra_language">he-HE</string>
+    <string name="leku_toolbar_action_voice_title">קול</string>
+    <string name="leku_search_hint">חיפוש</string>
+    <string name="leku_longitude">קו אורך</string>
+    <string name="leku_latitude">קו רוחב</string>
+    <string name="leku_coordinates">קואורדינטות</string>
+    <string name="leku_no_geocoder_available">השירות לא זמין</string>
+    <string name="leku_network_resource">אינטרנט</string>
+</resources>
