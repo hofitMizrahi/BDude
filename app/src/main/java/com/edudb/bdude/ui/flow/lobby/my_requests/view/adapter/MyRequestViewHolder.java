@@ -37,5 +37,6 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
         mTitle.setText(post.getTitle());
         mBody.setText(post.getBody());
 
+        //TODO add more details
     }
 }
