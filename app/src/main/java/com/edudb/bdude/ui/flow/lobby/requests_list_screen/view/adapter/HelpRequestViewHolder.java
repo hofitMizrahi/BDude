@@ -36,7 +36,7 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.destination)
     TextView mLocation;
 
-    public HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
+    HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mListener = requestIExecutable;
@@ -53,19 +53,19 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     void onBind(Post post) {
 
         mPost = post;
-        mTitle.setText(String.format("%s %s", post.getUserName(), mTitle.getText()));
+        mTitle.setText(String.format("%s %s", post.getUserName(), itemView.getContext().getString(R.string.need_help_with)));
         mBody.setText(post.getTitle());
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
-        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " km";
+        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
         mLocation.setText(kmStr);
 
         int hours = (int) ((mPost.getTimestamp() / (1000 * 60 * 60)) % 24);
         String fullTimeStr = "";
 
         if (hours == 0) {
-            fullTimeStr += "פורסם לאחרונה";
+            fullTimeStr += itemView.getContext().getString(R.string.recently_published);
         } else {
-            fullTimeStr += "פורסם לפני " + hours + " שעות";
+            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + hours + " " + itemView.getContext().getString(R.string.hours_ago);
         }
         mHours.setText(fullTimeStr);
         Glide.with(mAvatar.getContext()).load("https://api.adorable.io/avatar/" + post.getId()).circleCrop().into(mAvatar);

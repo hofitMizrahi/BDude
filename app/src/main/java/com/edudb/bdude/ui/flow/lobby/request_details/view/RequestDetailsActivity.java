@@ -18,6 +18,7 @@ import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
+import com.edudb.bdude.general.CountryPrefixPhone;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
@@ -71,7 +72,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
         TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         String countryCodeValue = tm.getNetworkCountryIso();
 
-        String contact = countryCodeValue + mRequestDetailsObj.getPhoneNumber();
+        String contact = CountryPrefixPhone.getPhone(countryCodeValue) + mRequestDetailsObj.getPhoneNumber();
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
             PackageManager pm = getPackageManager();

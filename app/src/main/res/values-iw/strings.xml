@@ -10,7 +10,7 @@
     <string name="call_to_number">חייג למספר</string>
     <string name="share_info">TODO טקסט לשיתוף + קישור לגוגל פליי</string>
     <string name="i_need_help_with">אני רוצה עזרה עם:</string>
-    <string name="need_help_with">צריך עזרה עם:</string>
+    <string name="need_help_with">רוצה עזרה עם:</string>
     <string name="my_location_is">המיקום שלי:</string>
 
     <string name="approve">אישור</string>
@@ -33,6 +33,11 @@
     <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
     <string name="enter_name">שם:</string>
     <string name="enter_name_hint">נא להכניס שם</string>
+
+    <string name="km"> ק\"מ</string>
+    <string name="recently_published">פורסם לאחרונה</string>
+    <string name="publish_time">פורסם לפני </string>
+    <string name="hours_ago">שעות</string>
 
     <string name="leku_title_activity_location_picker">בחירת מיקום</string>
     <string name="leku_load_location_error">משהו לא עבד, נא נסה שנית.</string>

@@ -51,5 +51,9 @@
     <string name="delete_item_text">Are you sure you want to delete this request?</string>
     <string name="delete">delete</string>
     <string name="pay_attention_please">Pay attention</string>
+    <string name="km"> km</string>
+    <string name="recently_published">recently Published</string>
+    <string name="publish_time">posted </string>
+    <string name="hours_ago">hours ago</string>
 
 </resources>

@@ -87,10 +87,10 @@
                 android:layout_weight="1"
                 android:gravity="center|start"
                 android:lines="1"
+                android:textDirection="locale"
                 android:paddingStart="16dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="6dp"
-                android:textDirection="rtl"
                 android:textSize="18sp"
                 tools:text="...תל אביב" />
 

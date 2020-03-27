@@ -39,6 +39,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="start"
                 android:textSize="18sp"
+                android:textDirection="locale"
                 android:layout_marginEnd="16dp"
                 android:maxLength="100"
                 android:textStyle="bold"
@@ -46,7 +47,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/avatar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="description" />
+                tools:text="לקחת את הכלב לטיול" />
 
             <TextView
                 android:id="@+id/hours"
@@ -56,6 +57,7 @@
                 android:textColor="@color/gray_light"
                 android:textSize="14sp"
                 android:paddingStart="4dp"
+                android:textDirection="locale"
                 android:paddingEnd="4dp"
                 android:textStyle="italic"
                 android:layout_marginTop="4dp"
@@ -69,11 +71,12 @@
             <TextView
                 android:id="@+id/destination"
                 android:layout_width="0dp"
-                tools:text="40 km"
+                tools:text="5 קמ"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/green_dark"
                 android:textSize="14sp"
                 android:paddingStart="4dp"
+                android:textDirection="locale"
                 android:paddingEnd="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_height="wrap_content"
@@ -88,11 +91,12 @@
                 android:textStyle="bold"
                 android:maxLength="20"
                 android:textSize="18sp"
+                android:textDirection="locale"
                 android:textColor="@color/colorDark"
                 android:layout_width="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_height="wrap_content"
-                android:text="@string/need_help_with"
+                tools:text="צריך עזרה עם:"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="start"
