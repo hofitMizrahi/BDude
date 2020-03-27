@@ -64,11 +64,6 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     }
 
     @Override
-    public BasePresenter getPresenter() {
-        return mPresenter;
-    }
-
-    @Override
     public void displayList(List<HelpRequest> posts) {
         mEmptyViewTxt.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
@@ -76,6 +71,12 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
         mRecycler.setNestedScrollingEnabled(false);
         mAdapter.setDate(posts, mPresenter);
         mRecycler.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.onStart();
     }
 
     @Override

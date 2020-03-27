@@ -50,10 +50,16 @@ public class LocationHelper {
         return new GeoPoint(latitude, longitude);
     }
 
+    public static void checkFirstLocation(Context context) {
+
+        if(!userNotHavePermission(context) && isHaveGpsOpen(context)){
+            setUserLocation(getCurrentLocation(context));
+        }
+    }
+
     public void checkLocation(BaseActivity activity) {
 
-        if ((ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+        if (userNotHavePermission(activity)) {
 
             DialogUtil.getSingleButtonInstance(activity, (dialog, i) -> {
                         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
@@ -64,8 +70,7 @@ public class LocationHelper {
                     , activity.getString(R.string.ask_for_location_permission_message)
                     , activity.getString(R.string.approve), true);
 
-            //TODO CHECK || INTERNET LOCATION
-        } else if (!((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        } else if (!isHaveGpsOpen(activity)) {
 
             DialogUtil.getSingleButtonInstance(activity, (dialog, i) -> {
 
@@ -76,12 +81,23 @@ public class LocationHelper {
                     , activity.getString(R.string.ask_for_location_gps_open_btn), true);
 
         } else {
-            setUserLocation(activity);
+            setUserLocation(getCurrentLocation(activity));
         }
     }
 
-    public void setUserLocation(Context context) {
-        Location location = Utils.getLastBestLocation(context);
+    private static boolean isHaveGpsOpen(Context context){
+        return ((LocationManager) context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+    private static boolean userNotHavePermission(Context context){
+        return (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+    }
+
+    public static Location getCurrentLocation(Context context) {
+        return Utils.getLastBestLocation(context);
+    }
+
+    private static void setUserLocation(Location location) {
         mLastLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
     }
 

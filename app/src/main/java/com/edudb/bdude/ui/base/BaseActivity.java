@@ -111,6 +111,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAskLocationEvent(BaseActionBar.LocationMessageEvent event) {
+        checkLocation();
+    }
+
     public void displayProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
         mContainer.setVisibility(View.GONE);
@@ -137,7 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mBaseActionBar.removeSearchLine();
         }
 
-        if (this instanceof MyRequestsActivity) {
+        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity) {
             mBaseActionBar.removeLoginIcon();
         }
 
@@ -208,10 +213,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             switch (navigation) {
                 case CREATE_POST:
-                    startActivity(new Intent(this, CreateHelpRequestActivity.class));
+                    startActivity(new Intent(this, CreateHelpRequestActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
                     break;
                 case MY_REQUESTS:
-                    startActivity(new Intent(this, MyRequestsActivity.class));
+                    startActivity(new Intent(this, MyRequestsActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
                     break;
             }
         }
@@ -305,9 +310,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                         .createSignInIntentBuilder()
                         .setAvailableProviders(Arrays.asList(
                                 new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                //new AuthUI.IdpConfig.FacebookBuilder().build(), TODO add facebook_application_id, https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#facebook, https://console.firebase.google.com/project/bdude-d4c05/authentication/providers
-                                new AuthUI.IdpConfig.EmailBuilder().build()
-                                //new AuthUI.IdpConfig.PhoneBuilder().build()
+                                new AuthUI.IdpConfig.FacebookBuilder().build()
                         ))
                         .setTheme(R.style.AppThemeFirebaseAuth)
                         .setLogo(R.drawable.ic_big_logo)

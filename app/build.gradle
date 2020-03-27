@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\hofit\\.android\\key_store.jks')
+            storePassword 'chsushartk'
+            keyAlias = 'Bdude'
+            keyPassword 'chsushartk'
+        }
+    }
     compileSdkVersion 28
 
     defaultConfig {

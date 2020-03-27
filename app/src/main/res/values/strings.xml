@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="facebook_application_id" translatable="false">1295107550685494</string>
+
     <string name="app_name">BDude</string>
     <string name="help_please_btn">Help please</string>
     <string name="no_request_data">There are not request around you</string>
@@ -7,7 +10,7 @@
     <string name="show_phone">Show phone number</string>
     <string name="call_to_number">Call phone number</string>
     <string name="share_info">TODO Text to share + קישור לגוגל פליי</string>
-    <string name="i_need_help_with">Need help with:</string>
+    <string name="i_need_help_with">I need help with:</string>
     <string name="need_help_with">need help with:</string>
     <string name="my_location_is">My location:</string>
 
@@ -25,7 +28,7 @@
     <string name="ask_for_location_gps_message">You have to open GPS to find requests near you</string>
     <string name="ask_for_location_gps_title">Open GPS title</string>
     <string name="hint_enter_location">Please enter location</string>
-    <string name="hint_help_with">Please enter title</string>
+    <string name="hint_help_with">In a word or two..</string>
     <string name="details_edit_text">What do you need help with?</string>
     <string name="send_whatsapp">Send Whatsapp</string>
     <string name="check_the_number">Please, check the phone number again</string>

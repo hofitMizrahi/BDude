@@ -126,7 +126,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public void initViews() {
-        mNameEt.setText(mUser.getName());
+       // mNameEt.setText(mUser.getName());
     }
 
     @Override

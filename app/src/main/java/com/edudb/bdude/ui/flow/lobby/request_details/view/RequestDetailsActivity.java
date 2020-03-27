@@ -1,8 +1,10 @@
 package com.edudb.bdude.ui.flow.lobby.request_details.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,8 +67,11 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     }
 
     private void openWhatsApp() {
-        //TODO check country code with lang
-        String contact = "+972" + mRequestDetailsObj.getPhoneNumber();
+
+        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        String countryCodeValue = tm.getNetworkCountryIso();
+
+        String contact = countryCodeValue + mRequestDetailsObj.getPhoneNumber();
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
             PackageManager pm = getPackageManager();

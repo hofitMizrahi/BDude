@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:focusable="true"
                 android:hint="@string/hint_help_with"
-                android:maxLength="20"
+                android:maxLength="15"
                 android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -112,11 +112,12 @@
 <!--                    android:layout_gravity="center"-->
 <!--                    android:background="@drawable/ic_location_on" />-->
 
-                <TextView
+                <EditText
                     android:id="@+id/my_location_editT"
                     style="@style/text_control_style"
                     android:layout_width="match_parent"
-                    android:focusable="true"
+                    android:focusable="false"
+                    android:inputType="none"
                     android:hint="@string/hint_enter_location"
                     android:layoutDirection="rtl"
                     android:maxLength="20"
@@ -199,6 +200,7 @@
                     android:focusable="true"
                     android:inputType="number"
                     android:lines="1"
+                    android:gravity="start"
                     android:maxLength="10"
                     android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"

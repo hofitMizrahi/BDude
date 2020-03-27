@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layoutDirection="rtl">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,37 +68,40 @@
 
         <LinearLayout
             android:id="@+id/searchContainer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/searching_style"
             android:orientation="horizontal"
             android:paddingEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toStartOf="@+id/btnShare"
+            app:layout_constraintStart_toEndOf="@+id/btnUserRegistration"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/getLocationText"
-                android:layout_width="205dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
-                android:paddingStart="16dp"
-                android:textDirection="rtl"
                 android:gravity="center|start"
-                android:paddingBottom="6dp"
                 android:lines="1"
-                android:text="...תל אביב גחגחגחי גגיו"
+                android:paddingStart="16dp"
                 android:paddingTop="5dp"
-                android:textSize="18dp" />
+                android:paddingBottom="6dp"
+                android:textDirection="rtl"
+                android:textSize="18sp"
+                tools:text="...תל אביב" />
 
             <ImageView
-                android:id="@+id/search_image"
+                android:id="@+id/ask_location"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_gps_fixed_black"
                 android:layout_marginStart="10dp"
-                android:paddingStart="8dp" />
+                android:paddingStart="8dp"
+                android:src="@drawable/ic_gps_fixed_black" />
 
         </LinearLayout>
 

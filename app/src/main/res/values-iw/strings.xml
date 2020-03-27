@@ -9,7 +9,7 @@
     <string name="show_phone">הצג מספר טלפון</string>
     <string name="call_to_number">חייג למספר</string>
     <string name="share_info">TODO טקסט לשיתוף + קישור לגוגל פליי</string>
-    <string name="i_need_help_with">צריך עזרה עם:</string>
+    <string name="i_need_help_with">אני רוצה עזרה עם:</string>
     <string name="need_help_with">צריך עזרה עם:</string>
     <string name="my_location_is">המיקום שלי:</string>
 
@@ -18,7 +18,7 @@
     <string name="terms_of_use_default_text">במהלך מתן או קבלת עזרה אנא הקפידו על הוראות משרד הבריאות כפי שמופרסמות באתר *משרד הבריאות, למען שמירה על בריאותכם ובריאות הציבור.    *לינק לאתר https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx</string>
     <string name="send_request">שלח בקשה</string>
     <string name="more_details">פרטים נוספים:</string>
-    <string name="enter_phone_number">טלפון ליצירת קשר:</string>
+    <string name="enter_phone_number">טלפון:</string>
     <string name="hello">שלום</string>
     <string name="help_please_btn_new">בקשה חדשה</string>
     <string name="ask_for_location_permission_title">בקשת מיקום</string>
@@ -27,11 +27,11 @@
     <string name="ask_for_location_gps_message">עלייך לפתוח pgs בכדי שנוכל לחפש אנשים לפי המיקום הקרו ב אלייך</string>
     <string name="ask_for_location_gps_title">כותרת לפתוח gps</string>
     <string name="hint_enter_location">נא להכניס מיקום</string>
-    <string name="hint_help_with">נא לתת כותרת לבקשה</string>
-    <string name="details_edit_text">במה אתה צריך עזרה?</string>
+    <string name="hint_help_with">במילה או שתיים..</string>
+    <string name="details_edit_text">קצת יותר פרטים</string>
     <string name="send_whatsapp">שלח וואטסאפ</string>
     <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
-    <string name="enter_name">שם המבקש:</string>
+    <string name="enter_name">שם:</string>
     <string name="enter_name_hint">נא להכניס שם</string>
 
     <string name="leku_title_activity_location_picker">בחירת מיקום</string>

@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -33,6 +34,9 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.btnShare)
     Button btnShare;
 
+    @BindView(R.id.ask_location)
+    ImageView askLocation;
+
     @OnClick(R.id.btnShare)
     void onShareBtnClicked() {
         EventBus.getDefault().post(new ShareMessageEvent());
@@ -46,6 +50,11 @@ public class BaseActionBar extends ConstraintLayout {
     @OnClick(R.id.btnUserRegistration)
     void onUserRegistrationBtnClicked() {
         EventBus.getDefault().post(new UserRegistrationMessageEvent());
+    }
+
+    @OnClick(R.id.ask_location)
+    void onAskPermissionBtnClicked() {
+        EventBus.getDefault().post(new LocationMessageEvent());
     }
 
     public BaseActionBar(Context context) {

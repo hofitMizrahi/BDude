@@ -4,6 +4,7 @@ import android.app.Application;
 import com.edudb.bdude.di.components.ApplicationComponent;
 import com.edudb.bdude.di.components.DaggerApplicationComponent;
 import com.edudb.bdude.di.modules.ApplicationModule;
+import com.edudb.bdude.location.LocationHelper;
 
 public class BDudeApplication extends Application {
 
@@ -19,6 +20,8 @@ public class BDudeApplication extends Application {
         super.onCreate();
         initCommonAppComponents();
         initSingletonDependencies();
+
+        LocationHelper.checkFirstLocation(getApplicationContext());
     }
 
     public ApplicationComponent getApplicationComponent(){
