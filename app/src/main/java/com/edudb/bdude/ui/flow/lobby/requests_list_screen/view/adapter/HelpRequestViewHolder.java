@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
+class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
     private IExecutable<Post> mListener;
     private Post mPost;
@@ -54,7 +54,8 @@ public class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
         mPost = post;
         mTitle.setText(String.format("%s %s", post.getUserName(), itemView.getContext().getString(R.string.need_help_with)));
-        mBody.setText(post.getTitle());
+        mTitle.setText(post.getTitle());
+        mBody.setVisibility(View.GONE);
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
         mLocation.setText(kmStr);

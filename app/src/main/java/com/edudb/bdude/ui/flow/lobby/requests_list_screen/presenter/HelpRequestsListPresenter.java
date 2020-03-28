@@ -1,5 +1,7 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
 
+import android.util.Log;
+
 import com.algolia.search.saas.AbstractQuery;
 import com.algolia.search.saas.AlgoliaException;
 import com.algolia.search.saas.Index;
