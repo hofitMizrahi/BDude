@@ -21,7 +21,7 @@ public class BDudeApplication extends Application {
         initCommonAppComponents();
         initSingletonDependencies();
 
-        LocationHelper.checkFirstLocation(getApplicationContext());
+        LocationHelper.checkLastLocation(getApplicationContext());
     }
 
     public ApplicationComponent getApplicationComponent(){

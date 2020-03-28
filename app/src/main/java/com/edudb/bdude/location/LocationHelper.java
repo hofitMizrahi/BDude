@@ -1,6 +1,7 @@
 package com.edudb.bdude.location;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,21 +10,29 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
+
 import androidx.core.app.ActivityCompat;
+
 import com.edudb.bdude.R;
+import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 import com.schibstedspain.leku.LocationPickerActivity;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import static android.content.Context.LOCATION_SERVICE;
 import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
 import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 
 public class LocationHelper {
+
+    public static final int GPS_OPEN = 999;
 
     //tel aviv TODO change
     public static GeoPoint mLastLocation = new GeoPoint(32.069424, 34.783667);
@@ -50,9 +59,9 @@ public class LocationHelper {
         return new GeoPoint(latitude, longitude);
     }
 
-    public static void checkFirstLocation(Context context) {
+    public static void checkLastLocation(Context context) {
 
-        if(!userNotHavePermission(context) && isHaveGpsOpen(context)){
+        if (!userNotHavePermission(context) && isHaveGpsOpen(context)) {
             setUserLocation(getCurrentLocation(context));
         }
     }
@@ -74,7 +83,7 @@ public class LocationHelper {
 
             DialogUtil.getSingleButtonInstance(activity, (dialog, i) -> {
 
-                        activity.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        activity.startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), GPS_OPEN);
 
                     }, activity.getString(R.string.ask_for_location_gps_title)
                     , activity.getString(R.string.ask_for_location_gps_message)
@@ -85,16 +94,42 @@ public class LocationHelper {
         }
     }
 
-    private static boolean isHaveGpsOpen(Context context){
-        return ((LocationManager) context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
+    public static boolean isHaveGpsOpen(Context context) {
+        return ((LocationManager) context.getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
-    private static boolean userNotHavePermission(Context context){
+
+    public static boolean userNotHavePermission(Context context) {
         return (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
     }
 
+    @SuppressLint("MissingPermission")
+    public static Location getLastBestLocation(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location locationNet = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        long GPSLocationTime = 0;
+        if (null != locationGPS) {
+            GPSLocationTime = locationGPS.getTime();
+        }
+
+        long NetLocationTime = 0;
+
+        if (null != locationNet) {
+            NetLocationTime = locationNet.getTime();
+        }
+
+        if (0 < GPSLocationTime - NetLocationTime) {
+            return locationGPS;
+        } else {
+            return locationNet;
+        }
+
+    }
+
     public static Location getCurrentLocation(Context context) {
-        return Utils.getLastBestLocation(context);
+        return getLastBestLocation(context);
     }
 
     private static void setUserLocation(Location location) {
@@ -113,10 +148,10 @@ public class LocationHelper {
         if (addresses != null && addresses.size() > 0) {
 
             String str = "";
-            if(!Utils.isNullOrWhiteSpace(addresses.get(0).getLocality())){
+            if (!Utils.isNullOrWhiteSpace(addresses.get(0).getLocality())) {
                 str += addresses.get(0).getLocality();
             }
-            if(!Utils.isNullOrWhiteSpace(addresses.get(0).getThoroughfare())){
+            if (!Utils.isNullOrWhiteSpace(addresses.get(0).getThoroughfare())) {
                 str += ", " + addresses.get(0).getThoroughfare();
             }
             return str;

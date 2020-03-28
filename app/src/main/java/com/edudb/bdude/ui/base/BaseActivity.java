@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
+import com.edudb.bdude.general.KeyValue;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
@@ -32,6 +34,7 @@ import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequ
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
+import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -48,6 +51,7 @@ import java.util.Objects;
 
 import butterknife.ButterKnife;
 
+import static com.edudb.bdude.location.LocationHelper.GPS_OPEN;
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -56,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public static final int PLACE_PICKER_REQUEST = 6;
     public static final String REQUEST_DETAILS = "request_details";
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private EnumNavigation mEnumNavigation;
     private Post mTempPost;
 
@@ -72,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         hideProgressBar();
         if (getPresenter() != null) {
             getPresenter().onStart();
@@ -99,6 +105,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         LocationHelper.setMap(this);
     }
 
+    public void logEvent(String key, String value){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, value);
+        //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        //bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(key, bundle);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShareMessageEvent(BaseActionBar.ShareMessageEvent event) {
         Intent sendIntent = new Intent();
@@ -116,6 +131,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAskLocationEvent(BaseActionBar.LocationMessageEvent event) {
         checkLocation();
+        if (!LocationHelper.userNotHavePermission(this) && LocationHelper.isHaveGpsOpen(this)) {
+            searchByNewLocation();
+        }
     }
 
     public void displayProgressBar() {
@@ -144,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mBaseActionBar.removeSearchLine();
         }
 
-        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity) {
+        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity || this instanceof TermsOfUseActivity) {
             mBaseActionBar.removeLoginIcon();
         }
 
@@ -285,6 +303,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 }
             } else {
                 showSnackbar("מיקום לא נמצא");
+            }
+        }else if(requestCode == GPS_OPEN){
+
+            if (!LocationHelper.userNotHavePermission(this) && LocationHelper.isHaveGpsOpen(this)) {
+                LocationHelper.checkLastLocation(this);
+                searchByNewLocation();
             }
         }
     }

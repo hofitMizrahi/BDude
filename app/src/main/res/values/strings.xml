@@ -10,7 +10,7 @@
     <string name="show_phone">Show phone number</string>
     <string name="call_to_number">Call phone number</string>
     <string name="share_info">TODO Text to share + קישור לגוגל פליי</string>
-    <string name="i_need_help_with">I need help with:</string>
+    <string name="i_need_help_with">Title:</string>
     <string name="need_help_with">need help with:</string>
     <string name="my_location_is">My location:</string>
 
