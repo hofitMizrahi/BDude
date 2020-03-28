@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +14,7 @@ import androidx.cardview.widget.CardView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
-import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
@@ -24,10 +24,6 @@ import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
 import com.edudb.bdude.ui.flow.lobby.request_details.presenter.RequestDetailsPresenter;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -59,7 +55,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @OnClick(R.id.show_phone)
     void onBtnClicked() {
-        startDial(mRequestDetailsObj.getPhoneNumber());
+        startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
     }
 
     @OnClick(R.id.whatsappCV)
@@ -69,12 +65,17 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     private void openWhatsApp() {
 
-        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         String countryCodeValue = tm.getNetworkCountryIso();
 
         String contact = CountryPrefixPhone.getPhone(countryCodeValue) + mRequestDetailsObj.getPhoneNumber();
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalyticsHelper.PARAM_PHONE_NUMBER, mRequestDetailsObj.getPhoneNumber());
+            bundle.putString(FirebaseAnalyticsHelper.PARAM_POST_ID, mRequestDetailsObj.getId());
+            FirebaseAnalyticsHelper.LogEvent(this, FirebaseAnalyticsHelper.CONTACT_WHATSAPP, bundle);
+
             PackageManager pm = getPackageManager();
             pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -107,7 +108,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @Override
     public void initViews() {
 
-        if(mRequestDetailsObj.getPhoneNumber().length() < 10){
+        if (mRequestDetailsObj.getPhoneNumber().length() < 10) {
             mWhatsAppBtn.setVisibility(View.GONE);
         }
         mTitleTxt.setText(mRequestDetailsObj.getTitle());
