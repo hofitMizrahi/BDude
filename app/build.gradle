@@ -4,20 +4,21 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\hofit\\.android\\key_store.jks')
+            storeFile file('C:\\projects\\BDude\\key_store.jks')
             storePassword 'chsushartk'
             keyAlias = 'Bdude'
+            //בידודישראל
             keyPassword 'chsushartk'
         }
     }
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.edudb.bdude"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     compileOptions {
@@ -26,6 +27,22 @@ android {
     }
 
     buildTypes {
+
+        buildTypes {
+            release {
+                debuggable false
+                jniDebuggable false
+                useProguard true
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+            debug {
+                signingConfig signingConfigs.debug
+                minifyEnabled false
+            }
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -74,7 +91,7 @@ dependencies {
 
     //algolia
     implementation 'com.algolia:algoliasearch-android:3.27.0'
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:design:29.0.0'
 
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'

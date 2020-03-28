@@ -23,10 +23,10 @@
     <string name="hello">Hello</string>
     <string name="help_please_btn_new">New request</string>
     <string name="ask_for_location_permission_title">Location permission</string>
-    <string name="ask_for_location_permission_message">We would like to get your location TODO..</string>
-    <string name="ask_for_location_gps_open_btn">Open GPS Screen</string>
-    <string name="ask_for_location_gps_message">You have to open GPS to find requests near you</string>
-    <string name="ask_for_location_gps_title">Open GPS title</string>
+    <string name="ask_for_location_permission_message">Please authorise us to use your location</string>
+    <string name="ask_for_location_gps_open_btn">Open GPS</string>
+    <string name="ask_for_location_gps_message">You must open the GPS in the device settings so that we can search requests near you</string>
+    <string name="ask_for_location_gps_title">Open GPS</string>
     <string name="hint_enter_location">Please enter location</string>
     <string name="hint_help_with">In a word or two..</string>
     <string name="details_edit_text">What do you need help with?</string>

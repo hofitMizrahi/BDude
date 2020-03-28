@@ -344,8 +344,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(Arrays.asList(
-                                new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                new AuthUI.IdpConfig.FacebookBuilder().build()
+                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                                //new AuthUI.IdpConfig.FacebookBuilder().build()
                         ))
                         .setTheme(R.style.AppThemeFirebaseAuth)
                         .setLogo(R.drawable.ic_big_logo)

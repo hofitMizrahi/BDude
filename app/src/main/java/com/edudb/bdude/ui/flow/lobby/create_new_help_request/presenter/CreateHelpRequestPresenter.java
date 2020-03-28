@@ -36,7 +36,7 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     @Override
     public void sendRequest() {
 
-        //mView.displayProgressBar();
+        mView.displayProgressBar();
         User user = SessionManager.getInstance().getUser();
 
         HelpRequest post = new HelpRequest();
@@ -63,8 +63,8 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     }
 
     private void onComplete(Void var){
-        //mView.hideProgressBar();
-        //mView.getActivity().finish();
-       // mView.checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
+        mView.hideProgressBar();
+        mView.getActivity().finish();
+        mView.checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 }
