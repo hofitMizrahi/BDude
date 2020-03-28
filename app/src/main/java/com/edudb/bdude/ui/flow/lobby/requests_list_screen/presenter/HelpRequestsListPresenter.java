@@ -31,7 +31,9 @@ import javax.inject.Inject;
 @PerActivity
 public class HelpRequestsListPresenter implements HelpRequestsListContract.Presenter {
 
+    public static final int GAP_TO_LOAD_MORE = 20;
     private List<Post> mSearchResultItems;
+    private AlgoliaModel mResult;
 
     @Inject
     Query mQuery;
@@ -44,6 +46,8 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     @Inject
     SharedPrefsController mSharedPrefsController;
+
+    private boolean mIsLoading;
 
     @Inject
     HelpRequestsListPresenter() {
@@ -66,7 +70,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
     }
 
     private void onSearchComplete(JSONObject jsonObject, AlgoliaException e) {
-        AlgoliaUtils.getAlgoliaResult(jsonObject, e, mSearchResultItems = new ArrayList<>());
+        mResult = AlgoliaUtils.getAlgoliaResult(jsonObject, e, mSearchResultItems = new ArrayList<>());
         displayList();
     }
 
@@ -80,9 +84,51 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         mView.hideProgressBar();
     }
 
+    public void loadMore() {
+        Log.d("algolia", "loadMore");
+        mIsLoading = true;
+        if ((mSearchResultItems.size() / mResult.getHitsPerPage()) - 1 == mQuery.getPage()) {
+            Integer currentPage = mQuery.getPage();
+            currentPage = currentPage == null ? 0 : currentPage;
+            mQuery.setPage(currentPage + 1);
+            mIndex.searchAsync(mQuery, this::onLoadMoreComplete);
+        }
+    }
+
+    @Override
+    public boolean canLoadMore() {
+        return mResult != null && mResult.getPage() < mResult.getNbPages() && !mIsLoading && mResult.getNbHits() > mSearchResultItems.size();
+    }
+
+    private void onLoadMoreComplete(JSONObject jsonObject, AlgoliaException e) {
+        mIsLoading = false;
+        List<Post> items = new ArrayList<>();
+        mResult = AlgoliaUtils.getAlgoliaResult(jsonObject, e, items);
+        mSearchResultItems.addAll(items);
+        displayResults();
+    }
+
+    private void displayResults() {
+        if (mQuery.getPage() != null || mQuery.getPage() != 0) {
+            mView.displayMoreResults();
+        }
+    }
+
     @Override
     public void createHelpRequestClicked() {
         mView.checkLoginAndNavigate(EnumNavigation.CREATE_POST);
+    }
+
+    @Override
+    public void onResultsScroll(int lastVisibleItem) {
+        if (lastVisibleItem >= mSearchResultItems.size() - GAP_TO_LOAD_MORE && canLoadMore()) {
+            loadMore();
+        }
+    }
+
+    @Override
+    public List<Post> getSearchResultItems() {
+        return mSearchResultItems;
     }
 
     @Override

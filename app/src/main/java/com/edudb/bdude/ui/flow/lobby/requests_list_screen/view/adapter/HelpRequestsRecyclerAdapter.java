@@ -44,6 +44,10 @@ public class HelpRequestsRecyclerAdapter extends RecyclerView.Adapter<HelpReques
         mListener.onItemClicked(request);
     }
 
+    public void setList(List<Post> searchResultItems) {
+        mList = searchResultItems;
+    }
+
     public interface InteractionListener{
         void onItemClicked(Post request);
     }

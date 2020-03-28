@@ -2,6 +2,7 @@ package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,9 +21,15 @@ import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
 import com.google.firebase.firestore.GeoPoint;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import static com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter.GAP_TO_LOAD_MORE;
 
 public class HelpRequestsListActivity extends BaseActivity implements HelpRequestsListContract.View{
 
@@ -70,6 +77,7 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     protected void onResume() {
         super.onResume();
         refreshData();
+        addTimerToLoadMore();
     }
 
     @Override
@@ -88,5 +96,34 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     @Override
     public void navigateTermsOfUseScreen() {
         startActivity(new Intent(this, TermsOfUseActivity.class));
+    }
+
+    @Override
+    public void displayMoreResults() {
+        if (mAdapter != null) {
+            Parcelable recyclerViewState = mRecyclerView.getLayoutManager().onSaveInstanceState();
+            mAdapter.setList(mPresenter.getSearchResultItems());
+            mAdapter.notifyDataSetChanged();
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+        }
+        hideProgressBar();
+    }
+
+    private void addTimerToLoadMore() {
+        Observable.interval(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(this::checkLoadMore)
+                .subscribe();
+    }
+
+    private <R> R checkLoadMore(Long aLong) {
+        LinearLayoutManager manager = ((LinearLayoutManager) mRecyclerView.getLayoutManager());
+            if (manager != null) {
+                int lastVisibleItem = manager.findLastVisibleItemPosition();
+                if (lastVisibleItem > 0) {
+                    mPresenter.onResultsScroll(lastVisibleItem);
+                }
+            }
+        return null;
     }
 }
