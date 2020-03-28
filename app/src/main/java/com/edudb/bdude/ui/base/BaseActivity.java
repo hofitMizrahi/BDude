@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edudb.bdude.R;
+import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.FirebaseDbHelper;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
@@ -169,8 +170,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar.postInvalidate();
     }
 
-    public void startDial(String phoneNumber) {
+    public void startDial(String id, String phoneNumber) {
         try {
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalyticsHelper.PARAM_PHONE_NUMBER, phoneNumber);
+            bundle.putString(FirebaseAnalyticsHelper.PARAM_POST_ID, id);
+            FirebaseAnalyticsHelper.LogEvent(this, FirebaseAnalyticsHelper.CONTACT_DIAL, bundle);
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(phoneNumber)));
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
@@ -247,6 +252,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (!SessionManager.getInstance().isUserLogin()) {
             startLogin();
         } else {
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalyticsHelper.PARAM_POST_ID, request.getId());
+            FirebaseAnalyticsHelper.LogEvent(this, FirebaseAnalyticsHelper.NAVIGATE_POST_DETAILS, bundle);
             startActivity(new Intent(this, RequestDetailsActivity.class).putExtra(REQUEST_DETAILS, request));
         }
     }
@@ -260,10 +268,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
+                FirebaseAnalyticsHelper.LogEvent(this, FirebaseAnalytics.Event.LOGIN);
 
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     FirebaseDbHelper.getInstance().getCurrentUserDetails(FirebaseAuth.getInstance().getCurrentUser().getUid(), this::saveUserDetails);
                 }
+
 
             } else {
 
