@@ -65,6 +65,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
             mView.navigateTermsOfUseScreen();
         }
 
+        mQuery.setPage(0);
         mQuery.setAroundLatLng(new AbstractQuery.LatLng(LocationHelper.mLastLocation.getLatitude(), LocationHelper.mLastLocation.getLongitude()));
         mIndex.searchAsync(mQuery, this::onSearchComplete);
     }
@@ -88,6 +89,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         Log.d("algolia", "loadMore");
         mIsLoading = true;
         if ((mSearchResultItems.size() / mResult.getHitsPerPage()) - 1 == mQuery.getPage()) {
+            mView.displayProgressBar();
             Integer currentPage = mQuery.getPage();
             currentPage = currentPage == null ? 0 : currentPage;
             mQuery.setPage(currentPage + 1);
@@ -106,6 +108,7 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
         mResult = AlgoliaUtils.getAlgoliaResult(jsonObject, e, items);
         mSearchResultItems.addAll(items);
         displayResults();
+        mView.hideProgressBar();
     }
 
     private void displayResults() {

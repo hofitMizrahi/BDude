@@ -120,7 +120,7 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
         LinearLayoutManager manager = ((LinearLayoutManager) mRecyclerView.getLayoutManager());
             if (manager != null) {
                 int lastVisibleItem = manager.findLastVisibleItemPosition();
-                if (lastVisibleItem > 0) {
+                if (lastVisibleItem > mPresenter.getSearchResultItems().size() - 5) {
                     mPresenter.onResultsScroll(lastVisibleItem);
                 }
             }
