@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.FirebaseDbHelper;
@@ -117,11 +118,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShareMessageEvent(BaseActionBar.ShareMessageEvent event) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_info));
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "B-dude");
+            String shareMessage= "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
