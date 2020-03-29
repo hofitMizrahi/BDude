@@ -1,5 +1,7 @@
 package com.edudb.bdude.ui.flow.terms_of_use.presenter;
 
+import android.text.Html;
+
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.ui.flow.terms_of_use.contract.TermsOfUseContract;
@@ -25,7 +27,7 @@ public class TermsOfUsePresenter implements TermsOfUseContract.Presenter {
 
         mView.displayProgressBar();
         mConfiguration.fetchAndActivate().addOnCompleteListener(task ->
-                mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_KEY)));
+                mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_IL_KEY)));
         mView.hideProgressBar();
         mView.checkLocation();
     }
