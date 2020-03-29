@@ -64,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private EnumNavigation mEnumNavigation;
     private Post mTempPost;
 
+    
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
