@@ -34,6 +34,8 @@
     <string name="enter_name">שם:</string>
     <string name="enter_name_hint">נא להכניס שם</string>
 
+    <string name="you_cont_ask_more_five_requests">אינך יכול לפרסם יותר מ 5 בקשות</string>
+
     <string name="km"> ק\"מ</string>
     <string name="recently_published">פורסם לאחרונה</string>
     <string name="publish_time">פורסם לפני </string>

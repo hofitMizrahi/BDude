@@ -11,11 +11,13 @@ import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelp
 import com.google.firebase.firestore.GeoPoint;
 
 import java.security.PrivateKey;
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Presenter{
 
+    private static final int MAX_REQUESTS = 5;
     private GeoPoint mSelectedLocation;
 
     @Inject
@@ -26,7 +28,16 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
 
     @Override
     public void onStart() {
+        mView.displayProgressBar();
         mView.initViews();
+        mDataBase.getMyRequests(this::displayList);
+    }
+
+    private void displayList(List<HelpRequest> posts) {
+        if(posts == null || posts.size() >= MAX_REQUESTS){
+            mView.showNotAskMoreRequestView();
+        }
+        mView.hideProgressBar();
     }
 
     @Inject

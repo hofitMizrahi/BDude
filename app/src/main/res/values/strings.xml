@@ -55,5 +55,6 @@
     <string name="recently_published">recently Published</string>
     <string name="publish_time">posted </string>
     <string name="hours_ago">hours ago</string>
+    <string name="you_cont_ask_more_five_requests">You cannot post more than 5 requests</string>
 
 </resources>

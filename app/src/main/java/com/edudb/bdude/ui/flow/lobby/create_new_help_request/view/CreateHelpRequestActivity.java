@@ -10,6 +10,7 @@ import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
 import com.edudb.bdude.general.Constants;
+import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
@@ -280,6 +281,15 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Override
     public void changeLocationText(String locationName) {
         mMyLocation.setText(locationName);
+    }
+
+    @Override
+    public void showNotAskMoreRequestView() {
+        DialogUtil.getSingleButtonInstance(this, (dialog, whith) -> {
+                    finish();
+                }, getString(R.string.pay_attention_please),
+                getString(R.string.you_cont_ask_more_five_requests),
+                getString(R.string.approve), false );
     }
 
     private boolean blackWordsCheck(String text) {

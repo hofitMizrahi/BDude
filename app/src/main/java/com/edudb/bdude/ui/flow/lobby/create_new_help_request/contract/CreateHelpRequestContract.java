@@ -14,6 +14,7 @@ public interface CreateHelpRequestContract {
         String getBody();
         String getFullTitle();
         void changeLocationText(String locationName);
+        void showNotAskMoreRequestView();
     }
 
     interface Presenter extends BasePresenter {
