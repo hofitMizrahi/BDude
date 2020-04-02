@@ -59,4 +59,7 @@
     <string name="delete">מחק</string>
     <string name="pay_attention_please">לתשומת לבך</string>
 
+    <string name="facebook_login">להיכנס עם פייסבוק</string>
+    <string name="google_login">להיכנס עם גוגל</string>
+
 </resources>

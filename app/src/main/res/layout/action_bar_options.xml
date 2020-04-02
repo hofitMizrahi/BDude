@@ -63,8 +63,9 @@
                 android:lines="1"
                 android:textDirection="locale"
                 android:paddingTop="5dp"
+                android:drawablePadding="8dp"
                 android:textSize="18sp"
-                tools:text="...תל אביב" />
+                android:text="השכונה שלי" />
 
             <TextView
                 android:id="@+id/getLocationText"

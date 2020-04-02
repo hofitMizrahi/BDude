@@ -159,32 +159,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_green_btn_continue"
-        android:text="@string/send_whatsapp"
-        android:textColor="#ffff"
-        android:visibility="gone"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/show_phone"
-        android:textDirection="rtl"
-        android:drawableStart="@drawable/whatsapp_icon"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_green_btn_continue"
-        android:text="@string/call_to_number"
-        android:visibility="gone"
-        android:textColor="#ffff"
-        android:gravity="center"
-        android:textDirection="rtl"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,5 +56,7 @@
     <string name="publish_time">posted </string>
     <string name="hours_ago">hours ago</string>
     <string name="you_cont_ask_more_five_requests">אינך יכול לשלוח יותר מ 5 בקשות</string>
+    <string name="facebook_login">login with Facebook</string>
+    <string name="google_login">login with Google</string>
 
 </resources>
