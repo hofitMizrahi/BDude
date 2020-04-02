@@ -33,9 +33,9 @@ public class BaseActionBar extends ConstraintLayout {
 
     @BindView(R.id.btnShare)
     Button btnShare;
-
-    @BindView(R.id.ask_location)
-    ImageView askLocation;
+//
+//    @BindView(R.id.ask_location)
+//    ImageView askLocation;
 
     @OnClick(R.id.btnShare)
     void onShareBtnClicked() {
@@ -52,10 +52,10 @@ public class BaseActionBar extends ConstraintLayout {
         EventBus.getDefault().post(new UserRegistrationMessageEvent());
     }
 
-    @OnClick(R.id.ask_location)
-    void onAskPermissionBtnClicked() {
-        EventBus.getDefault().post(new LocationMessageEvent());
-    }
+//    @OnClick(R.id.ask_location)
+//    void onAskPermissionBtnClicked() {
+//        EventBus.getDefault().post(new LocationMessageEvent());
+//    }
 
     public BaseActionBar(Context context) {
         super(context);

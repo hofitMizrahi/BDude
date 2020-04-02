@@ -8,23 +8,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/header_gradient_horizontal"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:weightSum="4">
-
-<!--        <Button-->
-<!--            android:id="@+id/btnLocation"-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:background="@drawable/green_location_ic"-->
-<!--            android:padding="15dp"-->
-<!--            android:visibility="visible"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/btnShare"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <Button
             android:id="@+id/btnShare"
@@ -52,20 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-<!--        <TextView-->
-<!--            android:id="@+id/logo"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@drawable/ic_logo_40"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="10sp"-->
-<!--            android:textStyle="normal"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <LinearLayout
             android:id="@+id/searchContainer"
             android:layout_width="0dp"
@@ -73,38 +47,37 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/searching_style"
-            android:orientation="horizontal"
-            android:paddingEnd="16dp"
+            android:orientation="vertical"
+            android:gravity="center"
             app:layout_constraintEnd_toStartOf="@+id/btnShare"
             app:layout_constraintStart_toEndOf="@+id/btnUserRegistration"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/getLocationText"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center|start"
+                android:drawableTint="@color/colorBlack"
+                android:drawableStart="@drawable/ic_location_on"
+                android:gravity="center"
                 android:lines="1"
                 android:textDirection="locale"
-                android:paddingStart="16dp"
                 android:paddingTop="5dp"
-                android:paddingBottom="6dp"
                 android:textSize="18sp"
                 tools:text="...תל אביב" />
 
-            <ImageView
-                android:id="@+id/ask_location"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:paddingStart="8dp"
-                android:src="@drawable/ic_gps_fixed_black" />
-
+            <TextView
+                android:id="@+id/getLocationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:lines="1"
+                android:textStyle="bold"
+                android:textColor="@color/colorDark"
+                android:textDirection="locale"
+                android:textSize="20sp"
+                tools:text="...תל אביב" />
         </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
