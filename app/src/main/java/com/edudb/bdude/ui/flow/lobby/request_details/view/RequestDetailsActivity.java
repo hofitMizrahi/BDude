@@ -20,10 +20,12 @@ import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
 import com.edudb.bdude.general.CountryPrefixPhone;
 import com.edudb.bdude.general.utils.Utils;
+import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
 import com.edudb.bdude.ui.flow.lobby.request_details.presenter.RequestDetailsPresenter;
+import com.google.android.gms.maps.model.LatLng;
 
 import javax.inject.Inject;
 
@@ -38,8 +40,8 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @Inject
     Post mRequestDetailsObj;
 
-    @BindView(R.id.title)
-    TextView mTitleTxt;
+    @BindView(R.id.name)
+    TextView mName;
 
     @BindView(R.id.body)
     TextView mBodyTxt;
@@ -47,21 +49,25 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.time)
     TextView mTimeTxt;
 
-    @BindView(R.id.show_phone)
-    CardView mNumberBtn;
+    @BindView(R.id.distance)
+    TextView mDistance;
 
-    @BindView(R.id.whatsappCV)
-    CardView mWhatsAppBtn;
+//    @BindView(R.id.show_phone)
+//    CardView mNumberBtn;
+//
+//    @BindView(R.id.whatsappCV)
+//    CardView mWhatsAppBtn;
 
-    @OnClick(R.id.show_phone)
+    @OnClick(R.id.helpBtn)
     void onBtnClicked() {
-        startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
+        //TODO open view with phone number
+        //startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
     }
 
-    @OnClick(R.id.whatsappCV)
-    void openWhatsAppClicked() {
-        openWhatsApp();
-    }
+//    @OnClick(R.id.whatsappCV)
+//    void openWhatsAppClicked() {
+//        openWhatsApp();
+//    }
 
     private void openWhatsApp() {
 
@@ -89,7 +95,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public int getLayoutResource() {
-        return R.layout.activity_request_details;
+        return R.layout.activity_request_post_details;
     }
 
     @Override
@@ -108,11 +114,14 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @Override
     public void initViews() {
 
-        if (mRequestDetailsObj.getPhoneNumber().length() < 10) {
-            mWhatsAppBtn.setVisibility(View.GONE);
-        }
-        mTitleTxt.setText(mRequestDetailsObj.getTitle());
+//        if (mRequestDetailsObj.getPhoneNumber().length() < 10) {
+//            mWhatsAppBtn.setVisibility(View.GONE);
+//        }
+        mName.setText(mRequestDetailsObj.getUserName());
         mBodyTxt.setText(mRequestDetailsObj.getBody());
         mTimeTxt.setText(Utils.getTimeFormat(mRequestDetailsObj.getTimestamp()));
+        LatLng latLng = new LatLng(mRequestDetailsObj.getGeoloc().getLat(), mRequestDetailsObj.getGeoloc().getLng());
+        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + getString(R.string.km);
+        mDistance.setText(kmStr);
     }
 }

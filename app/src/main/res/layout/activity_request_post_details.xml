@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_main_background"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/helpBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="אני יעזור"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    app:layout_constraintBottom_toTopOf="@id/helpBtn"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/content_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/divider">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="מרחק ממני:"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp"
+                            tools:text="30km" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="נשלח ב:"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="13:00"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="עזרה עם:"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="הערות:"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="אני בבידוד וצריכה קאפו"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="20sp" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/productsRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/title_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:src="@drawable/ic_user_pic"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="8dp"
+                                android:text="תמר"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:id="@+id/age_at_risk_container"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ic_red_home"
+                                app:layout_constraintBottom_toTopOf="@id/textView"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="גיל בסיכון"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:id="@+id/isolation_container"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ic_red_home"
+                                app:layout_constraintBottom_toTopOf="@id/textView3"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="בבידוד"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        android:background="@color/colorBlack"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/content_container" />
+
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/colorBlack"
+                        app:layout_constraintTop_toBottomOf="@id/title_container" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
