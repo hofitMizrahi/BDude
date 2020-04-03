@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,22 +53,28 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.distance)
     TextView mDistance;
 
-//    @BindView(R.id.show_phone)
-//    CardView mNumberBtn;
-//
-//    @BindView(R.id.whatsappCV)
-//    CardView mWhatsAppBtn;
+    @BindView(R.id.phoneNumber)
+    TextView mNumber;
+
+    @BindView(R.id.helpBtn)
+    Button mHelpBtn;
+
+    @BindView(R.id.phoneContainer)
+    View mPhoneContainer;
 
     @OnClick(R.id.helpBtn)
     void onBtnClicked() {
-        //TODO open view with phone number
-        //startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
+        mPhoneContainer.setVisibility(View.VISIBLE);
+        mHelpBtn.setVisibility(View.GONE);
     }
 
-//    @OnClick(R.id.whatsappCV)
-//    void openWhatsAppClicked() {
-//        openWhatsApp();
-//    }
+    @OnClick(R.id.phoneNumber)
+    void openWhatsAppClicked() {
+
+        //TODO check what to do??
+        //startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
+        openWhatsApp();
+    }
 
     private void openWhatsApp() {
 
@@ -113,15 +120,12 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public void initViews() {
-
-//        if (mRequestDetailsObj.getPhoneNumber().length() < 10) {
-//            mWhatsAppBtn.setVisibility(View.GONE);
-//        }
         mName.setText(mRequestDetailsObj.getUserName());
         mBodyTxt.setText(mRequestDetailsObj.getBody());
         mTimeTxt.setText(Utils.getTimeFormat(mRequestDetailsObj.getTimestamp()));
         LatLng latLng = new LatLng(mRequestDetailsObj.getGeoloc().getLat(), mRequestDetailsObj.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + getString(R.string.km);
         mDistance.setText(kmStr);
+        mNumber.setText(mRequestDetailsObj.getPhoneNumber());
     }
 }
