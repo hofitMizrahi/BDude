@@ -39,16 +39,20 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @BindView(R.id.my_requests_recycler_view)
     RecyclerView mRecycler;
 
-    @OnClick(R.id.helpContinueBtn)
-    void startHelpRequest(){
-        mPresenter.createHelpRequestClicked();
-    }
+//    @OnClick(R.id.helpContinueBtn)
+//    void startHelpRequest(){
+//        mPresenter.createHelpRequestClicked();
+//    }
 
-    @BindView(R.id.title_name)
-    TextView mTitleWithUserName;
+    @BindView(R.id.name)
+    TextView mName;
 
-    @BindView(R.id.empty_view)
-    TextView mEmptyViewTxt;
+    @BindView(R.id.phoneNumber)
+    TextView mPhoneNumber;
+
+    //TODO change no request view
+//    @BindView(R.id.empty_view)
+//    TextView mEmptyViewTxt;
 
     @Override
     public int getLayoutResource() {
@@ -65,7 +69,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
 
     @Override
     public void displayList(List<HelpRequest> posts) {
-        mEmptyViewTxt.setVisibility(View.GONE);
+        //mEmptyViewTxt.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setNestedScrollingEnabled(false);
@@ -85,12 +89,15 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
         if (mCurrentUser.getName() != null && !mCurrentUser.equals("")) {
             str = mCurrentUser.getName();
         }
-        mTitleWithUserName.setText(String.format("%s %s%s", getString(R.string.hello), str, "!"));
+
+        //TODO add check if user have phone and name -> if not -> View.GONE
+        mName.setText(str);
+        mPhoneNumber.setText(mCurrentUser.getPhone_number());
     }
 
     @Override
     public void showEmptyView() {
-        mEmptyViewTxt.setVisibility(View.VISIBLE);
+        //mEmptyViewTxt.setVisibility(View.VISIBLE);
         mRecycler.setVisibility(View.GONE);
     }
 
