@@ -48,8 +48,6 @@ public class IntroTermsActivity extends BaseActivity implements IntroTermsContra
     public void initViews() {
 
         addFragment(getSupportFragmentManager(), R.id.container, WelcomeTermsFragment.getInstance(), false,"");
-//        mHealthWarningTerms.setText(Html.fromHtml(str));
-//        setTextViewHTML(mHealthWarningTerms, str);
     }
 
     @Override
@@ -61,34 +59,4 @@ public class IntroTermsActivity extends BaseActivity implements IntroTermsContra
     public void navigateHealthWarningsFragment() {
         addFragment(getSupportFragmentManager(), R.id.container, HealthTermsFragment.getInstance(), false,"");
     }
-
-    protected void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                String url = "https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
-    }
-
-    protected void setTextViewHTML(TextView text, String html)
-    {
-        CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
-        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for(URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
-        }
-        text.setText(strBuilder);
-        text.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
 }

@@ -26,4 +26,9 @@ public class LocationTermsPresenter implements LocationTermsContract.Presenter {
     public void nextStep() {
         mContainerPresenter.navigateToNextStep(mView.getStepNumber());
     }
+
+    @Override
+    public void askLocation() {
+        mView.checkLocation();
+    }
 }

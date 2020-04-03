@@ -8,8 +8,8 @@ public interface HealthTermsContract {
 
     interface View extends BaseView {
         void initViews();
-
         EnumStepNumber getStepNumber();
+        void initText(String string);
     }
 
     interface Presenter extends BasePresenter {

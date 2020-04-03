@@ -14,5 +14,6 @@ public interface LocationTermsContract {
 
     interface Presenter extends BasePresenter {
         void nextStep();
+        void askLocation();
     }
 }

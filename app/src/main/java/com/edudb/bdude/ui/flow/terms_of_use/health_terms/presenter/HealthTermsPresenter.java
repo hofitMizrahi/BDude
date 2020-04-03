@@ -1,8 +1,11 @@
 package com.edudb.bdude.ui.flow.terms_of_use.health_terms.presenter;
 
 import com.edudb.bdude.di.scope.PerFragment;
+import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.ui.flow.terms_of_use.container.presenter.IntroTermsPresenter;
 import com.edudb.bdude.ui.flow.terms_of_use.health_terms.contract.HealthTermsContract;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+
 import javax.inject.Inject;
 
 @PerFragment
@@ -15,12 +18,18 @@ public class HealthTermsPresenter implements HealthTermsContract.Presenter {
     IntroTermsPresenter mContainerPresenter;
 
     @Inject
+    FirebaseRemoteConfig mConfiguration;
+
+    @Inject
     HealthTermsPresenter() {
     }
 
     @Override
     public void onStart() {
-
+           mView.displayProgressBar();
+        mConfiguration.fetchAndActivate().addOnCompleteListener(task ->
+                mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_IL_KEY)));
+           mView.hideProgressBar();
     }
 
     @Override

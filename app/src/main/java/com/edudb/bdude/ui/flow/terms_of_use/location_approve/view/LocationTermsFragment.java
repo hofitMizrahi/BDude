@@ -30,6 +30,7 @@ public class LocationTermsFragment extends BaseFragment implements LocationTerms
 
     @OnClick(R.id.nextBtn)
     void onNextBtnClicked(){
+        mPresenter.askLocation();
         mPresenter.nextStep();
     }
 
