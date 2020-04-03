@@ -78,7 +78,7 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_green_btn_continue">
+            android:background="@drawable/rounded_btn_continue">
 
             <ImageView
                 android:layout_width="25dp"
@@ -126,7 +126,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_green_btn_continue">
+            android:background="@drawable/rounded_btn_continue">
 
             <ImageView
                 android:id="@+id/imageView"

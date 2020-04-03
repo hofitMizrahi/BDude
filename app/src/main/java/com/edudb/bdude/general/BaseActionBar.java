@@ -31,6 +31,9 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.searchContainer)
     View mSearchContainer;
 
+    @BindView(R.id.root)
+    View mRoot;
+
     @BindView(R.id.btnShare)
     Button btnShare;
 //
@@ -96,6 +99,14 @@ public class BaseActionBar extends ConstraintLayout {
 
     public void removeLoginIcon() {
         mBtnUserRegistration.setVisibility(GONE);
+    }
+
+    public void hideActionBar() {
+        mRoot.setVisibility(GONE);
+    }
+
+    public void showActionBar() {
+        mRoot.setVisibility(VISIBLE);
     }
 
     public static class LocationMessageEvent {

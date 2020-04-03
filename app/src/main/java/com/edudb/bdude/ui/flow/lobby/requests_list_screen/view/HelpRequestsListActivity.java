@@ -13,23 +13,17 @@ import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
-import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
-import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
-import com.google.firebase.firestore.GeoPoint;
-
+import com.edudb.bdude.ui.flow.terms_of_use.container.view.IntroTermsActivity;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-import static com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter.GAP_TO_LOAD_MORE;
 
 public class HelpRequestsListActivity extends BaseActivity implements HelpRequestsListContract.View{
 
@@ -95,7 +89,7 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
 
     @Override
     public void navigateTermsOfUseScreen() {
-        startActivity(new Intent(this, TermsOfUseActivity.class));
+        startActivity(new Intent(this, IntroTermsActivity.class));
     }
 
     @Override

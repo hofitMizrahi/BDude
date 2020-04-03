@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_green_btn_continue"
+        android:background="@drawable/rounded_btn_continue"
         android:text="@string/help_please_btn_new"
         android:textColor="#ffff"
         android:textSize="20sp"

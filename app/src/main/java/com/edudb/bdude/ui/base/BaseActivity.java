@@ -6,7 +6,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,10 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
@@ -35,23 +35,19 @@ import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequ
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
-import com.edudb.bdude.ui.flow.terms_of_use.view.TermsOfUseActivity;
+import com.edudb.bdude.ui.flow.terms_of_use.container.view.IntroTermsActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.Arrays;
 import java.util.Objects;
-
 import butterknife.ButterKnife;
-
 import static com.edudb.bdude.location.LocationHelper.GPS_OPEN;
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
 
@@ -65,7 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private EnumNavigation mEnumNavigation;
     private Post mTempPost;
 
-    
     private ProgressBar mProgressBar;
     private View mContainer;
     private ViewGroup mActionBarContainer;
@@ -107,13 +102,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         LocationHelper.setMap(this);
     }
 
-    public void logEvent(String key, String value){
-
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, value);
-        //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
-        //bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
-        mFirebaseAnalytics.logEvent(key, bundle);
+    public void addFragment(FragmentManager fragmentManager, int containerId, BaseFragment fragment, boolean addToBackStack, String tag) {
+        if (!isFinishing()) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction().add(containerId, fragment, tag);
+            if (addToBackStack) {
+                transaction.addToBackStack(tag);
+            }
+            transaction.commitAllowingStateLoss();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -159,6 +155,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected void setActionBar() {
+        //TODO remove from baseActivity
         Log.d("setActionBar", getClass().getSimpleName());
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
@@ -170,7 +167,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mBaseActionBar.removeSearchLine();
         }
 
-        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity || this instanceof TermsOfUseActivity) {
+        if(this instanceof IntroTermsActivity){
+            mBaseActionBar.hideActionBar();
+        }else {
+            mBaseActionBar.showActionBar();
+        }
+
+        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity) {
             mBaseActionBar.removeLoginIcon();
         }
 

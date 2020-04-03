@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.terms_of_use.view;
+package com.edudb.bdude.ui.flow.terms_of_use.container.view;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,36 +7,24 @@ import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BDudeApplication;
-import com.edudb.bdude.di.components.DaggerTermsOfUseComponent;
-import com.edudb.bdude.di.modules.TermsOfUseModule;
+import com.edudb.bdude.di.components.DaggerIntroTermsComponent;
+import com.edudb.bdude.di.modules.IntroTermsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
-import com.edudb.bdude.ui.base.BasePresenter;
-import com.edudb.bdude.ui.flow.terms_of_use.contract.TermsOfUseContract;
-import com.edudb.bdude.ui.flow.terms_of_use.presenter.TermsOfUsePresenter;
-
+import com.edudb.bdude.ui.flow.terms_of_use.container.contract.IntroTermsContract;
+import com.edudb.bdude.ui.flow.terms_of_use.container.presenter.IntroTermsPresenter;
+import com.edudb.bdude.ui.flow.terms_of_use.health_terms.view.HealthTermsFragment;
+import com.edudb.bdude.ui.flow.terms_of_use.location_approve.view.LocationTermsFragment;
+import com.edudb.bdude.ui.flow.terms_of_use.welcom.view.WelcomeTermsFragment;
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
-public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContract.View {
+public class IntroTermsActivity extends BaseActivity implements IntroTermsContract.View {
 
     @Inject
-    TermsOfUsePresenter mPresenter;
-
-    @OnClick(R.id.btnApprove)
-    void onApproveBtnClicked(){
-        finish();
-    }
-
-    @BindView(R.id.termsTV)
-    TextView mHealthWarningTerms;
+    IntroTermsPresenter mPresenter;
 
     @Override
     public int getLayoutResource() {
@@ -45,21 +33,33 @@ public class TermsOfUseActivity extends BaseActivity implements TermsOfUseContra
 
     @Override
     public void initDependencies() {
-        DaggerTermsOfUseComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
-                .termsOfUseModule(new TermsOfUseModule(this))
+        DaggerIntroTermsComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
+                .introTermsModule(new IntroTermsModule(this))
                 .build()
                 .inject(this);
     }
 
     @Override
-    public BasePresenter getPresenter() {
+    public IntroTermsPresenter getPresenter() {
         return mPresenter;
     }
 
     @Override
-    public void initText(String str) {
-        mHealthWarningTerms.setText(Html.fromHtml(str));
-        setTextViewHTML(mHealthWarningTerms, str);
+    public void initViews() {
+
+        addFragment(getSupportFragmentManager(), R.id.container, WelcomeTermsFragment.getInstance(), false,"");
+//        mHealthWarningTerms.setText(Html.fromHtml(str));
+//        setTextViewHTML(mHealthWarningTerms, str);
+    }
+
+    @Override
+    public void navigateToLocationFragment() {
+        addFragment(getSupportFragmentManager(), R.id.container, LocationTermsFragment.getInstance(), false,"");
+    }
+
+    @Override
+    public void navigateHealthWarningsFragment() {
+        addFragment(getSupportFragmentManager(), R.id.container, HealthTermsFragment.getInstance(), false,"");
     }
 
     protected void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)

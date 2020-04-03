@@ -31,7 +31,7 @@ import javax.inject.Inject;
 @PerActivity
 public class HelpRequestsListPresenter implements HelpRequestsListContract.Presenter {
 
-    public static final int GAP_TO_LOAD_MORE = 20;
+    private final int GAP_TO_LOAD_MORE = 20;
     private List<Post> mSearchResultItems;
     private AlgoliaModel mResult;
 

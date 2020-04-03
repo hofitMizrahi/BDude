@@ -3,16 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.edudb.bdude">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-    <uses-feature android:name="android.hardware.location.gps" />
-    <uses-feature android:name="android.hardware.location.network" />
-
     <application
         android:name=".application.BDudeApplication"
         android:allowBackup="true"
@@ -21,19 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.flow.terms_of_use.health_terms.view.HealthTermsFragment"></activity>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_application_id"
-            tools:replace="android:value"/>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB-18eoGiL3AeCHj8PeGtP0shY3bUwW_P8" />
-
-        <activity android:name=".ui.flow.terms_of_use.view.TermsOfUseActivity"/>
+        <activity android:name=".ui.flow.terms_of_use.view.TermsOfUseActivity" />
         <activity
             android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,9 +32,6 @@
             android:name=".ui.flow.lobby.my_requests.view.MyRequestsActivity"
             android:screenOrientation="fullSensor" />
         <activity android:name=".ui.flow.lobby.request_details.view.RequestDetailsActivity" />
-
-        <uses-library android:name="com.google.android.maps" />
-
         <activity
             android:name="com.schibstedspain.leku.LocationPickerActivity"
             android:label="@string/leku_title_activity_location_picker"
@@ -67,6 +48,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.base.BaseActivity" />
         </activity>
+        <activity android:name=".ui.flow.terms_of_use.container.view.IntroTermsActivity" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id"
+            tools:replace="android:value" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB-18eoGiL3AeCHj8PeGtP0shY3bUwW_P8" />
+        <uses-library android:name="com.google.android.maps" />
     </application>
+    <uses-feature android:name="android.hardware.location.network" />
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
