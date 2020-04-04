@@ -165,10 +165,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mActionBarContainer.removeAllViews();
 
         if (this instanceof HelpRequestsListActivity) {
-            mBaseActionBar.showSearchLine();
+            //mBaseActionBar.showSearchLine();
             mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
         } else {
-            mBaseActionBar.removeSearchLine();
+            //mBaseActionBar.removeSearchLine();
         }
 
         if (this instanceof IntroTermsActivity || this instanceof LoginActivity) {
@@ -295,6 +295,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 LocationHelper.checkLastLocation(this);
                 searchByNewLocation();
             }
+
         } else if (requestCode == RC_SIGN_IN) {
             User user = (User) Objects.requireNonNull(data.getExtras()).getSerializable(USER_SAVE);
             saveUserDetails(user);

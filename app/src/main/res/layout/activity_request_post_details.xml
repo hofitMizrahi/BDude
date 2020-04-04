@@ -106,6 +106,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:text="צורת החזר:"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_red_home"
+                            android:drawablePadding="8dp"
+                            android:text="אני אחזיר לך עם פייבוקס"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="locale"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
                             android:text="עזרה עם:"
                             android:textColor="@color/colorBlack"
                             android:textDirection="locale"
@@ -143,6 +165,7 @@
                             android:orientation="vertical"
                             android:layout_marginTop="16dp"
                             android:visibility="gone"
+                            tools:visibility="visible"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -181,7 +204,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/phoneNumber"
+                                android:id="@+id/phoneNumberWhatsApp"
                                 android:layout_width="wrap_content"
                                 android:drawablePadding="8dp"
                                 android:layout_height="wrap_content"
@@ -191,6 +214,20 @@
                                 android:textDirection="locale"
                                 android:textSize="18sp"
                                 tools:text="0528415353" />
+
+                            <TextView
+                                android:id="@+id/phoneNumber"
+                                android:layout_width="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:drawableStart="@drawable/ic_phone_grey"
+                                android:textColor="@color/colorBlack"
+                                android:drawableTint="@color/yellow"
+                                android:textDirection="locale"
+                                android:textSize="18sp"
+                                tools:text="0528415353" />
+
 
                         </LinearLayout>
 

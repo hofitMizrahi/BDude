@@ -2,10 +2,8 @@ package com.edudb.bdude.ui.flow.login.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +12,6 @@ import androidx.annotation.Nullable;
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.DatabaseController;
-import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerLoginComponent;
 import com.edudb.bdude.di.modules.LoginModule;
@@ -28,23 +25,17 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -61,8 +52,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Inject
     LoginPresenter mPresenter;
 
-    private GoogleSignInClient mGoogleSignInClient;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,31 +64,22 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnClick(R.id.google_login)
     void googleLoginClicked() {
-        signIn();
+        signInWithGoogle();
     }
 
-    private void signIn() {
+    private void signInWithGoogle() {
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        GoogleSignInClient signInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInClient signInClient = buildGoogleSignInClient();
         Intent intent = signInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
-    private void onSignInSuccess(GoogleSignInAccount googleSignInAccount) {
-
-    }
-
     private GoogleSignInClient buildGoogleSignInClient() {
-        GoogleSignInOptions signInOptions =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        //.requestScopes(Drive.SCOPE_APPFOLDER)
-                        .build();
-        return GoogleSignIn.getClient(this, signInOptions);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        return GoogleSignIn.getClient(this, gso);
     }
 
     @Override
@@ -184,11 +164,4 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 
-    public void signOut(View view) {
-        AuthUI.getInstance().signOut(this);
-    }
-
-    @Override
-    public void startLogin() {
-    }
 }

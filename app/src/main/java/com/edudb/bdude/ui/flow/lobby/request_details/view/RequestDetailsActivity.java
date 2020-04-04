@@ -54,6 +54,9 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.phoneNumber)
     TextView mNumber;
 
+    @BindView(R.id.phoneNumberWhatsApp)
+    TextView mWhatsAppNumber;
+
     @BindView(R.id.helpBtn)
     Button mHelpBtn;
 
@@ -67,10 +70,12 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     }
 
     @OnClick(R.id.phoneNumber)
-    void openWhatsAppClicked() {
+    void openDialClicked() {
+        startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
+    }
 
-        //TODO check what to do??
-        //startDial(mRequestDetailsObj.getId(), mRequestDetailsObj.getPhoneNumber());
+    @OnClick(R.id.phoneNumberWhatsApp)
+    void openWhatsAppClicked() {
         openWhatsApp();
     }
 
@@ -118,12 +123,20 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public void initViews() {
+
+        if(mRequestDetailsObj.getPhoneNumber() != null && mRequestDetailsObj.getPhoneNumber().length() < 10){
+            mWhatsAppNumber.setVisibility(View.GONE);
+        }else {
+            mWhatsAppNumber.setVisibility(View.VISIBLE);
+            mWhatsAppNumber.setText(mRequestDetailsObj.getPhoneNumber());
+        }
+        mNumber.setText(mRequestDetailsObj.getPhoneNumber());
+
         mName.setText(mRequestDetailsObj.getUserName());
         mBodyTxt.setText(mRequestDetailsObj.getBody());
         mTimeTxt.setText(Utils.getTimeFormat(mRequestDetailsObj.getTimestamp()));
         LatLng latLng = new LatLng(mRequestDetailsObj.getGeoloc().getLat(), mRequestDetailsObj.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + getString(R.string.km);
         mDistance.setText(kmStr);
-        mNumber.setText(mRequestDetailsObj.getPhoneNumber());
     }
 }
