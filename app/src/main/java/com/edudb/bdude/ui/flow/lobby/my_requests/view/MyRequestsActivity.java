@@ -3,6 +3,7 @@ package com.edudb.bdude.ui.flow.lobby.my_requests.view;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,16 +13,21 @@ import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerMyRequestsComponent;
 import com.edudb.bdude.di.modules.MyRequestsModule;
+import com.edudb.bdude.general.BaseActionBar;
+import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MyRequestsActivity extends BaseActivity implements MyRequestsContract.View {
 
@@ -37,20 +43,21 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @BindView(R.id.my_requests_recycler_view)
     RecyclerView mRecycler;
 
-//    @OnClick(R.id.helpContinueBtn)
-//    void startHelpRequest(){
-//        mPresenter.createHelpRequestClicked();
-//    }
-
     @BindView(R.id.name)
     TextView mName;
 
     @BindView(R.id.phoneNumber)
     TextView mPhoneNumber;
 
-    //TODO change no request view
-//    @BindView(R.id.empty_view)
-//    TextView mEmptyViewTxt;
+    @OnClick(R.id.btnShare)
+    void onShareBtnClicked() {
+        EventBus.getDefault().post(new BaseActionBar.ShareMessageEvent());
+    }
+
+    @OnClick(R.id.backBtn)
+    void onBackBtnClicked() {
+        onBackPressed();
+    }
 
     @Override
     public int getLayoutResource() {
@@ -67,7 +74,6 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
 
     @Override
     public void displayList(List<HelpRequest> posts) {
-        //mEmptyViewTxt.setVisibility(View.GONE);
         mRecycler.setVisibility(View.VISIBLE);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setNestedScrollingEnabled(false);
@@ -83,19 +89,24 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
 
     @Override
     public void initView() {
-        String str = "";
-        if (mCurrentUser.getName() != null && !mCurrentUser.equals("")) {
-            str = mCurrentUser.getName();
+
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getName())) {
+            mName.setText("הכנס שם");
+            mName.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+        } else {
+            mName.setText(mCurrentUser.getName());
         }
 
-        //TODO add check if user have phone and name -> if not -> View.GONE
-        mName.setText(str);
-        mPhoneNumber.setText(mCurrentUser.getPhone_number());
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhone_number())) {
+            mPhoneNumber.setText("הכנס מספר טלפון");
+            mPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+        } else {
+            mPhoneNumber.setText(mCurrentUser.getPhone_number());
+        }
     }
 
     @Override
     public void showEmptyView() {
-        //mEmptyViewTxt.setVisibility(View.VISIBLE);
         mRecycler.setVisibility(View.GONE);
     }
 

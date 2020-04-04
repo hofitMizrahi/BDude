@@ -23,7 +23,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_share"
             android:backgroundTint="@color/colorDark"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/searchContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

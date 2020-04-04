@@ -25,25 +25,14 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.getLocationText)
     TextView mLocationTxt;
 
-    @BindView(R.id.btnUserRegistration)
-    TextView mBtnUserRegistration;
-
     @BindView(R.id.searchContainer)
     View mSearchContainer;
 
     @BindView(R.id.root)
     View mRoot;
 
-    @BindView(R.id.btnShare)
-    Button btnShare;
-//
 //    @BindView(R.id.ask_location)
 //    ImageView askLocation;
-
-    @OnClick(R.id.btnShare)
-    void onShareBtnClicked() {
-        EventBus.getDefault().post(new ShareMessageEvent());
-    }
 
     @OnClick(R.id.searchContainer)
     void onGetLocationTextClicked() {
@@ -75,8 +64,6 @@ public class BaseActionBar extends ConstraintLayout {
     protected void init() {
         inflate(getContext(), R.layout.action_bar_options, this);
         ButterKnife.bind(this);
-        buttonEffect(btnShare);
-        buttonEffect(mBtnUserRegistration);
     }
 
     public BaseActionBar(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -87,18 +74,6 @@ public class BaseActionBar extends ConstraintLayout {
 
     public void setAddress(String address) {
         mLocationTxt.setText(address);
-    }
-
-    public void showSearchLine() {
-        mSearchContainer.setVisibility(VISIBLE);
-    }
-
-    public void removeSearchLine() {
-        mSearchContainer.setVisibility(GONE);
-    }
-
-    public void removeLoginIcon() {
-        mBtnUserRegistration.setVisibility(GONE);
     }
 
     public void hideActionBar() {

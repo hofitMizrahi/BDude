@@ -131,10 +131,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
-        checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
+//        checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAskLocationEvent(BaseActionBar.LocationMessageEvent event) {
@@ -164,21 +164,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
 
-        if (this instanceof HelpRequestsListActivity) {
-            //mBaseActionBar.showSearchLine();
-            mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
-        } else {
-            //mBaseActionBar.removeSearchLine();
-        }
-
         if (this instanceof IntroTermsActivity || this instanceof LoginActivity) {
             mBaseActionBar.hideActionBar();
         } else {
+            mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
             mBaseActionBar.showActionBar();
-        }
-
-        if (this instanceof MyRequestsActivity || this instanceof CreateHelpRequestActivity) {
-            mBaseActionBar.removeLoginIcon();
         }
 
         mActionBarContainer.addView(mBaseActionBar);
@@ -296,7 +286,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 searchByNewLocation();
             }
 
-        } else if (requestCode == RC_SIGN_IN) {
+        } else if (requestCode == RC_SIGN_IN && data != null) {
             User user = (User) Objects.requireNonNull(data.getExtras()).getSerializable(USER_SAVE);
             saveUserDetails(user);
         }

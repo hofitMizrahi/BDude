@@ -12,6 +12,7 @@ import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
+import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
@@ -42,6 +43,11 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     @OnClick(R.id.helpContinueBtn)
     void startHelpRequest(){
         mPresenter.createHelpRequestClicked();
+    }
+
+    @OnClick(R.id.btn_private_area)
+    void navigateToUserDetails(){
+        checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 
     @Override
