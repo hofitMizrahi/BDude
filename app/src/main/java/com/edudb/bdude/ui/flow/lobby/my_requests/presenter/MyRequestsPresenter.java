@@ -1,6 +1,6 @@
 package com.edudb.bdude.ui.flow.lobby.my_requests.presenter;
 
-import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
@@ -12,7 +12,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
     private List<HelpRequest> mMyList;
 
     @Inject
-    FirebaseDbHelper mDataBase;
+    DatabaseController mDataBase;
 
     @Inject
     MyRequestsContract.View mView;

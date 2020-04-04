@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
@@ -16,7 +16,7 @@ import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
-import com.edudb.bdude.ui.flow.terms_of_use.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -56,7 +56,7 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
 
     @Override
     public void initDependencies() {
-        DaggerHelpRequestsListComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
+        DaggerHelpRequestsListComponent.builder().applicationComponent(BdudeApplication.getInstance().getApplicationComponent())
                 .helpRequestsModule(new HelpRequestsModule(this))
                 .build()
                 .inject(this);

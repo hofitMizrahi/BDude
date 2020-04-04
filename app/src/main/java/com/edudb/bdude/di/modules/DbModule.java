@@ -1,6 +1,7 @@
 package com.edudb.bdude.di.modules;
 
-import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.DatabaseController;
+
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
@@ -10,7 +11,7 @@ public class DbModule {
 
     @Provides
     @Singleton
-    FirebaseDbHelper provideDb(){
-        return FirebaseDbHelper.getInstance();
+    DatabaseController provideDb(){
+        return DatabaseController.getInstance();
     }
 }

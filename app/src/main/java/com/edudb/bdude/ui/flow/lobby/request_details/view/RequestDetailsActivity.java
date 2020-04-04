@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
-
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
@@ -107,7 +105,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public void initDependencies() {
-        DaggerRequestDetailsComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
+        DaggerRequestDetailsComponent.builder().applicationComponent(BdudeApplication.getInstance().getApplicationComponent())
                 .requestDetailsModule(new RequestDetailsModule(this))
                 .build()
                 .inject(this);

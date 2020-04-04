@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
@@ -225,7 +225,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public void initDependencies() {
-        DaggerCreateHelpRequestComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
+        DaggerCreateHelpRequestComponent.builder().applicationComponent(BdudeApplication.getInstance().getApplicationComponent())
                 .createHelpRequestModule(new CreateHelpRequestModule(this))
                 .build()
                 .inject(this);

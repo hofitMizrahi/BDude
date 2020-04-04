@@ -2,7 +2,7 @@ package com.edudb.bdude.di.components;
 
 import com.edudb.bdude.di.modules.WelcomeTermsModule;
 import com.edudb.bdude.di.scope.PerFragment;
-import com.edudb.bdude.ui.flow.terms_of_use.welcom.view.WelcomeTermsFragment;
+import com.edudb.bdude.ui.flow.intro.welcom.view.WelcomeTermsFragment;
 
 import dagger.Component;
 

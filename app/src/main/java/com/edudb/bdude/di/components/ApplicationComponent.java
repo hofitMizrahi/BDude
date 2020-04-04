@@ -2,7 +2,7 @@ package com.edudb.bdude.di.components;
 
 import android.content.Context;
 
-import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.di.modules.ApplicationModule;
 import com.edudb.bdude.di.modules.DbModule;
 import com.edudb.bdude.di.modules.StorageModule;
@@ -27,5 +27,5 @@ public interface ApplicationComponent {
 
     void inject(BaseActivity baseActivity);
 
-    void inject(FirebaseDbHelper db);
+    void inject(DatabaseController db);
 }

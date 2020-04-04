@@ -1,10 +1,9 @@
 package com.edudb.bdude.di.modules;
 
 import com.edudb.bdude.di.scope.PerFragment;
-import com.edudb.bdude.ui.flow.terms_of_use.container.presenter.IntroTermsPresenter;
-import com.edudb.bdude.ui.flow.terms_of_use.container.view.IntroTermsActivity;
-import com.edudb.bdude.ui.flow.terms_of_use.location_approve.contract.LocationTermsContract;
-import com.edudb.bdude.ui.flow.terms_of_use.welcom.contract.WelcomeTermsContract;
+import com.edudb.bdude.ui.flow.intro.container.presenter.IntroTermsPresenter;
+import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.intro.welcom.contract.WelcomeTermsContract;
 
 import dagger.Module;
 import dagger.Provides;

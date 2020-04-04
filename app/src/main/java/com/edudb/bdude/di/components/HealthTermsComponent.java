@@ -2,7 +2,7 @@ package com.edudb.bdude.di.components;
 
 import com.edudb.bdude.di.modules.HealthTermsModule;
 import com.edudb.bdude.di.scope.PerFragment;
-import com.edudb.bdude.ui.flow.terms_of_use.health_terms.view.HealthTermsFragment;
+import com.edudb.bdude.ui.flow.intro.health_terms.view.HealthTermsFragment;
 import dagger.Component;
 
 @PerFragment

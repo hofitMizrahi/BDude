@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +23,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
-import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
-import com.edudb.bdude.general.KeyValue;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
@@ -35,29 +35,34 @@ import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequ
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
-import com.edudb.bdude.ui.flow.terms_of_use.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.login.view.LoginActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.Arrays;
 import java.util.Objects;
+
 import butterknife.ButterKnife;
+
 import static com.edudb.bdude.location.LocationHelper.GPS_OPEN;
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
+import static com.edudb.bdude.ui.flow.login.view.LoginActivity.USER_SAVE;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
-    private static final int RC_SIGN_IN = 5;
+    public static final int RC_SIGN_IN = 5;
     public static final int PLACE_PICKER_REQUEST = 6;
     public static final String REQUEST_DETAILS = "request_details";
 
-    private FirebaseAnalytics mFirebaseAnalytics;
     private EnumNavigation mEnumNavigation;
     private Post mTempPost;
 
@@ -74,7 +79,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView();
         ButterKnife.bind(this);
         initDependencies();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         hideProgressBar();
         if (getPresenter() != null) {
             getPresenter().onStart();
@@ -118,11 +122,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "B-dude");
-            String shareMessage= "\nLet me recommend you this application\n\n";
-            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            String shareMessage = "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "choose one"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -167,9 +171,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mBaseActionBar.removeSearchLine();
         }
 
-        if(this instanceof IntroTermsActivity){
+        if (this instanceof IntroTermsActivity || this instanceof LoginActivity) {
             mBaseActionBar.hideActionBar();
-        }else {
+        } else {
             mBaseActionBar.showActionBar();
         }
 
@@ -245,7 +249,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (!SessionManager.getInstance().isUserLogin()) {
             startLogin();
         } else {
-
             switch (navigation) {
                 case CREATE_POST:
                     startActivity(new Intent(this, CreateHelpRequestActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
@@ -273,36 +276,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RC_SIGN_IN) {
-
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            // Successfully signed in
-            if (resultCode == RESULT_OK) {
-                FirebaseAnalyticsHelper.LogEvent(this, FirebaseAnalytics.Event.LOGIN);
-
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    FirebaseDbHelper.getInstance().getCurrentUserDetails(FirebaseAuth.getInstance().getCurrentUser().getUid(), this::saveUserDetails);
-                }
-
-
-            } else {
-
-                // Sign in failed
-                if (response == null) {
-                    // User pressed back button
-                    showSnackbar("Sign in cancelled");
-                    return;
-                }
-                if (Objects.requireNonNull(response.getError()).getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showSnackbar("No Internet connection");
-                    return;
-                }
-                showSnackbar("Unknown error");
-                Log.e("BDUDE", "Sign-in error: ", response.getError());
-            }
-
-        } else if (requestCode == PLACE_PICKER_REQUEST) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
 
             if (resultCode == Activity.RESULT_OK && data != null) {
 
@@ -315,12 +289,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             } else {
                 showSnackbar("מיקום לא נמצא");
             }
-        }else if(requestCode == GPS_OPEN){
+        } else if (requestCode == GPS_OPEN) {
 
             if (!LocationHelper.userNotHavePermission(this) && LocationHelper.isHaveGpsOpen(this)) {
                 LocationHelper.checkLastLocation(this);
                 searchByNewLocation();
             }
+        } else if (requestCode == RC_SIGN_IN) {
+            User user = (User) Objects.requireNonNull(data.getExtras()).getSerializable(USER_SAVE);
+            saveUserDetails(user);
         }
     }
 
@@ -332,7 +309,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void refreshData() {
     }
 
-    private void saveUserDetails(User user) {
+    protected void saveUserDetails(User user) {
         SessionManager.getInstance().setCurrentUser(user);
 
         if (mEnumNavigation == EnumNavigation.POST_DETAILS) {
@@ -346,22 +323,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 
-    public void signOut(View view) {
-        AuthUI.getInstance().signOut(this);
-    }
-
     public void startLogin() {
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(Arrays.asList(
-                                new AuthUI.IdpConfig.GoogleBuilder().build()
-                                //new AuthUI.IdpConfig.FacebookBuilder().build()
-                        ))
-                        .setTheme(R.style.AppThemeFirebaseAuth)
-                        .setLogo(R.drawable.ic_big_logo)
-                        .build(),
-                RC_SIGN_IN);
+        startActivityForResult(new Intent(this, LoginActivity.class), RC_SIGN_IN);
     }
 
     @Override

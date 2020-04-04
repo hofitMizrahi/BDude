@@ -3,7 +3,9 @@ package com.edudb.bdude.db.modules;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private GeoPoint address_coords;
     private String address_text;

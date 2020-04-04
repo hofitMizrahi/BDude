@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment;
 
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.enums.EnumNavigation;
-import com.edudb.bdude.enums.EnumStepNumber;
-import com.edudb.bdude.ui.flow.terms_of_use.container.presenter.IntroTermsPresenter;
 
 import butterknife.ButterKnife;
 

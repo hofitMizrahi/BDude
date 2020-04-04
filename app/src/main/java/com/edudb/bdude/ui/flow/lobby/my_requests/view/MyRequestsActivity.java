@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
+import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerMyRequestsComponent;
 import com.edudb.bdude.di.modules.MyRequestsModule;
 import com.edudb.bdude.ui.base.BaseActivity;
-import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
@@ -23,7 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class MyRequestsActivity extends BaseActivity implements MyRequestsContract.View {
 
@@ -61,7 +59,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
 
     @Override
     public void initDependencies() {
-        DaggerMyRequestsComponent.builder().applicationComponent(BDudeApplication.getInstance().getApplicationComponent())
+        DaggerMyRequestsComponent.builder().applicationComponent(BdudeApplication.getInstance().getApplicationComponent())
                 .myRequestsModule(new MyRequestsModule(this))
                 .build()
                 .inject(this);

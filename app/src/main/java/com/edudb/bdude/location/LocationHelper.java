@@ -14,7 +14,6 @@ import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 
 import com.edudb.bdude.R;
-import com.edudb.bdude.application.BDudeApplication;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;

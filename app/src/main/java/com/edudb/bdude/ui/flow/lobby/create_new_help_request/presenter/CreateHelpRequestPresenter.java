@@ -1,16 +1,14 @@
 package com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter;
 
-import com.edudb.bdude.db.FirebaseDbHelper;
+import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
-import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.google.firebase.firestore.GeoPoint;
 
-import java.security.PrivateKey;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,7 +19,7 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     private GeoPoint mSelectedLocation;
 
     @Inject
-    FirebaseDbHelper mDataBase;
+    DatabaseController mDataBase;
 
     @Inject
     CreateHelpRequestContract.View mView;

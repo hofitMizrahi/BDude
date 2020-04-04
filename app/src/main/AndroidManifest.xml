@@ -4,16 +4,16 @@
     package="com.edudb.bdude">
 
     <application
-        android:name=".application.BDudeApplication"
+        android:name=".application.BdudeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_logo_orange"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.flow.terms_of_use.health_terms.view.HealthTermsFragment"></activity>
+        <activity android:name=".ui.flow.intro.health_terms.view.HealthTermsFragment"></activity>
 
-        <activity android:name=".ui.flow.terms_of_use.view.TermsOfUseActivity" />
+        <activity android:name=".ui.flow.intro.view.TermsOfUseActivity" />
         <activity
             android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -48,7 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.base.BaseActivity" />
         </activity>
-        <activity android:name=".ui.flow.terms_of_use.container.view.IntroTermsActivity" />
+        <activity android:name=".ui.flow.intro.container.view.IntroTermsActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
