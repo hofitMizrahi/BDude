@@ -24,26 +24,20 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     private IExecutable<Post> mListener;
     private Post mPost;
 
-    @BindView(R.id.body)
-    TextView mBody;
-
-    @BindView(R.id.title)
-    TextView mTitle;
+    @BindView(R.id.recyclerViewItems)
+    RecyclerView mRecyclerView;
 
     @BindView(R.id.hours)
     TextView mHours;
 
-    @BindView(R.id.destination)
-    TextView mLocation;
+    @BindView(R.id.name)
+    TextView mName;
 
     HelpRequestViewHolder(@NonNull View itemView, IExecutable<Post> requestIExecutable) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mListener = requestIExecutable;
     }
-
-    @BindView(R.id.avatar)
-    ImageView mAvatar;
 
     @OnClick(R.id.root_item)
     void onItemClicked() {
@@ -53,22 +47,18 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     void onBind(Post post) {
 
         mPost = post;
-        mTitle.setText(String.format("%s %s", post.getUserName(), itemView.getContext().getString(R.string.need_help_with)));
-        mTitle.setText(post.getTitle());
-        mBody.setVisibility(View.GONE);
-        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
-        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
-        mLocation.setText(kmStr);
+        mName.setText(mPost.getUserName());
+//        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
+//        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
+//        mLocation.setText(kmStr);
 
         int hours = (int) ((mPost.getTimestamp() / (1000 * 60 * 60)) % 24);
-        String fullTimeStr = "";
-
-        if (hours == 0) {
-            fullTimeStr += itemView.getContext().getString(R.string.recently_published);
-        } else {
-            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + hours + " " + itemView.getContext().getString(R.string.hours_ago);
-        }
+//        if (hours == 0) {
+//            fullTimeStr += itemView.getContext().getString(R.string.recently_published);
+//        } else {
+//            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + hours + " " + itemView.getContext().getString(R.string.hours_ago);
+//        }
+        String fullTimeStr = hours + " " + itemView.getContext().getString(R.string.hours_ago);
         mHours.setText(fullTimeStr);
-        Glide.with(mAvatar.getContext()).load("https://api.adorable.io/avatar/" + post.getId()).circleCrop().into(mAvatar);
     }
 }

@@ -67,7 +67,9 @@ public class HelpRequestsListPresenter implements HelpRequestsListContract.Prese
 
     private void onSearchComplete(JSONObject jsonObject, AlgoliaException e) {
         mResult = AlgoliaUtils.getAlgoliaResult(jsonObject, e, mSearchResultItems = new ArrayList<>());
-        displayList();
+        if(mResult != null) {
+            displayList();
+        }
     }
 
     private void displayList() {

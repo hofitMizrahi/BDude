@@ -25,6 +25,6 @@ public class AlgoliaSearchController {
 
     private void initClient() {
         mClient = new Client(APPLICATION_ID_ALGOLIA, ALGOLIA_KEY);
-        mIndex = mClient.getIndex("posts");
+        mIndex = mClient.getIndex("requests");
     }
 }

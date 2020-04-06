@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.flow.intro.health_terms.view.HealthTermsFragment"></activity>
 
-        <activity android:name=".ui.flow.intro.view.TermsOfUseActivity" />
         <activity
             android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
             android:windowSoftInputMode="adjustResize" />
