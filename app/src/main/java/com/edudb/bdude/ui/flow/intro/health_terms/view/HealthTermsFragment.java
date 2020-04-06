@@ -1,8 +1,5 @@
 package com.edudb.bdude.ui.flow.intro.health_terms.view;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.di.components.DaggerHealthTermsComponent;
@@ -28,12 +28,16 @@ import com.edudb.bdude.ui.flow.intro.health_terms.presenter.HealthTermsPresenter
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class HealthTermsFragment extends BaseFragment implements HealthTermsContract.View {
 
     @Inject
     HealthTermsPresenter mPresenter;
+
+    @BindView(R.id.healthLink)
+    TextView healthLink;
 
     @OnClick(R.id.nextBtn)
     void onNextBtnClicked() {
@@ -69,8 +73,9 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
 
     @Override
     public void initText(String string) {
-     //   mHealthWarningTerms.setText(Html.fromHtml(str));
-       // setTextViewHTML(mHealthWarningTerms, str);
+
+        healthLink.setText(Html.fromHtml(string));
+        setTextViewHTML(healthLink, string);
     }
 
     @Override
@@ -79,8 +84,7 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
     }
 
 
-    protected void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
+    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span) {
         int start = strBuilder.getSpanStart(span);
         int end = strBuilder.getSpanEnd(span);
         int flags = strBuilder.getSpanFlags(span);
@@ -96,12 +100,11 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
         strBuilder.removeSpan(span);
     }
 
-    protected void setTextViewHTML(TextView text, String html)
-    {
+    private void setTextViewHTML(TextView text, String html) {
         CharSequence sequence = Html.fromHtml(html);
         SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
         URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for(URLSpan span : urls) {
+        for (URLSpan span : urls) {
             makeLinkClickable(strBuilder, span);
         }
         text.setText(strBuilder);
