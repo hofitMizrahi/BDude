@@ -39,9 +39,21 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
     @BindView(R.id.healthLink)
     TextView healthLink;
 
+    @BindView(R.id.healthText)
+    TextView healthText;
+
     @OnClick(R.id.nextBtn)
     void onNextBtnClicked() {
         mPresenter.nextStep();
+    }
+
+    @OnClick(R.id.healthLink)
+    void onLinkClicked() {
+        //TODO add this to config
+        String url = "https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     public static HealthTermsFragment getInstance() {
@@ -73,42 +85,13 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
 
     @Override
     public void initText(String string) {
-
-        healthLink.setText(Html.fromHtml(string));
-        setTextViewHTML(healthLink, string);
+        healthText.setText(string);
+        healthLink.setText(Html.fromHtml(getString(R.string.link_health_terms)));
     }
 
     @Override
     public BasePresenter getPresenter() {
         return mPresenter;
     }
-
-
-    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span) {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                String url = "https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
-    }
-
-    private void setTextViewHTML(TextView text, String html) {
-        CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
-        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for (URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
-        }
-        text.setText(strBuilder);
-        text.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
+    
 }

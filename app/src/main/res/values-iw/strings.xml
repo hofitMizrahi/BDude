@@ -13,6 +13,8 @@
     <string name="need_help_with">כותרת:</string>
     <string name="my_location_is">המיקום שלי:</string>
 
+    <string name="health_warning">כדי שנצליח לעזור אחד לשני בצורה נכונה חשוב לעקוב אחרי הכללים</string>
+
     <string name="approve">אישור</string>
     <string name="terms_of_use">תנאי שימוש</string>
     <string name="terms_of_use_default_text">במהלך מתן או קבלת עזרה אנא הקפידו על הוראות משרד הבריאות כפי שמופרסמות באתר *משרד הבריאות, למען שמירה על בריאותכם ובריאות הציבור.    *לינק לאתר https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx</string>

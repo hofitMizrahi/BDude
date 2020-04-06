@@ -41,11 +41,11 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/healthText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:text="כדי שנצליח לעזור אחד לשני בצורה נכונה חשוב לעקוב אחרי הכללים"
+            android:text="@string/health_warning"
             android:textColor="@color/colorBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/healthLink"
@@ -56,13 +56,13 @@
 
         <TextView
             android:id="@+id/healthLink"
-            android:text="כללי בטיחות של משרד הבריאות"
+            android:text="@string/health_terms_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="16dp"
             android:textColor="@color/redButton"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/nextBtn"
             app:layout_constraintEnd_toEndOf="parent"
