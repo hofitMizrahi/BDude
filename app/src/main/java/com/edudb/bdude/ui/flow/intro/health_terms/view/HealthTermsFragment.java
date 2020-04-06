@@ -93,5 +93,5 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
     public BasePresenter getPresenter() {
         return mPresenter;
     }
-    
+
 }

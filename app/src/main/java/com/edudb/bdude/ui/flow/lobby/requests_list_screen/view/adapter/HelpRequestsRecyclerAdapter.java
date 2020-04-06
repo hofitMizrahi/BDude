@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Post;
+import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.interfaces.IExecutable;
+import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 
 import java.util.List;
 
