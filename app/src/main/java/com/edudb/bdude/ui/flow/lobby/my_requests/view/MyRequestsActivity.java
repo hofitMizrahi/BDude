@@ -1,7 +1,11 @@
 package com.edudb.bdude.ui.flow.lobby.my_requests.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,6 +53,9 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @BindView(R.id.phoneNumber)
     TextView mPhoneNumber;
 
+    @BindView(R.id.emailEditText)
+    EditText mEmailContentET;
+
     @OnClick(R.id.btnShare)
     void onShareBtnClicked() {
         EventBus.getDefault().post(new BaseActionBar.ShareMessageEvent());
@@ -57,6 +64,31 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @OnClick(R.id.backBtn)
     void onBackBtnClicked() {
         onBackPressed();
+    }
+
+    @OnClick(R.id.sendToEmail)
+    void onSendEmailClicked() {
+        if(!Utils.isNullOrWhiteSpace(mEmailContentET.getText().toString())){
+
+            String mailto = "mailto:hofitmizrahi92@gmail.com" +
+                    "?cc=" + "hofitmizrahi92@gmail.com" +
+                    "&subject=" + Uri.encode("חוות דעת") +
+                    "&body=" + Uri.encode(mEmailContentET.getText().toString());
+
+            Intent i = new Intent(Intent.ACTION_SENDTO);
+            i.setData(Uri.parse(mailto));
+            //i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"hofitmizrahi92@gmail.com"});
+            //i.putExtra(Intent.EXTRA_SUBJECT, "חוות דעת");
+            //i.putExtra(Intent.EXTRA_TEXT   , mEmailContentET.getText().toString());
+            try {
+                startActivity(Intent.createChooser(i, "Send mail..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+
     }
 
     @Override
