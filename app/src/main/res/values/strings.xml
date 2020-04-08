@@ -62,5 +62,9 @@
     <string name="google_login">login with Google</string>
     <string name="health_warning">In order for us to help each other properly, it is important to follow the rules</string>
     <string name="health_terms_link">כללי בטיחות של משרד הבריאות</string>
+    <string name="share_this_app">Share the app with your friends</string>
+    <string name="my_requests">My requests:</string>
+    <string name="personal_details">Personal Details:</string>
+    <string name="notes_to_improve">Give us notes for improvement:</string>
 
 </resources>

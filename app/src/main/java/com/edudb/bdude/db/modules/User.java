@@ -25,7 +25,7 @@ public class User implements Serializable {
         this.address_coords = address_coords;
     }
 
-    public String getAddress_text() {
+    public String getAddress() {
         return address_text;
     }
 
@@ -49,7 +49,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phone_number;
     }
 

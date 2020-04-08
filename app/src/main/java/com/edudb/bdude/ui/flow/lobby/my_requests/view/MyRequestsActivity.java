@@ -50,6 +50,9 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @BindView(R.id.name)
     TextView mName;
 
+    @BindView(R.id.address)
+    TextView mAddress;
+
     @BindView(R.id.phoneNumber)
     TextView mPhoneNumber;
 
@@ -70,25 +73,20 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     void onSendEmailClicked() {
         if(!Utils.isNullOrWhiteSpace(mEmailContentET.getText().toString())){
 
-            String mailto = "mailto:hofitmizrahi92@gmail.com" +
-                    "?cc=" + "hofitmizrahi92@gmail.com" +
+            String mailto = "mailto:covid19communityhelp@gmail.com" +
+                    "?cc=" + "covid19communityhelp@gmail.com" +
                     "&subject=" + Uri.encode("חוות דעת") +
                     "&body=" + Uri.encode(mEmailContentET.getText().toString());
 
             Intent i = new Intent(Intent.ACTION_SENDTO);
             i.setData(Uri.parse(mailto));
-            //i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"hofitmizrahi92@gmail.com"});
-            //i.putExtra(Intent.EXTRA_SUBJECT, "חוות דעת");
-            //i.putExtra(Intent.EXTRA_TEXT   , mEmailContentET.getText().toString());
+
             try {
                 startActivity(Intent.createChooser(i, "Send mail..."));
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
             }
-
         }
-
-
     }
 
     @Override
@@ -129,11 +127,18 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
             mName.setText(mCurrentUser.getName());
         }
 
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhone_number())) {
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getAddress())) {
+            mAddress.setText("הכנס כתובת");
+            mAddress.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+        } else {
+            mAddress.setText(mCurrentUser.getAddress());
+        }
+
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhoneNumber())) {
             mPhoneNumber.setText("הכנס מספר טלפון");
             mPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
-            mPhoneNumber.setText(mCurrentUser.getPhone_number());
+            mPhoneNumber.setText(mCurrentUser.getPhoneNumber());
         }
     }
 

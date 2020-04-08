@@ -14,6 +14,12 @@
     <string name="my_location_is">המיקום שלי:</string>
 
     <string name="health_warning">כדי שנצליח לעזור אחד לשני בצורה נכונה חשוב לעקוב אחרי הכללים</string>
+    <string name="health_terms_link">כללי בטיחות של משרד הבריאות</string>
+    <string name="share_this_app">לשתף את האפליקציה עם חברים</string>
+
+    <string name="my_requests">הבקשות שלי:</string>
+    <string name="personal_details">פרטים אישיים:</string>
+    <string name="notes_to_improve">הערות לנו לשיפור:</string>
 
     <string name="approve">אישור</string>
     <string name="terms_of_use">תנאי שימוש</string>

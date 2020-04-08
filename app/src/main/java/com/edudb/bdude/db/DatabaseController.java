@@ -31,7 +31,7 @@ public class DatabaseController {
 
     public void createRequest(HelpRequest post, IExecutable<Void> listener) {
 
-        DocumentReference dr = db.collection("posts").document();
+        DocumentReference dr = db.collection("requests").document();
         post.setId(dr.getId());
         dr.set(post).addOnSuccessListener(snapshot -> {
             listener.execute(null);
@@ -40,7 +40,7 @@ public class DatabaseController {
 
     public void getAllRequestsList(IExecutable<List<HelpRequest>> listener) {
 
-        db.collection("posts").get().addOnSuccessListener(snapshots -> {
+        db.collection("requests").get().addOnSuccessListener(snapshots -> {
             List<HelpRequest> list = new ArrayList<>();
 
             for (DocumentSnapshot document : snapshots.getDocuments()) {
@@ -52,7 +52,7 @@ public class DatabaseController {
     }
 
     public void deleteRequest(String documentId, IExecutable<Void> listener) {
-        db.collection("posts")
+        db.collection("requests")
                 .document(documentId)
                 .delete().addOnSuccessListener(snapsShot -> {
             listener.execute(null);
@@ -60,7 +60,7 @@ public class DatabaseController {
     }
 
     public void getMyRequests(IExecutable<List<HelpRequest>> listener) {
-        db.collection("posts").whereEqualTo("user_ID", SessionManager.getInstance().getUser().getUid()).get().addOnSuccessListener(snapshots -> {
+        db.collection("requests").whereEqualTo("user_ID", SessionManager.getInstance().getUser().getUid()).get().addOnSuccessListener(snapshots -> {
             List<HelpRequest> list = new ArrayList<>();
 
             for (DocumentSnapshot document : snapshots.getDocuments()) {
