@@ -105,7 +105,7 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Override
     public int getLayoutResource() {
-        return R.layout.activity_request_post_details;
+        return R.layout.activity_request_details;
     }
 
     @Override

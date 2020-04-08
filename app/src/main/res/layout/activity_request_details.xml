@@ -117,7 +117,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:drawableStart="@drawable/ic_red_home"
+                            android:drawableStart="@drawable/ic_refund_back"
                             android:drawablePadding="8dp"
                             android:text="אני אחזיר לך עם פייבוקס"
                             android:textColor="@color/colorBlack"
