@@ -3,27 +3,50 @@ package com.edudb.bdude.db.modules;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.edudb.bdude.db.modules.algolia.Geoloc;
 import com.edudb.bdude.enums.EnumGender;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class HelpRequest implements Serializable {
 
     @SerializedName("address_coords")
     @Expose
     GeoPoint address_coords;
+    @SerializedName("timestamp")
+    @Expose
+    long timestamp;
+    @SerializedName("status")
+    @Expose
+    int status;
+    @SerializedName("views")
+    @Expose
+    int views;
+    @SerializedName("products")
+    @Expose
+    List<Product> products;
+    @SerializedName("category")
+    @Expose
+    int category;
+    @SerializedName("ageAtRisk")
+    @Expose
+    boolean ageAtRisk;
+    @SerializedName("inIsolation")
+    @Expose
+    boolean inIsolation;
     @SerializedName("address_text")
     @Expose
     String address_text;
     @SerializedName("body")
     @Expose
     String body;
-    @SerializedName("id")
+    @SerializedName("objectID")
     @Expose
-    String id;
+    String objectID;
     @SerializedName("phone_number")
     @Expose
     String phone_number;
@@ -33,17 +56,71 @@ public class HelpRequest implements Serializable {
     @SerializedName("user_ID")
     @Expose
     String user_ID;
-    @SerializedName("user_avatar")
-    @Expose
-    String user_avatar;
     @SerializedName("user_name")
     @Expose
     String user_name;
-    @SerializedName("timestamp")
-    @Expose
-    long timestamp;
 
     public HelpRequest() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public boolean isAgeAtRisk() {
+        return ageAtRisk;
+    }
+
+    public void setAgeAtRisk(boolean ageAtRisk) {
+        this.ageAtRisk = ageAtRisk;
+    }
+
+    public boolean isInIsolation() {
+        return inIsolation;
+    }
+
+    public void setInIsolation(boolean inIsolation) {
+        this.inIsolation = inIsolation;
+    }
+
+    public String getObjectID() {
+        return objectID;
+    }
+
+    public void setObjectID(String objectID) {
+        this.objectID = objectID;
+    }
+
+    public String getUser_name() {
+        return user_name;
     }
 
     public long getTimestamp() {
@@ -56,10 +133,6 @@ public class HelpRequest implements Serializable {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
-    }
-
-    public void setUser_avatar(String user_avatar) {
-        this.user_avatar = user_avatar;
     }
 
     public void setUser_name(String user_name) {
@@ -95,11 +168,11 @@ public class HelpRequest implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return user_ID;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.user_ID = id;
     }
 
     public String getPhone_number() {
@@ -126,15 +199,7 @@ public class HelpRequest implements Serializable {
         this.user_ID = user_ID;
     }
 
-    public String getUser_avatar() {
-        return user_avatar;
-    }
-
-    public void setUserAvatar(String user_avatar) {
-        this.user_avatar = user_avatar;
-    }
-
-    public String getUser_name() {
+    public String getUserName() {
         return user_name;
     }
 

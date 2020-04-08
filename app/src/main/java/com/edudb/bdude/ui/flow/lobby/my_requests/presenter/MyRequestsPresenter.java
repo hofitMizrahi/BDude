@@ -25,17 +25,15 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
     }
 
     private void displayList(List<HelpRequest> posts) {
-        if(posts != null && posts.size() > 0){
+        if(posts != null){
             mMyList = posts;
             mView.displayList(posts);
-        }else {
-            mView.showEmptyView();
         }
         mView.hideProgressBar();
     }
 
     @Inject
-    public MyRequestsPresenter() {
+    MyRequestsPresenter() {
     }
 
     @Override
@@ -44,17 +42,10 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
         mDataBase.deleteRequest(request.getId(), aVoid -> {
             mMyList.remove(request);
 
-            if(mMyList != null && mMyList.size() > 0){
+            if(mMyList != null){
                 mView.refreshList(mMyList);
-            }else {
-                mView.showEmptyView();
             }
             mView.hideProgressBar();
         });
-    }
-
-    @Override
-    public void createHelpRequestClicked() {
-        mView.checkLoginAndNavigate(EnumNavigation.CREATE_POST);
     }
 }

@@ -11,12 +11,10 @@ public interface MyRequestsContract {
 
     interface View extends BaseView {
         void displayList(List<HelpRequest> posts);
-        void showEmptyView();
         void refreshList(List<HelpRequest> list);
         void initView();
     }
 
     interface Presenter extends BasePresenter , MyRequestsRecyclerAdapter.IEventListener {
-        void createHelpRequestClicked();
     }
 }

@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.interfaces.IExecutable;
-
 import java.util.List;
 
-public class MyRequestsRecyclerAdapter extends RecyclerView.Adapter<MyRequestViewHolder> implements IExecutable<Integer> {
+public class MyRequestsRecyclerAdapter extends RecyclerView.Adapter implements IExecutable<Integer> {
 
     private List<HelpRequest> mList;
     private IEventListener mListener;
@@ -23,19 +22,30 @@ public class MyRequestsRecyclerAdapter extends RecyclerView.Adapter<MyRequestVie
 
     @NonNull
     @Override
-    public MyRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_help_my_request, parent, false);
-        return new MyRequestViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        if(mList.size() > 0) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_help_my_request, parent, false);
+            return new MyRequestViewHolder(view);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_no_data, parent, false);
+            return new NoDataViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyRequestViewHolder holder, int position) {
-        holder.onBind(mList.get(position), this);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        if(mList.size() > 0) {
+            ((MyRequestViewHolder)holder).onBind(mList.get(position), this);
+        }else {
+            ((NoDataViewHolder)holder).onBind("אין בקשות");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList.size() > 0 ? mList.size() : 1;
     }
 
     @Override

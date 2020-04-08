@@ -143,11 +143,6 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     }
 
     @Override
-    public void showEmptyView() {
-        mRecycler.setVisibility(View.GONE);
-    }
-
-    @Override
     public void refreshList(List<HelpRequest> list) {
         mAdapter.refreshData(list);
         mAdapter.notifyDataSetChanged();

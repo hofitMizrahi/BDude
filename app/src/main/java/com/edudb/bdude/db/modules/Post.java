@@ -5,12 +5,31 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Post implements Serializable {
 
     @SerializedName("timestamp")
     @Expose
     long timestamp;
+    @SerializedName("status")
+    @Expose
+    int status;
+    @SerializedName("views")
+    @Expose
+    int views;
+    @SerializedName("products")
+    @Expose
+    List<Product> products;
+    @SerializedName("category")
+    @Expose
+    int category;
+    @SerializedName("ageAtRisk")
+    @Expose
+    boolean ageAtRisk;
+    @SerializedName("inIsolation")
+    @Expose
+    boolean inIsolation;
     @SerializedName("_geoloc")
     @Expose
     Geoloc geoloc;
@@ -41,6 +60,55 @@ public class Post implements Serializable {
 
     public Post() {
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public boolean isAgeAtRisk() {
+        return ageAtRisk;
+    }
+
+    public void setAgeAtRisk(boolean ageAtRisk) {
+        this.ageAtRisk = ageAtRisk;
+    }
+
+    public boolean isInIsolation() {
+        return inIsolation;
+    }
+
+    public void setInIsolation(boolean inIsolation) {
+        this.inIsolation = inIsolation;
+    }
+
 
     public Geoloc getGeoloc() {
         return geoloc;

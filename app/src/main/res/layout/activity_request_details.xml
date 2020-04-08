@@ -177,7 +177,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="כל הכבוד וממש תודה!"
+                                android:text="@string/ty_very_match"
                                 android:layout_marginTop="16dp"
                                 android:textColor="@color/colorBlack"
                                 android:textDirection="locale"
@@ -191,7 +191,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textDirection="locale"
                                 android:textSize="18sp"
-                                android:text="התחלתם את תהליך העזרה, בואו תתקשרו לתמר וכשתסיימו תמר תסגור את הבקשה" />
+                                android:text="תודה רבה על כוונתך לעזור, אפשר לחייג למספר או להשלוח הודעת וואטסאפ טקסט כרגע לא בטוח" />
 
                             <TextView
                                 android:layout_width="wrap_content"

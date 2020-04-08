@@ -65,15 +65,7 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
                 false);
         mRecyclerView.setLayoutManager(HorizontalLayout);
 
-        //TODO delete temp list
-
-        ArrayList<Product> list = new ArrayList<>();
-        list.add(new Product(5, "ביצים"));
-        list.add(new Product(5, "ביצים"));
-        list.add(new Product(5, "ביצים"));
-        list.add(new Product(5, "ביצים"));
-
-        mAdapter.setData(list);
+        mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
         mName.setText(mPost.getUserName());
 //        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());

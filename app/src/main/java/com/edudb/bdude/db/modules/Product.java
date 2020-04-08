@@ -1,13 +1,19 @@
 package com.edudb.bdude.db.modules;
 
-public class Product {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
+public class Product implements Serializable {
+
+    @SerializedName("amount")
+    @Expose
     int amount;
+    @SerializedName("product")
+    @Expose
     String product;
 
-    public Product(int amount, String product) {
-        this.amount = amount;
-        this.product = product;
+    public Product() {
     }
 
     public int getAmount() {

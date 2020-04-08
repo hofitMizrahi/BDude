@@ -1,46 +1,64 @@
 
 package com.edudb.bdude.db.modules.algolia;
 
+import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.db.modules.algolia.Geoloc;
 import com.edudb.bdude.db.modules.algolia.HighlightResult;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Hit {
 
     @SerializedName("timestamp")
     @Expose
-    private long timestamp;
-    @SerializedName("user_name")
+    long timestamp;
+    @SerializedName("status")
     @Expose
-    private String userName;
-    @SerializedName("user_avatar")
+    int status;
+    @SerializedName("views")
     @Expose
-    private String userAvatar;
-    @SerializedName("user_ID")
+    int views;
+    @SerializedName("products")
     @Expose
-    private String userID;
-    @SerializedName("title")
+    List<Product> products;
+    @SerializedName("category")
     @Expose
-    private String title;
-    @SerializedName("phone_number")
+    int category;
+    @SerializedName("ageAtRisk")
     @Expose
-    private String phoneNumber;
-    @SerializedName("body")
+    boolean ageAtRisk;
+    @SerializedName("inIsolation")
     @Expose
-    private String body;
-    @SerializedName("address_text")
-    @Expose
-    private String addressText;
+    boolean inIsolation;
     @SerializedName("_geoloc")
     @Expose
-    private Geoloc geoloc;
+    Geoloc geoloc;
+    @SerializedName("address_text")
+    @Expose
+    String address;
+    @SerializedName("body")
+    @Expose
+    String body;
     @SerializedName("objectID")
     @Expose
-    private String objectID;
-    @SerializedName("_highlightResult")
+    String id;
+    @SerializedName("phone_number")
     @Expose
-    private HighlightResult highlightResult;
+    String phoneNumber;
+    @SerializedName("title")
+    @Expose
+    String title;
+    @SerializedName("user_ID")
+    @Expose
+    String userID;
+    @SerializedName("user_avatar")
+    @Expose
+    String userAvatar;
+    @SerializedName("user_name")
+    @Expose
+    String userName;
 
     public String getUserName() {
         return userName;
@@ -99,11 +117,11 @@ public class Hit {
     }
 
     public String getAddressText() {
-        return addressText;
+        return address;
     }
 
     public void setAddressText(String addressText) {
-        this.addressText = addressText;
+        this.address = addressText;
     }
 
     public Geoloc getGeoloc() {
@@ -115,19 +133,11 @@ public class Hit {
     }
 
     public String getObjectID() {
-        return objectID;
+        return id;
     }
 
     public void setObjectID(String objectID) {
-        this.objectID = objectID;
-    }
-
-    public HighlightResult getHighlightResult() {
-        return highlightResult;
-    }
-
-    public void setHighlightResult(HighlightResult highlightResult) {
-        this.highlightResult = highlightResult;
+        this.id = objectID;
     }
 
 }
