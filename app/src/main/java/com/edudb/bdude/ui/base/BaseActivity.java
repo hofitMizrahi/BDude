@@ -124,11 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onUserRegistrationEvent(BaseActionBar.UserRegistrationMessageEvent event) {
-//        checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
-//    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAskLocationEvent(BaseActionBar.LocationMessageEvent event) {
         checkLocation();
