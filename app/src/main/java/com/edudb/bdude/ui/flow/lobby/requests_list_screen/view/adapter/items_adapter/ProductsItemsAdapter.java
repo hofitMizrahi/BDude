@@ -23,7 +23,7 @@ public class ProductsItemsAdapter extends RecyclerView.Adapter<ProductViewHolder
     }
 
     public void setData(List<Product> list){
-        if(mList == null) {
+        if(list == null) {
             mList = new ArrayList<>();
         }else {
             mList = list;
