@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/root_item"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -107,10 +105,11 @@
 
                     <TextView
                         android:id="@+id/name"
-                        android:layout_width="90dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         tools:text="123456978"
+                        android:gravity="center"
                         android:lines="2"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsItemsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
@@ -22,7 +23,11 @@ public class ProductsItemsAdapter extends RecyclerView.Adapter<ProductViewHolder
     }
 
     public void setData(List<Product> list){
-        mList = list;
+        if(mList == null) {
+            mList = new ArrayList<>();
+        }else {
+            mList = list;
+        }
     }
 
     @Override

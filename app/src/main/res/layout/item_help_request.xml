@@ -45,9 +45,9 @@
 
                 <TextView
                     android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="123456978"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"

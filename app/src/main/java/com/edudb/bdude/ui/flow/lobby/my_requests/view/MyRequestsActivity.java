@@ -2,6 +2,7 @@ package com.edudb.bdude.ui.flow.lobby.my_requests.view;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
