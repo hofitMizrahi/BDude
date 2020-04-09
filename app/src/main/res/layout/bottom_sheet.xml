@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/yellow"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="50dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:alpha="0.5"
+        android:background="@color/colorWhite">
+
+        <View
+            android:background="@color/colorBlack"
+            android:layout_width="32dp"
+            android:layout_height="3dp"/>
+
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/colorBlack"
+            android:layout_width="32dp"
+            android:layout_height="3dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/create_request_bottom_layout"/>
+
+</LinearLayout>

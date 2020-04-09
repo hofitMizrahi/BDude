@@ -4,7 +4,14 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\projects\\BDude\\key_store.jks')
+            storeFile file('key_store.jks')
+            storePassword 'chsushartk'
+            keyAlias = 'Bdude'
+            //בידודישראל
+            keyPassword 'chsushartk'
+        }
+        debug {
+            storeFile file('key_store.jks')
             storePassword 'chsushartk'
             keyAlias = 'Bdude'
             //בידודישראל
@@ -51,6 +58,8 @@ android {
 }
 
 dependencies {
+
+    // TODO Alex check for dublicates
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.1.0'

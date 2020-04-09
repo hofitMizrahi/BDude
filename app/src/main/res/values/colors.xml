@@ -8,6 +8,7 @@
     <color name="green_dark">#00A851</color>
     <color name="colorWhite">#ffff</color>
     <color name="colorDark">#2C2C2C</color>
+    <color name="colorDarkWithAlpha">#802C2C2C</color>
     <color name="bottomAwActionBar">#F36F21</color>
     <color name="dim">#3B3B3B</color>
     <color name="appointments_screens_color">#F7F7F7</color>
@@ -24,4 +25,6 @@
     <color name="orange_header_dark">#f16f30</color>
     <color name="Transparent">#00000000</color>
     <color name="yellow">#FFCF23</color>
+    <color name="yellow_with_alpha">#80FFCF23</color>
+    <color name="red">#EC5050</color>
 </resources>

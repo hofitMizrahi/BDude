@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layoutDirection="rtl"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textStyle="bold"
+        android:text="בבקשה שלי יהיה:"
+        android:textColor="@color/colorDark"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_marginBottom="8dp"
+        android:id="@+id/items_selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:text="דחיפות:"
+        android:textColor="@color/colorDark"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include layout="@layout/category_list_item"
+        android:id="@+id/emergency_selected"/>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="צורת החזר:"
+        android:textColor="@color/colorDark"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        layout="@layout/category_list_item"
+        android:id="@+id/payback_selected"/>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="הערה שלי:"
+        android:textColor="@color/colorDark"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textDirection="rtl"
+        android:text="asjkhdk ajjskdjaksjdhak jshdkajhsdk jahks jdhaks jdhaksjd h"
+        android:id="@+id/note"
+        android:textColor="@color/colorDark"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
