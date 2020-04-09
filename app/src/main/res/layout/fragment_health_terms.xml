@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/ic_logo_orange"
+        android:src="@drawable/ic_clean_hands"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

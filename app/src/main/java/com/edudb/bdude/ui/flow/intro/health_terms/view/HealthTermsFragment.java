@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +28,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class HealthTermsFragment extends BaseFragment implements HealthTermsContract.View {
+
+    private String mLink;
 
     @Inject
     HealthTermsPresenter mPresenter;
@@ -84,9 +82,10 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
     }
 
     @Override
-    public void initText(String string) {
-        healthText.setText(string);
+    public void initText(String terms, String link) {
+        healthText.setText(terms);
         healthLink.setText(Html.fromHtml(getString(R.string.link_health_terms)));
+        mLink = link;
     }
 
     @Override

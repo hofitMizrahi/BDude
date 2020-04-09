@@ -67,7 +67,8 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
-        mName.setText(mPost.getUserName());
+        mRecyclerView.suppressLayout(true);
+        //mName.setText(mPost.getUserName());
 //        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
 //        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
 //        mLocation.setText(kmStr);

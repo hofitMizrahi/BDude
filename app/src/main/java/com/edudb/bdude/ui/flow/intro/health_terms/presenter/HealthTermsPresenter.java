@@ -28,7 +28,9 @@ public class HealthTermsPresenter implements HealthTermsContract.Presenter {
     public void onStart() {
         mView.displayProgressBar();
         mConfiguration.fetchAndActivate().addOnCompleteListener(task ->
-                mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_IL_KEY)));
+                mView.initText(mConfiguration.getString(Constants.HEALTH_WARNING_IL_KEY)
+                , mConfiguration.getString(Constants.HEALTH_LINK_IL_KEY))
+        );
         mView.hideProgressBar();
     }
 

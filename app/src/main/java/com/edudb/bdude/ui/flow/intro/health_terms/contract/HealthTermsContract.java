@@ -9,7 +9,7 @@ public interface HealthTermsContract {
     interface View extends BaseView {
         void initViews();
         EnumStepNumber getStepNumber();
-        void initText(String string);
+        void initText(String terms, String link);
     }
 
     interface Presenter extends BasePresenter {

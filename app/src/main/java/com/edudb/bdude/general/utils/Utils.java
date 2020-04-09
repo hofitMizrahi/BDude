@@ -5,6 +5,8 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
+import android.view.View;
+
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.text.Format;
@@ -25,6 +27,20 @@ public class Utils {
             Log.d("tryParseJson", string);
         }
         return null;
+    }
+
+
+    public static void setViewVisibility(View view, Boolean isVisible, int nonVisibleMode) {
+        if (view == null)
+            return;
+        if (isVisible != null) {
+            if (isVisible) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.setVisibility(nonVisibleMode);
+
+            }
+        }
     }
 
     public static <T> T tryParseJsonType(String string, Type clazz) {
