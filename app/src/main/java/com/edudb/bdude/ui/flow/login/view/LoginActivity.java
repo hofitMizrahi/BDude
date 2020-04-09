@@ -3,7 +3,6 @@ package com.edudb.bdude.ui.flow.login.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.login.contract.LoginContract;
 import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
-import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.Auth;
@@ -142,7 +140,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 if (task.isSuccessful()) {
                     Log.d("TAG", "onComplete: successful");
                     if (mAuth.getCurrentUser() != null) {
-                        DatabaseController.getInstance().getCurrentUserDetails(mAuth.getCurrentUser().getUid(), this::saveUserDetails);
+                        DatabaseController.getInstance().getCurrentUserDetails(mAuth.getCurrentUser().getUid(), this::userDetailsSuccess);
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Authentication failed.",
@@ -150,10 +148,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 }
             }
 
-            private void saveUserDetails(User user) {
+            private void userDetailsSuccess(User user) {
 
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra(USER_SAVE, user);
                 setResult(BaseActivity.RC_SIGN_IN, resultIntent);
                 finish();
             }

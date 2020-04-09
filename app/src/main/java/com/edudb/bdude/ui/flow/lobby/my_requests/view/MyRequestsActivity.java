@@ -19,6 +19,7 @@ import com.edudb.bdude.di.components.DaggerMyRequestsComponent;
 import com.edudb.bdude.di.modules.MyRequestsModule;
 import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.general.utils.Utils;
+import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
@@ -73,6 +74,11 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @OnClick(R.id.editAddress)
     void onUpdateLocationClicked() {
         mPresenter.selectLocationClicked();
+    }
+
+    @OnClick(R.id.editPhone)
+    void onUpdatePhoneClicked() {
+        mPresenter.setUserPhoneClicked("052333333");
     }
 
     @OnClick(R.id.sendToEmail)
@@ -138,18 +144,18 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
             mName.setText(mCurrentUser.getName());
         }
 
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getAddress())) {
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getAddress_text())) {
             mAddress.setText("הכנס כתובת");
             mAddress.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
-            mAddress.setText(mCurrentUser.getAddress());
+            mAddress.setText(mCurrentUser.getAddress_text());
         }
 
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhoneNumber())) {
+        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhone_number())) {
             mPhoneNumber.setText("הכנס מספר טלפון");
             mPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
-            mPhoneNumber.setText(mCurrentUser.getPhoneNumber());
+            mPhoneNumber.setText(mCurrentUser.getPhone_number());
         }
     }
 
@@ -157,5 +163,10 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     public void refreshList(List<HelpRequest> list) {
         mAdapter.refreshData(list);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setCurrentUser(){
+        mCurrentUser = SessionManager.getInstance().getUser();
     }
 }

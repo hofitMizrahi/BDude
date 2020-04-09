@@ -5,18 +5,41 @@ import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class User implements Parcelable {
+public class User implements Serializable {
 
-    private GeoPoint address_coords;
-    private String address_text;
-    private String name;
-    private String phone_number;
-    private String uid;
+    @SerializedName("address_text")
+    @Expose
+    String address_text;
+    @SerializedName("address_coords")
+    @Expose
+    GeoPoint address_coords;
+    @SerializedName("email")
+    @Expose
+    String email;
+    @SerializedName("phone_number")
+    @Expose
+    String phone_number;
+    @SerializedName("name")
+    @Expose
+    String name;
+    @SerializedName("uid")
+    @Expose
+    String uid;
 
     public User() {
+    }
+
+    public String getAddress_text() {
+        return address_text;
+    }
+
+    public void setAddress_text(String address_text) {
+        this.address_text = address_text;
     }
 
     public GeoPoint getAddress_coords() {
@@ -27,12 +50,20 @@ public class User implements Parcelable {
         this.address_coords = address_coords;
     }
 
-    public String getAddress() {
-        return address_text;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress_text(String address_text) {
-        this.address_text = address_text;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getName() {
@@ -43,14 +74,6 @@ public class User implements Parcelable {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
     public String getUid() {
         return uid;
     }
@@ -58,43 +81,4 @@ public class User implements Parcelable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    protected User(Parcel in) {
-
-        double lat = in.readDouble();
-        double lng = in.readDouble();
-        address_coords = new GeoPoint(lat, lng);
-        address_text = in.readString();
-        name  = in.readString();
-        phone_number = in.readString();
-        uid = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeDouble(address_coords.getLatitude());
-        parcel.writeDouble(address_coords.getLongitude());
-        parcel.writeString(address_text);
-        parcel.writeString(name);
-        parcel.writeString(phone_number);
-        parcel.writeString(uid);
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
 }

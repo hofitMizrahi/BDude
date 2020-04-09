@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
-import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
@@ -35,21 +34,14 @@ import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequ
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
 import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
 import com.edudb.bdude.ui.flow.login.view.LoginActivity;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import butterknife.ButterKnife;
@@ -292,8 +284,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             }
 
         } else if (requestCode == RC_SIGN_IN && data != null) {
-            User user = (User) Objects.requireNonNull(data.getExtras()).getParcelable(USER_SAVE);
-            saveUserDetails(user);
+            navigateAfterLogin();
         }
     }
 
@@ -305,9 +296,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void refreshData() {
     }
 
-    protected void saveUserDetails(User user) {
-        SessionManager.getInstance().setCurrentUser(user);
-
+    protected void navigateAfterLogin() {
         if (mEnumNavigation == EnumNavigation.POST_DETAILS) {
             navigateToRequestDetailsScreen(mTempPost);
         } else {

@@ -14,11 +14,14 @@ public interface MyRequestsContract {
         void displayList(List<HelpRequest> posts);
         void refreshList(List<HelpRequest> list);
         void initView();
+
+        void setCurrentUser();
     }
 
     interface Presenter extends BasePresenter , MyRequestsRecyclerAdapter.IEventListener {
         void selectLocationClicked();
         void updateLocation(GeoPoint location);
         void onStartReloadData();
+        void setUserPhoneClicked(String s);
     }
 }

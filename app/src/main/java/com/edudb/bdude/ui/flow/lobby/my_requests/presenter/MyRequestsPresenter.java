@@ -4,6 +4,7 @@ import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
+import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.google.firebase.firestore.GeoPoint;
 
@@ -43,12 +44,13 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
 
     @Override
     public void updateLocation(GeoPoint location) {
-        //TODO update User Location
+        mView.displayProgressBar();
         mDataBase.updateUserLocation(mView.getActivity(), location, this::onUpdateSuccess);
     }
 
     private void onUpdateSuccess(User user) {
-
+        mView.setCurrentUser();
+        onStartReloadData();
     }
 
     @Override
@@ -56,6 +58,11 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
         mView.displayProgressBar();
         mView.initView();
         mDataBase.getMyRequests(this::displayList);
+    }
+
+    @Override
+    public void setUserPhoneClicked(String s) {
+        mDataBase.updateUserPhone(mView.getActivity(), s, this::onUpdateSuccess);
     }
 
     @Override

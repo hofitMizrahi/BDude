@@ -86,29 +86,45 @@ public class DatabaseController {
     public void getCurrentUserDetails(String uId, IExecutable<User> listener) {
         db.collection("users").whereEqualTo("uid", uId).get().addOnSuccessListener(snapshots -> {
 
-            for (DocumentSnapshot document : snapshots.getDocuments()) {
-                User user = document.toObject(User.class);
-                listener.execute(user);
+            if (listener != null) {
+
+                for (DocumentSnapshot document : snapshots.getDocuments()) {
+                    User user = document.toObject(User.class);
+                    SessionManager.getInstance().setCurrentUser(user);
+                    listener.execute(user);
+                }
             }
         });
     }
 
     public void updateUserLocation(Context context, GeoPoint location, IExecutable<User> listener) {
 
-
         DocumentReference dr = db.collection("users").document(SessionManager.getInstance().getUser().getUid());
 
         dr.update("address_coords", location
-        ,"address_text", LocationHelper.getLocationName(context, location))
+                , "address_text", LocationHelper.getLocationName(context, location))
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    listener.execute(null);
-                }else {
-                    int a =1;
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            getCurrentUserDetails(SessionManager.getInstance().getUser().getUid(), listener);
+                        }
+                    }
+                });
+    }
+
+    public void updateUserPhone(Context context, String phone, IExecutable<User> listener) {
+
+        DocumentReference dr = db.collection("users").document(SessionManager.getInstance().getUser().getUid());
+
+        dr.update("phone_number", phone)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            getCurrentUserDetails(SessionManager.getInstance().getUser().getUid(), listener);
+                        }
+                    }
+                });
     }
 }
