@@ -217,8 +217,8 @@
                 android:id="@+id/chips_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/counter_view"
                 />
 
@@ -272,7 +272,8 @@
                 android:layoutDirection="rtl"
                 app:layout_constraintTop_toBottomOf="@+id/emergency_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="36dp"
                 android:id="@+id/emergency_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
@@ -312,7 +313,8 @@
                 android:layoutDirection="rtl"
                 app:layout_constraintTop_toBottomOf="@+id/payback_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="36dp"
                 android:id="@+id/pay_chooser_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
