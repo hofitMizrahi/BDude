@@ -2,8 +2,11 @@ package com.edudb.bdude.ui.flow.lobby.my_requests.presenter;
 
 import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.List;
 import javax.inject.Inject;
 
@@ -19,9 +22,6 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
 
     @Override
     public void onStart() {
-        mView.displayProgressBar();
-        mView.initView();
-        mDataBase.getMyRequests(this::displayList);
     }
 
     private void displayList(List<HelpRequest> posts) {
@@ -34,6 +34,28 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
 
     @Inject
     MyRequestsPresenter() {
+    }
+
+    @Override
+    public void selectLocationClicked() {
+        mView.openMap();
+    }
+
+    @Override
+    public void updateLocation(GeoPoint location) {
+        //TODO update User Location
+        mDataBase.updateUserLocation(mView.getActivity(), location, this::onUpdateSuccess);
+    }
+
+    private void onUpdateSuccess(User user) {
+
+    }
+
+    @Override
+    public void onStartReloadData() {
+        mView.displayProgressBar();
+        mView.initView();
+        mDataBase.getMyRequests(this::displayList);
     }
 
     @Override

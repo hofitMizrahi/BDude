@@ -20,6 +20,7 @@ import com.edudb.bdude.di.modules.MyRequestsModule;
 import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
+import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
@@ -69,6 +70,11 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
         onBackPressed();
     }
 
+    @OnClick(R.id.editAddress)
+    void onUpdateLocationClicked() {
+        mPresenter.selectLocationClicked();
+    }
+
     @OnClick(R.id.sendToEmail)
     void onSendEmailClicked() {
         if(!Utils.isNullOrWhiteSpace(mEmailContentET.getText().toString())){
@@ -87,6 +93,11 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
                 Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return mPresenter;
     }
 
     @Override
@@ -114,7 +125,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.onStart();
+        mPresenter.onStartReloadData();
     }
 
     @Override

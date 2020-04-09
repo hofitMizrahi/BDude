@@ -1,12 +1,21 @@
 package com.edudb.bdude.db;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
 import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.interfaces.IExecutable;
+import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +47,18 @@ public class DatabaseController {
         });
     }
 
-    public void getAllRequestsList(IExecutable<List<HelpRequest>> listener) {
-
-        db.collection("requests").get().addOnSuccessListener(snapshots -> {
-            List<HelpRequest> list = new ArrayList<>();
-
-            for (DocumentSnapshot document : snapshots.getDocuments()) {
-                HelpRequest objectList = document.toObject(HelpRequest.class);
-                list.add(objectList);
-            }
-            listener.execute(list);
-        });
-    }
+//    public void getAllRequestsList(IExecutable<List<HelpRequest>> listener) {
+//
+//        db.collection("requests").get().addOnSuccessListener(snapshots -> {
+//            List<HelpRequest> list = new ArrayList<>();
+//
+//            for (DocumentSnapshot document : snapshots.getDocuments()) {
+//                HelpRequest objectList = document.toObject(HelpRequest.class);
+//                list.add(objectList);
+//            }
+//            listener.execute(list);
+//        });
+//    }
 
     public void deleteRequest(String documentId, IExecutable<Void> listener) {
         db.collection("requests")
@@ -80,6 +89,25 @@ public class DatabaseController {
             for (DocumentSnapshot document : snapshots.getDocuments()) {
                 User user = document.toObject(User.class);
                 listener.execute(user);
+            }
+        });
+    }
+
+    public void updateUserLocation(Context context, GeoPoint location, IExecutable<User> listener) {
+
+
+        DocumentReference dr = db.collection("users").document(SessionManager.getInstance().getUser().getUid());
+
+        dr.update("address_coords", location
+        ,"address_text", LocationHelper.getLocationName(context, location))
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    listener.execute(null);
+                }else {
+                    int a =1;
+                }
             }
         });
     }

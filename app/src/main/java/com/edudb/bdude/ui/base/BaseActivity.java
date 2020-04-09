@@ -32,6 +32,7 @@ import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity;
+import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
@@ -272,6 +273,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
                 if (getActivity() instanceof CreateHelpRequestActivity) {
                     ((CreateHelpRequestPresenter) getPresenter()).changeLocation(LocationHelper.getLocation(data));
+
+                }else if (getActivity() instanceof MyRequestsActivity) {
+                    ((MyRequestsPresenter) getPresenter()).updateLocation(LocationHelper.getLocation(data));
+
                 } else {
                     LocationHelper.setLocation(data);
                     searchByNewLocation();
@@ -287,7 +292,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             }
 
         } else if (requestCode == RC_SIGN_IN && data != null) {
-            User user = (User) Objects.requireNonNull(data.getExtras()).getSerializable(USER_SAVE);
+            User user = (User) Objects.requireNonNull(data.getExtras()).getParcelable(USER_SAVE);
             saveUserDetails(user);
         }
     }

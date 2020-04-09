@@ -53,9 +53,6 @@ public class Hit {
     @SerializedName("user_ID")
     @Expose
     String userID;
-    @SerializedName("user_avatar")
-    @Expose
-    String userAvatar;
     @SerializedName("user_name")
     @Expose
     String userName;
@@ -66,14 +63,6 @@ public class Hit {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserAvatar() {
-        return userAvatar;
-    }
-
-    public void setUserAvatar(String userAvatar) {
-        this.userAvatar = userAvatar;
     }
 
     public String getUserID() {
