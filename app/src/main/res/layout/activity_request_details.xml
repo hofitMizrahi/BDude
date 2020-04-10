@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layoutDirection="rtl"
     android:background="@color/color_main_background"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -65,7 +66,7 @@
                             android:layout_height="wrap_content"
                             android:text="מרחק ממני:"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -75,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             tools:text="30km" />
 
@@ -86,7 +87,7 @@
                             android:layout_marginTop="16dp"
                             android:text="נשלח ב:"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -98,7 +99,7 @@
                             android:layout_marginTop="8dp"
                             android:text="13:00"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp" />
 
 
@@ -108,7 +109,7 @@
                             android:layout_marginTop="16dp"
                             android:text="צורת החזר:"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -121,7 +122,7 @@
                             android:drawablePadding="8dp"
                             android:text="אני אחזיר לך עם פייבוקס"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp" />
 
                         <TextView
@@ -130,7 +131,7 @@
                             android:layout_marginTop="16dp"
                             android:text="עזרה עם:"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -146,7 +147,7 @@
                             android:layout_marginTop="16dp"
                             android:text="הערות:"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -157,7 +158,7 @@
                             android:layout_marginTop="8dp"
                             android:text="אני בבידוד וצריכה קאפו"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="18sp" />
 
                         <LinearLayout
@@ -180,7 +181,7 @@
                                 android:text="@string/ty_very_match"
                                 android:layout_marginTop="16dp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -189,7 +190,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="18sp"
                                 android:text="תודה רבה על כוונתך לעזור, אפשר לחייג למספר או להשלוח הודעת וואטסאפ טקסט כרגע לא בטוח" />
 
@@ -199,7 +200,7 @@
                                 android:text="מספר טלפון:"
                                 android:layout_marginTop="16dp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -211,7 +212,7 @@
                                 android:layout_marginTop="8dp"
                                 android:drawableStart="@drawable/ic_yellow_whatsapp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="18sp"
                                 tools:text="0528415353" />
 
@@ -224,7 +225,7 @@
                                 android:drawableStart="@drawable/ic_phone_grey"
                                 android:textColor="@color/colorBlack"
                                 android:drawableTint="@color/yellow"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="18sp"
                                 tools:text="0528415353" />
 

@@ -1,71 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="facebook_application_id" translatable="false">1295107550685494</string>
-
     <string name="app_name">BDude</string>
-    <string name="help_please_btn">Help please</string>
-    <string name="no_request_data">There are not request around you</string>
-    <string name="my_request_title">My requests</string>
-    <string name="no_my_request_data">You have no requests, if you need help, please click on the \'Help please\' button</string>
-    <string name="show_phone">Show phone number</string>
-    <string name="call_to_number">Call phone number</string>
-    <string name="share_info">TODO Text to share + קישור לגוגל פליי</string>
-    <string name="i_need_help_with">Title:</string>
-    <string name="need_help_with">need help with:</string>
-    <string name="my_location_is">My location:</string>
 
-    <string name="link_health_terms" translatable="false"><![CDATA[<u><b><font color=#f04447>באתר משרד הבריאות</font></b></u>]]></string>
+    <string name="help_please_btn">עזרה בבקשה</string>
+    <string name="no_request_data">אין בקשות להציג בסביבתך</string>
+    <string name="my_request_title">הבקשות שלי</string>
+    <string name="no_my_request_data">אין לך בקשות לעזרה, אם ברצונך לבקש עזרה לחץ על הוספת בקשה חדשה</string>
+    <string name="show_phone">הצג מספר טלפון</string>
+    <string name="call_to_number">חייג למספר</string>
+    <string name="share_info">TODO טקסט לשיתוף + קישור לגוגל פליי</string>
+    <string name="i_need_help_with">צריך עזרה עם:</string>
+    <string name="need_help_with">כותרת:</string>
+    <string name="my_location_is">המיקום שלי:</string>
 
-    <string name="approve">OK</string>
-    <string name="terms_of_use">Terms of use</string>
-    <string name="send_request">Send request</string>
-    <string name="more_details">More details:</string>
-    <string name="enter_phone_number">Contact phone:</string>
-    <string name="hello">Hello</string>
-    <string name="help_please_btn_new">New request</string>
-    <string name="ask_for_location_permission_title">Location permission</string>
-    <string name="ask_for_location_permission_message">Please authorise us to use your location</string>
-    <string name="ask_for_location_gps_open_btn">Open GPS</string>
-    <string name="ask_for_location_gps_message">You must open the GPS in the device settings so that we can search requests near you</string>
-    <string name="ask_for_location_gps_title">Open GPS</string>
-    <string name="hint_enter_location">Please enter location</string>
-    <string name="hint_help_with">In a word or two..</string>
-    <string name="details_edit_text">What do you need help with?</string>
-    <string name="send_whatsapp">Send Whatsapp</string>
-    <string name="check_the_number">Please, check the phone number again</string>
-    <string name="enter_name">Name:</string>
-    <string name="enter_name_hint">Please enter name</string>
-
-    <string name="leku_title_activity_location_picker">Location Picker</string>
-    <string name="leku_no_geocoder_available">Service not available</string>
-    <string name="leku_load_location_error">Something went wrong. Please try again.</string>
-    <string name="leku_no_search_results">There are no results for your search</string>
-    <string name="leku_network_resource">network</string>
-    <string name="leku_unknown_location">unknown location</string>
-    <string name="leku_voice_search_promp">Search by voice…</string>
-    <string name="leku_voice_search_extra_language">en-EN</string>
-    <string name="leku_toolbar_action_voice_title">Voice</string>
-    <string name="leku_search_hint">Search</string>
-    <string name="leku_longitude">Longitude</string>
-    <string name="leku_latitude">Latitude</string>
-    <string name="leku_coordinates">Coordinates</string>
-    <string name="delete_item_text">Are you sure you want to delete this request?</string>
-    <string name="delete">delete</string>
-    <string name="pay_attention_please">Pay attention</string>
-    <string name="km"> km</string>
-    <string name="recently_published">recently Published</string>
-    <string name="publish_time">posted </string>
-    <string name="hours_ago">hours ago</string>
-    <string name="you_cont_ask_more_five_requests">אינך יכול לשלוח יותר מ 5 בקשות</string>
-    <string name="facebook_login">login with Facebook</string>
-    <string name="google_login">login with Google</string>
-    <string name="health_warning">In order for us to help each other properly, it is important to follow the rules</string>
+    <string name="health_warning">כדי שנצליח לעזור אחד לשני בצורה נכונה חשוב לעקוב אחרי הכללים</string>
     <string name="health_terms_link">כללי בטיחות של משרד הבריאות</string>
-    <string name="share_this_app">Share the app with your friends</string>
-    <string name="my_requests">My requests:</string>
-    <string name="personal_details">Personal Details:</string>
-    <string name="notes_to_improve">Give us notes for improvement:</string>
+    <string name="share_this_app">לשתף את האפליקציה עם חברים</string>
+
+    <string name="my_requests">הבקשות שלי:</string>
+    <string name="personal_details">פרטים אישיים:</string>
+    <string name="notes_to_improve">הערות לנו לשיפור:</string>
+
+    <string name="approve">אישור</string>
+    <string name="terms_of_use">תנאי שימוש</string>
+    <string name="send_request">שלח בקשה</string>
+    <string name="more_details">פרטים נוספים:</string>
+    <string name="enter_phone_number">טלפון:</string>
+    <string name="hello">שלום</string>
+    <string name="help_please_btn_new">בקשה חדשה</string>
+    <string name="ask_for_location_permission_title">בקשת מיקום</string>
+    <string name="ask_for_location_permission_message">בבקשה אשר שימוש במיקומך על מנת שנמצא את הבקשות לעזרה הקרובות אלייך.</string>
+    <string name="ask_for_location_gps_open_btn">פתח gps</string>
+    <string name="ask_for_location_gps_message">עלייך לפתוח את gps בהגדרות המכשיר בכדי שנוכל לחפש בקשות קרובות אלייך</string>
+    <string name="ask_for_location_gps_title">פתיחת gps</string>
+    <string name="hint_enter_location">נא להכניס מיקום</string>
+    <string name="hint_help_with">במילה או שתיים..</string>
+    <string name="details_edit_text">קצת יותר פרטים</string>
+    <string name="send_whatsapp">שלח וואטסאפ</string>
+    <string name="check_the_number">בדוק שנית את המספר שהוכנס</string>
+    <string name="enter_name">שם:</string>
+    <string name="enter_name_hint">נא להכניס שם</string>
+
+    <string name="you_cont_ask_more_five_requests">אינך יכול לפרסם יותר מ 5 בקשות</string>
+
+    <string name="km"> ק\"מ</string>
+    <string name="recently_published">פורסם לאחרונה</string>
+    <string name="publish_time">לפני </string>
+    <string name="hours_ago">ש\'</string>
+
+    <string name="leku_title_activity_location_picker">בחירת מיקום</string>
+    <string name="leku_load_location_error">משהו לא עבד, נא נסה שנית.</string>
+    <string name="leku_no_search_results">אין תוצאות לחיפוש</string>
+    <string name="leku_unknown_location">מיקום לא ידוע</string>
+    <string name="leku_voice_search_promp">חיפוש בקול…</string>
+    <string name="leku_voice_search_extra_language">he-HE</string>
+    <string name="leku_toolbar_action_voice_title">קול</string>
+    <string name="leku_search_hint">חיפוש</string>
+    <string name="leku_longitude">קו אורך</string>
+    <string name="leku_latitude">קו רוחב</string>
+    <string name="leku_coordinates">קואורדינטות</string>
+    <string name="leku_no_geocoder_available">השירות לא זמין</string>
+    <string name="leku_network_resource">אינטרנט</string>
+
+    <string name="delete_item_text">האם ברצונך למחוק את הבקשה?</string>
+    <string name="delete">מחק</string>
+    <string name="pay_attention_please">לתשומת לבך</string>
+
+    <string name="facebook_login">להיכנס עם פייסבוק</string>
+    <string name="google_login">להיכנס עם גוגל</string>
+
     <string name="ty_very_match">כל הכבוד וממש תודה!</string>
     <string name="age_at_risk">גיל בסיכון</string>
+    <string name="approve_your_location_text">כדי שתדעו מי לידכם או שתוכלו לבקש עזרה מאנשים באזורכם תאשרו שנדע את המיקום שלכם</string>
+    <string name="one_moment_before_start">רגע לפני שמתחילים</string>
+    <string name="good_to_me">יאללה מתאים</string>
+    <string name="lets_help_people">בואו נעזור לשכנים או כמובן לבקש עזרה אם הושפעתם</string>
+    <string name="welcome">ברוכים הבאים!</string>
+    <string name="link_health_terms">ברוכים הבאים!</string>
+    <string name="important_to_save_terms">חשוב לשמור על כללי הבטיחות</string>
+    <string name="days_ago">ימ\'</string>
 
 </resources>

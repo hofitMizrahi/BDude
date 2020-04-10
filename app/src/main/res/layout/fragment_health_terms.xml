@@ -72,7 +72,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="חשוב לשמור על כללי הבטיחות"
+            android:text="@string/important_to_save_terms"
             android:textColor="@color/colorBlack"
             android:textSize="40sp"
             android:textStyle="bold"

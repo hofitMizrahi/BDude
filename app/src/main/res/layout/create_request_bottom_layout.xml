@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/category_list_item"
+    <include layout="@layout/item_category_list"
         android:id="@+id/emergency_selected"/>
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"/>
 
     <include
-        layout="@layout/category_list_item"
+        layout="@layout/item_category_list"
         android:id="@+id/payback_selected"/>
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:textDirection="rtl"
+        android:textDirection="anyRtl"
         android:text="asjkhdk ajjskdjaksjdhak jshdkajhsdk jahks jdhaks jdhaksjd h"
         android:id="@+id/note"
         android:textColor="@color/colorDark"

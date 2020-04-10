@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layoutDirection="rtl"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_main_background">
@@ -36,7 +37,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/personal_details"
                         android:textColor="@color/colorBlack"
-                        android:textDirection="locale"
+                        android:textDirection="anyRtl"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -55,7 +56,7 @@
                             android:gravity="center"
                             tools:text="רונה"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +90,7 @@
                             android:gravity="center"
                             tools:text="0528415353"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +124,7 @@
                             android:gravity="center"
                             tools:text="תל אביב, הרצל 20"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent" />
@@ -156,7 +157,7 @@
                             android:gravity="start"
                             android:text="@string/share_this_app"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="locale"
+                            android:textDirection="anyRtl"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/my_requests"
                         android:textColor="@color/colorBlack"
-                        android:textDirection="locale"
+                        android:textDirection="anyRtl"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -205,7 +206,7 @@
                         android:text="עזרתי ל:"
                         android:visibility="gone"
                         android:textColor="@color/colorBlack"
-                        android:textDirection="locale"
+                        android:textDirection="anyRtl"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -221,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/notes_to_improve"
                         android:textColor="@color/colorBlack"
-                        android:textDirection="locale"
+                        android:textDirection="anyRtl"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -247,7 +248,7 @@
                                 android:background="@null"
                                 android:gravity="top"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="locale"
+                                android:textDirection="anyRtl"
                                 android:textSize="16sp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

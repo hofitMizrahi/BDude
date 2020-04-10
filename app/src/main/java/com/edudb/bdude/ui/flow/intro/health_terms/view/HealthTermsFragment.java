@@ -47,10 +47,8 @@ public class HealthTermsFragment extends BaseFragment implements HealthTermsCont
 
     @OnClick(R.id.healthLink)
     void onLinkClicked() {
-        //TODO add this to config
-        String url = "https://www.health.gov.il/Subjects/disease/corona/Pages/default.aspx";
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
+        i.setData(Uri.parse(mLink));
         startActivity(i);
     }
 

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:background="@color/color_main_background"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -30,7 +31,7 @@
             android:background="@drawable/rounded_btn_continue"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:text="יאללה מתאים"
+            android:text="@string/good_to_me"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:text="כדי שתדעו מי לידכם או שתוכלו לבקש עזרה מאנשים באזורכם תאשרו שנדע את המיקום שלכם"
+            android:text="@string/approve_your_location_text"
             android:textColor="@color/colorBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/nextBtn"
@@ -56,7 +57,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="רגע לפני שמתחילים"
+            android:text="@string/one_moment_before_start"
             android:textColor="@color/colorBlack"
             android:textSize="40sp"
             android:textStyle="bold"

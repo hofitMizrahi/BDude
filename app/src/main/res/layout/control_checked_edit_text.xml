@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="1"
+    android:layoutDirection="rtl"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -22,7 +23,8 @@
         android:textColor="@color/colorDark"
         android:textColorHint="@color/colorDark"
         android:textCursorDrawable="@drawable/cursor_color"
-        android:textDirection="locale"
+        android:textDirection="rtl"
+        android:gravity="right"
         android:textSize="18sp"
         android:layout_weight="1"
         android:textStyle="bold"

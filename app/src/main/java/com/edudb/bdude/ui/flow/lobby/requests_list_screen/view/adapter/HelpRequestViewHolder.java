@@ -19,7 +19,9 @@ import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_ada
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +40,9 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.hours)
     TextView mHours;
+
+    @BindView(R.id.distance)
+    TextView mDistance;
 
     @BindView(R.id.name)
     TextView mName;
@@ -68,17 +73,22 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
         mName.setText(mPost.getUserName());
-//        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
-//        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
-//        mLocation.setText(kmStr);
+        LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
+        String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);
+        mDistance.setText(kmStr);
 
-        int hours = (int) ((mPost.getTimestamp() / (1000 * 60 * 60)) % 24);
-//        if (hours == 0) {
-//            fullTimeStr += itemView.getContext().getString(R.string.recently_published);
-//        } else {
-//            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + hours + " " + itemView.getContext().getString(R.string.hours_ago);
-//        }
-        String fullTimeStr = hours + " " + itemView.getContext().getString(R.string.hours_ago);
+        String fullTimeStr = "";
+
+        long days = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - mPost.getTimestamp());
+        long hours = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis() - mPost.getTimestamp());
+
+        if (hours == 0) {
+            fullTimeStr += itemView.getContext().getString(R.string.recently_published);
+        } else if (days == 0){
+            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + (hours % 24) + " " + itemView.getContext().getString(R.string.hours_ago);
+        }else {
+            fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + days + " " + itemView.getContext().getString(R.string.days_ago);
+        }
         mHours.setText(fullTimeStr);
     }
 }

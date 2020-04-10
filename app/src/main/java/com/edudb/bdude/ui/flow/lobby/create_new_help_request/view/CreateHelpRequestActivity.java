@@ -15,10 +15,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
+import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
@@ -35,6 +37,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,12 +45,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 
 import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING;
 
 public class CreateHelpRequestActivity extends BaseActivity implements CreateHelpRequestContract.View {
+
+    private List<Product> mProductsList;
 
     @Inject
     CreateHelpRequestPresenter mPresenter;
@@ -73,10 +77,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.phone)
     CheckedEditText mPhoneNumber;
 
-//  TODO ALEX - NO TITLE ANYMORE ? IF SO NEED TO REMOVE
-//    @BindView(R.id.need_help_with_editT)
-//    EditText mTitle;
-
     @BindView(R.id.send_help_request)
     Button mHelpButton;
 
@@ -87,7 +87,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     CheckedEditText mNameEt;
 
     @BindView(R.id.search_items)
-    CheckedEditText chipSearch;
+    CheckedEditText EditTextFreeSearch;
 
     @BindView(R.id.add_chip_item)
     Button addChipButton;
@@ -112,23 +112,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @BindView(R.id.pay_chooser_recycler)
     RecyclerView payCategoryRecycler;
-
-//    @OnTextChanged({R.id.phone, R.id.more_details_editT, R.id.my_location_editT, R.id.name_ET})
-//    void onTextChange() {
-//        validateBtn();
-//    }
-
-//    @OnTextChanged({R.id.search_items})
-//    void onStartSearch() {
-//        addChipView();
-//    }
-
-//    @OnFocusChange({R.id.phone})
-//    void onPhoneFocusChange() {
-//        if (!mPhoneNumber.isFocused()) {
-//            checkMobileNumberError();
-//        }
-//    }
 
     @OnClick(R.id.send_help_request)
     void onCreatePostClicked() {
@@ -163,145 +146,23 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         finish();
     }
 
-    //TODO remove from view
-    List<String> blackWords = Arrays.asList(
-            "anal",
-            "anus",
-            "arse",
-            "ass",
-            "ass fuck",
-            "ass hole",
-            "assfucker",
-            "asshole",
-            "assshole",
-            "bastard",
-            "bitch",
-            "black cock",
-            "bloody hell",
-            "boong",
-            "cock",
-            "cockfucker",
-            "cocksuck",
-            "cocksucker",
-            "coon",
-            "coonnass",
-            "crap",
-            "cunt",
-            "cyberfuck",
-            "damn",
-            "darn",
-            "dick",
-            "dirty",
-            "douche",
-            "dummy",
-            "erect",
-            "erection",
-            "erotic",
-            "escort",
-            "fag",
-            "faggot",
-            "fuck",
-            "Fuck off",
-            "fuck you",
-            "fuckass",
-            "fuckhole",
-            "god damn",
-            "gook",
-            "hard core",
-            "hardcore",
-            "homoerotic",
-            "hore",
-            "lesbian",
-            "lesbians",
-            "mother fucker",
-            "motherfuck",
-            "motherfucker",
-            "negro",
-            "nigger",
-            "orgasim",
-            "orgasm",
-            "penis",
-            "penisfucker",
-            "piss",
-            "piss off",
-            "porn",
-            "porno",
-            "pornography",
-            "pussy",
-            "retard",
-            "sadist",
-            "sex",
-            "sexy",
-            "shit",
-            "slut",
-            "son of a bitch",
-            "suck",
-            "tits",
-            "viagra",
-            "whore",
-            "xxx",
-            "אנאלי",
-            "פי הטבעת",
-            "התחת",
-            "אידיוט",
-            "חור תחת",
-            "ממזר",
-            "בון",
-            "זין",
-            "קוקסינקר",
-            "שטויות",
-            "כוס",
-            "פאקינג",
-            "לעזאזל",
-            "מלוכלך",
-            "זקוף",
-            "זקפה",
-            "ארוטי",
-            "ליווי",
-            "הומו",
-            "זיון",
-            "תזדיין",
-            "לזיין",
-            "לעזאזל",
-            "הארדקור",
-            "הומורוטי",
-            "חורה",
-            "לסבית",
-            "לסביות",
-            "כושי",
-            "אורגסים",
-            "אורגזמה",
-            "איבר המין",
-            "שתן",
-            "להשתין",
-            "פורנו",
-            "פורנוגרפיה",
-            "מפגר",
-            "סדיסט",
-            "סקס",
-            "חרא",
-            "שרמוטה",
-            "למצוץ",
-            "ציצים",
-            "ויאגרה",
-            "זונה");
-
     private void validateBtn() {
 
         boolean retVal =
                 !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString()) &&
                         !Utils.isNullOrWhiteSpace(mPhoneNumber.getText()) &&
-                        !Utils.isNullOrWhiteSpace(mMyLocation.getText().toString()) &&
-                      //  !Utils.isNullOrWhiteSpace(mNameEt.getText().toString()) &&
+                        !Utils.isNullOrWhiteSpace(mMyLocation.getText()) &&
+                        !Utils.isNullOrWhiteSpace(mNameEt.getText()) &&
+                        mProductsList.size() > 0 &&
                         mPhoneNumber.getText().matches(Constants.PHONE_FULL_REGEX) &&
-                        blackWordsCheck(mMoreDetails.getText().toString());
+                        Utils.blackWordsCheck(mMoreDetails.getText().toString());
 
         setBtnEnabled(retVal);
     }
 
     private void addChipView() {
         scrollToTopEditText(needHelpTitle);
-        String txt = chipSearch.getText().toString();
+        String txt = EditTextFreeSearch.getText().toString();
         if (txt.length() > 0) {
             addChipButton.setEnabled(true);
             counterView.setVisibility(View.VISIBLE);
@@ -336,22 +197,27 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         return mPresenter;
     }
 
-    private void checkMobileNumberError() {
-        if (Utils.isNullOrWhiteSpace(mPhoneNumber.getText()) || !mPhoneNumber.getText().matches(Constants.PHONE_FULL_REGEX)) {
-            //mPhoneNumber.setError(getString(R.string.check_the_number));
-        } else {
-            //mPhoneNumber.setError(null);
-        }
-    }
-
     private void setBtnEnabled(boolean validate) {
         mHelpButton.setEnabled(validate);
     }
 
     @Override
     public void initViews() {
+        mProductsList = new ArrayList<>();
+        EditTextFreeSearch.setTextListener(this::onFreeSearchTextChange);
+        mNameEt.setTextListener(this::validate);
+        mPhoneNumber.setTextListener(this::validate);
+        mMyLocation.setTextListener(this::validate);
         initCategoriesAdapters();
         initBottomSheetListener();
+    }
+
+    private void validate(String s) {
+        validateBtn();
+    }
+
+    private void onFreeSearchTextChange(String s) {
+        addChipView();
     }
 
     /**
@@ -419,7 +285,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
             paybackImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorWhite), PorterDuff.Mode.SRC_IN);
             ((TextView) paybackSelected.getChildAt(1)).setText(paybackData.first);
         }
-
     }
 
     @Override
@@ -434,8 +299,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public String getName() {
-       // return mNameEt.getText().toString();
-        return "";
+        return mNameEt.getText();
     }
 
     @Override
@@ -463,15 +327,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
                 getString(R.string.approve), false);
     }
 
-    private boolean blackWordsCheck(String text) {
-        for (String blackWord : blackWords) {
-            if (text.contains(blackWord))
-                return false;
-        }
-
-        return true;
-    }
-
     private void initCategoriesAdapters() {
         emergencyAdapter.setWorkingData(true);
         emergencyCategoryRecycler.setAdapter(emergencyAdapter);
@@ -497,7 +352,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     private void addChipItem() {
         Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip_item, null, false);
-        chip.setText(String.format("%s %s", chipSearch.getText(), ((TextView) findViewById(R.id.counter)).getText()));
+        chip.setText(String.format("%s %s", EditTextFreeSearch.getText(), ((TextView) findViewById(R.id.counter)).getText()));
 
         chip.setOnCloseIconClickListener(new View.OnClickListener() {
             @Override
@@ -507,6 +362,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         });
 
         requestedItemsGroup.addView(chip);
-        chipSearch.setText("");
+        EditTextFreeSearch.setText("");
     }
 }

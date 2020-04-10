@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="locale"
+    android:textDirection="anyRtl"
     android:animateLayoutChanges="true"
     android:background="#FFFFFF">
 
@@ -37,8 +37,19 @@
                 android:textColor="@drawable/btn_text_selector"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/counter_view" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layoutDirection="rtl"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chips_group" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
+
 
             <EditText
                 android:id="@+id/more_details_editT"
@@ -47,14 +58,13 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittext_shape"
                 android:gravity="top"
+                android:lines="4"
+                android:padding="16dp"
                 android:inputType="text|textMultiLine|textCapSentences"
-                android:minHeight="120dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:textColor="@color/colorDark"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textDirection="rtl"
-                android:textSize="24sp"
+                android:textDirection="anyRtl"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="פרטיים אישיים:"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,9 +99,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
-                android:text="צריך עזרה עם:"
+                android:text="@string/i_need_help_with"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +116,7 @@
                 android:gravity="center_vertical"
                 android:text="דחיפות:"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +131,7 @@
                 android:gravity="center_vertical"
                 android:text="צורת החזר:"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +148,7 @@
                 android:gravity="center_vertical"
                 android:text="תרצו להשאיר הערה?"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +173,7 @@
                 android:background="@color/colorDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
+                app:layout_constraintTop_toBottomOf="@+id/chips_group" />
 
             <View
                 android:id="@+id/payback_separator"
@@ -191,14 +201,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layoutDirection="locale"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emergency_title"
                 tools:itemCount="3"
-                tools:listitem="@layout/category_list_item" />
+                tools:listitem="@layout/item_category_list" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -206,14 +216,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layoutDirection="locale"
                 android:orientation="horizontal"
+                android:layoutDirection="rtl"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/payback_title"
                 tools:itemCount="3"
-                tools:listitem="@layout/category_list_item" />
+                tools:listitem="@layout/item_category_list" />
 
 
             <com.edudb.bdude.general.CheckedEditText
@@ -264,16 +274,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/need_help_title" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chips_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layoutDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/counter_view" />
-
             <include
                 android:id="@+id/counter_view"
                 layout="@layout/chip_item_counter"
@@ -281,7 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/search_items" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

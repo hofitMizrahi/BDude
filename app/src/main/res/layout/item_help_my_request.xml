@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/root_item"
+    android:layoutDirection="rtl"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -35,7 +36,7 @@
                     android:maxLength="100"
                     android:text="ביקשתי עזרה עם"
                     android:textColor="@color/colorDark"
-                    android:textDirection="locale"
+                    android:textDirection="anyRtl"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/hours"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
                     android:layout_marginTop="16dp"
                     android:gravity="start"
                     android:textColor="@color/colorDark"
-                    android:textDirection="locale"
+                    android:textDirection="anyRtl"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/divider"
                     app:layout_constraintTop_toTopOf="parent"

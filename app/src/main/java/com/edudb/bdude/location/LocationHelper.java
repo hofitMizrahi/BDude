@@ -31,13 +31,10 @@ import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 
 public class LocationHelper {
 
-    public static final int GPS_OPEN = 999;
-
-    //tel aviv TODO change
     public static GeoPoint mLastLocation = new GeoPoint(32.069424, 34.783667);
 
+    public static final int GPS_OPEN = 999;
     public static final int LOCATION_PERMISSION_REQ_CODE = 10;
-
     private static LocationHelper mInstance;
 
     public static LocationHelper getInstance() {

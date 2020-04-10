@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/root_item"
+    android:layoutDirection="rtl"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingStart="16dp"
@@ -74,18 +75,16 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 android:gravity="start"
+                android:layout_marginTop="4dp"
                 android:maxLength="100"
+                android:layout_marginStart="16dp"
+                android:text="צריכים עזרה עם"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/hours"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@id/hours"
-                android:text="צריכים עזרה עם" />
+                app:layout_constraintStart_toEndOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@id/hours" />
 
             <TextView
                 android:id="@+id/hours"
@@ -95,7 +94,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="start"
                 android:textColor="@color/colorDark"
-                android:textDirection="locale"
+                android:textDirection="anyRtl"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/divider"
                 app:layout_constraintTop_toTopOf="parent"
@@ -113,6 +112,21 @@
                 app:layout_constraintStart_toEndOf="@id/hours"
                 app:layout_constraintTop_toTopOf="@id/hours"
                 app:layout_constraintVertical_bias="0.187" />
+
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="start"
+                android:textColor="@color/colorDark"
+                android:textDirection="anyRtl"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="@id/hours"
+                app:layout_constraintTop_toTopOf="@id/hours"
+                tools:text="13 קמ" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewItems"
