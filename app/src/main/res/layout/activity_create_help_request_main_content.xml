@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:animateLayoutChanges="true"
     android:background="#FFFFFF">
 
     <!-- TODO ALEX - REPLACE ALL HADRCODED STRINGS -->
@@ -17,26 +17,204 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="86dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="86dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/add_chip_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_selector"
+                android:enabled="false"
+                android:padding="12dp"
+                android:text="הוסף לבקשה"
+                android:textColor="@drawable/btn_text_selector"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chips_group" />
+
+            <EditText
+                android:id="@+id/more_details_editT"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edittext_shape"
+                android:gravity="top"
+                android:inputType="text|textMultiLine|textCapSentences"
+                android:minHeight="120dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/colorDark"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textDirection="rtl"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note_title" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/need_help_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/need_help_title"
+                app:layout_constraintTop_toTopOf="@+id/need_help_title"
+                app:srcCompat="@drawable/ic_exclamation_mark" />
 
             <TextView
-                android:textColor="@color/colorDark"
                 android:id="@+id/user_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="פרטיים אישיים:"
+                android:textColor="@color/colorDark"
                 android:textDirection="locale"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/need_help_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="צריך עזרה עם:"
+                android:textColor="@color/colorDark"
+                android:textDirection="locale"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_info_separator" />
+
+            <TextView
+                android:id="@+id/emergency_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="דחיפות:"
+                android:textColor="@color/colorDark"
+                android:textDirection="locale"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergency_separator" />
+
+            <TextView
+                android:id="@+id/payback_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="צורת החזר:"
+                android:textColor="@color/colorDark"
+                android:textDirection="locale"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payback_separator" />
+
+            <!-- TODO ALEX CHANGE ICON -->
+
+            <TextView
+                android:id="@+id/note_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center_vertical"
+                android:text="תרצו להשאיר הערה?"
+                android:textColor="@color/colorDark"
+                android:textDirection="locale"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note_separator" />
+
+            <View
+                android:id="@+id/user_info_separator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_location" />
+
+            <View
+                android:id="@+id/emergency_separator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
+
+            <View
+                android:id="@+id/payback_separator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergency_recycler" />
+
+            <View
+                android:id="@+id/note_separator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pay_chooser_recycler" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/emergency_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layoutDirection="locale"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergency_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/category_list_item" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pay_chooser_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layoutDirection="locale"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payback_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/category_list_item" />
+
 
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/name"
@@ -45,249 +223,66 @@
                 android:layout_marginTop="16dp"
                 android:hint="שם"
                 android:inputType="text"
-                app:required="true"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_info_title"  />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_info_title"
+                app:required="true" />
 
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/phone"
-                android:hint="מספר"
-                android:layout_marginTop="12dp"
                 android:layout_width="0dp"
-                app:drawable_start="@drawable/ic_user_phone_edittext"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="מספר"
                 android:inputType="phone"
-                app:layout_constraintStart_toStartOf="parent"
+                app:drawable_start="@drawable/ic_user_phone_edittext"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/my_location"
-                android:hint="תבחר מיקום"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_width="0dp"
+                android:hint="תבחר מיקום"
+                android:inputType="text"
                 app:drawable_start="@drawable/ic_user_location"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone"/>
-
-            <View
-                android:background="@color/colorDark"
-                android:layout_marginTop="24dp"
-                android:id="@+id/user_info_separator"
-                app:layout_constraintTop_toBottomOf="@+id/my_location"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:textColor="@color/colorDark"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:id="@+id/need_help_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="צריך עזרה עם:"
-                android:textDirection="locale"
-                android:textSize="17sp"
-                app:layout_constraintTop_toBottomOf="@+id/user_info_separator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <ImageView
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_exclamation_mark"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/need_help_title"
-                app:layout_constraintTop_toTopOf="@+id/need_help_title"
-                app:layout_constraintBottom_toBottomOf="@+id/need_help_title"
-                />
-
-            <!-- TODO ALEX CHANGE ICON -->
-
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
 
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/search_items"
-                android:hint="חיפוש חופשי"
-                android:layout_marginTop="12dp"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="חיפוש חופשי"
+                android:inputType="text"
                 app:drawable_start="@drawable/ic_search"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/need_help_title"/>
-
-            <include
-                android:visibility="gone"
-                android:layout_marginTop="16dp"
-                layout="@layout/chip_item_counter"
-                android:id="@+id/counter_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_items"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/need_help_title" />
 
             <com.google.android.material.chip.ChipGroup
-                android:layoutDirection="rtl"
-                android:layout_marginTop="16dp"
                 android:id="@+id/chips_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                android:layoutDirection="rtl"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/counter_view"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/counter_view" />
 
-            <Button
-                android:enabled="false"
-                android:layout_marginTop="32dp"
-                android:padding="12dp"
-                android:textSize="18sp"
-                android:text="הוסף לבקשה"
-                android:textStyle="bold"
-                android:background="@drawable/btn_selector"
-                android:textColor="@drawable/btn_text_selector"
-                android:id="@+id/add_chip_item"
+            <include
+                android:id="@+id/counter_view"
+                layout="@layout/chip_item_counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chips_group"/>
-
-            <View
-                android:background="@color/colorDark"
-                android:layout_marginTop="24dp"
-                android:id="@+id/emergency_separator"
-                app:layout_constraintTop_toBottomOf="@+id/add_chip_item"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:textColor="@color/colorDark"
                 android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:id="@+id/emergency_title"
-                android:layout_width="0dp"
-                android:textDirection="locale"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="דחיפות:"
-                android:textSize="17sp"
-                app:layout_constraintTop_toBottomOf="@+id/emergency_separator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                tools:listitem="@layout/category_list_item"
-                tools:itemCount="3"
-                android:layout_marginTop="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                android:layoutDirection="locale"
-                app:layout_constraintTop_toBottomOf="@+id/emergency_title"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/emergency_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-
-            <View
-                android:background="@color/colorDark"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:id="@+id/payback_separator"
-                app:layout_constraintTop_toBottomOf="@+id/emergency_recycler"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:textColor="@color/colorDark"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:id="@+id/payback_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="צורת החזר:"
-                android:textDirection="locale"
-                android:textSize="17sp"
-                app:layout_constraintTop_toBottomOf="@+id/payback_separator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                tools:listitem="@layout/category_list_item"
-                tools:itemCount="3"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                android:layoutDirection="locale"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/payback_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="36dp"
-                android:id="@+id/pay_chooser_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <View
-                android:background="@color/colorDark"
-                android:layout_marginTop="24dp"
-                android:id="@+id/note_separator"
-                app:layout_constraintTop_toBottomOf="@+id/pay_chooser_recycler"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="1dp"/>
-
-            <TextView
-                android:layout_marginTop="32dp"
-                android:textStyle="bold"
-                android:id="@+id/note_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="@color/colorDark"
-                android:text="תרצו להשאיר הערה?"
-                android:textDirection="locale"
-                android:textSize="17sp"
-                app:layout_constraintTop_toBottomOf="@+id/note_separator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <EditText
-                android:gravity="top"
-                android:textColor="@color/colorDark"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textDirection="rtl"
-                android:textStyle="bold"
-                android:id="@+id/more_details_editT"
-                android:textSize="24sp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edittext_shape"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:minHeight="120dp"
-                android:inputType="text|textMultiLine|textCapSentences"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/note_title" />
+                app:layout_constraintTop_toBottomOf="@+id/search_items" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

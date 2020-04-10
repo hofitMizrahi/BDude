@@ -56,20 +56,21 @@ public class CheckedEditText extends ConstraintLayout {
 
         if (attrs != null) {
 
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CheckedEditText);
+            TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.CheckedEditText);
             String text = a.getString(R.styleable.CheckedEditText_android_text);
             String hint = a.getString(R.styleable.CheckedEditText_android_hint);
             Drawable drawableStart = a.getDrawable(R.styleable.CheckedEditText_drawable_start);
             int inputType = a.getInt(R.styleable.CheckedEditText_android_inputType, EditorInfo.TYPE_TEXT_VARIATION_NORMAL);
             mRegex = a.getString(R.styleable.CheckedEditText_regex);
             mRequired = a.getBoolean(R.styleable.CheckedEditText_required, false);
+            boolean edit = a.getBoolean(R.styleable.CheckedEditText_edit, true);
 
             mEditText.setText(text != null ? text : "");
             mEditText.setHint(hint != null ? hint : "");
             mEditText.setInputType(inputType);
 
             if(drawableStart != null) {
-//                v.setBounds(0, 0, 55, 55);
+                drawableStart.setBounds(0, 0, 55, 55);
                 mEditText.setCompoundDrawablesRelative(drawableStart, null, null, null);
                 mEditText.setCompoundDrawablePadding(16);
             }

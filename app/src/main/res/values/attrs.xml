@@ -7,5 +7,6 @@
         <attr name="regex" format="string" />
         <attr name="drawable_start" format="reference"/>
         <attr name="required" format="boolean" />
+        <attr name="edit" format="boolean" />
     </declare-styleable>
 </resources>
