@@ -14,6 +14,7 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,35 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="86dp"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/add_chip_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/btn_selector"
-                android:enabled="false"
-                android:padding="12dp"
-                android:text="הוסף לבקשה"
-                android:textColor="@drawable/btn_text_selector"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/counter_view" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chips_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layoutDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
-
+            android:layout_marginEnd="24dp">
 
             <EditText
                 android:id="@+id/more_details_editT"
@@ -58,9 +31,9 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittext_shape"
                 android:gravity="top"
+                android:inputType="text|textMultiLine|textCapSentences"
                 android:lines="4"
                 android:padding="16dp"
-                android:inputType="text|textMultiLine|textCapSentences"
                 android:textColor="@color/colorDark"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:textDirection="anyRtl"
@@ -71,6 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/note_title" />
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="12dp"
@@ -80,11 +54,30 @@
                 app:layout_constraintTop_toTopOf="@+id/need_help_title"
                 app:srcCompat="@drawable/ic_exclamation_mark" />
 
+
+            <TextView
+                android:id="@+id/add_chip_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_selector"
+                android:enabled="false"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:text="@string/add_item"
+                android:textColor="@drawable/btn_text_selector"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/counter_view" />
+
             <TextView
                 android:id="@+id/user_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="פרטיים אישיים:"
+                android:text="@string/private_details_title"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
                 android:textSize="17sp"
@@ -138,8 +131,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/payback_separator" />
 
-            <!-- TODO ALEX CHANGE ICON -->
-
             <TextView
                 android:id="@+id/note_title"
                 android:layout_width="0dp"
@@ -154,6 +145,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/note_separator" />
+
+            <!-- TODO ALEX CHANGE ICON -->
 
             <View
                 android:id="@+id/user_info_separator"
@@ -210,14 +203,13 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_category_list" />
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pay_chooser_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal"
                 android:layoutDirection="rtl"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -237,6 +229,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_info_title"
                 app:required="true" />
+
 
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/phone"
@@ -273,6 +266,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/need_help_title" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layoutDirection="rtl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
 
             <include
                 android:id="@+id/counter_view"

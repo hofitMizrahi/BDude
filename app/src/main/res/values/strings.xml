@@ -88,5 +88,10 @@
     <string name="sent_in">נשלח ב:</string>
     <string name="comments">הערות:</string>
     <string name="refund_back">צורת החזר:</string>
+    <string name="summary_request_title">סיכום הבקשה שלך</string>
+    <string name="send_request_summary">סכם בקשה</string>
+    <string name="add_item">הוסף לבקשה</string>
+    <string name="x">x</string>
+    <string name="private_details_title">פרטיים אישיים:</string>
 
 </resources>

@@ -16,6 +16,11 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Product(String text, int count) {
+        amount = count;
+        product = text;
+    }
+
     public int getAmount() {
         return amount;
     }

@@ -20,6 +20,7 @@
     <color name="blue_button_lighter">#009BDF</color>
     <color name="borderGray1">#C2C2C2</color>
     <color name="gray_light">#C2C2C2</color>
+    <color name="gray_shadow">#0F000000</color>
     <color name="bottomNavigationBackgroundColor">#E8E8E8</color>
     <color name="orange_header_light">#f59331</color>
     <color name="orange_header_dark">#f16f30</color>

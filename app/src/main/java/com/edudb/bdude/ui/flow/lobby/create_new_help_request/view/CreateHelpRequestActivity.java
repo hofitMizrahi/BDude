@@ -71,14 +71,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.more_details_editT)
     EditText mMoreDetails;
 
-    @BindView(R.id.note)
-    TextView selectedNote;
-
     @BindView(R.id.phone)
     CheckedEditText mPhoneNumber;
 
     @BindView(R.id.send_help_request)
-    Button mHelpButton;
+    View mHelpButton;
 
     @BindView(R.id.need_help_title)
     TextView needHelpTitle;
@@ -90,13 +87,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     CheckedEditText EditTextFreeSearch;
 
     @BindView(R.id.add_chip_item)
-    Button addChipButton;
+    TextView addChipButton;
 
     @BindView(R.id.chips_group)
     ChipGroup requestedItemsGroup;
-
-    @BindView(R.id.items_selected)
-    ChipGroup itemsSelected;
 
     @BindView(R.id.counter)
     TextView counter;
@@ -120,6 +114,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         }
     }
 
+    @OnClick(R.id.btn_return)
+    void returnBackClicked() {
+        finish();
+    }
+
     @OnClick(R.id.increase_counter)
     void increaseCounter() {
         increaseItemCounter();
@@ -139,11 +138,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     void onSelectLocationClicked() {
         //TODO not edit
         mPresenter.selectLocationClicked();
-    }
-
-    @OnClick(R.id.close)
-    void goBack() {
-        finish();
     }
 
     private void validateBtn() {
@@ -209,7 +203,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         mPhoneNumber.setTextListener(this::validate);
         mMyLocation.setTextListener(this::validate);
         initCategoriesAdapters();
-        initBottomSheetListener();
+        //initBottomSheetListener();
     }
 
     private void validate(String s) {
@@ -220,72 +214,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         addChipView();
     }
 
-    /**
-     * bottom sheet state change listener
-     * we are changing data when sheet changed state
-     */
-    private void initBottomSheetListener() {
-        BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet));
-        sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == STATE_DRAGGING) {
-                    invalidateBottomSheetData();
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-            }
-        });
-    }
-
-    private void invalidateBottomSheetData() {
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-
-        //remove previous chips
-        itemsSelected.removeAllViews();
-
-        // add chips to bottom sheet
-        for (int i = 0; i < requestedItemsGroup.getChildCount(); i++) {
-            Chip chipold = (Chip) requestedItemsGroup.getChildAt(i);
-
-            Chip chip = (Chip) inflater.inflate(R.layout.chip_item, null, false);
-            chip.setText(chipold.getText());
-            chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
-
-            itemsSelected.addView(chip);
-        }
-
-        // init emergency & payback categories
-        setBottomSheetCategories();
-
-        // set note to bottom sheet
-        selectedNote.setText(mMoreDetails.getText().toString());
-
-    }
-
-    private void setBottomSheetCategories() {
-
-        LinearLayout emergencySelected = findViewById(R.id.emergency_selected);
-        Pair<String, Integer> emergencyData = emergencyAdapter.getSelectdItem();
-        if (emergencyData != null) {
-            ImageView emergencyImage = ((ImageView) emergencySelected.getChildAt(0));
-            emergencyImage.setImageResource(emergencyData.second);
-            emergencyImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorWhite), PorterDuff.Mode.SRC_IN);
-            ((TextView) emergencySelected.getChildAt(1)).setText(emergencyData.first);
-        }
-
-        LinearLayout paybackSelected = findViewById(R.id.payback_selected);
-        Pair<String, Integer> paybackData = paybackAdapter.getSelectdItem();
-        if (paybackData != null) {
-            ImageView paybackImage = ((ImageView) paybackSelected.getChildAt(0));
-            paybackImage.setImageResource(paybackData.second);
-            paybackImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorWhite), PorterDuff.Mode.SRC_IN);
-            ((TextView) paybackSelected.getChildAt(1)).setText(paybackData.first);
-        }
-    }
 
     @Override
     public String getLocationName() {
@@ -341,22 +269,28 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         counter.setText("x" + counterNum);
     }
 
-    @SuppressLint("SetTextI18n")
     private void decreaseItemCounter() {
-        int counterNum = Integer.parseInt(counter.getText().toString().replace("x", ""));
+        int counterNum = Integer.parseInt(counter.getText().toString().replace(getString(R.string.x), ""));
         if (counterNum > 1) {
             counterNum--;
-            counter.setText("x" + counterNum);
+            counter.setText(getString(R.string.x) + counterNum);
         }
     }
 
     private void addChipItem() {
         Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip_item, null, false);
-        chip.setText(String.format("%s %s", EditTextFreeSearch.getText(), ((TextView) findViewById(R.id.counter)).getText()));
+        int count =  Integer.parseInt(counter.getText().toString().replace(getString(R.string.x), ""));
+        chip.setText(String.format("%s %s", EditTextFreeSearch.getText(), count));
+
+        mProductsList.add(new Product(EditTextFreeSearch.getText(), count));
 
         chip.setOnCloseIconClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                //TODO remove chip from ArrayList;
+
                 requestedItemsGroup.removeView(v);
             }
         });
@@ -364,4 +298,73 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         requestedItemsGroup.addView(chip);
         EditTextFreeSearch.setText("");
     }
+
+
+    /**
+     * bottom sheet state change listener
+     * we are changing data when sheet changed state
+     */
+//    private void initBottomSheetListener() {
+//        BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet));
+//        sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+//                if (newState == STATE_DRAGGING) {
+//                    invalidateBottomSheetData();
+//                }
+//            }
+//
+//            @Override
+//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//            }
+//        });
+//    }
+
+//    private void invalidateBottomSheetData() {
+//
+//        LayoutInflater inflater = LayoutInflater.from(this);
+//
+//        //remove previous chips
+//        itemsSelected.removeAllViews();
+//
+//        // add chips to bottom sheet
+//        for (int i = 0; i < requestedItemsGroup.getChildCount(); i++) {
+//            Chip chipold = (Chip) requestedItemsGroup.getChildAt(i);
+//
+//            Chip chip = (Chip) inflater.inflate(R.layout.chip_item, null, false);
+//            chip.setText(chipold.getText());
+//            chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
+//
+//            itemsSelected.addView(chip);
+//        }
+//
+//        // init emergency & payback categories
+//        setBottomSheetCategories();
+//
+//        // set note to bottom sheet
+//        selectedNote.setText(mMoreDetails.getText().toString());
+//
+//    }
+//
+//    private void setBottomSheetCategories() {
+//
+//        LinearLayout emergencySelected = findViewById(R.id.emergency_selected);
+//        Pair<String, Integer> emergencyData = emergencyAdapter.getSelectdItem();
+//        if (emergencyData != null) {
+//            ImageView emergencyImage = ((ImageView) emergencySelected.getChildAt(0));
+//            emergencyImage.setImageResource(emergencyData.second);
+//            emergencyImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorWhite), PorterDuff.Mode.SRC_IN);
+//            ((TextView) emergencySelected.getChildAt(1)).setText(emergencyData.first);
+//        }
+//
+//        LinearLayout paybackSelected = findViewById(R.id.payback_selected);
+//        Pair<String, Integer> paybackData = paybackAdapter.getSelectdItem();
+//        if (paybackData != null) {
+//            ImageView paybackImage = ((ImageView) paybackSelected.getChildAt(0));
+//            paybackImage.setImageResource(paybackData.second);
+//            paybackImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorWhite), PorterDuff.Mode.SRC_IN);
+//            ((TextView) paybackSelected.getChildAt(1)).setText(paybackData.first);
+//        }
+//    }
+
 }
