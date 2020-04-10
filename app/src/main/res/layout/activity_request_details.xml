@@ -38,7 +38,7 @@
                         android:background="@color/yellow"
                         android:gravity="center"
                         android:padding="24dp"
-                        android:text="אני יעזור"
+                        android:text="@string/i_will_help"
                         android:textColor="@color/colorBlack"
                         android:textSize="25sp"
                         android:textStyle="bold"
@@ -64,7 +64,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="מרחק ממני:"
+                            android:text="@string/distance_from_me"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
+                            android:gravity="right"
                             android:textSize="18sp"
                             tools:text="30km" />
 
@@ -85,7 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="נשלח ב:"
+                            android:text="@string/sent_in"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -97,9 +97,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="13:00"
+                            tools:text="13:00"
+                            android:gravity="right"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
                             android:textSize="18sp" />
 
 
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="צורת החזר:"
+                            android:text="@string/refund_back"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -120,16 +120,16 @@
                             android:layout_marginTop="8dp"
                             android:drawableStart="@drawable/ic_refund_back"
                             android:drawablePadding="8dp"
-                            android:text="אני אחזיר לך עם פייבוקס"
+                            tools:text="אני אחזיר לך עם פייבוקס"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
+                            android:gravity="right"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="עזרה עם:"
+                            android:text="@string/help_with"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -138,6 +138,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/productsRecyclerView"
                             android:layout_width="match_parent"
+                            android:divider="@null"
+                            android:orientation="horizontal"
+                            app:reverseLayout="true"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp" />
 
@@ -145,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="הערות:"
+                            android:text="@string/comments"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -156,9 +159,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="אני בבידוד וצריכה קאפו"
+                            tools:text="אני בבידוד וצריכה קאפו"
                             android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
+                            android:gravity="right"
                             android:textSize="18sp" />
 
                         <LinearLayout
@@ -181,23 +184,25 @@
                                 android:text="@string/ty_very_match"
                                 android:layout_marginTop="16dp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="anyRtl"
+                                android:gravity="right"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+
+<!--                            TODO change text-->
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:textColor="@color/colorBlack"
-                                android:textDirection="anyRtl"
+                                android:gravity="right"
                                 android:textSize="18sp"
                                 android:text="תודה רבה על כוונתך לעזור, אפשר לחייג למספר או להשלוח הודעת וואטסאפ טקסט כרגע לא בטוח" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="מספר טלפון:"
+                                android:text="@string/phone_number"
                                 android:layout_marginTop="16dp"
                                 android:textColor="@color/colorBlack"
                                 android:textDirection="anyRtl"
@@ -286,7 +291,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_red_home"
+                                android:src="@drawable/ic_warning_yellow"
                                 app:layout_constraintBottom_toTopOf="@id/textView"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -330,7 +335,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="בבידוד"
+                                android:text="@string/in_isolation"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />

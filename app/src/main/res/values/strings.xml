@@ -79,5 +79,14 @@
     <string name="link_health_terms">ברוכים הבאים!</string>
     <string name="important_to_save_terms">חשוב לשמור על כללי הבטיחות</string>
     <string name="days_ago">ימ\'</string>
+    <string name="add_comment">תרצו להשאיר הערה?</string>
+    <string name="phone_number">מספר טלפון:</string>
+    <string name="help_with">עזרה עם:</string>
+    <string name="i_will_help">אני יעזור</string>
+    <string name="in_isolation">בבידוד</string>
+    <string name="distance_from_me">מרחק ממני:</string>
+    <string name="sent_in">נשלח ב:</string>
+    <string name="comments">הערות:</string>
+    <string name="refund_back">צורת החזר:</string>
 
 </resources>

@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center_vertical"
-                android:text="תרצו להשאיר הערה?"
+                android:text="@string/add_comment"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
                 android:textSize="17sp"
