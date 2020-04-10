@@ -22,6 +22,7 @@ import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
+import com.edudb.bdude.general.CheckedEditText;
 import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
@@ -60,8 +61,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Inject
     CategoryAdapter paybackAdapter;
 
-    @BindView(R.id.my_location_editT)
-    TextView mMyLocation;
+    @BindView(R.id.my_location)
+    CheckedEditText mMyLocation;
 
     @BindView(R.id.more_details_editT)
     EditText mMoreDetails;
@@ -69,8 +70,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.note)
     TextView selectedNote;
 
-    @BindView(R.id.phone_ET)
-    EditText mPhoneNumber;
+    @BindView(R.id.phone)
+    CheckedEditText mPhoneNumber;
 
 //  TODO ALEX - NO TITLE ANYMORE ? IF SO NEED TO REMOVE
 //    @BindView(R.id.need_help_with_editT)
@@ -82,11 +83,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.need_help_title)
     TextView needHelpTitle;
 
-    @BindView(R.id.name_ET)
-    EditText mNameEt;
+    @BindView(R.id.name)
+    CheckedEditText mNameEt;
 
     @BindView(R.id.search_items)
-    EditText chipSearch;
+    CheckedEditText chipSearch;
 
     @BindView(R.id.add_chip_item)
     Button addChipButton;
@@ -112,22 +113,22 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @BindView(R.id.pay_chooser_recycler)
     RecyclerView payCategoryRecycler;
 
-    @OnTextChanged({R.id.phone_ET, R.id.more_details_editT, R.id.my_location_editT, R.id.name_ET})
-    void onTextChange() {
-        validateBtn();
-    }
+//    @OnTextChanged({R.id.phone, R.id.more_details_editT, R.id.my_location_editT, R.id.name_ET})
+//    void onTextChange() {
+//        validateBtn();
+//    }
 
-    @OnTextChanged({R.id.search_items})
-    void onStartSearch() {
-        addChipView();
-    }
+//    @OnTextChanged({R.id.search_items})
+//    void onStartSearch() {
+//        addChipView();
+//    }
 
-    @OnFocusChange({R.id.phone_ET})
-    void onPhoneFocusChange() {
-        if (!mPhoneNumber.isFocused()) {
-            checkMobileNumberError();
-        }
-    }
+//    @OnFocusChange({R.id.phone})
+//    void onPhoneFocusChange() {
+//        if (!mPhoneNumber.isFocused()) {
+//            checkMobileNumberError();
+//        }
+//    }
 
     @OnClick(R.id.send_help_request)
     void onCreatePostClicked() {
@@ -151,8 +152,9 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         addChipItem();
     }
 
-    @OnClick(R.id.my_location_editT)
+    @OnClick(R.id.my_location)
     void onSelectLocationClicked() {
+        //TODO not edit
         mPresenter.selectLocationClicked();
     }
 
@@ -161,6 +163,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         finish();
     }
 
+    //TODO remove from view
     List<String> blackWords = Arrays.asList(
             "anal",
             "anus",
@@ -287,10 +290,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
         boolean retVal =
                 !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString()) &&
-                        !Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString()) &&
+                        !Utils.isNullOrWhiteSpace(mPhoneNumber.getText()) &&
                         !Utils.isNullOrWhiteSpace(mMyLocation.getText().toString()) &&
-                        !Utils.isNullOrWhiteSpace(mNameEt.getText().toString()) &&
-                        mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX) &&
+                      //  !Utils.isNullOrWhiteSpace(mNameEt.getText().toString()) &&
+                        mPhoneNumber.getText().matches(Constants.PHONE_FULL_REGEX) &&
                         blackWordsCheck(mMoreDetails.getText().toString());
 
         setBtnEnabled(retVal);
@@ -334,10 +337,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     }
 
     private void checkMobileNumberError() {
-        if (Utils.isNullOrWhiteSpace(mPhoneNumber.getText().toString()) || !mPhoneNumber.getText().toString().matches(Constants.PHONE_FULL_REGEX)) {
-            mPhoneNumber.setError(getString(R.string.check_the_number));
+        if (Utils.isNullOrWhiteSpace(mPhoneNumber.getText()) || !mPhoneNumber.getText().matches(Constants.PHONE_FULL_REGEX)) {
+            //mPhoneNumber.setError(getString(R.string.check_the_number));
         } else {
-            mPhoneNumber.setError(null);
+            //mPhoneNumber.setError(null);
         }
     }
 
@@ -431,7 +434,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public String getName() {
-        return mNameEt.getText().toString();
+       // return mNameEt.getText().toString();
+        return "";
     }
 
     @Override

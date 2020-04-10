@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CheckedEditText">
+        <attr name="android:text" />
+        <attr name="android:hint" />
+        <attr name="android:inputType" />
+        <attr name="regex" format="string" />
+        <attr name="drawable_start" format="reference"/>
+        <attr name="required" format="boolean" />
+    </declare-styleable>
+</resources>
