@@ -66,6 +66,11 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
     }
 
     @Override
+    public void saveUserName(String name) {
+        mDataBase.updateUserName(mView.getActivity(), name, this::onUpdateSuccess);
+    }
+
+    @Override
     public void onItemDeleteClicked(HelpRequest request) {
         mView.displayProgressBar();
         mDataBase.deleteRequest(request.getObjectID(), aVoid -> {

@@ -1,5 +1,6 @@
 package com.edudb.bdude.db;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -118,6 +119,21 @@ public class DatabaseController {
         DocumentReference dr = db.collection("users").document(SessionManager.getInstance().getUser().getUid());
 
         dr.update("phone_number", phone)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            getCurrentUserDetails(SessionManager.getInstance().getUser().getUid(), listener);
+                        }
+                    }
+                });
+    }
+
+    public void updateUserName(Activity activity, String name, IExecutable<User> listener) {
+
+        DocumentReference dr = db.collection("users").document(SessionManager.getInstance().getUser().getUid());
+
+        dr.update("name", name)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -61,13 +61,7 @@ public class IntroTermsActivity extends BaseActivity implements IntroTermsContra
     public void onBackPressed() {
 
         if(getFragmentCount() == 0){
-            DialogUtil.getSingleButtonInstance(this, (dialog, i) -> {
-
-                        this.finishAffinity();
-
-                    }, getString(R.string.pay_attention_please)
-                    , getString(R.string.exit_app)
-                    , getString(R.string.yes), true);
+            closeApp();
         }else {
             super.onBackPressed();
         }

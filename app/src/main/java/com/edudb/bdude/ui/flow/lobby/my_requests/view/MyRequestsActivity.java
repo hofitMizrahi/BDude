@@ -20,6 +20,8 @@ import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
+import com.edudb.bdude.ui.flow.dialogs.UpdateNameDialogFragment;
+import com.edudb.bdude.ui.flow.dialogs.UpdatePhoneDialogFragment;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
@@ -70,9 +72,14 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
         mPresenter.selectLocationClicked();
     }
 
+    @OnClick(R.id.editName)
+    void onUpdateNameClicked() {
+        UpdateNameDialogFragment.showDialog(getSupportFragmentManager(),"", mPresenter::saveUserName);
+    }
+
     @OnClick(R.id.editPhone)
     void onUpdatePhoneClicked() {
-        mPresenter.setUserPhoneClicked("052333333");
+        UpdatePhoneDialogFragment.showDialog(getSupportFragmentManager(),"", mPresenter::setUserPhoneClicked);
     }
 
     @OnClick(R.id.sendToEmail)

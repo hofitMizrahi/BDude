@@ -57,7 +57,7 @@
                             tools:text="רונה"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
                             tools:text="0528415353"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +125,7 @@
                             tools:text="תל אביב, הרצל 20"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent" />
 
@@ -158,7 +158,7 @@
                             android:text="@string/share_this_app"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -266,8 +266,8 @@
                        android:layout_marginTop="8dp"
                        android:layout_marginStart="8dp"
                        android:paddingBottom="8dp"
-                       android:paddingStart="12dp"
-                       android:paddingEnd="12dp"
+                       android:paddingStart="16dp"
+                       android:paddingEnd="16dp"
                        android:background="@drawable/rounded_btn_continue"/>
 
                 </LinearLayout>

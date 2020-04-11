@@ -23,5 +23,6 @@ public interface MyRequestsContract {
         void updateLocation(GeoPoint location);
         void onStartReloadData();
         void setUserPhoneClicked(String s);
+        void saveUserName(String name);
     }
 }

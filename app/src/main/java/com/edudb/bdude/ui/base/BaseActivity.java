@@ -28,6 +28,7 @@ import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
+import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
@@ -228,6 +229,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 checkLocation();
             }
         }
+    }
+
+    public void closeApp(){
+        DialogUtil.getSingleButtonInstance(this, (dialog, i) -> {
+
+                    this.finishAffinity();
+
+                }, getString(R.string.pay_attention_please)
+                , getString(R.string.exit_app)
+                , getString(R.string.yes), true);
     }
 
     @Override

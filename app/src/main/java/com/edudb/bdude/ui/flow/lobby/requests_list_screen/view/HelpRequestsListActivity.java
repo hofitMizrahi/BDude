@@ -126,4 +126,9 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
             }
         return null;
     }
+
+    @Override
+    public void onBackPressed() {
+        closeApp();
+    }
 }
