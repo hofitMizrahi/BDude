@@ -44,7 +44,7 @@ public class SendRequestModule {
     @PerActivity
     @Provides
     HelpRequest provideRequestDetails() {
-        return (HelpRequest) mActivity.getIntent().getExtras().getSerializable(POST_OBJ);
+        return (HelpRequest) mActivity.getIntent().getExtras().getParcelable(POST_OBJ);
     }
 
 }

@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class HelpRequest implements Serializable {
+public class HelpRequest implements Parcelable {
 
     @SerializedName("address_coords")
     @Expose
@@ -62,6 +62,38 @@ public class HelpRequest implements Serializable {
 
     public HelpRequest() {
     }
+
+    protected HelpRequest(Parcel in) {
+        double lat = in.readDouble();
+        double lan = in.readDouble();
+        address_coords = new GeoPoint(lat, lan);
+        timestamp = in.readLong();
+        status = in.readInt();
+        views = in.readInt();
+        products = in.readArrayList(Product.class.getClassLoader());
+        category = in.readInt();
+        ageAtRisk = in.readByte() != 0;
+        inIsolation = in.readByte() != 0;
+        address_text = in.readString();
+        body = in.readString();
+        objectID = in.readString();
+        phone_number = in.readString();
+        title = in.readString();
+        user_ID = in.readString();
+        user_name = in.readString();
+    }
+
+    public static final Creator<HelpRequest> CREATOR = new Creator<HelpRequest>() {
+        @Override
+        public HelpRequest createFromParcel(Parcel in) {
+            return new HelpRequest(in);
+        }
+
+        @Override
+        public HelpRequest[] newArray(int size) {
+            return new HelpRequest[size];
+        }
+    };
 
     public int getStatus() {
         return status;
@@ -205,5 +237,30 @@ public class HelpRequest implements Serializable {
 
     public void setUserName(String user_name) {
         this.user_name = user_name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeDouble(address_coords.getLatitude());
+        parcel.writeDouble(address_coords.getLongitude());
+        parcel.writeLong(timestamp);
+        parcel.writeInt(status);
+        parcel.writeInt(views);
+        parcel.writeList(products);
+        parcel.writeInt(category);
+        parcel.writeByte((byte) (ageAtRisk ? 1 : 0));
+        parcel.writeByte((byte) (inIsolation ? 1 : 0));
+        parcel.writeString(address_text);
+        parcel.writeString(body);
+        parcel.writeString(objectID);
+        parcel.writeString(phone_number);
+        parcel.writeString(title);
+        parcel.writeString(user_ID);
+        parcel.writeString(user_name);
     }
 }

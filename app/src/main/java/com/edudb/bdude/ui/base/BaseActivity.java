@@ -35,6 +35,7 @@ import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
 import com.edudb.bdude.ui.flow.login.view.LoginActivity;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -152,7 +153,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
 
-        if (this instanceof IntroTermsActivity || this instanceof LoginActivity || this instanceof CreateHelpRequestActivity) {
+        if (this instanceof SendRequestActivity || this instanceof IntroTermsActivity || this instanceof LoginActivity || this instanceof CreateHelpRequestActivity) {
             mBaseActionBar.hideActionBar();
         } else {
             mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));

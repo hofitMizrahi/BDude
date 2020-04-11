@@ -75,29 +75,6 @@
                             android:textSize="18sp"
                             tools:text="30km" />
 
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/sent_in"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/time"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            tools:text="13:00"
-                            android:gravity="right"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="18sp" />
-
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -107,7 +84,6 @@
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
                             android:textStyle="bold" />
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -140,6 +116,7 @@
                             android:layout_marginTop="8dp" />
 
                         <TextView
+                            android:id="@+id/more_details_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"

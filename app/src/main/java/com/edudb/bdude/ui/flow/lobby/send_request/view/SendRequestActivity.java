@@ -18,6 +18,7 @@ import com.edudb.bdude.ui.flow.lobby.send_request.contract.SendRequestContract;
 import com.edudb.bdude.ui.flow.lobby.send_request.presenter.SendRequestPresenter;
 import javax.inject.Inject;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class SendRequestActivity extends BaseActivity implements SendRequestContract.View {
 
@@ -36,17 +37,13 @@ public class SendRequestActivity extends BaseActivity implements SendRequestCont
     @BindView(R.id.body)
     TextView mBodyTxt;
 
-    @BindView(R.id.time)
-    TextView mTimeTxt;
-
     @BindView(R.id.distance)
     TextView mDistance;
 
     @BindView(R.id.phoneNumber)
     TextView mNumber;
-
-    @BindView(R.id.helpBtn)
-    Button mHelpBtn;
+    @BindView(R.id.more_details_title)
+    TextView mMoreDetailsTitle;
 
     @BindView(R.id.age_at_risk_container)
     View mAgeAtRisk;
@@ -56,6 +53,11 @@ public class SendRequestActivity extends BaseActivity implements SendRequestCont
 
     @BindView(R.id.isolation_container)
     View mIsolation;
+
+    @OnClick(R.id.btn_private_area)
+    void onBackClicked(){
+        finish();
+    }
 
     @Override
     public int getLayoutResource() {
@@ -89,14 +91,18 @@ public class SendRequestActivity extends BaseActivity implements SendRequestCont
                 LinearLayoutManager.HORIZONTAL,
                 false);
 
+        //TODO add refund details from pbj
+
         mRecyclerView.setLayoutManager(HorizontalLayout);
         mAdapter.setData(mHelpRequest.getProducts());
         mRecyclerView.setAdapter(mAdapter);
         mName.setText(mHelpRequest.getUserName());
 
+        Utils.setViewVisibility(mMoreDetailsTitle, !Utils.isNullOrWhiteSpace(mHelpRequest.getBody()), View.GONE);
+        Utils.setViewVisibility(mBodyTxt, !Utils.isNullOrWhiteSpace(mHelpRequest.getBody()), View.GONE);
+
         mName.setText(mHelpRequest.getUserName());
         mBodyTxt.setText(mHelpRequest.getBody());
-        mTimeTxt.setText(Utils.getTimeFormat(mHelpRequest.getTimestamp()));
         mDistance.setText(mHelpRequest.getAddress_text());
     }
 }

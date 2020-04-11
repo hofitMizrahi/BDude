@@ -45,7 +45,6 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     @Override
     public void sendRequest() {
 
-        mView.displayProgressBar();
         User user = SessionManager.getInstance().getUser();
 
         HelpRequest post = new HelpRequest();
