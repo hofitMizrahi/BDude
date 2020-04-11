@@ -14,10 +14,18 @@ import com.edudb.bdude.db.DatabaseController;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerLoginComponent;
 import com.edudb.bdude.di.modules.LoginModule;
+import com.edudb.bdude.general.Constants;
+import com.edudb.bdude.shared_preferences.SharedPrefsController;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.login.contract.LoginContract;
 import com.edudb.bdude.ui.flow.login.presenter.LoginPresenter;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.Auth;
@@ -31,9 +39,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.gson.Gson;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -42,13 +53,20 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
+    private static final String TAG = "LoginActivity";
+
     public static final String USER_SAVE = "user_details";
     public static final int RC_SIGN_IN = 555;
+    public static final int FACEBOOK_SIGN_IN = 64206;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private CallbackManager callbackManager;
 
     @Inject
     LoginPresenter mPresenter;
+
+    @Inject
+    SharedPrefsController sharedPrefsController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +75,30 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnClick(R.id.facebook_login)
     void facebookLoginClicked() {
+        signInWithFacebook();
+    }
 
+    private void signInWithFacebook() {
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                firebaseAuthWithFacebook(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+            }
+        });
+
+        // TODO ALEX - CHECK IF NEED OTHER PERMISIONS ?
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
     }
 
     @OnClick(R.id.google_login)
@@ -100,8 +141,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        IdpResponse response = IdpResponse.fromResultIntent(data);
-
         if (requestCode == RC_SIGN_IN) {
             Log.d("TAG", "onActivityResult: requestCode = " + requestCode);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -113,8 +152,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 Toast.makeText(getApplicationContext(), "Sign In Failed", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "onActivityResult: failed");
             }
+        } else if (requestCode == FACEBOOK_SIGN_IN) {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         } else {
-
+            IdpResponse response = IdpResponse.fromResultIntent(data);
             // Sign in failed
             if (response == null) {
                 // User pressed back button
@@ -132,8 +173,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d("TAG", "firebaseAuthWithGoogle: " + account.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        fireBaseAuthenticate(credential);
+    }
+
+    private void firebaseAuthWithFacebook(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        fireBaseAuthenticate(credential);
+    }
+
+    private void fireBaseAuthenticate(AuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -149,12 +198,17 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
 
             private void userDetailsSuccess(User user) {
-
+                saveUserLocal(user);
                 Intent resultIntent = new Intent();
                 setResult(BaseActivity.RC_SIGN_IN, resultIntent);
                 finish();
             }
         });
+    }
+
+    private void saveUserLocal(User user){
+        String userJson = new Gson().toJson(user);
+        sharedPrefsController.putString(Constants.LOGGED_IN_USER, userJson);
     }
 
     private void showSnackbar(String message) {

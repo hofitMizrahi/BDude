@@ -5,34 +5,47 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.Post;
+import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerHelpRequestsListComponent;
 import com.edudb.bdude.di.modules.HelpRequestsModule;
 import com.edudb.bdude.enums.EnumNavigation;
+import com.edudb.bdude.general.Constants;
+import com.edudb.bdude.session.SessionManager;
+import com.edudb.bdude.shared_preferences.SharedPrefsController;
 import com.edudb.bdude.ui.base.BaseActivity;
+import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
-import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
+import com.google.gson.Gson;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
-public class HelpRequestsListActivity extends BaseActivity implements HelpRequestsListContract.View{
+public class HelpRequestsListActivity extends BaseActivity implements HelpRequestsListContract.View {
 
     @Inject
     HelpRequestsRecyclerAdapter mAdapter;
 
     @Inject
     HelpRequestsListPresenter mPresenter;
+
+    @Inject
+    SharedPrefsController sharedPrefsController;
 
     @BindView(R.id.request_recycler_view)
     RecyclerView mRecyclerView;
@@ -41,18 +54,29 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     TextView mEmptyViewTxt;
 
     @OnClick(R.id.helpContinueBtn)
-    void startHelpRequest(){
+    void startHelpRequest() {
         mPresenter.createHelpRequestClicked();
     }
 
     @OnClick(R.id.btn_private_area)
-    void navigateToUserDetails(){
+    void navigateToUserDetails() {
         checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkLocalUser(); // TODO - Alex find better place for the method
+    }
+
+    // TODO - Alex find better place for the method
+    private void checkLocalUser() {
+        Gson gson = new Gson();
+        String json = sharedPrefsController.getString(Constants.LOGGED_IN_USER);
+        User user = gson.fromJson(json, User.class);
+        if (user != null) {
+            SessionManager.getInstance().setCurrentUser(user);
+        }
     }
 
     @Override
@@ -118,12 +142,12 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
 
     private <R> R checkLoadMore(Long aLong) {
         LinearLayoutManager manager = ((LinearLayoutManager) mRecyclerView.getLayoutManager());
-            if (manager != null) {
-                int lastVisibleItem = manager.findLastVisibleItemPosition();
-                if (lastVisibleItem > mPresenter.getSearchResultItems().size() - 5) {
-                    mPresenter.onResultsScroll(lastVisibleItem);
-                }
+        if (manager != null) {
+            int lastVisibleItem = manager.findLastVisibleItemPosition();
+            if (lastVisibleItem > mPresenter.getSearchResultItems().size() - 5) {
+                mPresenter.onResultsScroll(lastVisibleItem);
             }
+        }
         return null;
     }
 }
