@@ -59,6 +59,11 @@ public class SendRequestActivity extends BaseActivity implements SendRequestCont
         finish();
     }
 
+    @OnClick(R.id.sendRequest)
+    void onSendRequestClicked(){
+        mPresenter.sendRequest();
+    }
+
     @Override
     public int getLayoutResource() {
         return R.layout.activity_send_request;
