@@ -102,4 +102,7 @@
     <string name="exit_app">האם ברצונך לצאת מהאפליקציה?</string>
     <string name="yes">כן</string>
 
+    <string name="facebook_app_id">1295107550685494</string>
+    <string name="fb_login_protocol_scheme">fb1295107550685494</string>
+
 </resources>
