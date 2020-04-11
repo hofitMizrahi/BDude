@@ -104,5 +104,7 @@
 
     <string name="facebook_app_id">1295107550685494</string>
     <string name="fb_login_protocol_scheme">fb1295107550685494</string>
+    <string name="ask_help_with">ביקשתי עזרה עם</string>
+    <string name="personal_info">האיזור האישי</string>
 
 </resources>

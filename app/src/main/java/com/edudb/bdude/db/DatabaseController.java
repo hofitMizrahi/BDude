@@ -45,7 +45,7 @@ public class DatabaseController {
     public void createRequest(HelpRequest post, IExecutable<Void> listener) {
 
         DocumentReference dr = db.collection("requests").document();
-        post.setObjectID(dr.getId());
+        post.setId(dr.getId());
         dr.set(post).addOnSuccessListener(snapshot -> {
             listener.execute(null);
         });

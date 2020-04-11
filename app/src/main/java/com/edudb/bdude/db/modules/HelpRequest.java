@@ -39,9 +39,9 @@ public class HelpRequest implements Parcelable {
     @SerializedName("body")
     @Expose
     String body;
-    @SerializedName("objectID")
+    @SerializedName("id")
     @Expose
-    String objectID;
+    String id;
     @SerializedName("phone_number")
     @Expose
     String phone_number;
@@ -71,7 +71,7 @@ public class HelpRequest implements Parcelable {
         inIsolation = in.readByte() != 0;
         address_text = in.readString();
         body = in.readString();
-        objectID = in.readString();
+        id = in.readString();
         phone_number = in.readString();
         title = in.readString();
         user_ID = in.readString();
@@ -138,14 +138,6 @@ public class HelpRequest implements Parcelable {
         this.inIsolation = inIsolation;
     }
 
-    public String getObjectID() {
-        return objectID;
-    }
-
-    public void setObjectID(String objectID) {
-        this.objectID = objectID;
-    }
-
     public String getUser_name() {
         return user_name;
     }
@@ -195,11 +187,11 @@ public class HelpRequest implements Parcelable {
     }
 
     public String getId() {
-        return user_ID;
+        return id;
     }
 
     public void setId(String id) {
-        this.user_ID = id;
+        this.id = id;
     }
 
     public String getPhone_number() {
@@ -252,7 +244,7 @@ public class HelpRequest implements Parcelable {
         parcel.writeByte((byte) (inIsolation ? 1 : 0));
         parcel.writeString(address_text);
         parcel.writeString(body);
-        parcel.writeString(objectID);
+        parcel.writeString(id);
         parcel.writeString(phone_number);
         parcel.writeString(title);
         parcel.writeString(user_ID);

@@ -30,27 +30,23 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="16dp"
                     android:gravity="start"
+                    android:layout_marginTop="4dp"
                     android:maxLength="100"
-                    android:text="ביקשתי עזרה עם"
-                    android:fontFamily="@font/alef"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/ask_help_with"
                     android:textColor="@color/colorDark"
                     android:textDirection="anyRtl"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/hours"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="@id/hours" />
+                    app:layout_constraintStart_toEndOf="@+id/divider"
+                    app:layout_constraintTop_toBottomOf="@id/hours" />
 
                 <TextView
                     android:id="@+id/hours"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/alef"
+                    android:layout_marginStart="16dp"
                     android:gravity="start"
                     android:textColor="@color/colorDark"
                     android:textDirection="anyRtl"
@@ -58,6 +54,20 @@
                     app:layout_constraintStart_toEndOf="@+id/divider"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="13:00" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:gravity="start"
+                    android:textColor="@color/colorDark"
+                    android:textDirection="anyRtl"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintBottom_toBottomOf="@id/hours"
+                    app:layout_constraintTop_toTopOf="@id/hours"
+                    tools:text="13 קמ" />
 
                 <View
                     android:id="@+id/divider"

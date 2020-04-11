@@ -11,7 +11,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/backBtn"
+        app:layout_constraintBottom_toTopOf="@id/backBtnContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -279,7 +279,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backBtn"
+        android:id="@+id/backBtnContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_yellow"
@@ -287,12 +287,12 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:background="@drawable/ic_back"
             android:gravity="center"
-            android:text="ליצור בקשה"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -306,7 +306,7 @@
             android:padding="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="חזרה לבקשות"
+            android:text="@string/personal_info"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
             android:textStyle="bold"

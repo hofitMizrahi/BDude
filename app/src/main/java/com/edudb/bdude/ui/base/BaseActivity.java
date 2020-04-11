@@ -152,7 +152,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
 
-        if (this instanceof SendRequestActivity || this instanceof IntroTermsActivity || this instanceof LoginActivity || this instanceof CreateHelpRequestActivity) {
+        if (this instanceof SendRequestActivity || this instanceof MyRequestsActivity || this instanceof IntroTermsActivity || this instanceof LoginActivity || this instanceof CreateHelpRequestActivity) {
             mBaseActionBar.hideActionBar();
         } else {
             mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
