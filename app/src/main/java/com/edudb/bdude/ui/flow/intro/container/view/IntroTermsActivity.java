@@ -1,9 +1,16 @@
 package com.edudb.bdude.ui.flow.intro.container.view;
 
+import android.Manifest;
+import android.app.Fragment;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.di.components.DaggerIntroTermsComponent;
 import com.edudb.bdude.di.modules.IntroTermsModule;
+import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.intro.container.contract.IntroTermsContract;
 import com.edudb.bdude.ui.flow.intro.container.presenter.IntroTermsPresenter;
@@ -37,17 +44,36 @@ public class IntroTermsActivity extends BaseActivity implements IntroTermsContra
 
     @Override
     public void initViews() {
-
         addFragment(getSupportFragmentManager(), R.id.container, WelcomeTermsFragment.getInstance(), false,"");
     }
 
     @Override
     public void navigateToLocationFragment() {
-        addFragment(getSupportFragmentManager(), R.id.container, LocationTermsFragment.getInstance(), false,"");
+        addFragment(getSupportFragmentManager(), R.id.container, LocationTermsFragment.getInstance(), true,"");
     }
 
     @Override
     public void navigateHealthWarningsFragment() {
-        addFragment(getSupportFragmentManager(), R.id.container, HealthTermsFragment.getInstance(), false,"");
+        addFragment(getSupportFragmentManager(), R.id.container, HealthTermsFragment.getInstance(), true,"");
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(getFragmentCount() == 0){
+            DialogUtil.getSingleButtonInstance(this, (dialog, i) -> {
+
+                        this.finishAffinity();
+
+                    }, getString(R.string.pay_attention_please)
+                    , getString(R.string.exit_app)
+                    , getString(R.string.yes), true);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    protected int getFragmentCount() {
+        return getSupportFragmentManager().getBackStackEntryCount();
     }
 }

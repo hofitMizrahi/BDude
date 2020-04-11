@@ -2,16 +2,13 @@ package com.edudb.bdude.ui.flow.lobby.my_requests.view;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.HelpRequest;
@@ -26,13 +23,9 @@ import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
 import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 

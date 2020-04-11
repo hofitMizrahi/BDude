@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.TaskStackBuilder;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -35,6 +36,7 @@ import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
+import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
 import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
 import com.edudb.bdude.ui.flow.login.view.LoginActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -164,6 +166,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mBaseActionBar.postInvalidate();
     }
 
+    public void navigateToMyRequest() {
+
+        TaskStackBuilder.create(this)
+                .addNextIntent(new Intent(this, HelpRequestsListActivity.class))
+                .addNextIntent(new Intent(this, MyRequestsActivity.class))
+                .startActivities();
+    }
+
     public void startDial(String id, String phoneNumber) {
         try {
             Bundle bundle = new Bundle();
@@ -233,7 +243,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     startActivity(new Intent(this, CreateHelpRequestActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
                     break;
                 case MY_REQUESTS:
-                    startActivity(new Intent(this, MyRequestsActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                    navigateToMyRequest();
                     break;
             }
         }

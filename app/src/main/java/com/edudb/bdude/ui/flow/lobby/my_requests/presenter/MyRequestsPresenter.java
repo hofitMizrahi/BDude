@@ -68,7 +68,7 @@ public class MyRequestsPresenter implements MyRequestsContract.Presenter {
     @Override
     public void onItemDeleteClicked(HelpRequest request) {
         mView.displayProgressBar();
-        mDataBase.deleteRequest(request.getId(), aVoid -> {
+        mDataBase.deleteRequest(request.getObjectID(), aVoid -> {
             mMyList.remove(request);
 
             if(mMyList != null){

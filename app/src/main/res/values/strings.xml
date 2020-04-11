@@ -98,5 +98,8 @@
     <string name="free_search">חיפוש חופשי</string>
     <string name="phone_regex">^(0)[23489]{1}[0-9]{7}$|^(05)[0-9]{8}$</string>
     <string name="location">מיקום:</string>
+    <string name="close">סגור</string>
+    <string name="exit_app">האם ברצונך לצאת מהאפליקציה?</string>
+    <string name="yes">כן</string>
 
 </resources>

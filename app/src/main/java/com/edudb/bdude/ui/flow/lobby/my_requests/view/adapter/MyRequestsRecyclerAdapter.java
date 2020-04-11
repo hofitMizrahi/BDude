@@ -35,7 +35,6 @@ public class MyRequestsRecyclerAdapter extends RecyclerView.Adapter implements I
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         if(mList.size() > 0) {
             ((MyRequestViewHolder)holder).onBind(mList.get(position), this);
         }else {
