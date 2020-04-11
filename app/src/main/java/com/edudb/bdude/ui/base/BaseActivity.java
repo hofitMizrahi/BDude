@@ -25,7 +25,6 @@ import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.modules.Post;
-import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.BaseActionBar;
 import com.edudb.bdude.general.utils.DialogUtil;
@@ -46,13 +45,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Objects;
-
 import butterknife.ButterKnife;
 
 import static com.edudb.bdude.location.LocationHelper.GPS_OPEN;
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
-import static com.edudb.bdude.ui.flow.login.view.LoginActivity.USER_SAVE;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 

@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.modules.Post;
@@ -25,12 +23,9 @@ import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsL
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
 import com.google.gson.Gson;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;

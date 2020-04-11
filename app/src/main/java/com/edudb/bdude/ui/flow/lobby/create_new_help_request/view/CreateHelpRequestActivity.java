@@ -274,6 +274,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     }
 
     private void initCategoriesAdapters() {
+
+        emergencyCategoryRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+        payCategoryRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+
         emergencyAdapter.setWorkingData(true);
         emergencyCategoryRecycler.setAdapter(emergencyAdapter);
         paybackAdapter.setWorkingData(false);

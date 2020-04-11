@@ -3,7 +3,6 @@ package com.edudb.bdude.db;
 import android.util.Log;
 import com.algolia.search.saas.AlgoliaException;
 import com.edudb.bdude.db.modules.Post;
-import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.algolia.AlgoliaModel;
 import com.edudb.bdude.general.utils.Utils;
 import com.google.gson.reflect.TypeToken;

@@ -1,6 +1,5 @@
 package com.edudb.bdude.di.modules;
 
-import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
@@ -32,7 +31,7 @@ public class RequestDetailsModule {
     @PerActivity
     @Provides
     Post provideRequestDetails() {
-        return (Post) mActivity.getIntent().getExtras().getSerializable(REQUEST_DETAILS);
+        return (Post) mActivity.getIntent().getExtras().getParcelable(REQUEST_DETAILS);
     }
 
     @PerActivity

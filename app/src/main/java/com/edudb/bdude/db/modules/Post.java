@@ -1,13 +1,15 @@
 package com.edudb.bdude.db.modules;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.edudb.bdude.db.modules.algolia.Geoloc;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Post implements Serializable {
+public class Post implements Parcelable {
 
     @SerializedName("timestamp")
     @Expose
@@ -60,6 +62,39 @@ public class Post implements Serializable {
 
     public Post() {
     }
+
+    protected Post(Parcel in) {
+        timestamp = in.readLong();
+        status = in.readInt();
+        views = in.readInt();
+        products = in.createTypedArrayList(Product.CREATOR);
+        category = in.readInt();
+        ageAtRisk = in.readByte() != 0;
+        inIsolation = in.readByte() != 0;
+        double lat = in.readDouble();
+        double lng = in.readDouble();
+        geoloc = new Geoloc(lat, lng);
+        address = in.readString();
+        body = in.readString();
+        id = in.readString();
+        phoneNumber = in.readString();
+        title = in.readString();
+        userID = in.readString();
+        userAvatar = in.readString();
+        userName = in.readString();
+    }
+
+    public static final Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
 
     public int getStatus() {
         return status;
@@ -188,5 +223,31 @@ public class Post implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(timestamp);
+        parcel.writeInt(status);
+        parcel.writeInt(views);
+        parcel.writeTypedList(products);
+        parcel.writeInt(category);
+        parcel.writeByte((byte) (ageAtRisk ? 1 : 0));
+        parcel.writeByte((byte) (inIsolation ? 1 : 0));
+        parcel.writeDouble(geoloc.getLat());
+        parcel.writeDouble(geoloc.getLng());
+        parcel.writeString(address);
+        parcel.writeString(body);
+        parcel.writeString(id);
+        parcel.writeString(phoneNumber);
+        parcel.writeString(title);
+        parcel.writeString(userID);
+        parcel.writeString(userAvatar);
+        parcel.writeString(userName);
     }
 }

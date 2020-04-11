@@ -2,14 +2,9 @@ package com.edudb.bdude.db.modules;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.edudb.bdude.db.modules.algolia.Geoloc;
-import com.edudb.bdude.enums.EnumGender;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 import java.util.List;
 
 public class HelpRequest implements Parcelable {

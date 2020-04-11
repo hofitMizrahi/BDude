@@ -31,23 +31,13 @@ public class BaseActionBar extends ConstraintLayout {
     @BindView(R.id.root)
     View mRoot;
 
-//    @BindView(R.id.ask_location)
-//    ImageView askLocation;
+    @BindView(R.id.btnLocation)
+    Button askLocation;
 
-    @OnClick(R.id.searchContainer)
+    @OnClick({R.id.searchContainer, R.id.btnLocation})
     void onGetLocationTextClicked() {
         EventBus.getDefault().post(new ChangeLocationEvent());
     }
-
-    @OnClick(R.id.btnUserRegistration)
-    void onUserRegistrationBtnClicked() {
-        EventBus.getDefault().post(new UserRegistrationMessageEvent());
-    }
-
-//    @OnClick(R.id.ask_location)
-//    void onAskPermissionBtnClicked() {
-//        EventBus.getDefault().post(new LocationMessageEvent());
-//    }
 
     public BaseActionBar(Context context) {
         super(context);

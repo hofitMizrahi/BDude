@@ -143,6 +143,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
             mName.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
             mName.setText(mCurrentUser.getName());
+            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
         }
 
         if (Utils.isNullOrWhiteSpace(mCurrentUser.getAddress_text())) {
@@ -150,6 +151,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
             mAddress.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
             mAddress.setText(mCurrentUser.getAddress_text());
+            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
         }
 
         if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhone_number())) {
@@ -157,6 +159,7 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
             mPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
         } else {
             mPhoneNumber.setText(mCurrentUser.getPhone_number());
+            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
         }
     }
 

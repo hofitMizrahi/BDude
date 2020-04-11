@@ -28,7 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
 
     private List<Pair<String, Integer>> paybackCategories = Arrays.asList(
             new Pair<>("תרומה", R.drawable.ic_payback_contribution),
-            new Pair<>("אני אשלם דרך...", R.drawable.ic_payback_pay),
+            new Pair<>("אעביר לך", R.drawable.ic_payback_pay),
             new Pair<>("בהשאלה", R.drawable.ic_payback_loan)
     );
 

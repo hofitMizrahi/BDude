@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnUserRegistration"
+            android:id="@+id/btnLocation"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
@@ -52,7 +52,7 @@
             android:orientation="vertical"
             android:gravity="center"
             app:layout_constraintEnd_toStartOf="@+id/btnShare"
-            app:layout_constraintStart_toEndOf="@+id/btnUserRegistration"
+            app:layout_constraintStart_toEndOf="@+id/btnLocation"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView

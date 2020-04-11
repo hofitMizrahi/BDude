@@ -1,7 +1,6 @@
 package com.edudb.bdude.di.modules;
 
 import com.edudb.bdude.db.modules.HelpRequest;
-import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.edudb.bdude.ui.flow.lobby.send_request.contract.SendRequestContract;

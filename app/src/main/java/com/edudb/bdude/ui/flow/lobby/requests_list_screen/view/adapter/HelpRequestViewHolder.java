@@ -1,33 +1,25 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.Post;
-import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.widget.LinearLayout.HORIZONTAL;
 
 class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
