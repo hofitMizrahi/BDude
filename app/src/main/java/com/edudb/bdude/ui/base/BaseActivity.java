@@ -259,7 +259,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             if (resultCode == Activity.RESULT_OK && data != null) {
 
                 if (getActivity() instanceof CreateHelpRequestActivity) {
-                    ((CreateHelpRequestPresenter) getPresenter()).changeLocation(LocationHelper.getLocation(data));
+                    ((CreateHelpRequestPresenter) getPresenter()).updateLocation(LocationHelper.getLocation(data));
 
                 }else if (getActivity() instanceof MyRequestsActivity) {
                     ((MyRequestsPresenter) getPresenter()).updateLocation(LocationHelper.getLocation(data));

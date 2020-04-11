@@ -16,11 +16,13 @@ import com.edudb.bdude.interfaces.IExecutable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 public class CheckedEditText extends ConstraintLayout {
 
     private IExecutable<String> mTextChangeListener;
+    private IExecutable<Void> mClickListener;
 
     private Context mContext;
 
@@ -35,9 +37,16 @@ public class CheckedEditText extends ConstraintLayout {
 
     @OnTextChanged(R.id.name_ET)
     void onTextChange(){
-        Utils.setViewVisibility(mWarningIV, Utils.isNullOrWhiteSpace(mEditText.getText().toString()), View.INVISIBLE);
+        validate();
         if(mTextChangeListener != null){
             mTextChangeListener.execute(getText());
+        }
+    }
+
+    @OnClick(R.id.name_ET)
+    void onEditTextClicked(){
+        if(mClickListener != null){
+            mClickListener.execute(null);
         }
     }
 
@@ -78,6 +87,11 @@ public class CheckedEditText extends ConstraintLayout {
             mEditText.setHint(hint != null ? hint : "");
             mEditText.setInputType(inputType);
 
+            if(!edit){
+                mEditText.setFocusable(false);
+                mEditText.setClickable(true);
+            }
+
             if(maxLength > 0){
                 mEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(maxLength)});
             }
@@ -97,8 +111,18 @@ public class CheckedEditText extends ConstraintLayout {
         return mEditText.getText().toString();
     }
 
-    public boolean validatePhone() {
-        return false;
+    public boolean validate() {
+
+        boolean retVal;
+
+        if(Utils.isNullOrWhiteSpace(getText()) || (mRegex != null && !getText().matches(Constants.PHONE_FULL_REGEX))){
+            retVal = true;
+        }else {
+            retVal = false;
+        }
+        Utils.setViewVisibility(mWarningIV, retVal, View.INVISIBLE);
+
+        return !retVal;
     }
 
     public void setText(String text) {
@@ -107,5 +131,8 @@ public class CheckedEditText extends ConstraintLayout {
 
     public void setTextListener(IExecutable<String> listener){
         mTextChangeListener = listener;
+    }
+    public void setClickListener(IExecutable<Void> listener){
+        mClickListener = listener;
     }
 }

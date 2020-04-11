@@ -122,9 +122,6 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
         Utils.setViewVisibility(mAgeAtRisk, mRequestDetailsObj.isAgeAtRisk(), View.GONE);
         Utils.setViewVisibility(mIsolation, mRequestDetailsObj.isInIsolation(), View.GONE);
 
-        mRequestDetailsObj.getProducts().addAll(mRequestDetailsObj.getProducts());
-        mRequestDetailsObj.getProducts().addAll(mRequestDetailsObj.getProducts());
-
         RecyclerView.LayoutManager HorizontalLayout
                 = new LinearLayoutManager(
                 this,

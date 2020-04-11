@@ -59,7 +59,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/distance_from_me"
+                            android:text="@string/location"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="18sp"
@@ -158,6 +158,31 @@
                             android:textColor="@color/colorBlack"
                             android:gravity="right"
                             android:textSize="18sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_number"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/colorBlack"
+                            android:textDirection="anyRtl"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/phoneNumber"
+                            android:layout_width="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:drawableStart="@drawable/ic_phone_grey"
+                            android:textColor="@color/colorBlack"
+                            android:drawableTint="@color/yellow"
+                            android:textDirection="anyRtl"
+                            android:textSize="18sp"
+                            tools:text="0528415353" />
+
 
                     </LinearLayout>
 
@@ -338,7 +363,7 @@
                     android:padding="6dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="@string/send_request_summary"
+                    android:text="@string/send_request"
                     android:textColor="@color/colorBlack"
                     android:textSize="22sp"
                     android:textStyle="bold" />

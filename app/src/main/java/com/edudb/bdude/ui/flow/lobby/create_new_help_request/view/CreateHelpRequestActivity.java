@@ -1,6 +1,7 @@
 package com.edudb.bdude.ui.flow.lobby.create_new_help_request.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.util.Pair;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
+import com.edudb.bdude.db.modules.HelpRequest;
 import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
@@ -33,6 +35,7 @@ import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.adapter.CategoryAdapter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
+import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -50,6 +53,8 @@ import butterknife.OnTextChanged;
 import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING;
 
 public class CreateHelpRequestActivity extends BaseActivity implements CreateHelpRequestContract.View {
+
+    public static final String POST_OBJ = "post_obj";
 
     private List<Product> mProductsList;
 
@@ -75,7 +80,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     CheckedEditText mPhoneNumber;
 
     @BindView(R.id.send_help_request)
-    View mHelpButton;
+    TextView mHelpButton;
 
     @BindView(R.id.need_help_title)
     TextView needHelpTitle;
@@ -114,6 +119,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         }
     }
 
+    @OnTextChanged(R.id.more_details_editT)
+    void onTextChange() {
+       validateBtn();
+    }
+
     @OnClick(R.id.btn_return)
     void returnBackClicked() {
         finish();
@@ -136,21 +146,20 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @OnClick(R.id.my_location)
     void onSelectLocationClicked() {
-        //TODO not edit
         mPresenter.selectLocationClicked();
     }
 
     private void validateBtn() {
 
         boolean retVal =
-                !Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString()) &&
-                        !Utils.isNullOrWhiteSpace(mPhoneNumber.getText()) &&
                         !Utils.isNullOrWhiteSpace(mMyLocation.getText()) &&
                         !Utils.isNullOrWhiteSpace(mNameEt.getText()) &&
                         mProductsList.size() > 0 &&
-                        mPhoneNumber.getText().matches(Constants.PHONE_FULL_REGEX) &&
-                        Utils.blackWordsCheck(mMoreDetails.getText().toString());
+                        mPhoneNumber.validate();
 
+        if(!Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString()) && !Utils.blackWordsCheck(mMoreDetails.getText().toString())){
+            retVal = false;
+        }
         setBtnEnabled(retVal);
     }
 
@@ -201,9 +210,13 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         EditTextFreeSearch.setTextListener(this::onFreeSearchTextChange);
         mNameEt.setTextListener(this::validate);
         mPhoneNumber.setTextListener(this::validate);
-        mMyLocation.setTextListener(this::validate);
+        mMyLocation.setClickListener(this::openMap);
         initCategoriesAdapters();
         //initBottomSheetListener();
+    }
+
+    private void openMap(Void v) {
+        openMap();
     }
 
     private void validate(String s) {
@@ -235,17 +248,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         return mMoreDetails.getText().toString();
     }
 
-    //  TODO ALEX - NO TITLE ANYMORE ? IF SO NEED TO REMOVE
-    @Override
-    public String getFullTitle() {
-        return "";
-    }
-
-    @Override
-    public void changeLocationText(String locationName) {
-        mMyLocation.setText(locationName);
-    }
-
     @Override
     public void showNotAskMoreRequestView() {
         DialogUtil.getSingleButtonInstance(this, (dialog, whith) -> {
@@ -253,6 +255,21 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
                 }, getString(R.string.pay_attention_please),
                 getString(R.string.you_cont_ask_more_five_requests),
                 getString(R.string.approve), false);
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        return mProductsList;
+    }
+
+    @Override
+    public void setLocationAddress(String locationName) {
+        mMyLocation.setText(locationName);
+    }
+
+    @Override
+    public void navigateToSendRequestActivity(HelpRequest post) {
+        startActivity(new Intent(this, SendRequestActivity.class).putExtra(POST_OBJ, post));
     }
 
     private void initCategoriesAdapters() {
@@ -289,12 +306,13 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
             @Override
             public void onClick(View v) {
 
-                //TODO remove chip from ArrayList;
+                //TODO remove chip from ArrayList && validate;
 
                 requestedItemsGroup.removeView(v);
             }
         });
 
+        validateBtn();
         requestedItemsGroup.addView(chip);
         EditTextFreeSearch.setText("");
     }

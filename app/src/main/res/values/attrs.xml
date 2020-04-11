@@ -7,7 +7,7 @@
         <attr name="regex" format="string" />
         <attr name="drawable_start" format="reference"/>
         <attr name="required" format="boolean" />
-        <attr name="maxLength" format="boolean"/>
+        <attr name="maxLength" format="integer"/>
         <attr name="edit" format="boolean" />
     </declare-styleable>
 </resources>

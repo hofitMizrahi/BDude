@@ -49,15 +49,16 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
         User user = SessionManager.getInstance().getUser();
 
         HelpRequest post = new HelpRequest();
-        post.setTitle(mView.getFullTitle());
         post.setBody(mView.getBody());
         post.setPhoneNumber(mView.getNumber());
         post.setGeoPoint(mSelectedLocation);
+        post.setProducts(mView.getProducts());
         post.setAddress_text(mView.getLocationName());
         post.setUserName(mView.getName());
         post.setUser_ID(user.getUid());
         post.setTimestamp(System.currentTimeMillis());
-        mDataBase.createRequest(post, this::onComplete);
+
+        mView.navigateToSendRequestActivity(post);
     }
 
     @Override
@@ -66,14 +67,8 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
     }
 
     @Override
-    public void changeLocation(GeoPoint location) {
+    public void updateLocation(GeoPoint location) {
         mSelectedLocation = location;
-        mView.changeLocationText(LocationHelper.getLocationName(mView.getActivity(), location));
-    }
-
-    private void onComplete(Void var){
-        mView.hideProgressBar();
-        mView.getActivity().finish();
-        mView.checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
+        mView.setLocationAddress(LocationHelper.getLocationName(mView.getActivity(), location));
     }
 }
