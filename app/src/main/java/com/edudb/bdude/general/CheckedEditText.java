@@ -23,7 +23,7 @@ public class CheckedEditText extends ConstraintLayout {
 
     private IExecutable<String> mTextChangeListener;
     private IExecutable<Void> mClickListener;
-    private boolean errorRemoved;
+    private boolean showError = true;
 
     private Context mContext;
 
@@ -121,7 +121,7 @@ public class CheckedEditText extends ConstraintLayout {
         }else {
             retVal = false;
         }
-        Utils.setViewVisibility(mWarningIV, retVal && !errorRemoved, View.INVISIBLE);
+        Utils.setViewVisibility(mWarningIV, retVal && showError, View.INVISIBLE);
 
         return !retVal;
     }
@@ -131,7 +131,7 @@ public class CheckedEditText extends ConstraintLayout {
     }
 
     public void removeError(){
-        errorRemoved = true;
+        showError = false;
     }
 
     public void setTextListener(IExecutable<String> listener){
@@ -139,5 +139,10 @@ public class CheckedEditText extends ConstraintLayout {
     }
     public void setClickListener(IExecutable<Void> listener){
         mClickListener = listener;
+    }
+
+    public void showWarning() {
+        showError = true;
+        validate();
     }
 }

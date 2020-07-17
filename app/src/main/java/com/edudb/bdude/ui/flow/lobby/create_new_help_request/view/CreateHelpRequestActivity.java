@@ -310,12 +310,14 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
                         mProductsList.remove(removeItem);
                         validateBtn();
                     }
+                    if(mProductsList.size() == 0){
+                        mFreeSearch.showWarning();
+                    }
                 }
             });
             validateBtn();
             chip.setTag(newText);
             requestedItemsGroup.addView(chip);
-
         }else {
             Toast.makeText(this, "מוצר זה כבר נמצא ברשימה שלך", Toast.LENGTH_SHORT).show();
         }
