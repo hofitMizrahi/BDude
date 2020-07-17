@@ -1,176 +1,172 @@
-package com.edudb.bdude.ui.flow.lobby.my_requests.view;
+package com.edudb.bdude.ui.flow.lobby.my_requests.view
 
-import android.content.Intent;
-import android.net.Uri;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.edudb.bdude.R;
-import com.edudb.bdude.application.BdudeApplication;
-import com.edudb.bdude.db.modules.HelpRequest;
-import com.edudb.bdude.db.modules.User;
-import com.edudb.bdude.di.components.DaggerMyRequestsComponent;
-import com.edudb.bdude.di.modules.MyRequestsModule;
-import com.edudb.bdude.general.BaseActionBar;
-import com.edudb.bdude.general.utils.Utils;
-import com.edudb.bdude.session.SessionManager;
-import com.edudb.bdude.ui.base.BaseActivity;
-import com.edudb.bdude.ui.base.BasePresenter;
-import com.edudb.bdude.ui.flow.dialogs.UpdateNameDialogFragment;
-import com.edudb.bdude.ui.flow.dialogs.UpdatePhoneDialogFragment;
-import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract;
-import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
-import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter;
-import org.greenrobot.eventbus.EventBus;
-import java.util.List;
-import javax.inject.Inject;
-import butterknife.BindView;
-import butterknife.OnClick;
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
+import butterknife.OnClick
+import com.edudb.bdude.R
+import com.edudb.bdude.application.BdudeApplication
+import com.edudb.bdude.db.modules.HelpRequest
+import com.edudb.bdude.db.modules.User
+import com.edudb.bdude.di.components.DaggerMyRequestsComponent
+import com.edudb.bdude.di.modules.MyRequestsModule
+import com.edudb.bdude.general.BaseActionBar.ShareMessageEvent
+import com.edudb.bdude.general.utils.Utils
+import com.edudb.bdude.session.SessionManager
+import com.edudb.bdude.ui.base.BaseActivity
+import com.edudb.bdude.ui.base.BasePresenter
+import com.edudb.bdude.ui.flow.dialogs.UpdateNameDialogFragment
+import com.edudb.bdude.ui.flow.dialogs.UpdatePhoneDialogFragment
+import com.edudb.bdude.ui.flow.lobby.my_requests.contract.MyRequestsContract
+import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter
+import com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter.MyRequestsRecyclerAdapter
+import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
-public class MyRequestsActivity extends BaseActivity implements MyRequestsContract.View {
+class MyRequestsActivity : BaseActivity(), MyRequestsContract.View {
 
+    @JvmField
     @Inject
-    MyRequestsPresenter mPresenter;
+    var mPresenter: MyRequestsPresenter? = null
 
+    @JvmField
     @Inject
-    User mCurrentUser;
+    var mCurrentUser: User? = null
 
+    @JvmField
     @Inject
-    MyRequestsRecyclerAdapter mAdapter;
+    var mAdapter: MyRequestsRecyclerAdapter? = null
 
+    @JvmField
     @BindView(R.id.my_requests_recycler_view)
-    RecyclerView mRecycler;
+    var mRecycler: RecyclerView? = null
 
+    @JvmField
     @BindView(R.id.name)
-    TextView mName;
+    var mName: TextView? = null
 
+    @JvmField
     @BindView(R.id.address)
-    TextView mAddress;
+    var mAddress: TextView? = null
 
+    @JvmField
     @BindView(R.id.phoneNumber)
-    TextView mPhoneNumber;
+    var mPhoneNumber: TextView? = null
 
+    @JvmField
     @BindView(R.id.emailEditText)
-    EditText mEmailContentET;
+    var mEmailContentET: EditText? = null
 
     @OnClick(R.id.btnShare)
-    void onShareBtnClicked() {
-        EventBus.getDefault().post(new BaseActionBar.ShareMessageEvent());
+    fun onShareBtnClicked() {
+        EventBus.getDefault().post(ShareMessageEvent())
     }
 
     @OnClick(R.id.backBtn)
-    void onBackBtnClicked() {
-        onBackPressed();
+    fun onBackBtnClicked() {
+        onBackPressed()
     }
 
     @OnClick(R.id.editAddress)
-    void onUpdateLocationClicked() {
-        mPresenter.selectLocationClicked();
+    fun onUpdateLocationClicked() {
+        mPresenter!!.selectLocationClicked()
     }
 
     @OnClick(R.id.editName)
-    void onUpdateNameClicked() {
-        UpdateNameDialogFragment.showDialog(getSupportFragmentManager(),"", mPresenter::saveUserName);
+    fun onUpdateNameClicked() {
+        UpdateNameDialogFragment.showDialog(supportFragmentManager, "") { name: String? -> mPresenter!!.saveUserName(name) }
     }
 
     @OnClick(R.id.editPhone)
-    void onUpdatePhoneClicked() {
-        UpdatePhoneDialogFragment.showDialog(getSupportFragmentManager(),"", mPresenter::setUserPhoneClicked);
+    fun onUpdatePhoneClicked() {
+        UpdatePhoneDialogFragment.showDialog(supportFragmentManager, "") { s: String? -> mPresenter!!.setUserPhoneClicked(s) }
     }
 
     @OnClick(R.id.sendToEmail)
-    void onSendEmailClicked() {
-        if(!Utils.isNullOrWhiteSpace(mEmailContentET.getText().toString())){
+    fun onSendEmailClicked() {
+        if (!Utils.isNullOrWhiteSpace(mEmailContentET!!.text.toString())) {
 
-            String mailto = "mailto:covid19communityhelp@gmail.com" +
+            //TODO change this to do in background
+            val mailto = "mailto:covid19communityhelp@gmail.com" +
                     "?cc=" + "covid19communityhelp@gmail.com" +
                     "&subject=" + Uri.encode("חוות דעת") +
-                    "&body=" + Uri.encode(mEmailContentET.getText().toString());
-
-            Intent i = new Intent(Intent.ACTION_SENDTO);
-            i.setData(Uri.parse(mailto));
-
+                    "&body=" + Uri.encode(mEmailContentET!!.text.toString())
+            val i = Intent(Intent.ACTION_SENDTO)
+            i.data = Uri.parse(mailto)
             try {
-                startActivity(Intent.createChooser(i, "Send mail..."));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                startActivity(Intent.createChooser(i, "Send mail..."))
+            } catch (ex: ActivityNotFoundException) {
+                Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    @Override
-    public BasePresenter getPresenter() {
-        return mPresenter;
+    override fun getPresenter(): BasePresenter {
+        return mPresenter!!
     }
 
-    @Override
-    public int getLayoutResource() {
-        return R.layout.activity_my_requests;
+    override fun getLayoutResource(): Int {
+        return R.layout.activity_my_requests
     }
 
-    @Override
-    public void initDependencies() {
-        DaggerMyRequestsComponent.builder().applicationComponent(BdudeApplication.getInstance().getApplicationComponent())
-                .myRequestsModule(new MyRequestsModule(this))
+    override fun initDependencies() {
+        DaggerMyRequestsComponent.builder().applicationComponent(BdudeApplication.getInstance().applicationComponent)
+                .myRequestsModule(MyRequestsModule(this))
                 .build()
-                .inject(this);
+                .inject(this)
     }
 
-    @Override
-    public void displayList(List<HelpRequest> posts) {
-        mRecycler.setVisibility(View.VISIBLE);
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mRecycler.setNestedScrollingEnabled(false);
-        mAdapter.setDate(posts, mPresenter);
-        mRecycler.setAdapter(mAdapter);
+    override fun displayList(posts: List<HelpRequest>) {
+        mRecycler!!.visibility = View.VISIBLE
+        mRecycler!!.layoutManager = LinearLayoutManager(this)
+        mRecycler!!.isNestedScrollingEnabled = false
+        mAdapter!!.setDate(posts, mPresenter)
+        mRecycler!!.adapter = mAdapter
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.onStartReloadData();
+    override fun onResume() {
+        super.onResume()
+        mPresenter!!.onStartReloadData()
     }
 
-    @Override
-    public void initView() {
-
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getName())) {
-            mName.setText("הכנס שם");
-            mName.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+    override fun initView() {
+        if (Utils.isNullOrWhiteSpace(mCurrentUser!!.name)) {
+            mName!!.text = "הכנס שם"
+            mName!!.setTextColor(ContextCompat.getColor(this, R.color.gray_light))
         } else {
-            mName.setText(mCurrentUser.getName());
-            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
+            mName!!.text = mCurrentUser!!.name
+            mAddress!!.setTextColor(ContextCompat.getColor(this, R.color.yellow))
         }
-
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getAddress_text())) {
-            mAddress.setText("הכנס כתובת");
-            mAddress.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+        if (Utils.isNullOrWhiteSpace(mCurrentUser!!.address_text)) {
+            mAddress!!.text = "הכנס כתובת"
+            mAddress!!.setTextColor(ContextCompat.getColor(this, R.color.yellow))
         } else {
-            mAddress.setText(mCurrentUser.getAddress_text());
-            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
+            mAddress!!.text = mCurrentUser!!.address_text
+            mAddress!!.setTextColor(ContextCompat.getColor(this, R.color.colorBlack))
         }
-
-        if (Utils.isNullOrWhiteSpace(mCurrentUser.getPhone_number())) {
-            mPhoneNumber.setText("הכנס מספר טלפון");
-            mPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.gray_light));
+        if (Utils.isNullOrWhiteSpace(mCurrentUser!!.phone_number)) {
+            mPhoneNumber!!.text = "הכנס מספר טלפון"
+            mPhoneNumber!!.setTextColor(ContextCompat.getColor(this, R.color.gray_light))
         } else {
-            mPhoneNumber.setText(mCurrentUser.getPhone_number());
-            mAddress.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
+            mPhoneNumber!!.text = mCurrentUser!!.phone_number
+            mAddress!!.setTextColor(ContextCompat.getColor(this, R.color.yellow))
         }
     }
 
-    @Override
-    public void refreshList(List<HelpRequest> list) {
-        mAdapter.refreshData(list);
-        mAdapter.notifyDataSetChanged();
+    override fun refreshList(list: List<HelpRequest>) {
+        mAdapter!!.refreshData(list)
+        mAdapter!!.notifyDataSetChanged()
     }
 
-    @Override
-    public void setCurrentUser(){
-        mCurrentUser = SessionManager.getInstance().getUser();
+    override fun setCurrentUser() {
+        mCurrentUser = SessionManager.getInstance().user
     }
 }

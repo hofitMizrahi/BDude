@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.lobby.create_new_help_request.adapter;
+package com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.adapter;
 
 import android.util.Pair;
 import android.view.View;
@@ -12,11 +12,7 @@ import com.edudb.bdude.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-/**
- * Created by alexkorolov on 09/04/2020.
- */
 class CategoryHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.categoryName)
