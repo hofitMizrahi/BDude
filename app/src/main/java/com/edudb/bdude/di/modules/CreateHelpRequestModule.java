@@ -3,9 +3,10 @@ package com.edudb.bdude.di.modules;
 import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.session.SessionManager;
-import com.edudb.bdude.ui.flow.lobby.create_new_help_request.adapter.CategoryAdapter;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.adapter.PaymentAdapter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.adapter.EmergencyAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -38,7 +39,12 @@ public class CreateHelpRequestModule {
     }
 
     @Provides
-    CategoryAdapter provideAdapter() {
-        return new CategoryAdapter();
+    PaymentAdapter provideAdapter() {
+        return new PaymentAdapter();
+    }
+
+    @Provides
+    EmergencyAdapter provideEmergencyAdapter() {
+        return new EmergencyAdapter();
     }
 }

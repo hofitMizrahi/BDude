@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layoutDirection="rtl"
-    android:background="@color/color_main_background"
     android:layout_height="match_parent"
+    android:background="@color/color_main_background"
+    android:layoutDirection="rtl"
     android:padding="16dp">
 
     <ScrollView
@@ -14,358 +14,353 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            style="@style/card_view_style"
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="@string/request_detail_title"
+                android:textColor="@color/colorBlack"
+                android:textDirection="anyRtl"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:id="@+id/helpDetailsContainer"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent">
-
-                    <Button
-                        android:id="@+id/helpBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/yellow"
-                        android:gravity="center"
-                        android:padding="24dp"
-                        android:text="@string/i_will_help"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="25sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                </LinearLayout>
+            <androidx.cardview.widget.CardView
+                style="@style/card_view_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    app:layout_constraintBottom_toTopOf="@id/helpDetailsContainer"
-                    android:layout_height="wrap_content"
-                    android:padding="24dp"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/content_container"
+                        android:id="@+id/helpDetailsContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@id/divider">
+                        app:layout_constraintBottom_toBottomOf="parent">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/distance_from_me"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/distance"
+                        <Button
+                            android:id="@+id/helpBtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:padding="24dp"
+                            android:text="@string/i_will_help"
                             android:textColor="@color/colorBlack"
-                            android:gravity="right"
-                            android:textSize="18sp"
-                            tools:text="30km" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/sent_in"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/time"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            tools:text="13:00"
-                            android:gravity="right"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="18sp" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/refund_back"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:drawableStart="@drawable/ic_refund_back"
-                            android:drawablePadding="8dp"
-                            tools:text="אני אחזיר לך עם פייבוקס"
-                            android:textColor="@color/colorBlack"
-                            android:gravity="right"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/help_with"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/productsRecyclerView"
-                            android:layout_width="match_parent"
-                            android:divider="@null"
-                            android:orientation="horizontal"
-                            app:reverseLayout="true"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/comments"
-                            android:textColor="@color/colorBlack"
-                            android:textDirection="anyRtl"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/body"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            tools:text="אני בבידוד וצריכה קאפו"
-                            android:textColor="@color/colorBlack"
-                            android:gravity="right"
-                            android:textSize="18sp" />
-
-                        <LinearLayout
-                            android:id="@+id/phoneContainer"
-                            android:orientation="vertical"
-                            android:layout_marginTop="16dp"
-                            android:visibility="gone"
-                            tools:visibility="visible"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/colorBlack"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/ty_very_match"
-                                android:layout_marginTop="16dp"
-                                android:textColor="@color/colorBlack"
-                                android:gravity="right"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-<!--                            TODO change text-->
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:textColor="@color/colorBlack"
-                                android:gravity="right"
-                                android:textSize="18sp"
-                                android:text="תודה רבה על כוונתך לעזור, אפשר לחייג למספר או להשלוח הודעת וואטסאפ טקסט כרגע לא בטוח" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/phone_number"
-                                android:layout_marginTop="16dp"
-                                android:textColor="@color/colorBlack"
-                                android:textDirection="anyRtl"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/phoneNumberWhatsApp"
-                                android:layout_width="wrap_content"
-                                android:drawablePadding="8dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:drawableStart="@drawable/ic_yellow_whatsapp"
-                                android:textColor="@color/colorBlack"
-                                android:textDirection="anyRtl"
-                                android:textSize="18sp"
-                                tools:text="0528415353" />
-
-                            <TextView
-                                android:id="@+id/phoneNumber"
-                                android:layout_width="wrap_content"
-                                android:drawablePadding="8dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:drawableStart="@drawable/ic_phone_grey"
-                                android:textColor="@color/colorBlack"
-                                android:drawableTint="@color/yellow"
-                                android:textDirection="anyRtl"
-                                android:textSize="18sp"
-                                tools:text="0528415353" />
-
-
-                        </LinearLayout>
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/title_container"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="4"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:padding="24dp"
+                        app:layout_constraintBottom_toTopOf="@id/helpDetailsContainer"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:id="@+id/content_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:src="@drawable/ic_user_pic"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            android:layout_marginTop="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toBottomOf="@id/divider">
 
                             <TextView
-                                android:id="@+id/name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="8dp"
-                                android:text="תמר"
+                                android:text="@string/distance_from_me"
                                 android:textColor="@color/colorBlack"
+                                android:textDirection="anyRtl"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="right"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp"
+                                tools:text="30km" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/sent_in"
+                                android:textColor="@color/colorBlack"
+                                android:textDirection="anyRtl"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="right"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp"
+                                tools:text="13:00" />
+
+
+                            <TextView
+                                android:id="@+id/payBackTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/refund_back"
+                                android:textColor="@color/colorBlack"
+                                android:textDirection="anyRtl"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/pay_back_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:drawableStart="@drawable/ic_refund_back"
+                                android:drawablePadding="8dp"
+                                android:textDirection="rtl"
+                                android:gravity="right"
+                                android:drawableTint="@color/colorBlack"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp"
+                                tools:text="אני אחזיר לך עם פייבוקס" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/help_with"
+                                android:textColor="@color/colorBlack"
+                                android:textDirection="anyRtl"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chips_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:layoutDirection="rtl"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
+
+                            <TextView
+                                android:id="@+id/more_details_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/comments"
+                                android:textColor="@color/colorBlack"
+                                android:textDirection="anyRtl"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/body"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="right"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp"
+                                tools:text="אני בבידוד וצריכה קאפו" />
+
+                            <LinearLayout
+                                android:id="@+id/phoneContainer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                tools:visibility="visible">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorBlack" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:gravity="right"
+                                    android:text="@string/ty_very_match"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <!--                            TODO change text-->
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:gravity="right"
+                                    android:text="תודה רבה על כוונתך לעזור, אפשר לחייג למספר או להשלוח הודעת וואטסאפ טקסט כרגע לא בטוח"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:text="@string/phone_number"
+                                    android:textColor="@color/colorBlack"
+                                    android:textDirection="anyRtl"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/phoneNumberWhatsApp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:drawableStart="@drawable/ic_yellow_whatsapp"
+                                    android:drawablePadding="8dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:textDirection="anyRtl"
+                                    android:textSize="20sp"
+                                    tools:text="0528415353" />
+
+                                <TextView
+                                    android:id="@+id/phoneNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:drawableStart="@drawable/ic_phone_grey"
+                                    android:drawablePadding="8dp"
+                                    android:drawableTint="@color/yellow"
+                                    android:textColor="@color/colorBlack"
+                                    android:textDirection="anyRtl"
+                                    android:textSize="20sp"
+                                    tools:text="0528415353" />
+
+
+                            </LinearLayout>
+
                         </LinearLayout>
 
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:id="@+id/age_at_risk_container"
+                        <LinearLayout
+                            android:id="@+id/title_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_warning_yellow"
-                                app:layout_constraintBottom_toTopOf="@id/textView"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_weight="2"
+                                android:gravity="right"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textView"
-                                android:layout_width="wrap_content"
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:src="@drawable/ic_user_pic"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="8dp"
+                                    tools:text="תמר"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/status_emergency_container"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:gravity="center"
-                                android:text="@string/age_at_risk"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                                <ImageView
+                                    android:id="@+id/status_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_marginBottom="8dp"
+                                    android:src="@drawable/ic_red_home"
+                                    app:layout_constraintBottom_toTopOf="@id/status_text"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:id="@+id/isolation_container"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/status_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="@string/in_isolation"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_red_home"
-                                app:layout_constraintBottom_toTopOf="@id/textView3"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:text="@string/in_isolation"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                        </LinearLayout>
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <View
+                            android:id="@+id/divider2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="24dp"
+                            android:background="@color/colorBlack"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toBottomOf="@id/content_container" />
 
-                    </LinearLayout>
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/colorBlack"
+                            app:layout_constraintTop_toBottomOf="@id/title_container" />
 
-                    <View
-                        android:id="@+id/divider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="24dp"
-                        android:background="@color/colorBlack"
-                        android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/content_container" />
-
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
-                        android:background="@color/colorBlack"
-                        app:layout_constraintTop_toBottomOf="@id/title_container" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
     </ScrollView>
 

@@ -82,7 +82,7 @@
     <string name="add_comment">תרצו להשאיר הערה?</string>
     <string name="phone_number">מספר טלפון:</string>
     <string name="help_with">עזרה עם:</string>
-    <string name="i_will_help">אני יעזור</string>
+    <string name="i_will_help">אני רוצה לעזור</string>
     <string name="in_isolation">בבידוד</string>
     <string name="distance_from_me">מרחק ממני:</string>
     <string name="sent_in">נשלח ב:</string>
@@ -95,7 +95,7 @@
     <string name="private_details_title">פרטיים אישיים:</string>
     <string name="number">מספר</string>
     <string name="select_location">תבחר מיקום</string>
-    <string name="free_search">חיפוש חופשי</string>
+    <string name="free_search">הקלד כאן בטקסט חופשי</string>
     <string name="phone_regex">^(0)[23489]{1}[0-9]{7}$|^(05)[0-9]{8}$</string>
     <string name="location">מיקום:</string>
     <string name="close">סגור</string>
@@ -106,5 +106,18 @@
     <string name="fb_login_protocol_scheme">fb1295107550685494</string>
     <string name="ask_help_with">ביקשתי עזרה עם</string>
     <string name="personal_info">האיזור האישי</string>
+    <string name="add_address">הכנס כתובת</string>
+    <string name="add_name">הכנס שם</string>
+    <string name="add_phone_number">הכנס מספר טלפון</string>
+    <string name="write_us_here_hint">כתוב לנו כאן</string>
+    <string name="help_to_title">עזרתי ל:</string>
+    <string name="send_us_mail_btn">שלח משוב</string>
+    <string name="request_detail_title">פרטי הבקשה</string>
+    <string name="close_ticket">סגור כרטיס</string>
+    <string name="i_need_help_with_tag">* הקלד בקצרה במה אתה צריך עזרה והוסף לבקשה.\nלדוגמא: קניות, אוכל, תרופות, חלב..</string>
+    <string name="new_request_title">יצירת בקשה חדשה</string>
+    <string name="emergency_title_tag">* סמן אם הנך בבידוד, גיל בסיכון או חולה.\n* זהו אינו שדה חובה.</string>
+    <string name="payback_title_tag">* חובה לבחור את צורת ההחזר למי שיעזור לך</string>
+    <string name="phone_number_to_send_you">מספר הטלפון שיצרו עמך קשר:</string>
 
 </resources>

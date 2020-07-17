@@ -62,7 +62,7 @@
                             android:text="@string/location"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -82,16 +82,18 @@
                             android:text="@string/refund_back"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/refund_details"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:drawableStart="@drawable/ic_refund_back"
                             android:drawablePadding="8dp"
                             tools:text="אני אחזיר לך עם פייבוקס"
+                            android:drawableTint="@color/colorBlack"
                             android:textColor="@color/colorBlack"
                             android:gravity="right"
                             android:textSize="18sp" />
@@ -103,17 +105,18 @@
                             android:text="@string/help_with"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/productsRecyclerView"
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chips_group"
                             android:layout_width="match_parent"
-                            android:divider="@null"
-                            android:orientation="horizontal"
-                            app:reverseLayout="true"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginEnd="16dp"
+                            android:layoutDirection="rtl"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/add_chip_item" />
 
                         <TextView
                             android:id="@+id/more_details_title"
@@ -123,7 +126,7 @@
                             android:text="@string/comments"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -140,11 +143,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/phone_number"
+                            android:text="@string/phone_number_to_send_you"
                             android:layout_marginTop="16dp"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -168,7 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="4"
+                        android:weightSum="3"
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="8dp"
-                                android:text="תמר"
+                                tools:text="תמר כחח כחחח כחכח חככחחכ "
                                 android:textColor="@color/colorBlack"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -204,62 +207,31 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:id="@+id/age_at_risk_container"
+                            android:id="@+id/status_emergency_container"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
                             <ImageView
+                                android:id="@+id/status_image"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_marginBottom="8dp"
                                 android:src="@drawable/ic_warning_yellow"
-                                app:layout_constraintBottom_toTopOf="@id/textView"
+                                app:layout_constraintBottom_toTopOf="@id/status_text"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/textView"
+                                android:id="@+id/status_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:text="@string/age_at_risk"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:id="@+id/isolation_container"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_red_home"
-                                app:layout_constraintBottom_toTopOf="@id/textView3"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:text="@string/in_isolation"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />

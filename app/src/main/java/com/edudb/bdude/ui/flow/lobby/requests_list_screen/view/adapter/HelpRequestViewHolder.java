@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
+import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.concurrent.TimeUnit;
@@ -32,6 +34,9 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.hours)
     TextView mHours;
+
+    @BindView(R.id.dots)
+    TextView mDots;
 
     @BindView(R.id.distance)
     TextView mDistance;
@@ -55,15 +60,24 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
         mPost = post;
 
-        RecyclerView.LayoutManager HorizontalLayout
+        LinearLayoutManager horizontalLayout
                 = new LinearLayoutManager(
                 itemView.getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 false);
-        mRecyclerView.setLayoutManager(HorizontalLayout);
+        mRecyclerView.setLayoutManager(horizontalLayout);
 
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.scrollToPosition(0);
+
+        new Handler().postDelayed(() -> {
+            int lastVisibleFilter = horizontalLayout.findLastCompletelyVisibleItemPosition();
+            boolean shouldShowArrows = !post.getProducts().isEmpty() && lastVisibleFilter > -1 && lastVisibleFilter < post.getProducts().size() - 1;
+            Utils.setViewVisibility(mDots, shouldShowArrows, View.GONE);
+            mRecyclerView.postInvalidate();
+        }, 200);
+
         mName.setText(mPost.getUserName());
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);

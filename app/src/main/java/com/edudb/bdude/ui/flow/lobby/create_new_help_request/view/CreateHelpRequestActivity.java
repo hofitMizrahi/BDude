@@ -1,20 +1,12 @@
 package com.edudb.bdude.ui.flow.lobby.create_new_help_request.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,22 +19,19 @@ import com.edudb.bdude.db.modules.User;
 import com.edudb.bdude.di.components.DaggerCreateHelpRequestComponent;
 import com.edudb.bdude.di.modules.CreateHelpRequestModule;
 import com.edudb.bdude.general.CheckedEditText;
-import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
-import com.edudb.bdude.ui.flow.lobby.create_new_help_request.adapter.CategoryAdapter;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.adapter.PaymentAdapter;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.contract.CreateHelpRequestContract;
 import com.edudb.bdude.ui.flow.lobby.create_new_help_request.presenter.CreateHelpRequestPresenter;
+import com.edudb.bdude.ui.flow.lobby.create_new_help_request.view.adapter.EmergencyAdapter;
 import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,8 +39,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-
-import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING;
 
 public class CreateHelpRequestActivity extends BaseActivity implements CreateHelpRequestContract.View {
 
@@ -66,10 +53,10 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     User mUser;
 
     @Inject
-    CategoryAdapter emergencyAdapter;
+    EmergencyAdapter emergencyAdapter;
 
     @Inject
-    CategoryAdapter paybackAdapter;
+    PaymentAdapter paybackAdapter;
 
     @BindView(R.id.my_location)
     CheckedEditText mMyLocation;
@@ -90,16 +77,13 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     CheckedEditText mNameEt;
 
     @BindView(R.id.search_items)
-    CheckedEditText EditTextFreeSearch;
+    CheckedEditText mFreeSearch;
 
     @BindView(R.id.add_chip_item)
     TextView addChipButton;
 
     @BindView(R.id.chips_group)
     ChipGroup requestedItemsGroup;
-
-    @BindView(R.id.counter)
-    TextView counter;
 
     @BindView(R.id.chip_name)
     TextView chipName;
@@ -130,16 +114,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         finish();
     }
 
-    @OnClick(R.id.increase_counter)
-    void increaseCounter() {
-        increaseItemCounter();
-    }
-
-    @OnClick(R.id.decrease_counter)
-    void decreaseCounter() {
-        decreaseItemCounter();
-    }
-
     @OnClick(R.id.add_chip_item)
     void addChip() {
         addChipItem();
@@ -156,7 +130,8 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
                         !Utils.isNullOrWhiteSpace(mMyLocation.getText()) &&
                         !Utils.isNullOrWhiteSpace(mNameEt.getText()) &&
                         mProductsList.size() > 0 &&
-                        mPhoneNumber.validate();
+                        mPhoneNumber.validate() &&
+                        paybackAdapter.getSelectedItem() != null;
 
         if(!Utils.isNullOrWhiteSpace(mMoreDetails.getText().toString()) && !Utils.blackWordsCheck(mMoreDetails.getText().toString())){
             retVal = false;
@@ -166,7 +141,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     private void addChipView() {
         scrollToTopEditText(needHelpTitle);
-        String txt = EditTextFreeSearch.getText().toString();
+        String txt = mFreeSearch.getText().toString();
         if (txt.length() > 0) {
             addChipButton.setEnabled(true);
             counterView.setVisibility(View.VISIBLE);
@@ -174,7 +149,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         } else {
             counterView.setVisibility(View.GONE);
             addChipButton.setEnabled(false);
-            counter.setText("x1");
         }
     }
 
@@ -208,12 +182,11 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Override
     public void initViews() {
         mProductsList = new ArrayList<>();
-        EditTextFreeSearch.setTextListener(this::onFreeSearchTextChange);
+        mFreeSearch.setTextListener(this::onFreeSearchTextChange);
         mNameEt.setTextListener(this::validate);
         mPhoneNumber.setTextListener(this::validate);
         mMyLocation.setClickListener(this::openMap);
         initCategoriesAdapters();
-        //initBottomSheetListener();
     }
 
     private void openMap(Void v) {
@@ -273,52 +246,73 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
         startActivity(new Intent(this, SendRequestActivity.class).putExtra(POST_OBJ, post));
     }
 
+    @Override
+    public int getEmergencySelectedStatus() {
+        return emergencyAdapter.getSelectedItem() != null? emergencyAdapter.getSelectedItem().first.getValue() : 0;
+    }
+
+    @Override
+    public int getPaymentSelectedStatus() {
+        return paybackAdapter.getSelectedItem() != null ? paybackAdapter.getSelectedItem().first.getValue() : 0;
+    }
+
     private void initCategoriesAdapters() {
 
         emergencyCategoryRecycler.setLayoutManager(new GridLayoutManager(this, 3));
         payCategoryRecycler.setLayoutManager(new GridLayoutManager(this, 3));
-
-        emergencyAdapter.setWorkingData(true);
         emergencyCategoryRecycler.setAdapter(emergencyAdapter);
-        paybackAdapter.setWorkingData(false);
+        paybackAdapter.setListener(this::payBackChangeListener);
         payCategoryRecycler.setAdapter(paybackAdapter);
     }
 
-    @SuppressLint("SetTextI18n")
-    private void increaseItemCounter() {
-        int counterNum = Integer.parseInt(counter.getText().toString().replace("x", ""));
-        counterNum++;
-        counter.setText("x" + counterNum);
-    }
-
-    private void decreaseItemCounter() {
-        int counterNum = Integer.parseInt(counter.getText().toString().replace(getString(R.string.x), ""));
-        if (counterNum > 1) {
-            counterNum--;
-            counter.setText(getString(R.string.x) + counterNum);
-        }
+    private void payBackChangeListener(Void aVoid) {
+        validateBtn();
     }
 
     private void addChipItem() {
-        Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip_item, null, false);
-        int count =  Integer.parseInt(counter.getText().toString().replace(getString(R.string.x), ""));
-        chip.setText(String.format("%s %s", EditTextFreeSearch.getText(), count));
 
-        mProductsList.add(new Product(EditTextFreeSearch.getText(), count));
+        String newText  = mFreeSearch.getText();
+        boolean itemAlreadyInList = false;
 
-        chip.setOnCloseIconClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                //TODO remove chip from ArrayList && validate;
-
-                requestedItemsGroup.removeView(v);
+        for(Product item : mProductsList){
+            if(item.getProduct().equals(newText)){
+                itemAlreadyInList = true;
             }
-        });
+        }
 
-        validateBtn();
-        requestedItemsGroup.addView(chip);
-        EditTextFreeSearch.setText("");
+        if(!itemAlreadyInList) {
+
+            Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip_item, null, false);
+            chip.setText(newText);
+
+            mProductsList.add(new Product(newText));
+
+            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    requestedItemsGroup.removeView(v);
+
+                    Product removeItem = null;
+                    for (Product item : mProductsList) {
+                        if (item.getProduct().equals(v.getTag())) {
+                            removeItem = item;
+                        }
+                    }
+                    if (removeItem != null) {
+                        mProductsList.remove(removeItem);
+                        validateBtn();
+                    }
+                }
+            });
+
+            validateBtn();
+            chip.setTag(newText);
+            requestedItemsGroup.addView(chip);
+
+        }else {
+            Toast.makeText(this, "מוצר זה כבר נמצא ברשימה שלך", Toast.LENGTH_SHORT).show();
+        }
+        mFreeSearch.setText("");
     }
 }

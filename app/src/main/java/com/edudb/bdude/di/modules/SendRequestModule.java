@@ -34,12 +34,6 @@ public class SendRequestModule {
         return presenter;
     }
 
-    @Provides
-    @PerActivity
-    ProductsItemsAdapter provideAdapter(){
-        return new ProductsItemsAdapter();
-    }
-
     @PerActivity
     @Provides
     HelpRequest provideRequestDetails() {

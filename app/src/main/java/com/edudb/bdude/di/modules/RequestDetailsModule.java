@@ -33,11 +33,4 @@ public class RequestDetailsModule {
     Post provideRequestDetails() {
         return (Post) mActivity.getIntent().getExtras().getParcelable(REQUEST_DETAILS);
     }
-
-    @PerActivity
-    @Provides
-    ProductsItemsAdapter provideAdapter() {
-        return new ProductsItemsAdapter();
-    }
-
 }

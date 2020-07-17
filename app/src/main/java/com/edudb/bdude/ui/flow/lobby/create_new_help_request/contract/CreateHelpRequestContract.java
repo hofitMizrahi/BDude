@@ -20,6 +20,8 @@ public interface CreateHelpRequestContract {
         List<Product> getProducts();
         void setLocationAddress(String locationName);
         void navigateToSendRequestActivity(HelpRequest post);
+        int getEmergencySelectedStatus();
+        int getPaymentSelectedStatus();
     }
 
     interface Presenter extends BasePresenter {

@@ -6,8 +6,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +20,11 @@ import com.edudb.bdude.R;
 import com.edudb.bdude.application.BdudeApplication;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
 import com.edudb.bdude.db.modules.Post;
+import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.di.components.DaggerRequestDetailsComponent;
 import com.edudb.bdude.di.modules.RequestDetailsModule;
+import com.edudb.bdude.enums.EnumEmergency;
+import com.edudb.bdude.enums.EnumPayBack;
 import com.edudb.bdude.general.CountryPrefixPhone;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.location.LocationHelper;
@@ -29,6 +34,10 @@ import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsCont
 import com.edudb.bdude.ui.flow.lobby.request_details.presenter.RequestDetailsPresenter;
 import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -39,9 +48,6 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
 
     @Inject
     RequestDetailsPresenter mPresenter;
-
-    @Inject
-    ProductsItemsAdapter mAdapter;
 
     @Inject
     Post mRequestDetailsObj;
@@ -61,6 +67,9 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.phoneNumber)
     TextView mNumber;
 
+    @BindView(R.id.chips_group)
+    ChipGroup requestedItemsGroup;
+
     @BindView(R.id.phoneNumberWhatsApp)
     TextView mWhatsAppNumber;
 
@@ -70,14 +79,23 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
     @BindView(R.id.phoneContainer)
     View mPhoneContainer;
 
-    @BindView(R.id.age_at_risk_container)
-    View mAgeAtRisk;
+    @BindView(R.id.status_image)
+    ImageView mEmergencyStatusImage;
 
-    @BindView(R.id.productsRecyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.status_text)
+    TextView mEmergencyStatusText;
 
-    @BindView(R.id.isolation_container)
-    View mIsolation;
+    @BindView(R.id.pay_back_text)
+    TextView mPayBackText;
+
+    @BindView(R.id.payBackTitle)
+    TextView mPayBackTextTitle;
+
+    @BindView(R.id.status_emergency_container)
+    View mEmergencyContainer;
+
+    @BindView(R.id.more_details_title)
+    TextView mBodyTitle;
 
     @OnClick(R.id.helpBtn)
     void onBtnClicked() {
@@ -119,22 +137,46 @@ public class RequestDetailsActivity extends BaseActivity implements RequestDetai
         }
         mNumber.setText(mRequestDetailsObj.getPhoneNumber());
 
-        Utils.setViewVisibility(mAgeAtRisk, mRequestDetailsObj.isAgeAtRisk(), View.GONE);
-        Utils.setViewVisibility(mIsolation, mRequestDetailsObj.isInIsolation(), View.GONE);
-
         RecyclerView.LayoutManager HorizontalLayout
                 = new LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
                 false);
 
-        mRecyclerView.setLayoutManager(HorizontalLayout);
-        mAdapter.setData(mRequestDetailsObj.getProducts());
-        mRecyclerView.setAdapter(mAdapter);
+        if(mRequestDetailsObj.getCategory() != 0 && EnumPayBack.getEnumValueByName(mRequestDetailsObj.getCategory()) != null) {
+            mPayBackText.setText(Utils.getStringRefundTitle(Objects.requireNonNull(EnumPayBack.getEnumValueByName(mRequestDetailsObj.getCategory()))));
+            mPayBackText.setCompoundDrawablesWithIntrinsicBounds(Utils.getIconRefund(Objects.requireNonNull(EnumPayBack.getEnumValueByName(mRequestDetailsObj.getCategory()))), 0, 0, 0);
+        }else {
+            mPayBackText.setVisibility(View.GONE);
+            mPayBackTextTitle.setVisibility(View.GONE);
+        }
+
+        if(mRequestDetailsObj.getStatus() != 0){
+            mEmergencyContainer.setVisibility(View.VISIBLE);
+            mEmergencyStatusText.setText(Utils.getStringEmergencyTitle(Objects.requireNonNull(EnumEmergency.getEnumValueByName(mRequestDetailsObj.getStatus()))));
+            mEmergencyStatusImage.setImageResource(Utils.getIconEmergency(Objects.requireNonNull(EnumEmergency.getEnumValueByName(mRequestDetailsObj.getStatus()))));
+        }else {
+            mEmergencyContainer.setVisibility(View.GONE);
+        }
+
+        for(Product item : mRequestDetailsObj.getProducts()){
+
+            Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip_item, null, false);
+            chip.setText(item.getProduct());
+            chip.setCloseIcon(null);
+            requestedItemsGroup.addView(chip);
+        }
+
         mName.setText(mRequestDetailsObj.getUserName());
 
         mName.setText(mRequestDetailsObj.getUserName());
-        mBodyTxt.setText(mRequestDetailsObj.getBody());
+
+        if(Utils.isNullOrWhiteSpace(mRequestDetailsObj.getBody())){
+            mBodyTxt.setVisibility(View.GONE);
+            mBodyTitle.setVisibility(View.GONE);
+        }else {
+            mBodyTxt.setText(mRequestDetailsObj.getBody());
+        }
         mTimeTxt.setText(Utils.getTimeFormat(mRequestDetailsObj.getTimestamp()));
         LatLng latLng = new LatLng(mRequestDetailsObj.getGeoloc().getLat(), mRequestDetailsObj.getGeoloc().getLng());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + getString(R.string.km);

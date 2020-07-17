@@ -14,7 +14,6 @@ public interface MyRequestsContract {
         void displayList(List<HelpRequest> posts);
         void refreshList(List<HelpRequest> list);
         void initView();
-
         void setCurrentUser();
     }
 

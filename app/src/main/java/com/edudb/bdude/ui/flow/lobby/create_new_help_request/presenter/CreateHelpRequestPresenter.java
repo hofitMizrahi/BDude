@@ -51,6 +51,8 @@ public class CreateHelpRequestPresenter implements CreateHelpRequestContract.Pre
         post.setBody(mView.getBody());
         post.setPhoneNumber(mView.getNumber());
         post.setGeoPoint(mSelectedLocation);
+        post.setStatus(mView.getEmergencySelectedStatus());
+        post.setCategory(mView.getPaymentSelectedStatus());
         post.setProducts(mView.getProducts());
         post.setAddress_text(mView.getLocationName());
         post.setUserName(mView.getName());

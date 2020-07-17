@@ -8,9 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product implements Parcelable {
 
-    @SerializedName("amount")
-    @Expose
-    int amount;
     @SerializedName("product")
     @Expose
     String product;
@@ -18,19 +15,16 @@ public class Product implements Parcelable {
     public Product() {
     }
 
-    public Product(String text, int count) {
-        amount = count;
+    public Product(String text) {
         product = text;
     }
 
     protected Product(Parcel in) {
-        amount = in.readInt();
         product = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(amount);
         dest.writeString(product);
     }
 
@@ -50,14 +44,6 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 
     public String getProduct() {
         return product;

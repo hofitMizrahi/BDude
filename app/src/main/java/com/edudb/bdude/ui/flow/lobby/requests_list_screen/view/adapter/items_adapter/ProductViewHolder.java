@@ -20,6 +20,6 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(Product product){
-        mName.setText(product.getProduct() + " x " + product.getAmount());
+        mName.setText(product.getProduct());
     }
 }

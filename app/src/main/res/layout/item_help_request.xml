@@ -128,14 +128,25 @@
                 app:layout_constraintTop_toTopOf="@id/hours"
                 tools:text="13 קמ" />
 
+            <TextView
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:textSize="17dp"
+                android:layout_marginEnd="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/recyclerViewItems" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewItems"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/dots"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintStart_toEndOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 

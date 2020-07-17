@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/root_item"
     android:layoutDirection="rtl"
+    android:id="@+id/root_item"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -134,14 +134,25 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <TextView
+                    android:id="@+id/dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textSize="17dp"
+                    android:layout_marginEnd="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerViewItems" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewItems"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/dots"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/divider"
                     app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -177,7 +188,7 @@
                 android:paddingEnd="12dp"
                 android:src="@drawable/red_garbage_ic_"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:text="סגור כרטיס" />
+                android:text="@string/close_ticket" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

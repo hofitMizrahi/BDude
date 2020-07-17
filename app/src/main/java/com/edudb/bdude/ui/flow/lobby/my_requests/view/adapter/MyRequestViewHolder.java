@@ -67,6 +67,8 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
 
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.scrollToPosition(0);
+
         mName.setText(post.getUserName());
         LatLng latLng = new LatLng(post.getAddress_coords().getLatitude(), post.getAddress_coords().getLongitude());
         String kmStr = Utils.round(LocationHelper.getDistance(latLng), 1) + " " + itemView.getContext().getString(R.string.km);

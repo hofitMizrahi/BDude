@@ -38,7 +38,7 @@
                         android:text="@string/personal_details"
                         android:textColor="@color/colorBlack"
                         android:textDirection="anyRtl"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -182,7 +182,7 @@
                         android:text="@string/my_requests"
                         android:textColor="@color/colorBlack"
                         android:textDirection="anyRtl"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -203,7 +203,7 @@
                         android:layout_marginTop="24dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="עזרתי ל:"
+                        android:text="@string/help_to_title"
                         android:visibility="gone"
                         android:textColor="@color/colorBlack"
                         android:textDirection="anyRtl"
@@ -223,7 +223,7 @@
                         android:text="@string/notes_to_improve"
                         android:textColor="@color/colorBlack"
                         android:textDirection="anyRtl"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <androidx.cardview.widget.CardView
@@ -245,6 +245,7 @@
                                 android:maxLines="3"
                                 app:layout_constraintTop_toTopOf="parent"
                                 android:lines="3"
+                                android:hint="@string/write_us_here_hint"
                                 android:background="@null"
                                 android:gravity="top"
                                 android:textColor="@color/colorBlack"
@@ -258,7 +259,7 @@
                        android:id="@+id/sendToEmail"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="שלח משוב"
+                       android:text="@string/send_us_mail_btn"
                        android:textSize="16sp"
                        android:textStyle="bold"
                        android:textColor="@color/colorBlack"

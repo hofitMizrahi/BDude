@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/category_item_root"
     android:layout_width="match_parent"
+    android:padding="6dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center">

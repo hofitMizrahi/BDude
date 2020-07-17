@@ -75,12 +75,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnClick(R.id.facebook_login)
     void facebookLoginClicked() {
-        signInWithFacebook();
+        //signInWithFacebook();
     }
 
     private void signInWithFacebook() {
+
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
                 firebaseAuthWithFacebook(loginResult.getAccessToken());
@@ -97,7 +99,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
         });
 
-        // TODO ALEX - CHECK IF NEED OTHER PERMISIONS ?
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
     }
 
@@ -153,7 +154,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 Log.d("TAG", "onActivityResult: failed");
             }
         } else if (requestCode == FACEBOOK_SIGN_IN) {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+
+            //TODO -> add facebook singIn
+            //callbackManager.onActivityResult(requestCode, resultCode, data);
         } else {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             // Sign in failed
@@ -198,7 +201,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
 
             private void userDetailsSuccess(User user) {
-                saveUserLocal(user);
+                //saveUserLocal(user);
                 Intent resultIntent = new Intent();
                 setResult(BaseActivity.RC_SIGN_IN, resultIntent);
                 finish();
@@ -207,8 +210,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     private void saveUserLocal(User user){
-        String userJson = new Gson().toJson(user);
-        sharedPrefsController.putString(Constants.LOGGED_IN_USER, userJson);
+//        String userJson = new Gson().toJson(user);
+//        sharedPrefsController.putString(Constants.LOGGED_IN_USER, userJson);
     }
 
     private void showSnackbar(String message) {

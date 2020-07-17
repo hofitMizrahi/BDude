@@ -8,8 +8,6 @@
     android:animateLayoutChanges="true"
     android:background="#FFFFFF">
 
-    <!-- TODO ALEX - REPLACE ALL HADRCODED STRINGS -->
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -21,19 +19,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="@string/new_request_title"
+                android:textColor="@color/colorBlack"
+                android:textDirection="anyRtl"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/more_details_editT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/edittext_shape"
                 android:gravity="top"
                 android:inputType="text|textMultiLine|textCapSentences"
-                android:lines="4"
+                android:lines="3"
+                android:maxLength="200"
+                android:maxLines="3"
                 android:padding="16dp"
+                android:layout_marginBottom="32dp"
                 android:textColor="@color/colorDark"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:textDirection="anyRtl"
@@ -41,6 +57,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/note_title" />
 
             <ImageView
@@ -59,18 +76,19 @@
                 android:id="@+id/add_chip_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/btn_selector"
                 android:enabled="false"
                 android:paddingStart="12dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/add_item"
                 android:textColor="@drawable/btn_text_selector"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/counter_view" />
 
             <TextView
@@ -78,13 +96,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/private_details_title"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/title"/>
 
             <TextView
                 android:id="@+id/need_help_title"
@@ -95,11 +114,26 @@
                 android:text="@string/i_need_help_with"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_info_separator" />
+
+            <TextView
+                android:id="@+id/need_help_title_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/i_need_help_with_tag"
+                android:textColor="@color/colorDark"
+                android:textDirection="anyRtl"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/need_help_title" />
 
             <TextView
                 android:id="@+id/emergency_title"
@@ -110,11 +144,26 @@
                 android:text="דחיפות:"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emergency_separator" />
+
+            <TextView
+                android:id="@+id/emergency_title_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/emergency_title_tag"
+                android:textColor="@color/colorDark"
+                android:textDirection="anyRtl"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergency_title" />
 
             <TextView
                 android:id="@+id/payback_title"
@@ -125,34 +174,48 @@
                 android:text="צורת החזר:"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/payback_separator" />
 
             <TextView
+                android:id="@+id/payback_title_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/payback_title_tag"
+                android:textColor="@color/colorDark"
+                android:textDirection="anyRtl"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payback_title" />
+
+            <TextView
                 android:id="@+id/note_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
                 android:text="@string/add_comment"
                 android:textColor="@color/colorDark"
                 android:textDirection="anyRtl"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/note_separator" />
-
-            <!-- TODO ALEX CHANGE ICON -->
 
             <View
                 android:id="@+id/user_info_separator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/colorDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +225,8 @@
                 android:id="@+id/emergency_separator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/colorDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -172,8 +236,8 @@
                 android:id="@+id/payback_separator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/colorDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +247,8 @@
                 android:id="@+id/note_separator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/colorDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +264,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emergency_title"
+                app:layout_constraintTop_toBottomOf="@+id/emergency_title_tag"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_category_list" />
 
@@ -213,7 +278,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/payback_title"
+                app:layout_constraintTop_toBottomOf="@+id/payback_title_tag"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_category_list" />
 
@@ -261,6 +326,7 @@
             <com.edudb.bdude.general.CheckedEditText
                 android:id="@+id/search_items"
                 android:layout_width="0dp"
+                app:maxLength="20"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:hint="@string/free_search"
@@ -268,13 +334,14 @@
                 app:drawable_start="@drawable/ic_search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/need_help_title" />
+                app:layout_constraintTop_toBottomOf="@+id/need_help_title_tag" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chips_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:layoutDirection="rtl"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

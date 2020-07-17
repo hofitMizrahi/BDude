@@ -5,8 +5,12 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
+import com.edudb.bdude.R;
+import com.edudb.bdude.enums.EnumEmergency;
+import com.edudb.bdude.enums.EnumPayBack;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.text.Format;
@@ -14,6 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static com.edudb.bdude.enums.EnumEmergency.AGE_AT_RISK;
+import static com.edudb.bdude.enums.EnumEmergency.ISOLATE;
+import static com.edudb.bdude.enums.EnumEmergency.SICK;
 
 public class Utils {
 
@@ -205,4 +213,74 @@ public class Utils {
             "ציצים",
             "ויאגרה",
             "זונה");
+
+
+
+    public static String getStringRefundTitle(EnumPayBack item){
+
+        String title = "";
+        switch (item){
+            case BRING_BACK:
+                title = "מבקש בהשאלה";
+                break;
+            case CONTRIBUTION:
+                title = "מבקש תרומה";
+                break;
+            case MONEY_TRANSFER:
+                title = "אחזיר לך את הכסף";
+                break;
+        }
+        return title;
+    }
+
+    public static String getStringEmergencyTitle(EnumEmergency item){
+
+        String title = "";
+        switch (item){
+            case SICK:
+                title = "חולה";
+                break;
+            case ISOLATE:
+                title = "בבידוד";
+                break;
+            case AGE_AT_RISK:
+                title = "גיל בסיכון";
+                break;
+        }
+        return title;
+    }
+
+    public static int getIconRefund(EnumPayBack item){
+
+        int ic = 0;
+        switch (item){
+            case BRING_BACK:
+                ic = R.drawable.ic_payback_loan;
+                break;
+            case CONTRIBUTION:
+                ic = R.drawable.ic_payback_contribution;
+                break;
+            case MONEY_TRANSFER:
+                ic = R.drawable.ic_payback_pay;
+                break;
+        }
+        return ic;
+    }
+
+    public static int getIconEmergency(EnumEmergency item){
+
+        int ic = 0;
+        switch (item){
+            case AGE_AT_RISK:
+                ic = R.drawable.ic_emergency_sikun;
+                break;
+            case ISOLATE:
+                ic = R.drawable.ic_emergency_bdude;
+                break;
+            case SICK:
+                ic = R.drawable.ic_emergency_sick;
+                break;
+        }
+        return ic;
+    }
 }

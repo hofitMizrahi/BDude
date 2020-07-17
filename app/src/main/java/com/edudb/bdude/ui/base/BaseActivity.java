@@ -9,18 +9,15 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.TaskStackBuilder;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.edudb.bdude.BuildConfig;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.FirebaseAnalyticsHelper;
@@ -40,13 +37,10 @@ import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListA
 import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
 import com.edudb.bdude.ui.flow.login.view.LoginActivity;
 import com.google.android.material.snackbar.Snackbar;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import butterknife.ButterKnife;
-
 import static com.edudb.bdude.location.LocationHelper.GPS_OPEN;
 import static com.edudb.bdude.location.LocationHelper.LOCATION_PERMISSION_REQ_CODE;
 
@@ -147,18 +141,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected void setActionBar() {
-        //TODO remove from baseActivity
-        Log.d("setActionBar", getClass().getSimpleName());
+
         mBaseActionBar = getCustomActionBar();
         mActionBarContainer.removeAllViews();
 
-        if (this instanceof SendRequestActivity || this instanceof MyRequestsActivity || this instanceof IntroTermsActivity || this instanceof LoginActivity || this instanceof CreateHelpRequestActivity) {
+        if (this instanceof SendRequestActivity
+                || this instanceof MyRequestsActivity
+                || this instanceof IntroTermsActivity
+                || this instanceof LoginActivity
+                || this instanceof CreateHelpRequestActivity
+                || this instanceof RequestDetailsActivity) {
             mBaseActionBar.hideActionBar();
         } else {
             mBaseActionBar.setAddress(LocationHelper.getLocationName(this, LocationHelper.mLastLocation));
             mBaseActionBar.showActionBar();
         }
-
         mActionBarContainer.addView(mBaseActionBar);
         mBaseActionBar.postInvalidate();
     }
@@ -227,7 +224,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
-    public void closeApp(){
+    public void closeApp() {
         DialogUtil.getSingleButtonInstance(this, (dialog, i) -> {
 
                     this.finishAffinity();
@@ -279,7 +276,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 if (getActivity() instanceof CreateHelpRequestActivity) {
                     ((CreateHelpRequestPresenter) getPresenter()).updateLocation(LocationHelper.getLocation(data));
 
-                }else if (getActivity() instanceof MyRequestsActivity) {
+                } else if (getActivity() instanceof MyRequestsActivity) {
                     ((MyRequestsPresenter) getPresenter()).updateLocation(LocationHelper.getLocation(data));
 
                 } else {
