@@ -4,9 +4,9 @@ import com.algolia.search.saas.Index;
 import com.algolia.search.saas.Query;
 import com.edudb.bdude.db.AlgoliaSearchController;
 import com.edudb.bdude.di.scope.PerActivity;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
+import com.edudb.bdude.ui.flow.lobby.main_screen.contract.HelpRequestsListContract;
+import com.edudb.bdude.ui.flow.lobby.main_screen.presenter.HelpRequestsListPresenter;
+import com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.HelpRequestsRecyclerAdapter;
 
 import dagger.Module;
 import dagger.Provides;

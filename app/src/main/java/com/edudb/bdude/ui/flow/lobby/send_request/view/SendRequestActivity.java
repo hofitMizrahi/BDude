@@ -17,7 +17,6 @@ import com.edudb.bdude.enums.EnumPayBack;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.edudb.bdude.ui.flow.lobby.send_request.contract.SendRequestContract;
 import com.edudb.bdude.ui.flow.lobby.send_request.presenter.SendRequestPresenter;
 import com.google.android.material.chip.Chip;

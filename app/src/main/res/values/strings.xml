@@ -119,5 +119,6 @@
     <string name="emergency_title_tag">* סמן אם הנך בבידוד, גיל בסיכון או חולה.\n* זהו אינו שדה חובה.</string>
     <string name="payback_title_tag">* חובה לבחור את צורת ההחזר למי שיעזור לך</string>
     <string name="phone_number_to_send_you">מספר הטלפון שיצרו עמך קשר:</string>
+    <string name="user_cont_add_more_then_20">לא ניתן להוסיף יותר מ- 20 פריטים</string>
 
 </resources>

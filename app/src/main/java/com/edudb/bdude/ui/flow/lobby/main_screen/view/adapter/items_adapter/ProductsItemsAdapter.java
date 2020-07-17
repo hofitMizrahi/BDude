@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter;
+package com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.items_adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

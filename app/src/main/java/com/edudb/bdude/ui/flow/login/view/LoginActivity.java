@@ -142,6 +142,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        displayProgressBar();
+
         if (requestCode == RC_SIGN_IN) {
             Log.d("TAG", "onActivityResult: requestCode = " + requestCode);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -201,7 +203,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
 
             private void userDetailsSuccess(User user) {
-                //saveUserLocal(user);
+                saveUserLocal(user);
                 Intent resultIntent = new Intent();
                 setResult(BaseActivity.RC_SIGN_IN, resultIntent);
                 finish();
@@ -210,8 +212,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     private void saveUserLocal(User user){
-//        String userJson = new Gson().toJson(user);
-//        sharedPrefsController.putString(Constants.LOGGED_IN_USER, userJson);
+        String userJson = new Gson().toJson(user);
+        sharedPrefsController.putString(Constants.LOGGED_IN_USER, userJson);
     }
 
     private void showSnackbar(String message) {

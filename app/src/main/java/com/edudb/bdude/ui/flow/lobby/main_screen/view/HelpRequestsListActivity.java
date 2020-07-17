@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view;
+package com.edudb.bdude.ui.flow.lobby.main_screen.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +19,9 @@ import com.edudb.bdude.session.SessionManager;
 import com.edudb.bdude.shared_preferences.SharedPrefsController;
 import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter.HelpRequestsListPresenter;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.HelpRequestsRecyclerAdapter;
+import com.edudb.bdude.ui.flow.lobby.main_screen.contract.HelpRequestsListContract;
+import com.edudb.bdude.ui.flow.lobby.main_screen.presenter.HelpRequestsListPresenter;
+import com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.HelpRequestsRecyclerAdapter;
 import com.google.gson.Gson;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -61,10 +61,9 @@ public class HelpRequestsListActivity extends BaseActivity implements HelpReques
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkLocalUser(); // TODO - Alex find better place for the method
+        checkLocalUser();
     }
 
-    // TODO - Alex find better place for the method
     private void checkLocalUser() {
         Gson gson = new Gson();
         String json = sharedPrefsController.getString(Constants.LOGGED_IN_USER);

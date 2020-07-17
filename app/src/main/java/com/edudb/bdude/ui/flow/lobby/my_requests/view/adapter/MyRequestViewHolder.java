@@ -1,5 +1,6 @@
 package com.edudb.bdude.ui.flow.lobby.my_requests.view.adapter;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -7,15 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
-import com.edudb.bdude.db.modules.Product;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
+import com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -26,6 +25,8 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
 
     private IExecutable<Integer> mListener;
     private ProductsItemsAdapter mAdapter;
+    private LinearLayoutManager horizontalLayout;
+    private HelpRequest mPost;
 
     @BindView(R.id.recyclerViewItems)
     RecyclerView mRecyclerView;
@@ -35,6 +36,15 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.distance)
     TextView mDistance;
+
+    @BindView(R.id.dots)
+    TextView mDots;
+
+    @BindView(R.id.body_text)
+    TextView mBody;
+
+    @BindView(R.id.divider2)
+    View mBodyDivider;
 
     @BindView(R.id.name)
     TextView mName;
@@ -55,19 +65,36 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
     }
 
     void onBind(HelpRequest post, IExecutable<Integer> listener){
-
+        mPost = post;
         mListener = listener;
 
-        RecyclerView.LayoutManager HorizontalLayout
+        horizontalLayout
                 = new LinearLayoutManager(
                 itemView.getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 false);
-        mRecyclerView.setLayoutManager(HorizontalLayout);
+        mRecyclerView.setLayoutManager(horizontalLayout);
 
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.scrollToPosition(0);
+        checkIfNeedToShowArrow();
+
+        if(Utils.isNullOrWhiteSpace(post.getBody())){
+            mBody.setVisibility(View.GONE);
+            mBodyDivider.setVisibility(View.GONE);
+        }else {
+            mBody.setText(post.getBody());
+        }
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                checkIfNeedToShowArrow();
+            }
+        });
 
         mName.setText(post.getUserName());
         LatLng latLng = new LatLng(post.getAddress_coords().getLatitude(), post.getAddress_coords().getLongitude());
@@ -87,5 +114,15 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
             fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + days + " " + itemView.getContext().getString(R.string.days_ago);
         }
         mHours.setText(fullTimeStr);
+    }
+
+    private void checkIfNeedToShowArrow(){
+
+        new Handler().postDelayed(() -> {
+            int lastVisibleFilter = horizontalLayout.findLastCompletelyVisibleItemPosition();
+            boolean shouldShowArrows = !mPost.getProducts().isEmpty() && lastVisibleFilter > -1 && lastVisibleFilter < mPost.getProducts().size() - 1;
+            Utils.setViewVisibility(mDots, shouldShowArrows, View.GONE);
+            mRecyclerView.postInvalidate();
+        }, 100);
     }
 }

@@ -43,6 +43,7 @@ import butterknife.OnTextChanged;
 public class CreateHelpRequestActivity extends BaseActivity implements CreateHelpRequestContract.View {
 
     public static final String POST_OBJ = "post_obj";
+    private final int MAX_CHIPS = 20;
 
     private List<Product> mProductsList;
 
@@ -116,7 +117,12 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @OnClick(R.id.add_chip_item)
     void addChip() {
-        addChipItem();
+        if(mProductsList != null && mProductsList.size() <= MAX_CHIPS){
+            mFreeSearch.removeError();
+            addChipItem();
+        }else {
+            Toast.makeText(this, R.string.user_cont_add_more_then_20, Toast.LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.my_location)
@@ -204,12 +210,12 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
 
     @Override
     public String getLocationName() {
-        return mMyLocation.getText().toString();
+        return mMyLocation.getText();
     }
 
     @Override
     public String getNumber() {
-        return mPhoneNumber.getText().toString();
+        return mPhoneNumber.getText();
     }
 
     @Override
@@ -239,6 +245,7 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
     @Override
     public void setLocationAddress(String locationName) {
         mMyLocation.setText(locationName);
+        validateBtn();
     }
 
     @Override
@@ -305,7 +312,6 @@ public class CreateHelpRequestActivity extends BaseActivity implements CreateHel
                     }
                 }
             });
-
             validateBtn();
             chip.setTag(newText);
             requestedItemsGroup.addView(chip);

@@ -15,7 +15,7 @@
         <activity
             android:name=".ui.flow.lobby.create_new_help_request.view.CreateHelpRequestActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
+        <activity android:name=".ui.flow.lobby.main_screen.view.HelpRequestsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

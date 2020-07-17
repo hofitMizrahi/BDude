@@ -54,6 +54,7 @@
                             android:drawableStart="@drawable/ic_user"
                             android:drawablePadding="16dp"
                             android:gravity="center"
+                            android:maxWidth="270dp"
                             tools:text="רונה"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
@@ -117,17 +118,19 @@
                         <TextView
                             android:id="@+id/address"
                             android:layout_width="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="40dp"
                             android:drawableStart="@drawable/ic_location_black"
                             android:drawablePadding="16dp"
                             android:gravity="center"
-                            tools:text="תל אביב, הרצל 20"
+                            android:maxWidth="270dp"
                             android:textColor="@color/colorBlack"
                             android:textDirection="anyRtl"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="תל אביב,הרצל 20" />
 
                         <ImageView
                             app:layout_constraintStart_toEndOf="@id/address"

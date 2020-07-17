@@ -136,10 +136,11 @@
 
                 <TextView
                     android:id="@+id/dots"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="..."
+                    android:layout_width="12dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_height="30dp"
                     android:textSize="17dp"
+                    android:background="@drawable/arrow_link_disabled"
                     android:layout_marginEnd="16dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,8 +172,36 @@
                 app:layout_constraintTop_toBottomOf="@id/top_container" />
 
             <TextView
-                android:id="@+id/delete"
+                android:id="@+id/body_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="right"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorDark"
+                android:textDirection="anyRtl"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider2"
+                tools:text="jfujhifu fiujhfiuf iufhiufh fiuhfiuf ifuhfiuh" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBlack"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/body_text" />
+
+            <TextView
+                android:id="@+id/delete"
+                app:layout_constraintTop_toBottomOf="@id/divider3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

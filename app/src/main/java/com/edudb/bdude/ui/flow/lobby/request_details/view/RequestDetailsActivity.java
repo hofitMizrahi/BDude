@@ -32,7 +32,6 @@ import com.edudb.bdude.ui.base.BaseActivity;
 import com.edudb.bdude.ui.base.BasePresenter;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
 import com.edudb.bdude.ui.flow.lobby.request_details.presenter.RequestDetailsPresenter;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;

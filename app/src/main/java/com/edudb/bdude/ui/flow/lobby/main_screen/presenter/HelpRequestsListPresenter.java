@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.lobby.requests_list_screen.presenter;
+package com.edudb.bdude.ui.flow.lobby.main_screen.presenter;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import com.edudb.bdude.enums.EnumNavigation;
 import com.edudb.bdude.general.Constants;
 import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.shared_preferences.SharedPrefsController;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.contract.HelpRequestsListContract;
+import com.edudb.bdude.ui.flow.lobby.main_screen.contract.HelpRequestsListContract;
 
 import org.json.JSONObject;
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
     android:background="@color/color_main_background"
-    tools:context=".ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity">
+    tools:context=".ui.flow.lobby.main_screen.view.HelpRequestsListActivity">
 
     <TextView
         android:id="@+id/empty_view"

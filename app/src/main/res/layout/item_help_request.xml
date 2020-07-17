@@ -130,9 +130,10 @@
 
             <TextView
                 android:id="@+id/dots"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="..."
+                android:layout_width="12dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/arrow_link_disabled"
                 android:textSize="17dp"
                 android:layout_marginEnd="16dp"
                 android:textStyle="bold"

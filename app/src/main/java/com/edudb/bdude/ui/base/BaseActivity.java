@@ -33,7 +33,7 @@ import com.edudb.bdude.ui.flow.lobby.my_requests.presenter.MyRequestsPresenter;
 import com.edudb.bdude.ui.flow.lobby.my_requests.view.MyRequestsActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
 import com.edudb.bdude.ui.flow.intro.container.view.IntroTermsActivity;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.HelpRequestsListActivity;
+import com.edudb.bdude.ui.flow.lobby.main_screen.view.HelpRequestsListActivity;
 import com.edudb.bdude.ui.flow.lobby.send_request.view.SendRequestActivity;
 import com.edudb.bdude.ui.flow.login.view.LoginActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -296,6 +296,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         } else if (requestCode == RC_SIGN_IN && data != null) {
             navigateAfterLogin();
         }
+        hideProgressBar();
     }
 
     private void searchByNewLocation() {

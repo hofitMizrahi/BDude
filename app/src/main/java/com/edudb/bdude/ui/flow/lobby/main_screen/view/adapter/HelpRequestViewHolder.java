@@ -1,4 +1,4 @@
-package com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter;
+package com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter;
 
 import android.os.Handler;
 import android.view.View;
@@ -13,8 +13,7 @@ import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
 import com.edudb.bdude.location.LocationHelper;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
-import com.google.android.gms.common.util.CollectionUtils;
+import com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.concurrent.TimeUnit;
@@ -28,6 +27,7 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
     private IExecutable<Post> mListener;
     private Post mPost;
     private ProductsItemsAdapter mAdapter;
+    private LinearLayoutManager horizontalLayout;
 
     @BindView(R.id.recyclerViewItems)
     RecyclerView mRecyclerView;
@@ -60,7 +60,7 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
 
         mPost = post;
 
-        LinearLayoutManager horizontalLayout
+        horizontalLayout
                 = new LinearLayoutManager(
                 itemView.getContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -70,13 +70,15 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
         mAdapter.setData(post.getProducts());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.scrollToPosition(0);
+        checkIfNeedToShowArrow();
 
-        new Handler().postDelayed(() -> {
-            int lastVisibleFilter = horizontalLayout.findLastCompletelyVisibleItemPosition();
-            boolean shouldShowArrows = !post.getProducts().isEmpty() && lastVisibleFilter > -1 && lastVisibleFilter < post.getProducts().size() - 1;
-            Utils.setViewVisibility(mDots, shouldShowArrows, View.GONE);
-            mRecyclerView.postInvalidate();
-        }, 200);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                checkIfNeedToShowArrow();
+            }
+        });
 
         mName.setText(mPost.getUserName());
         LatLng latLng = new LatLng(post.getGeoloc().getLat(), post.getGeoloc().getLng());
@@ -96,5 +98,15 @@ class HelpRequestViewHolder extends RecyclerView.ViewHolder {
             fullTimeStr += itemView.getContext().getString(R.string.publish_time) + " " + days + " " + itemView.getContext().getString(R.string.days_ago);
         }
         mHours.setText(fullTimeStr);
+    }
+
+    private void checkIfNeedToShowArrow(){
+
+        new Handler().postDelayed(() -> {
+            int lastVisibleFilter = horizontalLayout.findLastCompletelyVisibleItemPosition();
+            boolean shouldShowArrows = !mPost.getProducts().isEmpty() && lastVisibleFilter > -1 && lastVisibleFilter < mPost.getProducts().size() - 1;
+            Utils.setViewVisibility(mDots, shouldShowArrows, View.GONE);
+            mRecyclerView.postInvalidate();
+        }, 100);
     }
 }

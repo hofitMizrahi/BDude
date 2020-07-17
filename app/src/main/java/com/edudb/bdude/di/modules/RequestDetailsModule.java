@@ -4,7 +4,6 @@ import com.edudb.bdude.db.modules.Post;
 import com.edudb.bdude.di.scope.PerActivity;
 import com.edudb.bdude.ui.flow.lobby.request_details.contract.RequestDetailsContract;
 import com.edudb.bdude.ui.flow.lobby.request_details.view.RequestDetailsActivity;
-import com.edudb.bdude.ui.flow.lobby.requests_list_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 
 import dagger.Module;
 import dagger.Provides;
