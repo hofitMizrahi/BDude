@@ -27,6 +27,42 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/refund"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:drawableTint="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:maxLength="100"
+                    android:layout_marginStart="16dp"
+                    android:drawablePadding="6dp"
+                    tools:text="בהשאלה"
+                    android:textColor="@color/colorDark"
+                    android:textDirection="anyRtl"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/divider"
+                    app:layout_constraintTop_toBottomOf="@id/hours" />
+
+                <TextView
+                    android:id="@+id/position"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:drawableTint="@color/colorBlack"
+                    android:layout_marginTop="4dp"
+                    android:drawablePadding="6dp"
+                    android:textStyle="bold"
+                    android:maxLength="100"
+                    android:layout_marginStart="16dp"
+                    tools:text="חולה"
+                    android:textColor="@color/colorDark"
+                    android:textDirection="anyRtl"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/divider"
+                    app:layout_constraintTop_toBottomOf="@id/refund" />
+
+                <TextView
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -39,7 +75,7 @@
                     android:textDirection="anyRtl"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/divider"
-                    app:layout_constraintTop_toBottomOf="@id/hours" />
+                    app:layout_constraintTop_toBottomOf="@id/position" />
 
                 <TextView
                     android:id="@+id/hours"

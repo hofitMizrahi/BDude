@@ -6,10 +6,11 @@
     <application
         android:name=".application.BdudeApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_logo_orange"
+        android:icon="@drawable/ic_logo_text"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        tools:replace="android:supportsRtl"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.flow.lobby.send_request.view.SendRequestActivity"/>
         <activity

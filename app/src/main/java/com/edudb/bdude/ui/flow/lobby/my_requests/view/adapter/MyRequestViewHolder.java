@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edudb.bdude.R;
 import com.edudb.bdude.db.modules.HelpRequest;
+import com.edudb.bdude.enums.EnumEmergency;
+import com.edudb.bdude.enums.EnumPayBack;
 import com.edudb.bdude.general.utils.DialogUtil;
 import com.edudb.bdude.general.utils.Utils;
 import com.edudb.bdude.interfaces.IExecutable;
@@ -15,6 +17,7 @@ import com.edudb.bdude.location.LocationHelper;
 import com.edudb.bdude.ui.flow.lobby.main_screen.view.adapter.items_adapter.ProductsItemsAdapter;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -42,6 +45,12 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.body_text)
     TextView mBody;
+
+    @BindView(R.id.refund)
+    TextView mRefund;
+
+    @BindView(R.id.position)
+    TextView mStatus;
 
     @BindView(R.id.divider2)
     View mBodyDivider;
@@ -85,6 +94,21 @@ class MyRequestViewHolder extends RecyclerView.ViewHolder {
             mBodyDivider.setVisibility(View.GONE);
         }else {
             mBody.setText(post.getBody());
+        }
+
+        if(post.getCategory() != 0 && EnumPayBack.getEnumValueByName(post.getCategory()) != null) {
+            mRefund.setText(Utils.getStringRefundTitle(Objects.requireNonNull(EnumPayBack.getEnumValueByName(post.getCategory()))));
+            mRefund.setCompoundDrawablesWithIntrinsicBounds(Utils.getIconRefund(Objects.requireNonNull(EnumPayBack.getEnumValueByName(post.getCategory()))), 0, 0, 0);
+        }else {
+            mRefund.setVisibility(View.GONE);
+        }
+
+        if(post.getStatus() != 0){
+            mStatus.setVisibility(View.VISIBLE);
+            mStatus.setText(Utils.getStringEmergencyTitle(Objects.requireNonNull(EnumEmergency.getEnumValueByName(post.getStatus()))));
+            mStatus.setCompoundDrawablesWithIntrinsicBounds(Utils.getIconEmergency(Objects.requireNonNull(EnumEmergency.getEnumValueByName(post.getStatus()))), 0, 0, 0);
+        }else {
+            mStatus.setVisibility(View.GONE);
         }
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

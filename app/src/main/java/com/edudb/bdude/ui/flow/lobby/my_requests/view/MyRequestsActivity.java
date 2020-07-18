@@ -86,8 +86,8 @@ public class MyRequestsActivity extends BaseActivity implements MyRequestsContra
     void onSendEmailClicked() {
 
         if (!Utils.isNullOrWhiteSpace(mEmailContentET.getText().toString())) {
-            String mailto = "mailto:covid19communityhelp@gmail.com" +
-                    "?cc=" + "covid19communityhelp@gmail.com" +
+            String mailto = "mailto:bdude.israel@gmail.com" +
+                    "?cc=" + "bdude.israel@gmail.com" +
                     "&subject=" + Uri.encode("חוות דעת") +
                     "&body=" + Uri.encode(mEmailContentET.getText().toString());
 

@@ -19,7 +19,7 @@
         android:textSize="45sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="צריך שתיכנסו למטרות אבטחה" />
+        android:text="@string/login_title" />
 
     <TextView
         android:id="@+id/body"
@@ -29,7 +29,7 @@
         android:padding="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="אין לנו שום צורך ורצון להשתמש במידע שלכם ומבטיחים לא לעשות שום שימוש במידע לגורמים חיצוניים. המידע ישמש למטרות אבטחה בלבד."
+        android:text="@string/login_sub_text"
         android:textColor="@color/colorDark"
         android:textDirection="anyRtl"
         android:textSize="25sp"

@@ -74,6 +74,8 @@
     <string name="approve_your_location_text">כדי שתדעו מי לידכם או שתוכלו לבקש עזרה מאנשים באזורכם תאשרו שנדע את המיקום שלכם</string>
     <string name="one_moment_before_start">רגע לפני שמתחילים</string>
     <string name="good_to_me">יאללה מתאים</string>
+    <string name="lets_go">בואו נתחיל</string>
+    <string name="ok">אוקיי</string>
     <string name="lets_help_people">בואו נעזור לשכנים או כמובן לבקש עזרה אם הושפעתם</string>
     <string name="welcome">ברוכים הבאים!</string>
     <string name="link_health_terms">ברוכים הבאים!</string>
@@ -104,7 +106,7 @@
 
     <string name="facebook_app_id">1295107550685494</string>
     <string name="fb_login_protocol_scheme">fb1295107550685494</string>
-    <string name="ask_help_with">ביקשתי עזרה עם</string>
+    <string name="ask_help_with">ביקשתי עזרה עם:</string>
     <string name="personal_info">האיזור האישי</string>
     <string name="add_address">הכנס כתובת</string>
     <string name="add_name">הכנס שם</string>
@@ -120,5 +122,8 @@
     <string name="payback_title_tag">* חובה לבחור את צורת ההחזר למי שיעזור לך</string>
     <string name="phone_number_to_send_you">מספר הטלפון שיצרו עמך קשר:</string>
     <string name="user_cont_add_more_then_20">לא ניתן להוסיף יותר מ- 20 פריטים</string>
+    <string name="good_to_know">טוב לדעת</string>
+    <string name="login_title">צריך שתיכנסו למטרות אבטחה</string>
+    <string name="login_sub_text">אין לנו שום צורך ורצון להשתמש במידע שלכם ומבטיחים לא לעשות שום שימוש במידע לגורמים חיצוניים. המידע ישמש למטרות אבטחה בלבד.</string>
 
 </resources>

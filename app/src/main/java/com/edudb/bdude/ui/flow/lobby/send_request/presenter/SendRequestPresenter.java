@@ -27,6 +27,7 @@ public class SendRequestPresenter implements SendRequestContract.Presenter {
         mView.hideProgressBar();
         mView.getActivity().finish();
         mView.checkLoginAndNavigate(EnumNavigation.MY_REQUESTS);
+        mView.hideProgressBar();
     }
 
 
@@ -36,6 +37,7 @@ public class SendRequestPresenter implements SendRequestContract.Presenter {
     }
 
     public void sendRequest() {
+        mView.displayProgressBar();
         mDbController.createRequest(mHelpRequest, this::onComplete);
     }
 }
